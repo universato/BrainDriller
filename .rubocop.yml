@@ -1,0 +1,182 @@
+## 2020/10 rubocop 0.90.0
+AllCops:
+  Exclude:
+    - Gemfile
+    - bin/*
+    - config/environments/production.rb
+    - config/initializers/filter_parameter_logging.rb
+    - config/puma.rb
+    - db/schema.rb
+    - node_modules/**/*
+    - vendor/**/*
+  NewCops: enable
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+
+## Layout
+
+# 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
+Layout/ExtraSpacing:
+  AutoCorrect: false
+# デフォルトだとメソッドの開始ブロックの手前にスペースを要求してくるが、競プロ界隈では一般的ではないと思う。
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+# Arrayリテラルの中にスペースを入れたくなることがあるので、自動修正はしない。
+Layout/SpaceInsideArrayLiteralBrackets:
+  AutoCorrect: false
+# デフォルトだと(0..10)を推奨してくるが、(0 .. 10)の方が見やすい気がするので許したい。
+Layout/SpaceInsideRangeLiteral:
+  Enabled: false
+
+## Lint
+
+# `assert_equal -1, hoge`と書くと警告がでる。
+# そこだけ`()`で囲むのも変な気がするので、部分的に許す。
+Lint/AmbiguousOperator:
+  AutoCorrect: false
+# 警告がでている部分を見てみたら大丈夫そうだったので、個別に許す。
+Lint/AmbiguousBlockAssociation:
+  AutoCorrect: false
+# `x * x`で警告がでるが、`x**2`よりも少し遅かったので許容したい。でも、なんでもかんでも許容するのは良くないかもしれない。
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: false
+# Numericから継承したときに、`super`を使う方法が謎だったので、部分的に許容することにする。
+Lint/MissingSuper:
+  AutoCorrect: false
+# 警告がでている部分を見てみたら大丈夫そうだったので、個別に許す。
+Lint/ParenthesesAsGroupedExpression:
+  AutoCorrect: false
+# ブロックの外と中で同名の変数名を禁じる設定。名前をつけるの大変なときもあるので、部分的に許容。
+Lint/ShadowingOuterLocalVariable:
+  AutoCorrect: false
+# 原則的には`_`(アンダースコア)始まりの変数は禁止だと思うけど、書きたいときもあったので個別に判断して許す。
+Lint/UnderscorePrefixedVariableName:
+  AutoCorrect: false
+# 例示用・説明用に何もしないけど、変数だけ書きたいことがあったので、そこは許しても良さそう。
+Lint/Void:
+  AutoCorrect: false
+
+## Metrics
+
+# メソッドの複雑さの数値。代入の回数が増えたりして、複雑になると警告をだす。緩める。デフォルトが17かな。
+Metrics/AbcSize:
+  Max: 47
+# クラスの行数がデフォルトが100行超えると警告。結構、超えるのあったので、設定する。
+Metrics/ClassLength:
+  Max: 334
+# デフォルトが7かな
+Metrics/CyclomaticComplexity:
+  Max: 34
+# デフォルトはメソッドの中が10行超えると警告だが厳しすぎる。行数よりも速さが大事だと思うので、行数を減らすの大変そうで労力に合わなそうな気がする。
+Metrics/MethodLength:
+  Max: 120
+# 引数の設定できる個数。
+# デフォルトだと、引数5-6個ぐらいで怒られる。
+# 多くしたくないけど、許容したいときもあるので、自動修正はしない。自動修正できる?
+Metrics/ParameterLists:
+  AutoCorrect: false
+# デフォルトが8かな
+Metrics/PerceivedComplexity:
+  Max: 34
+
+## Naming
+
+# set始まりのメソッド名を禁止にするもの。個別に除外する。
+Naming/AccessorMethodName:
+  AutoCorrect: false
+# 原則、メソッド名に大文字を使うのは禁止。
+# ただ、数値クラスを作ったときに、大文字始まりのメソッドを作りたくなったので、個別に除外する。
+Naming/MethodName:
+  AutoCorrect: false
+# 何でもかんでも変数名を1文字にするのはよくないと思うが、本家ACLでも1文字を使っているし、競プロではn, x, y, i, j など1文字の変数名は慣習的によく使われている。
+Naming/MethodParameterName:
+  Enabled: false
+
+## Style
+
+# `&&`や`||`だけでなく、`and`や`or`も許す設定。微妙なところでエラーがでやすい気がしていて、あまり好きではない。個人的にはCrystalで`and`や`or`が使えないのもあって否定的。
+Style/AndOr:
+  Enabled: false
+# [*1..5]の代わりにArray(1..5)を使え、と警告がでるけど、[*1..5]の方が一般的では。もし、速度がArray(1..5)の方が速いなら、こっちを使うようにする。
+Style/ArrayCoercion:
+  Enabled: false
+# 複数行のときのブロックに`{}`を使いたくなるときもあるので、自動修正はしない。
+# 2-3行なら`{}`も良いと思う。しかし、`{}`の中に`do end`は入れたくない。
+Style/BlockDelimiters:
+  AutoCorrect: false
+# 明示的に文字であることを強調したいときは、別に直さなくても良いと思う。
+# Matzは地上げしたいリテラルらしいし、わかりにくいかもしれないので、ケースバイケースで使えたらと思います。
+Style/CharacterLiteral:
+  AutoCorrect: false
+# グローバル変数は原則禁止。ごくまれにグローバル変数を使いたいときがあったので、別個許容する。
+Style/GlobalVars:
+  AutoCorrect: false
+#  `select{ hoge != fuga }`ではなく、`reject`を使え、とあったけれど、十分`select`でわかりやすいと思いました。
+# 別に個別に許さなくても、全部許しても良さそう。
+Style/InverseMethods:
+  AutoCorrect: false
+# lambda式はわかりにくい気がするので、個人的には消したいかもしれないけど、競プロで使ってる人がそこそこいる感じでしょうか。
+Style/Lambda:
+  Enabled: false
+Style/LambdaCall:
+  Enabled: false
+# `n == 0 || n == 1`の代わりに`[0, 1].include?(n)`を勧めてくるけど、わかりにくいと思う。
+Style/MultipleComparison:
+  Enabled: false
+# `if not`ではなく`unless`を使えといわれる。そうかもしれないけど、まあいっかと個別に許す。
+Style/NegatedIf:
+  AutoCorrect: false
+# `not`ではなく`!`を使えといわれる。うーん、`!`も見にくいとこあるし、まあいいかという感じ。
+Style/Not:
+  AutoCorrect: false
+# x == 0のとき、x.zero?を推奨してくるが、少なくとも競プロではx == 0が一般的で読みやすいはず。zero?はRuby特有の表現でも逆に読みにくいかも。
+Style/NumericPredicate:
+  Enabled: false
+# 原則、デフォルト引数は、最後の方に置く。
+# ただ、原則に当てはまらないものもありそうだったので、個別に除外する。
+Style/OptionalArguments:
+  AutoCorrect: false
+# 競プロ界隈では、多重代入はみんな使っていてわかりやすいみたいなので、制限はない方が良さそう。
+# `x, y = y, x`のようなswapは、わかりやすくてとても良いと思います。
+# ただ、個人的には、可読性が落ちてると思っていて、多重代入が好きではないです。
+Style/ParallelAssignment:
+  Enabled: false
+# 拡張子がついてる方が作ったファイルとわかりやすい気がしたから、.rbをつけることを許したい
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
+# 不要な`return`はわざわざつけない人も多そうだけど、バグにはならないので。
+# 個人的には、1行だけのメソッドには`retrun`は不要で、複数行あって枝分かれで`return`があるときはあっても良い気がする。
+Style/RedundantReturn:
+  AutoCorrect: false
+# a = a + 1をa += 1に書き換えるようにいう設定。
+# 配列のときに、平均的にa = a + [0]の方が速そうだったので、個別に除外する。
+Style/SelfAssignment:
+  AutoCorrect: false
+# 1行におさめたくて、セミコロンを使いたくなる場面がごくわずかにあるので、自動修正はしない。
+Style/Semicolon:
+  AutoCorrect: false
+# Prefer ary[n..] over ary[n..-1].と言われるが、ary[n..-1]でわかりやすいと思う。
+Style/SlicingWithRange:
+  Enabled: false
+# `$<`ではなく、`$DEFAULT_INPUT`と使えという警告がでてました。
+# 個人的には、グローバル変数をそもそも使って欲しくないところです。
+# ただ、競プロのコードを見てると、`$<`で入力受け取ってることもあるので良いかな、という感じです。
+# `$DEFAULT_INPUT`は初めて聞いたかもしれないです。
+Style/SpecialGlobalVars:
+  AutoCorrect: false
+# 末尾カンマの設定。配列の最後の要素にカンマを入れるか。個人的に見た目は美しくないと思うが、複数行だとdiffがわかりやすくなるし、どちからといえばカンマを入れる傾向が世間にあるのだとか。競プロRuby界隈ではあまり見たことないけど、複数行のときは積極的に使ってみたさがある。
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+# 実行文が1行のwhile文でも、後置にしなくて良いようにする。すごく個人的には、Crystalだと後置if文が使えないし、別に良いかなと。
+Style/WhileUntilModifier:
+  Enabled: false
+# `1 == x`のようなヨーダ記法(定数が左で、計算式が右)を認める設定。可読性が下がるが、`0 < x && x < 1`のように書きたいときや計算式が長い場合は、ヨーダ記法が容認できる。。
+Style/YodaCondition:
+  Enabled: false
