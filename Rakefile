@@ -9,3 +9,11 @@ Rails.application.load_tasks
 task log: :environment do
   ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
+
+# [Rails・seedファイルを分割して管理する \- Qiita](https://qiita.com/masaki7555/items/d65f56958020cbca5ee0)
+# bundle exex rake db:seed:user
+Pathname.glob(Rails.root.join('db/seeds/*.rb')) do |path|
+  desc("Load the seed data from db/seeds/#{path.basename}")
+  task("db:seed:#{path.basename('.*')}"  => :environment){ load(path) }
+  task("db:seeds:#{path.basename('.*')}" => :environment){ load(path) }
+end

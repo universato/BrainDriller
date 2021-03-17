@@ -1,1 +1,12 @@
-<h2>ユーザー一覧<h2>
+<h2>ユーザー一覧</h2>
+
+<%= paginate @users %>
+
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><p><%= user.id %></p></td>
+      <td><p><%= link_to "#{user.login_name}", "users/#{user.id}" %></p></td>
+    </tr>
+  <% end %>
+</table>

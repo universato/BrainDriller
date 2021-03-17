@@ -1,0 +1,24 @@
+<h1>ドリル一覧</h1>
+
+<%= link_to 'ドリルを作成する', new_drill_path %><br>
+
+<% if @drills.nil? || @drills.size == 0 %>
+  <%= "ドリルが取得できませんでした。" %>
+<% else %>
+  <table>
+    <tr>
+      <th>ドリル名</th>
+      <th>あなたの<br>理解数</th>
+      <th>問題数</th>
+      <th>全体の<br>閲覧数</th>
+    </tr>
+  <% @drills.each do |drill| %>
+    <tr>
+      <td><%= link_to drill.title, drill %></td>
+      <td><%= drill.drill_problems.count %>問</td>
+      <td><%= link_to "#{drill.drill_problems.count}問", drill %></td>
+      <td><%= drill.number_of_views %>回</td>
+    </tr>
+  <% end %>
+  <table>
+<% end %>

@@ -4,8 +4,7 @@ class CreateDrills < ActiveRecord::Migration[6.1]
       t.string :title
       t.integer :number_of_views, unsigned: true, null: false, default: 0
       t.references :user, foreign_key: true
-
-      enum state: { draft: 0, private: 100, public: 200 }
+      t.integer :state, null: false, default: 0
 
       t.timestamps
     end

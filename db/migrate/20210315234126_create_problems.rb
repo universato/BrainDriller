@@ -2,9 +2,11 @@ class CreateProblems < ActiveRecord::Migration[6.1]
   def change
     create_table :problems do |t|
       t.string :title, null: false
-      t.references :user, foreign_key: true
+      t.string :statement, null: false
+      t.references :user, foreign_key: true, null: false
       t.integer :problem_type, null: false
       t.json :choices, null: false
+      t.integer :correct_option, null: false
       t.text :explanation, null: false
 
       # t.text :correct1
@@ -39,7 +41,7 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       t.integer :number_of_views, default: 0, unsigned: true, null: false
       t.integer :number_of_submissions, default: 0, unsigned: true, null: false
       t.integer :number_of_correct_answers, default: 0, unsigned: true, null: false
-      t.integer :correct_answer_rate,  default: nil, limit: 1, null: false
+      t.integer :correct_answer_rate,  default: nil, limit: 1
 
       # 何をもって正解とするのか。最後の質問での正解者数か。それとも初回正解者数か。
       # 重複なしの閲覧人数 :number_of_viewers (=openers)
@@ -55,7 +57,7 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       t.integer :number_of_last_shot_answerers, default: 0, unsigned: true, null: false
       # t.integer :number_of_respondents, default: 0, unsigned: true
       # t.integer :, default: 0, unsigned: true, null: false
-      t.integer :correct_people_rate,  default: nil, limit: 1, null: false
+      t.integer :correct_people_rate,  default: nil, limit: 1
 
       t.integer :questioner, null: false
       t.boolean :open, default: false, null: false

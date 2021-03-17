@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_045731) do
+ActiveRecord::Schema.define(version: 2021_03_16_181707) do
 
   create_table "basic_choices", force: :cascade do |t|
     t.json "choices", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_045731) do
     t.string "title"
     t.integer "number_of_views", default: 0, null: false
     t.integer "user_id"
+    t.integer "state", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_drills_on_user_id"
@@ -54,26 +55,45 @@ ActiveRecord::Schema.define(version: 2021_03_16_045731) do
 
   create_table "problems", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "user_id"
+    t.string "statement", null: false
+    t.integer "user_id", null: false
     t.integer "problem_type", null: false
     t.json "choices", null: false
+    t.integer "correct_option", null: false
     t.text "explanation", null: false
     t.integer "impressions_count", default: 0, null: false
     t.integer "number_of_views", default: 0, null: false
     t.integer "number_of_submissions", default: 0, null: false
     t.integer "number_of_correct_answers", default: 0, null: false
-    t.integer "correct_answer_rate", limit: 1, null: false
+    t.integer "correct_answer_rate", limit: 1
     t.integer "number_of_viewers", default: 0, null: false
     t.integer "number_of_submitters", default: 0, null: false
     t.integer "number_of_one_shot_answerers", default: 0, null: false
     t.integer "number_of_last_shot_answerers", default: 0, null: false
-    t.integer "correct_people_rate", limit: 1, null: false
+    t.integer "correct_people_rate", limit: 1
     t.integer "questioner", null: false
     t.boolean "open", default: false, null: false
     t.boolean "in_order", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_problems_on_user_id"
+  end
+
+  create_table "user_problem_relations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "problem_id"
+    t.integer "number_of_views", default: 0
+    t.integer "number_of_submissions", default: 0
+    t.integer "number_of_correct_answers", default: 0
+    t.integer "correct_answer_rate", limit: 1, default: 0
+    t.float "average_time"
+    t.float "first_time"
+    t.float "fastest_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["problem_id"], name: "index_user_problem_relations_on_problem_id"
+    t.index ["user_id", "problem_id"], name: "index_user_problem_relations_on_user_id_and_problem_id", unique: true
+    t.index ["user_id"], name: "index_user_problem_relations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,4 +113,6 @@ ActiveRecord::Schema.define(version: 2021_03_16_045731) do
 
   add_foreign_key "drills", "users"
   add_foreign_key "problems", "users"
+  add_foreign_key "user_problem_relations", "problems"
+  add_foreign_key "user_problem_relations", "users"
 end

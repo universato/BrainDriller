@@ -14,3 +14,11 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym "API"
+end
+
+# acronymは「頭字語（とうじご）」という意味で、
+# 「NATO」のように複数の単語の頭文字をつなげて作られた単語.
+# Inflectionは「語形変化」。
