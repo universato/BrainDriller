@@ -1,9 +1,14 @@
 <h1>ドリル一覧</h1>
 
+
 <%= link_to 'ドリルを作成する', new_drill_path %><br>
 
 <% if @drills.nil? || @drills.size == 0 %>
   <%= "ドリルが取得できませんでした。" %>
+  <% if Rails.env.development? %>
+    <%= "@drillsがnil" if @drills.nil?  %>
+    <%= "@drills.sizeが0" if @drills.size == 0 %>
+  <% end %>
 <% else %>
   <table>
     <tr>
@@ -15,8 +20,8 @@
   <% @drills.each do |drill| %>
     <tr>
       <td><%= link_to drill.title, drill %></td>
-      <td><%= drill.drill_problems.count %>問</td>
-      <td><%= link_to "#{drill.drill_problems.count}問", drill %></td>
+      <td><%= drill.problems.size %>問</td>
+      <td><%= link_to "#{drill.problems.count}問", drill %></td>
       <td><%= drill.number_of_views %>回</td>
     </tr>
   <% end %>

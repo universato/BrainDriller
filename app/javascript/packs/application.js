@@ -10,10 +10,12 @@ import "channels"
 
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/js/all'
-import './application.scss'
+import '../stylesheets/application.scss'
+import '../stylesheets/problems.scss'
 
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
 
 require('./hello_vue.js')
+require('./solving_vue.js')

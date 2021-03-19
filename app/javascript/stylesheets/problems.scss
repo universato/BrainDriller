@@ -1,0 +1,24 @@
+// for debug
+body * {
+  // border: solid 1px #aaa;
+}
+
+.problem {
+  margin: 4px;
+  padding: 4px;
+  border: solid 1px #aaa;
+  width: 800px;
+}
+
+.problem-title {
+  margin: 4px;
+  padding: 4px;
+  border: solid 1px #aaa;
+  background-color: red;
+}
+
+.problem-statement {
+  border: solid 1px #aaa;
+  width: 200px;
+  height: 200px;
+}

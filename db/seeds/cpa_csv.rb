@@ -26,10 +26,13 @@ CSV.foreach('db/csv/cpa.csv', headers: true) do |row|
   d = Drill.find_or_create_by(title: title, user_id: 1)
 
   @problem = Problem.create!(
-    problem_type: :basic_choices,
+    # user_id: 1,
+    drill_id: 1
+    format: :basic_choices,
     title: row['title'],
     statement: row['statement'],
     choices: %w[アイ アウ アエ イウ イエ ウエ],
+    correct_option: row['ans'],
     # correct_option_number: row['ans'],
     in_order: row['in_order'],
     explanation: row['explanation'] || '',

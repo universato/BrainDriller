@@ -1,0 +1,19 @@
+@startuml erdiagram
+entity "app" {
+    + app_id [PK]
+    ==
+    app_cd
+    app_type
+}
+
+entity "app_detail" {
+    + app_detail_id [PK]
+    ==
+    # app_id [FK(app.app_id)]
+    app_cnt
+}
+
+
+
+app --o{ app_detail
+@enduml

@@ -1,10 +1,11 @@
 class CreateProblems < ActiveRecord::Migration[6.1]
   def change
     create_table :problems do |t|
+      t.references :drill, foreign_key: true, null: false
+      t.references :user, foreign_key: true, null: false
       t.string :title, null: false
       t.string :statement, null: false
-      t.references :user, foreign_key: true, null: false
-      t.integer :problem_type, null: false
+      t.integer :format, null: false
       t.json :choices, null: false
       t.integer :correct_option, null: false
       t.text :explanation, null: false
@@ -59,9 +60,9 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       # t.integer :, default: 0, unsigned: true, null: false
       t.integer :correct_people_rate,  default: nil, limit: 1
 
-      t.integer :questioner, null: false
-      t.boolean :open, default: false, null: false
-      t.boolean :in_order, default: true, null: false
+      t.integer :questioner # いや、これ不要。
+      t.boolean :open, default: false
+      t.boolean :in_order, default: true
 
       t.timestamps
     end
@@ -100,7 +101,7 @@ end
 # createdb quiz_lab
 # psql quiz_lab
 
-# create table problems (title varchar(255), body text, problem_type integer);
+# create table problems (title varchar(255), body text, format integer);
 # create table basic_choices ()
 
 # \l

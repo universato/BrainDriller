@@ -1,10 +1,20 @@
+# 何度も実行されることを想定すると、メアドでエラーが起きるかもしれない。
+User.create(
+  login_name: "uni",
+  nickname: "uni",
+  email: "uni@example.com",
+  password: "foobar",
+  password_confirmation: "foobar",
+)
+
 # 追加のユーザーをまとめて生成する
 id = User.count
 50.times do
   name = Faker::Name.name
-  password = Faker::Internet.password(min_length: 6)
+  # password = Faker::Internet.password(min_length: 6)
+  password = "foobar"
 
-  User.create(
+  User.create!(
     login_name: name,
     nickname: name,
     email: "a#{id}@example.com",

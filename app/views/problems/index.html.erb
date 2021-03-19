@@ -1,25 +1,112 @@
-<p id="notice"><%= notice %></p>
+<% if Rails.env.development? %>
+  <div style="font-size: 8px">
+    開発のみ表示：<br>
+    色分けをして、わかりやすくしたい。
+    理解した問題 ≒ 正答率が高い問題
+    1回も解けてない問題<br>
+    2連続で正解したら、青色。1回正解は、薄い青色。間違いは黄色。<br><br>
+  </div>
+<% end %>
 
-<h1>Problems</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @problems.each do |problem| %>
-      <tr>
-        <td><%= link_to 'Show', problem %></td>
-        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+※右端の「正答率・正解数・提出数」は、全体のデータ、あなた個人のデータで並んでいます <br>
 <br>
 
-<%= link_to 'New Problem', new_problem_path %>
+<br><br>
+全問題数：<%= @all_problem_size %><br>
+
+<% if user_signed_in? %>
+  <%= link_to '問題を作成する', new_problem_path %><br>
+<% else %>
+  問題を作成するには<%= link_to 'ログイン', new_user_session_path %>が必要です。<br>
+<% end %>
+
+<% if current_user %>
+  <br>
+  <table>
+    <!-- <tr>
+      <th rowspan="2">#</th>
+      <th rowspan="2">問題名</th>
+      <th rowspan="2">問題文</th>
+      <th colspan="3">全体データ</th>
+      <th colspan="3">あなたのデータ</th>
+    </tr>-->
+    <tr>
+      <th>#</th>
+      <th>問題名</th>
+      <th>問題文</th>
+      <th>正答率</th>
+      <th>正解数</th>
+      <th>提出数</th>
+      <th>正答率</th>
+      <th>正解数</th>
+      <th>提出数</th>
+    </tr>
+    <% @problems.each do |problem| %>
+      <% current_link = problem.user_problem_relations.find_by(user_id: current_user.id) %>
+        <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
+          <tr>
+        <% elsif 0 < current_link.number_of_correct_answers %>
+          <tr class="correct">
+        <% else %><tr class="wrong">
+        <% end %>
+          <td><%= link_to problem.id, problem %></td>
+          <td class="text-left"><strong><%= link_to problem.title, problem %></strong> </td>
+          <td class="text-left"><%= link_to problem.statement.truncate(32, omission: '……'),problem %> </td>
+          <td><%= (rate = problem.correct_answer_rate) ? "#{rate}%" : "-" %></td>
+          <td><%= "#{problem.number_of_correct_answers}回" %></td>
+          <td><%= "#{problem.number_of_views}回" %></td>
+          <% if current_link  %>
+            <td><%= current_link.correct_answer_rate %>%</td>
+            <td><%= current_link.number_of_correct_answers %>回</td>
+            <td><%= current_link.number_of_submissions %>回</td>
+          <% else %>
+            <td> - </td>
+            <td> 0回 </td>
+            <td> 0回 </td>
+          <% end %>
+        </tr>
+    <% end %>
+  </table>
+<% else %>
+<%= paginate @problems %>
+<br>
+<table>
+  <tr>
+    <th>#</th>
+    <th>問題名</th>
+    <th>問題文</th>
+    <th>正答率</th>
+    <th>正解数</th>
+    <th>提出数</th>
+    <th>正答率</th>
+    <th>正解数</th>
+    <th>提出数</th>
+  </tr>
+  <% @problems.each do |problem| %>
+    <% current_link = problem.user_problem_relations.find_by(user_id: current_user.id) if current_user %>
+      <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
+        <tr>
+      <% elsif 0 < current_link.number_of_correct_answers %>
+        <tr class="correct">
+      <% else %><tr class="wrong">
+      <% end %>
+        <td><%= link_to problem.id, problem %></td>
+        <td class="text-left"><strong><%= link_to problem.title, problem %></strong> </td>
+        <td class="text-left"><%= link_to problem.statement.truncate(32, omission: '……'),problem %> </td>
+        <td><%= (rate = problem.correct_answer_rate) ? "#{rate}%" : "-" %></td>
+        <td><%= "#{problem.number_of_correct_answers}回" %></td>
+        <td><%= "#{problem.number_of_views}回" %></td>
+        <% if current_link  %>
+          <td><%= current_link.correct_answer_rate %>%</td>
+          <td><%= current_link.number_of_correct_answers %>回</td>
+          <td><%= current_link.number_of_submissions %>回</td>
+        <% else %>
+          <td> - </td>
+          <td> 0回 </td>
+          <td> 0回 </td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+<% end %>

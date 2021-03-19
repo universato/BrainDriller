@@ -6,7 +6,7 @@ File.open('db/simple_problems/english.txt') do |file|
   while line = file.gets
     if line == "\n"
       Problem.create(**options) if options.size > 0
-      options = {title: title, user_id: 1, problem_type: :basic_choices, explanation: '', }
+      options = {title: title, user_id: 1, format: :basic_choices, explanation: '', }
       flag = 0
     else
       case flag

@@ -1,7 +1,10 @@
 class Problem < ApplicationRecord
   is_impressionable counter_cache: true
 
-  enum problem_type: {
+  belongs_to :drill
+  belongs_to :user
+
+  enum format: {
     basic_choices: 2000,
     simple_choices: 2001
   }

@@ -1,8 +1,7 @@
 class DrillsController < ApplicationController
 
   def index
-    # @drills = Drill.all.order(number_of_problems: "DESC")
-    @drills = Drill.order(created_at: "DESC").page(params[:page]).includes(:drill_problems)
+    @drills = Drill.order(created_at: "DESC").page(params[:page]).per(2)
   end
 
   def show
@@ -48,15 +47,21 @@ class DrillsController < ApplicationController
   def update
   end
 
-  def solve
-    @drill = Drill.find(params[:drill_id])
-    @problems = @drill.problems.paginate(page: params[:page], per_page: 1)
-    @problem = @problems[0]
+  def solving
+    puts "\n" * 20
+    p from_problem_id
+    # @drill = Drill.find(params[:id])
+    # @problems = @drill.problems.paginate(page: params[:page], per_page: 1)
+    # @problem = @problems[0]
   end
 
   private
-
     def drill_params
       params.require(:drill).permit(:title)
+    end
+
+    def from_problem_id
+      s = request.referrer
+      s && s[/drills\/(\d+)/, 1]
     end
 end

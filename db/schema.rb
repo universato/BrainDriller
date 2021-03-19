@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 2021_03_16_181707) do
   end
 
   create_table "drills", force: :cascade do |t|
-    t.string "title"
-    t.integer "number_of_views", default: 0, null: false
     t.integer "user_id"
+    t.string "title", default: "無題", null: false
+    t.string "guide", default: "説明文なし", null: false
     t.integer "state", default: 0, null: false
+    t.integer "number_of_views", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_drills_on_user_id"
@@ -54,10 +55,11 @@ ActiveRecord::Schema.define(version: 2021_03_16_181707) do
   end
 
   create_table "problems", force: :cascade do |t|
+    t.integer "drill_id", null: false
+    t.integer "user_id", null: false
     t.string "title", null: false
     t.string "statement", null: false
-    t.integer "user_id", null: false
-    t.integer "problem_type", null: false
+    t.integer "format", null: false
     t.json "choices", null: false
     t.integer "correct_option", null: false
     t.text "explanation", null: false
@@ -71,11 +73,12 @@ ActiveRecord::Schema.define(version: 2021_03_16_181707) do
     t.integer "number_of_one_shot_answerers", default: 0, null: false
     t.integer "number_of_last_shot_answerers", default: 0, null: false
     t.integer "correct_people_rate", limit: 1
-    t.integer "questioner", null: false
-    t.boolean "open", default: false, null: false
-    t.boolean "in_order", default: true, null: false
+    t.integer "questioner"
+    t.boolean "open", default: false
+    t.boolean "in_order", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["drill_id"], name: "index_problems_on_drill_id"
     t.index ["user_id"], name: "index_problems_on_user_id"
   end
 
@@ -112,6 +115,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_181707) do
   end
 
   add_foreign_key "drills", "users"
+  add_foreign_key "problems", "drills"
   add_foreign_key "problems", "users"
   add_foreign_key "user_problem_relations", "problems"
   add_foreign_key "user_problem_relations", "users"

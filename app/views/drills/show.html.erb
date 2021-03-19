@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+<h1>ドリル：<%= @drill.title %></h1>
+<div><%= @drill.guide %></div>
 
-<%= link_to 'Edit', edit_drill_path(@drill) %> |
-<%= link_to 'Back', drills_path %>
+<div>
+  このドリルの問題数:
+  <%= @drill.problems.count %>
+</div>
+
+<button>仮: 順番に全問を解く</button>
+<%= link_to "順番に全問を解く", solve_path %>
+<button>仮: ランダムに解く</button>
+<button>仮: 解けてない問題を解く</button>
+
+<% if Rails.env.development? %>
+  <div style="font-size: 8">
+    <%= link_to "編集する", edit_drill_path(@drill) %>
+  </div>
+<% end %>
