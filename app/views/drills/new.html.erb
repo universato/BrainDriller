@@ -1,7 +1,12 @@
 
 <h1>ドリル作成ページ</h1>
 
+<%= render 'form', drill: @drill, search: @search, problems: @problems %>
+
+<%= link_to 'ドリル一覧へ戻る(Back)', drills_path %>
+
 <% if Rails.env.development? %>
+  <br><br><br><br><br>
   <div style="font-size: 7pt;">
     開発のみ表示：<br>
     タグ入力フォーム<br>
@@ -16,7 +21,3 @@
     タイトルフォームとタグフォームの大きさを変更したい。タイトルはタイトルらしく大きくあるべき。
   </div>
 <% end %>
-
-<%= render 'form', drill: @drill, search: @search, problems: @problems %>
-
-<%= link_to 'ドリル一覧へ戻る(Back)', drills_path %>

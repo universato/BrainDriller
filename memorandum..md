@@ -149,3 +149,24 @@ APIで`def show`と原形にすべきところを誤って3人称単数形にし
 ```rb
 ActiveRecord::SubclassNotFound: The single-table inheritance mechanism failed to locate the subclass: 'basic_choices'. This error is raised because the column 'type' is reserved for storing the class in case of inheritance. Please rename this column if you didn't intend it to be used for storing the inheritance class or overwrite Problem.inheritance_column to use another column for that information.
 ```
+
+### CSS
+
+`border-color: #fff`とやっても、線が表示されない。
+線の情報は下の子タグに継承されていってる。
+基本のベースが、`border-style: none;`だったりするため、単に線の色情報を付加しても、線は表示されない。
+
+継承のケースでクラスをソートするために`type`は予約されているから、エラーが起こされるらしい。
+
+ドリル
+- 全問を解く
+- ランダムに解く
+- 解けてない問題をランダムに解く
+
+ドリル(この時点でドリルIDがわかっている)
+→ クリック時点で、ドリルIDを渡す必要あり。(DB側はドリルIDさえわかっていれば取れる)
+→ クリック時点で、「問題の解き方」の情報を持たせるか、
+
+→ GETで指定された「問題ID」「問題の解き方」によって、問題の選定・順番などを考慮して渡す。(ゆくゆくはログイン情報から解ける問題・解けない問題を選定したい。)
+
+→ 画面遷移が必要？
