@@ -170,3 +170,23 @@ ActiveRecord::SubclassNotFound: The single-table inheritance mechanism failed to
 → GETで指定された「問題ID」「問題の解き方」によって、問題の選定・順番などを考慮して渡す。(ゆくゆくはログイン情報から解ける問題・解けない問題を選定したい。)
 
 → 画面遷移が必要？
+
+3/19
+
+Fjord
+
+
+3/21
+
+```
+Uncaught TypeError: Cannot read property '1' of undefined
+    at Proxy.nextProblem (solving.vue:88)
+    at Object.onClick._cache.<computed>._cache.<computed> (solving.vue:26)
+    at callWithErrorHandling (runtime-core.esm-bundler.js:225)
+    at callWithAsyncErrorHandling (runtime-core.esm-bundler.js:235)
+    at HTMLButtonElement.invoker (runtime-dom.esm-bundler.js:372)
+```
+↓スペルミスかな
+```js
+this.currentProblem = this.probkems[this.currentProblemIndex];
+```

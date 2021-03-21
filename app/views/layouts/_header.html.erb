@@ -7,7 +7,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "トップ",   root_path %></li>
-        <li><%= link_to "ヘルプ",   "#help_path" %></li>
+        <li><%= link_to t("word.help"),   "#help_path" %></li>
         <li><%= link_to "#人気タグ", "#tags_path" %></li>
         <% if Rails.env.development? %>
           <li><%= link_to "人気ドリル", drills_path %></li>
@@ -23,12 +23,12 @@
               <li><%= link_to "設定", edit_user_path(current_user)  %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                <%= link_to t("word.logout"), destroy_user_session_path, method: :delete %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
+          <li><%= link_to t("word.login"), new_user_session_path %></li>
         <% end %>
       </ul>
     </nav>

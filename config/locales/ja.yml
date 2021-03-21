@@ -1,0 +1,34 @@
+ja:
+  word:
+    signup: 登録
+    help: ヘルプ
+    login: ログイン
+    logout: ログアウト
+  text:
+    Forgot_your_password?: パスワードを覚えてないとき
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: 空になっています。入力してください。
+            name:
+              blank: 空になっています。入力してください。
+            password:
+              blank: 空になっています。入力してください。
+              too_short: パスワードが短いです。
+            password_confirmation:
+              confirmation: パスワードが異なっています。
+    models:
+      drill: ドリル
+      problem: 問題
+      user: ユーザー
+    attributes:
+      drill:
+        title: タイトル
+        guide: ガイド
+      user:
+        login_name: ID
+        nickname: ハンドルネーム
+        email: メールアドレス

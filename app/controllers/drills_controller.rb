@@ -11,6 +11,7 @@ class DrillsController < ApplicationController
   end
 
   def new
+    authenticate_user!
     @drill = Drill.new
 
     # [Rails]ransackを利用した色々な検索フォーム作成方法まとめ - Qiita https://qiita.com/nishina555/items/2c1f8bae980e426519bc
@@ -34,10 +35,14 @@ class DrillsController < ApplicationController
   end
 
   def create
-    @drill = Drill.new(drill_params)
-    @drill.number_of_views = 0
-    @drill.save!
-    render "index"
+    # @drill = Drill.new(drill_params)
+    # @drill.number_of_views = 0
+    # @drill.save!
+    # render "index"
+    puts "\n" * 2
+    pp params
+    # 5 + :aaaaaa
+    render json: {}
   end
 
   def edit
@@ -49,7 +54,7 @@ class DrillsController < ApplicationController
 
   def solving
     puts "\n" * 20
-    p from_problem_id
+    id = from_problem_id
     # @drill = Drill.find(params[:id])
     # @problems = @drill.problems.paginate(page: params[:page], per_page: 1)
     # @problem = @problems[0]

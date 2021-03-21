@@ -1,7 +1,8 @@
 <h1>ドリル一覧</h1>
 
-
-<%= link_to 'ドリルを作成する', new_drill_path %><br>
+<% if current_user %>
+  <%= link_to 'ドリルを作成する', new_drill_path %><br>
+<% end %>
 
 <% if @drills.nil? || @drills.size == 0 %>
   <%= "ドリルが取得できませんでした。" %>
