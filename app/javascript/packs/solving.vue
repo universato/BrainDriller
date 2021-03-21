@@ -1,47 +1,46 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
     <div v-if="drill">
       <div class="drill-id"> ドリルID：{{ drill.id }} </div>
       <div class="drill-title"> ドリルのタイトル： {{ drill.title }} </div>
     </div>
-    <div class="problems">
-      <div v-if="currentProblem">
-        <div class=problem>{{ currentProblem }}</div>
-        <div class="problem-id"> 問題ID{{ currentProblem.id }} </div>
-        <div class="problem-id"> {{ currentProblemIndex +1 }}問目 </div>
-        <div class="problem-title"> {{ currentProblem.title }} </div>
-        <div class="problem-statement"> {{ currentProblem.statement }} </div>
-        <ol class="problem-choices">
-          <li
-            v-for="(choice, idx) in currentProblem.choices"
-            :key="idx"
-            class="problem-choice"
-          >
-            {{ choice }}
-          </li>
-        </ol>
+    <div v-if="state=='solving'">
+      <div class="problems">
+        <div v-if="currentProblem">
+          <div class="problem-id"> 問題ID{{ currentProblem.id }} </div>
+          <div class="problem-id"> {{ currentProblemIndex +1 }}問目 </div>
+          <div class="problem-title"> {{ currentProblem.title }} </div>
+          <div class="problem-statement"> {{ currentProblem.statement }} </div>
+          <ol class="problem-choices">
+            <li
+              v-for="(choice, idx) in currentProblem.choices"
+              :key="idx"
+              class="problem-choice"
+              @click="selectOption(idx)"
+            >
+              {{ choice }}
+            </li>
+          </ol>
+        </div>
+        <div v-if="false && 0 < currentProblemIndex"><button @click="prevProblem()">前のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()">次のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()">中断して採点する</button></div>
+        <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()">採点する</button></div>
       </div>
-      <div v-if="0 < currentProblemIndex"><button @click="prevProblem()">前のクイズへ</button></div>
-      <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()">次のクイズへ</button></div>
-      <div class="problem" v-for="(problem, problemNo) in problems" :key="problem.id">
-        <div>Problem ID{{ problem.id }}</div>
-        <div>{{ problemNo + 1 }}番目の問題</div>
-        <div>全{{ problems.size }}問</div>
-        <div class="problem-title"> {{ problem.title }} </div>
-        <div class="problem-statement">{{ problem.statement }}</div>
-        <ol class="problem-choice">
-          <li
-            class="choice"
-            v-for="(choice, choiceNo) in problem.choices"
-            :key="choice.id"
-            @click="selectOption(choiceNo)"
-          >
-            {{ choice }}
-          </li>
-        </ol>
-        {{ problem.correct_option }}
-      </div>
+    </div>
+    <div v-else-if="state=='result'">
+      <div>{{ correct_count }}</div>
+      <ol>
+        <li v-for="(problem, idx) in problems" :key="problem.id">
+          <div class="problem-id"> 問題ID{{ problem.id }} </div>
+          <div class="problem-title"> {{ problem.title }} </div>
+          <div class="problem-statement"> {{ problem.statement }} </div>
+          <div class="problem-selected_option"> {{ answerPaper[idx] }} </div>
+          <div class="problem-correct_option"> {{ problem.correct_option }} </div>
+          <div class="problem-explanation"> {{ problem.explanation }} </div>
+        </li>
+      </ol>
+
     </div>
   </div>
 </template>
@@ -54,8 +53,10 @@ export default {
       message: "問題を解いています！",
       drill: null,
       problems: [],
+      state: "solving",
       currentProblem: null,
       answerPaper: {},
+      correct_count: 0,
     }
   },
   created() {
@@ -79,11 +80,34 @@ export default {
   methods: {
     selectOption(choiceNo) {
       console.log(`selectOption Method ${choiceNo}`);
+      console.log(this.answerPaper);
       this.answerPaper[this.currentProblemIndex] = choiceNo;
-      console.log(this.answerPaper)
+      if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
+        this.currentProblemIndex += 1;
+        this.currentProblem = this.problems[this.currentProblemIndex];
+      } else if (this.currentProblemIndex == this.problems.length - 1) {
+        console.log("最後の問題です");
+      } else if (this.currentProblemIndex < 0 || this.problems.length - 1 < this.currentProblemIndex) {
+        console.log("問題番号が0未満になっているか、超越してます");
+      }
+    },
+    grade() {
+      console.log("method grade");
+      postAnswerPaper();
+      this.correct_count = 0
+      for(let i = 0; i < this.problems.length; i++){
+        let problem = this.problems[i];
+        if(this.answerPaper[problem.id - 1] + 1 == problem.correct_option){
+          this.correct_count += 1
+        }
+      }
+      this.state = "result"
+    },
+    postAnswerPaper() {
+
     },
     nextProblem() {
-      if(this.problems.size - 1 <= this.currentProblemIndex) { return }
+      if(this.problems.length - 1 <= this.currentProblemIndex) { return }
       this.currentProblemIndex += 1;
       this.currentProblem = this.problems[this.currentProblemIndex];
     },
@@ -114,6 +138,11 @@ export default {
 }
 
 .problem-choice {
+  width: 800px;
+  border: solid 1px #eee;
+}
+
+.problem-explanation {
   width: 800px;
   border: solid 1px #eee;
 }

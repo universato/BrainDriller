@@ -53,11 +53,7 @@ class DrillsController < ApplicationController
   end
 
   def solving
-    puts "\n" * 20
-    id = from_problem_id
-    # @drill = Drill.find(params[:id])
-    # @problems = @drill.problems.paginate(page: params[:page], per_page: 1)
-    # @problem = @problems[0]
+    @drill_id = drill_id
   end
 
   private
@@ -65,7 +61,7 @@ class DrillsController < ApplicationController
       params.require(:drill).permit(:title)
     end
 
-    def from_problem_id
+    def drill_id
       s = request.referrer
       s && s[/drills\/(\d+)/, 1]
     end

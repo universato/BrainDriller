@@ -190,3 +190,31 @@ Uncaught TypeError: Cannot read property '1' of undefined
 ```js
 this.currentProblem = this.probkems[this.currentProblemIndex];
 ```
+
+最小再現
+```js
+a = undefined
+a[1]
+```
+
+```js
+a = null
+a[1]
+```
+
+```
+/workspace/Main.js:2
+a[1]
+ ^
+
+TypeError: Cannot read property '1' of null
+```
+
+
+# やいまクイズ
+
+[やいまクイズ](https://yaima-quiz.kanasann.com/)
+
+選択肢
+
+各問題に、correct,uncorrect1,uncorrect2のプロパティがある。
