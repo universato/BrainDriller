@@ -1,3 +1,11 @@
 // [RailsでBootstrapとFont\-AwesomeはWebpackerで今時っぽく使おう \- Qiita](https://qiita.com/rhistoba/items/f724dae231d7e28bf477)
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+@media screen and ( max-width:479px )
+{
+	p
+	{
+		color: #f00 ;	/* 赤色 */
+	}
+}

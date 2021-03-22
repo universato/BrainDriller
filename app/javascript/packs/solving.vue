@@ -60,7 +60,9 @@ export default {
     }
   },
   created() {
-    fetch("/api/drills/1.json", {
+    const pathnames = location.pathname.split('/'); // ["", "solve", "5"]
+    const drill_id = pathnames[2];
+    fetch(`/api/drills/${drill_id}.json`, {
         method: 'GET',
         headers: { 'X-Requested-With': 'XMLHttpRequest', },
         credentials: 'same-origin',
@@ -93,7 +95,7 @@ export default {
     },
     grade() {
       console.log("method grade");
-      postAnswerPaper();
+      this.postAnswerPaper();
       this.correct_count = 0
       for(let i = 0; i < this.problems.length; i++){
         let problem = this.problems[i];

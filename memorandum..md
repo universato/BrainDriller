@@ -218,3 +218,106 @@ TypeError: Cannot read property '1' of null
 選択肢
 
 各問題に、correct,uncorrect1,uncorrect2のプロパティがある。
+シャッフルした問題というdata枠を用意して、そこにいれる。
+URLによって、取り出すスタイル。これ真似するか。
+
+`resources/js/components`
+
+```js
+  methods: {
+    getQuizzes: function() {
+      let quizUrl = location.pathname;
+      let catId = quizUrl.match(/\d/g);
+      let catNum;
+      if (catId) {
+        catNum = catId.join("");
+      }
+      if (quizUrl == "/quiz/" + catNum) {
+        this.axiosUrl = "ajax/menu" + catNum;
+      } else if (quizUrl == "/quiz/region/" + catNum) {
+        this.axiosUrl = "ajax/region" + catNum;
+      } else {
+        this.axiosUrl = "ajax/menu";
+      }
+```
+
+この`match(/\d/g)`はpathnameの文字列にある数字を拾った1文字の配列`catId`を作って、joinで結合させてるらしい。やばい。
+
+`location.pathname`は、
+
+# bootstrap
+
+クラスの1つ1つの細かいところで、色付けだけのクラスだったり、右寄せや中央寄せだけのクラスがあったりするのやばいな。
+
+`bg-primary`
+`text-center`, `text-right`
+`w-25`, `w-75`
+`h-100`, `h-50`
+
+`[p|m][location]-[size]`
+location
+- t, b, l, r
+- x, y
+
+size
+- 0
+- 1 0.25rem
+- 2 0.5rem
+- 3 1.0rem
+- 4 1.5rem
+- 5 3.0rem
+- auto
+`pt-3` padding-top-1rem
+
+!importantがついているので、注意。
+
+`btn-primary`
+`btn-lg` `btn-sm`
+
+|略  |      |
+|:---|:---  |
+|t   |top   |
+|b   |button|
+|l   |left  |
+|r   |right |
+|w   |width |
+|h   |height|
+
+|略  |       |
+|:---|:---   |
+|btn |button |
+|p   |padding|
+|m   |margin |
+
+|略  |       |
+|:---|:---   |
+|bg  |background|
+
+|略  |       |
+|:---|:---  |
+|sm  |small |
+|md  |medium|
+|lg  |large |
+|xl  |extra large|
+
+row
+col-8
+col-4
+
+row
+col-6
+col-6
+
+|略  |       |
+|:---|:---  |
+|sm  |576- |
+|md  |medium|
+|lg  |large |
+|xl  |extra large|
+
+```js
+
+```
+[![Image from Gyazo](https://i.gyazo.com/e73971543a9c84dfcd1464dd25218bc8.png)](https://gyazo.com/e73971543a9c84dfcd1464dd25218bc8)
+
+`d-flex`の下の方にあるタグ、日本語だと文字が下方向に行く感じがある。
