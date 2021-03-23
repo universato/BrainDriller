@@ -1,0 +1,17 @@
+<% if current_user %>
+  <%= form_with(model: current_user) do |form| %>
+    <div class="field">
+      <%= form.label :login_name %>
+      <%= form.text_field :login_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :nickname %>
+      <%= form.text_field :nickname %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t("text.edit_profile") %>
+    </div>
+  <% end %>
+<% end %>

@@ -8,6 +8,9 @@
 import { createApp } from 'vue'
 import App from './solving.vue'
 
+import marked from 'marked';
+import hljs from 'highlight.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const selector = '#js-solving';
   if(document.querySelector(selector)){

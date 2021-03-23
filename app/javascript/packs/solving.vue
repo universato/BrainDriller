@@ -10,7 +10,7 @@
           <div class="problem-id"> 問題ID{{ currentProblem.id }} </div>
           <div class="problem-id"> {{ currentProblemIndex +1 }}問目 </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
-          <div class="problem-statement"> {{ currentProblem.statement }} </div>
+          <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <ol class="problem-choices">
             <li
               v-for="(choice, idx) in currentProblem.choices"
@@ -46,6 +46,12 @@
 </template>
 
 <script>
+import marked from 'marked';
+import hljs from 'highlight.js';
+//import vuePlugin from "@highlightjs/vue-plugin";
+// Vue.use(vuePlugin());
+// import hljs from 'highlightjs';
+
 export default {
   data() {
     return {
@@ -60,6 +66,15 @@ export default {
     }
   },
   created() {
+    marked.setOptions({
+      // code要素にdefaultで付くlangage-を削除
+      langPrefix: '',
+      // highlightjsを使用したハイライト処理を追加
+      highlight: function(code, lang) {
+        return hljs.highlightAuto(code, [lang]).value
+      }
+    });
+
     const pathnames = location.pathname.split('/'); // ["", "solve", "5"]
     const drill_id = pathnames[2];
     const url = new URL(location.href);
@@ -120,6 +135,9 @@ export default {
       if(this.currentProblemIndex <= 0) { return }
       this.currentProblemIndex -= 1;
       this.currentProblem = this.problems[this.currentProblemIndex];
+    },
+    compiledMarkdown(md) {
+      return marked(md);
     }
   }
 }
@@ -140,6 +158,7 @@ export default {
 .problem-statement {
   width: 800px;
   border: solid 1px #eee;
+  padding: 16px;
 }
 
 .problem-choice {

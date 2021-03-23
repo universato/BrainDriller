@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_181707) do
+ActiveRecord::Schema.define(version: 2021_03_23_045841) do
 
   create_table "basic_choices", force: :cascade do |t|
     t.json "choices", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_181707) do
     t.integer "number_of_views", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "impressions_count", default: 0
     t.index ["user_id"], name: "index_drills_on_user_id"
   end
 

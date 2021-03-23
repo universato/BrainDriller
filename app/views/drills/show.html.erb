@@ -3,26 +3,27 @@
 
 <div>
   このドリルの問題数:
-  <%= @drill.problems.count %>
+  <%= problems_count = @drill.problems.count %>
 </div>
 
-<button>仮: 順番に全問を解く</button>
-<%= link_to "順番に全問を解く", solve_path %>
-<%= link_to "ランダムに解く", "/solve/1?rand=true" %>
+<%= form_with url: "/solve/#{@drill.id}", method: "GET" do |f| %>
 
-<%= form_with url: "/solve/#{@drill.id}", method: "GET" do %>
-  <input type="hidden" name="part" value="bass">
-  <input type="text" name="members">
-  <input type="submit">
+  <%= f.label :rand, "ランダムに出題する" %>
+  <%= f.check_box :rand, {checked: true}, "true", nil %>
+  <br>
+
+  <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem_number" %>
+    <%# problem_count_select_list(problems_count).each do |c| %>
+      <%#= content_tag(:option, c, value: c) %>
+    <%# end %>
+  <%# end %>
+  <br>
+
+  <%= f.submit t("text.Solve_problems"), name: '', class: '' %>
 <% end %>
 
-<form action="/solve/1" method="GET">
-  <input type="hidden" name="part" value="bass">
-  <input type="text" name="members">
-  <input type="submit">
-</form>
-
 <% if Rails.env.development? %>
+  <hr>
   <div style="font-size: 8">
     <%= link_to "編集する", edit_drill_path(@drill) %>
   </div>

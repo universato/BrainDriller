@@ -19,4 +19,8 @@ class UsersController < ApplicationController
       @user_problem_relations << UserProblemRelation.find_by(user_id: @user.id, problem_id: problem.id)
     end
   end
+
+  def edit_profile
+    authenticate_user!
+  end
 end

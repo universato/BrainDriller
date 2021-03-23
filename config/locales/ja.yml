@@ -4,8 +4,11 @@ ja:
     help: ヘルプ
     login: ログイン
     logout: ログアウト
+    submit: 送信
   text:
     Forgot_your_password?: パスワードを覚えてないとき
+    Solve_problems: 問題を解く
+    edit_profile: プロフィールを変更する
   activerecord:
     errors:
       models:

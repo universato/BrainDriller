@@ -6,6 +6,7 @@ class DrillsController < ApplicationController
   def show
     @drill = Drill.find_by(id: params[:id])
     @drill.increment!(:number_of_views, 1)
+    impressionist(@drill, nil, unique: [:session_hash])
     @problems = @drill.problems
   end
 

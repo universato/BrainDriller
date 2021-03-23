@@ -32,6 +32,9 @@ gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
 gem 'ransack'
+gem 'redcarpet'
+gem 'coderay'
+gem 'marked-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

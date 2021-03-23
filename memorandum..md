@@ -321,3 +321,11 @@ col-6
 [![Image from Gyazo](https://i.gyazo.com/e73971543a9c84dfcd1464dd25218bc8.png)](https://gyazo.com/e73971543a9c84dfcd1464dd25218bc8)
 
 `d-flex`の下の方にあるタグ、日本語だと文字が下方向に行く感じがある。
+`white-space: no-wrap;`をCSSで加えると、大丈夫。
+
+[Vue\.js \+ marked\.js \+ highlight\.jsを使ってシンタックスハイライト機能付きマークダウンエディタを作ってみたのでMEMO \- Madogiwa Blog](https://madogiwa0124.hatenablog.com/entry/2019/01/03/203334)
+
+```js
+import hljs from 'highlight.js';
+```
+`.`が必要なのでは。
