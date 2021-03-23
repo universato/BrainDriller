@@ -8,8 +8,19 @@
 
 <button>仮: 順番に全問を解く</button>
 <%= link_to "順番に全問を解く", solve_path %>
-<button>仮: ランダムに解く</button>
-<button>仮: 解けてない問題を解く</button>
+<%= link_to "ランダムに解く", "/solve/1?rand=true" %>
+
+<%= form_with url: "/solve/#{@drill.id}", method: "GET" do %>
+  <input type="hidden" name="part" value="bass">
+  <input type="text" name="members">
+  <input type="submit">
+<% end %>
+
+<form action="/solve/1" method="GET">
+  <input type="hidden" name="part" value="bass">
+  <input type="text" name="members">
+  <input type="submit">
+</form>
 
 <% if Rails.env.development? %>
   <div style="font-size: 8">

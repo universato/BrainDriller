@@ -5,6 +5,10 @@ class API::DrillsController < API::ApplicationController
 
   def show
     @drill = Drill.find(params[:id])
-    @problems = @drill.problems.reorder("RANDOM()")
+    if params[:rand]
+      @problems = @drill.problems.order("RANDOM()").limit(params[:num])
+    else
+      @problems = @drill.problems.limit(params[:num])
+    end
   end
 end

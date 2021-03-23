@@ -4,9 +4,9 @@
   <i class="fab fa-twitter"></i>
   <div id="js-hello"></div>
 <% end %>
-<%= debug(params) if Rails.env.development? %>
+<%= debug(params) if Rails.env.development? && false %>
 
-<% if Rails.env.development? %>
+<% if Rails.env.development? && false %>
   <%= request.inspect %>
   <% r = request %>
   <%= {url: r.url, original_url: r.original_url, base_url: r.base_url, path: r.path, full_path: r.fullpath, path_info: r.path_info,  controller_class: r.controller_class, from: r.from, referer: r.referer,  request_method: r.request_method, uuid: r.uuid, negotiate: r.negotiate, headers: r.headers, flash: r.flash } %>

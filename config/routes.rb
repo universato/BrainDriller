@@ -3,10 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :drills
   resources :problems
-  # resources :users
   get 'favorite-problems', to: 'problems#favorite'
-  get 'solving', to: 'drills#solving'
-  get 'solve/:id', to: 'drills#solving', as: "solve"
+  get 'solve/:id', to: 'drills#solve', as: "solve"
 
   namespace :api do
     resources :drills, only: %i(index show new create edit)
