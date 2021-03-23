@@ -1,0 +1,32 @@
+.drills {
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 16px;
+  padding: 16px;
+}
+
+.drill-title {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.drill-title:hover {
+  text-decoration: underline;
+}
+
+.drill-user {
+  color: #222;
+  text-decoration: none;
+}
+
+.drill-user:hover {
+  color: rgb(28, 77, 211);
+  text-decoration: underline;
+}
+
+
+.drill-title {
+  margin: 12px;
+  padding: 12px;
+}

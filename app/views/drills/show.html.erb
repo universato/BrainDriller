@@ -1,4 +1,4 @@
-<h1>ドリル：<%= @drill.title %></h1>
+<h1 class="drill-title">ドリル：<%= @drill.title %></h1>
 <div><%= @drill.guide %></div>
 
 <div>
@@ -8,10 +8,11 @@
 
 <%= form_with url: "/solve/#{@drill.id}", method: "GET" do |f| %>
 
-  <%= f.label :rand, "ランダムに出題する" %>
+  <%= f.label :rand, "ランダムに出題する: " %>
   <%= f.check_box :rand, {checked: true}, "true", nil %>
   <br>
 
+  <div>問題数: </div>
   <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem_number" %>
     <%# problem_count_select_list(problems_count).each do |c| %>
       <%#= content_tag(:option, c, value: c) %>
@@ -19,7 +20,7 @@
   <%# end %>
   <br>
 
-  <%= f.submit t("text.Solve_problems"), name: '', class: '' %>
+  <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big' %>
 <% end %>
 
 <% if Rails.env.development? %>

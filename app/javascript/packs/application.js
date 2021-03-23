@@ -11,6 +11,7 @@ import "channels"
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/js/all'
 import '../stylesheets/application.scss'
+import '../stylesheets/drill.scss'
 import '../stylesheets/problems.scss'
 
 Rails.start()
@@ -18,5 +19,5 @@ Rails.start()
 ActiveStorage.start()
 
 require('./hello_vue.js')
-require('./solving_vue.js')
+require('./solve_vue.js')
 require('./drill_form_vue.js')

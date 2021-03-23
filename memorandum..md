@@ -329,3 +329,6 @@ col-6
 import hljs from 'highlight.js';
 ```
 `.`が必要なのでは。
+
+Twitter 15文字
+はてな 32文字

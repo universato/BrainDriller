@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div v-if="drill">
+    <div v-if="drill" class="drill">
       <div class="drill-id"> ドリルID：{{ drill.id }} </div>
       <div class="drill-title"> ドリルのタイトル： {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
-      <div class="problems">
+      <div class="problem">
         <div v-if="currentProblem">
           <div class="problem-id"> 問題ID{{ currentProblem.id }} </div>
           <div class="problem-id"> {{ currentProblemIndex +1 }}問目 </div>
@@ -22,10 +22,11 @@
             </li>
           </ol>
         </div>
-        <div v-if="false && 0 < currentProblemIndex"><button @click="prevProblem()">前のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()">次のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()">中断して採点する</button></div>
-        <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()">採点する</button></div>
+        <div v-if="false && 0 < currentProblemIndex"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()" class="btn-next btn-std">わからない</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">次のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()" class="btn-std">中断して採点する</button></div>
+        <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()" class="btn-std">採点する</button></div>
       </div>
     </div>
     <div v-else-if="state=='result'">
@@ -126,6 +127,9 @@ export default {
     postAnswerPaper() {
 
     },
+    notSure() {
+      nextProblem();
+    },
     nextProblem() {
       if(this.problems.length - 1 <= this.currentProblemIndex) { return }
       this.currentProblemIndex += 1;
@@ -145,30 +149,60 @@ export default {
 
 <style scoped>
 
+.drill {
+  /* border: solid 1px #eee; */
+  margin: 8px;
+  padding: 8px;
+  border: none 0 #fff;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
 .drill-title {
-  width: 800px;
-  border: solid 1px #eee;
+  /* width: 800px; */
+  /* border: solid 1px #eee; */
+  background-color: #fff;
+}
+
+.problem {
+  margin: 8px;
+  padding: 8px;
+  border: none 0 #fff;
+  border-radius: 4px;
+  background-color: #fff;
 }
 
 .problem-title {
-  width: 800px;
-  border: solid 1px #eee;
+  /* width: 800px; */
+  /* border: solid 1px #eee; */
+  background-color: #fff;
 }
 
 .problem-statement {
-  width: 800px;
-  border: solid 1px #eee;
+  /* width: 800px; */
+  /* border: solid 1px #eee; */
   padding: 16px;
+  background-color: #fff;
 }
 
 .problem-choice {
-  width: 800px;
-  border: solid 1px #eee;
+  /* width: 800px; */
+  /* border: solid 1px #eee; */
+  border-radius: 4px;
+  background-color: #e1e1e1;
+  cursor: pointer;
+  margin: 8px;
+  padding: 8px;
+}
+
+.problem-choice:hover {
+  background-color: #efefef;
 }
 
 .problem-explanation {
-  width: 800px;
-  border: solid 1px #eee;
+  /* width: 800px; */
+  /* border: solid 1px #eee; */
+  background-color: #fff;
 }
 
 p {

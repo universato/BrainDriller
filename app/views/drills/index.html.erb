@@ -1,32 +1,44 @@
 <h1>ドリル一覧</h1>
 
 <% if current_user %>
-  <%= link_to 'ドリルを作成する', new_drill_path %><br>
+  <%= link_to 'ドリルを作成する', new_drill_path, class: "btn-std" %><br>
 <% end %>
 
-<% if @drills.nil? || @drills.size == 0 %>
-  <%= "ドリルが取得できませんでした。" %>
-  <% if Rails.env.development? %>
-    <%= "@drillsがnil" if @drills.nil?  %>
-    <%= "@drills.sizeが0" if @drills.size == 0 %>
+<% drill = @drills.first %>
+<div class="drills">
+  <div class="drill-title"><%= link_to drill.title, drill, class: "drill-title" %></div>
+  <div class="drill"><%= drill.problems.size %>問</div>
+  <div class="problem-count"><%= link_to "#{drill.problems.count}問", drill, class: "problem-count" %></div>
+  <div class="drill-view"><%= drill.number_of_views %>回</div>
+  <div class="drill-view"><%= drill.impressions_count %>回</div>
+  <div class="drill-user"><%= link_to drill.user, drill.user, class: "drill-user" %></div>
+</div>
+
+<div class="drills">
+  <% if @drills.nil? || @drills.size == 0 %>
+    <%= "ドリルが取得できませんでした。" %>
+    <% if Rails.env.development? %>
+      <%= "@drillsがnil" if @drills.nil?  %>
+      <%= "@drills.sizeが0" if @drills.size == 0 %>
+    <% end %>
+  <% else %>
+    <table>
+      <tr>
+        <th>ドリル名</th>
+        <th>あなたの<br>理解数</th>
+        <th>問題数</th>
+        <th>全体の<br>閲覧数</th>
+        <th>全体の<br>閲覧数</th>
+      </tr>
+    <% @drills.each do |drill| %>
+      <tr>
+        <td class="drill-title"><%= link_to drill.title, drill %></td>
+        <td class="problem-count"><%= drill.problems.size %>問</td>
+        <td><%= link_to "#{drill.problems.count}問", drill %></td>
+        <td><%= drill.number_of_views %>回</td>
+        <td><%= drill.impressions_count %>回</td>
+      </tr>
+    <% end %>
+    <table>
   <% end %>
-<% else %>
-  <table>
-    <tr>
-      <th>ドリル名</th>
-      <th>あなたの<br>理解数</th>
-      <th>問題数</th>
-      <th>全体の<br>閲覧数</th>
-      <th>全体の<br>閲覧数</th>
-    </tr>
-  <% @drills.each do |drill| %>
-    <tr>
-      <td><%= link_to drill.title, drill %></td>
-      <td><%= drill.problems.size %>問</td>
-      <td><%= link_to "#{drill.problems.count}問", drill %></td>
-      <td><%= drill.number_of_views %>回</td>
-      <td><%= drill.impressions_count %>回</td>
-    </tr>
-  <% end %>
-  <table>
-<% end %>
+</div>
