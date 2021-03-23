@@ -1,2 +1,2 @@
 json.drill @drill
-json.problems @drill.problems
+json.problems @problems

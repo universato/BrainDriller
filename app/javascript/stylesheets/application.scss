@@ -2,10 +2,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-@media screen and ( max-width:479px )
-{
-	p
-	{
-		color: #f00 ;	/* 赤色 */
-	}
+.no-wrap {
+  white-space: nowrap
 }

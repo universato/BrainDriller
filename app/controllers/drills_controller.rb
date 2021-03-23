@@ -53,16 +53,11 @@ class DrillsController < ApplicationController
   end
 
   def solving
-    @drill_id = drill_id
+    p params
   end
 
   private
     def drill_params
       params.require(:drill).permit(:title)
-    end
-
-    def drill_id
-      s = request.referrer
-      s && s[/drills\/(\d+)/, 1]
     end
 end

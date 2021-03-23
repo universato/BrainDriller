@@ -62,7 +62,10 @@ export default {
   created() {
     const pathnames = location.pathname.split('/'); // ["", "solve", "5"]
     const drill_id = pathnames[2];
-    fetch(`/api/drills/${drill_id}.json`, {
+    const url = new URL(location.href);
+    // const isRand = url.searchParams.get('rand');
+    // const is = url.searchParams.get('');
+    fetch(`/api/drills/${drill_id}.json${url.search}`, {
         method: 'GET',
         headers: { 'X-Requested-With': 'XMLHttpRequest', },
         credentials: 'same-origin',
