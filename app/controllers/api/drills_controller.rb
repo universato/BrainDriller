@@ -11,4 +11,7 @@ class API::DrillsController < API::ApplicationController
       @problems = @drill.problems.limit(params[:num])
     end
   end
+
+  def grade
+  end
 end

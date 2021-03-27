@@ -1,0 +1,18 @@
+ruby1:
+  user: ruby
+  drill: ruby
+  title: ""
+  format: basic_choices
+  statement:  "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
+  explanation: "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
+  choices: ["[1, 2, 3]", "[2, 3, 6]", "[1, 2, 3, 4, 5, 6]"]
+  correct_option: 1
+ruby2:
+  user: ruby
+  drill: ruby
+  title: ""
+  format: basic_choices
+  statement:  "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
+  explanation: "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
+  choices: ["[1, 2, 3]", "[2, 3, 6]", "[1, 2, 3, 4, 5, 6]"]
+  correct_option: 1

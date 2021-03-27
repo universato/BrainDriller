@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <div v-if="drill" class="drill">
+  <div id="app panel">
+    <div v-if="drill" class="solve-drill">
       <div class="drill-id"> ドリルID：{{ drill.id }} </div>
-      <div class="drill-title"> ドリルのタイトル： {{ drill.title }} </div>
+      <div class="solve-drill-title"> ドリルのタイトル： {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
       <div class="problem">
@@ -35,10 +35,10 @@
         <li v-for="(problem, idx) in problems" :key="problem.id">
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title"> {{ problem.title }} </div>
-          <div class="problem-statement"> {{ problem.statement }} </div>
+          <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
           <div class="problem-selected_option"> {{ answerPaper[idx] }} </div>
           <div class="problem-correct_option"> {{ problem.correct_option }} </div>
-          <div class="problem-explanation"> {{ problem.explanation }} </div>
+          <div class="problem-explanation" v-html="compiledMarkdown(problem.explanation)"> </div>
         </li>
       </ol>
 
@@ -102,7 +102,7 @@ export default {
     selectOption(choiceNo) {
       console.log(`selectOption Method ${choiceNo}`);
       console.log(this.answerPaper);
-      this.answerPaper[this.currentProblemIndex] = choiceNo;
+      this.answerPaper[this.currentProblem.id] = choiceNo;
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
@@ -118,14 +118,36 @@ export default {
       this.correct_count = 0
       for(let i = 0; i < this.problems.length; i++){
         let problem = this.problems[i];
-        if(this.answerPaper[problem.id - 1] + 1 == problem.correct_option){
+        console.log([problem.id])
+        if(this.answerPaper[problem.id] + 1 == problem.correct_option){
           this.correct_count += 1
         }
       }
       this.state = "result"
     },
     postAnswerPaper() {
-
+      console.log("will post Answer Paper")
+      const body = {
+        problems: this.problems,
+        answer_paper: this.answerPaper
+      }
+      fetch(`/api/drills/grade`, {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          "Content-Type": "application/json",
+        },
+        credentials: 'same-origin',
+        redirect: 'manual',
+        body: JSON.stringify(body),
+      }).then(response => {
+        return response;
+      }).then(json => {
+        console.log(json)
+        console.log("posted Answer Paper")
+      }).catch(error => {
+        console.warn('Failed to parsing', error)
+      })
     },
     notSure() {
       nextProblem();
@@ -149,7 +171,7 @@ export default {
 
 <style scoped>
 
-.drill {
+.solve-drill {
   /* border: solid 1px #eee; */
   margin: 8px;
   padding: 8px;
@@ -158,10 +180,14 @@ export default {
   background-color: #fff;
 }
 
-.drill-title {
+.solve-drill-title {
   /* width: 800px; */
   /* border: solid 1px #eee; */
   background-color: #fff;
+}
+
+.panel {
+  background-color: #fafafa;
 }
 
 .problem {

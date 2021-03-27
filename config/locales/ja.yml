@@ -4,17 +4,31 @@ ja:
     help: ヘルプ
     login: ログイン
     logout: ログアウト
+    new_password: 新しいパスワード
+    new_password_confirmation: 新しいパスワード(確認用)
+    update: 更新
+    Update: 更新
     submit: 送信
   text:
+    are_you_sure?: 本当にアカウントを削除しますか
+    cancel_my_account: アカウントを削除する
     Forgot_your_password?: パスワードを覚えてないとき
     Solve_problems: 問題を解く
     edit_profile: プロフィールを変更する
+    leave_blank_if_you_don't_want_to_change_it: 変更しない場合は空欄にしてください
+    we_need_your_current_password_to_confirm_your_changes: パスワードを変更するときは、現在のパスワードを入力してください
   activerecord:
     errors:
       models:
         user:
           attributes:
             email:
+              blank: 空になっています。入力してください。
+            login_name:
+              too_long: 文字数の制限を超えています。
+              blank: 空になっています。入力してください。
+            nickname:
+              too_long: 文字数の制限を超えています。
               blank: 空になっています。入力してください。
             name:
               blank: 空になっています。入力してください。
@@ -35,3 +49,4 @@ ja:
         login_name: ID
         nickname: ハンドルネーム
         email: メールアドレス
+        icon: アイコン

@@ -1,11 +1,18 @@
-# 何度も実行されることを想定すると、メアドでエラーが起きるかもしれない。
-User.create(
-  login_name: "uni",
-  nickname: "uni",
-  email: "uni@example.com",
-  password: "foobar",
-  password_confirmation: "foobar",
-)
+def create_user(name)
+  User.create(
+    login_name: name,
+    nickname: name,
+    email: "#{name}@example.com",
+    password: "foobar",
+    password_confirmation: "foobar",
+  )
+  # 何度も実行されることを想定すると、メアドでエラーが起きるかもしれないので、エラーはださない。
+end
+
+create_user("uni")
+create_user("ruby")
+
+return if User.count > 100
 
 # 追加のユーザーをまとめて生成する
 id = User.count
@@ -14,7 +21,7 @@ id = User.count
   # password = Faker::Internet.password(min_length: 6)
   password = "foobar"
 
-  User.create!(
+  User.create(
     login_name: name,
     nickname: name,
     email: "a#{id}@example.com",

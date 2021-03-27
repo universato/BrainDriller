@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_045841) do
+ActiveRecord::Schema.define(version: 2021_03_23_224105) do
 
   create_table "basic_choices", force: :cascade do |t|
     t.json "choices", null: false
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 2021_03_23_045841) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "nickname"
     t.string "login_name"
+    t.string "image"
+    t.string "icon"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["login_name"], name: "index_users_on_login_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

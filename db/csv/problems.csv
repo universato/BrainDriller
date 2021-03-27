@@ -1,4 +1,4 @@
-#,title,statement,o1,o2,o3,o4,ans,in_order,tag0,tag1,tag2,tag3,explanation,private_memo,drill_id
+ID,title,statement,o1,o2,o3,o4,ans,in_order,tag0,tag1,tag2,tag3,explanation,private_memo,drill_id
 1,日本一の高い山は,日本一の高い山は?,富士山,北岳,奥穂高岳,間ノ岳,1,FALSE,山,日本の山,常識,易しい,"富士山は3776mと日本一高いです。
 続いて、北岳3193m、奥穂高岳3190m、間ノ岳3190mと並びます。",,
 2,日本一の低い山は,日本一の高い山は富士山ですが、2番目は?,富士山,北岳,奥穂高岳,間ノ岳,2,FALSE,山,日本の山,雑学,難しい,"富士山は3776mですが、2番目は北岳3193mです。

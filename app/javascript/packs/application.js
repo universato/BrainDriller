@@ -13,6 +13,7 @@ import '@fortawesome/fontawesome-free/js/all'
 import '../stylesheets/application.scss'
 import '../stylesheets/drill.scss'
 import '../stylesheets/problems.scss'
+import '../stylesheets/user.scss'
 
 Rails.start()
 // Turbolinks.start()

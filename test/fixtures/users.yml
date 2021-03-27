@@ -2,3 +2,15 @@ uni:
   login_name: uni
   nickname: uni
   email: uni@example.com
+ruby:
+  login_name: ruby
+  nickname: ruby
+  email: ruby@example.com
+kaikei:
+  login_name: kaikei
+  nickname: uni
+  email: kaikei@example.com
+kigyo:
+  login_name: ruby
+  nickname: ruby
+  email: kigyo@example.com

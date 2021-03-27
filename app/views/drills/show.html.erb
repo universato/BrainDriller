@@ -1,31 +1,38 @@
-<h1 class="drill-title">ドリル：<%= @drill.title %></h1>
-<div><%= @drill.guide %></div>
+<div class="drill-panel">
+  <h1 class="drill-title">ドリル：<%= @drill.title %></h1>
+  <div class="drill-guide"><%= @drill.guide %></div>
 
-<div>
-  このドリルの問題数:
-  <%= problems_count = @drill.problems.count %>
-</div>
-
-<%= form_with url: "/solve/#{@drill.id}", method: "GET" do |f| %>
-
-  <%= f.label :rand, "ランダムに出題する: " %>
-  <%= f.check_box :rand, {checked: true}, "true", nil %>
-  <br>
-
-  <div>問題数: </div>
-  <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem_number" %>
-    <%# problem_count_select_list(problems_count).each do |c| %>
-      <%#= content_tag(:option, c, value: c) %>
-    <%# end %>
-  <%# end %>
-  <br>
-
-  <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big' %>
-<% end %>
-
-<% if Rails.env.development? %>
-  <hr>
-  <div style="font-size: 8">
-    <%= link_to "編集する", edit_drill_path(@drill) %>
+  <div class="drill-problem-count">
+    このドリルの問題数:
+    <%= problems_count = @drill.problems.count %>
   </div>
-<% end %>
+
+  <%= form_with url: "/solve/#{@drill.id}", method: "GET" do |f| %>
+
+  <div class="drill-option">
+    <%# f.label :rand, "ランダムに出題する: " %>
+    <%# f.check_box :rand, {checked: true}, "true", nil %>
+
+    <%= f.label :rand, "過去の回答に基づいて出題する" %>
+    <%= f.check_box :rand, {checked: true}, "true", nil %>
+  </div>
+
+  <div class="drill-option">
+    <div>問題数: </div>
+    <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem_number" %>
+      <%# problem_count_select_list(problems_count).each do |c| %>
+        <%#= content_tag(:option, c, value: c) %>
+      <%# end %>
+    <%# end %>
+  </div>
+
+    <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big' %>
+  <% end %>
+
+  <% if Rails.env.development? %>
+    <hr>
+    <div style="font-size: 8">
+      <%= link_to "編集する", edit_drill_path(@drill) %>
+    </div>
+  <% end %>
+</div>

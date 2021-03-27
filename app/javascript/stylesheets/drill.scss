@@ -1,3 +1,12 @@
+.drill-panel {
+  // grid-column: 2;
+  // display: grid;
+  // grid-template-columns: 10% 80% 10%;
+  background-color: #fff;
+  margin: 16px;
+  padding: 16px;
+}
+
 .drills {
   background-color: #fff;
   border-radius: 4px;
@@ -6,16 +15,28 @@
 }
 
 .drill-title {
+  grid-column: 2;
   color: black;
   font-weight: bold;
   text-decoration: none;
+  margin: 12px;
+  padding: 12px;
 }
 
-.drill-title:hover {
+a.drill-title:hover {
   text-decoration: underline;
 }
 
+.drill-option {
+  // grid-column: 2;
+}
+
+.drill-guide {
+  // grid-column: 2;
+}
+
 .drill-user {
+  // grid-column: 2;
   color: #222;
   text-decoration: none;
 }
@@ -25,8 +46,6 @@
   text-decoration: underline;
 }
 
-
-.drill-title {
-  margin: 12px;
-  padding: 12px;
+.drill-problem-count {
+  // grid-column: 2;
 }

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root "drills#index"
-  devise_for :users
+  devise_for :users, :controllers => {
+    :sessions => 'users/sessions' ,
+    :registrations => 'users/registrations'
+  }
   resources :drills
   resources :problems
   get 'favorite-problems', to: 'problems#favorite'
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :drills, only: %i(index show new create edit)
+    post 'drills/grade', to: "drills#grade"
   end
 
   resources :users, only: %i(index show new create edit) do
