@@ -1,30 +1,34 @@
-File.open('db/simple_problems/english.txt') do |file|
-  title =  file.gets
+first_user = User.first
 
-  flag = 0
-  options = {}
-  while line = file.gets
-    if line == "\n"
-      Problem.create(**options) if options.size > 0
-      options = {title: title, user_id: 1, format: :basic_choices, explanation: '', }
-      flag = 0
-    else
-      case flag
-      in 0
-        options[:statement] = line
-      in 1
-        options[:choices] = [line.chomp]
-      in 2..4
-        options[:choices] << line.chomp
-      in 5
-        options[:correct_option] = line.to_i - 1
-      else
-        options[:explanation] = line.chomp || ''
-      end
-      flag += 1
-    end
+problems = File.read("db/simple_problems/english.txt").split("\n\n")
 
-  end
+header = problems.shift.split
+drill_title, guide = header[0]
+
+drill = Drill.find_by(title: drill_title)
+drill ||= Drill.create!(
+  title: drill_title,
+  user: first_user,
+  guide: guide || '',
+)
+
+unless drill.problems.empty?
+  puts "作成済みのドリルの問題が空でなかったため、問題の作成を中止します。"
+  exit
 end
 
-puts title
+user = drill.user
+
+problems.each do |problem|
+  statement, o1, o2, o3, o4, correct_option, explanation = problem.split("\n")
+  Problem.create(
+    drill: drill,
+    user: user,
+    title: '',
+    statement: statement,
+    format: "basic_choices",
+    choices: [o1, o2, o3, o4],
+    correct_option: correct_option.to_i - 1,
+    explanation: explanation || '',
+  )
+end

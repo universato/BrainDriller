@@ -1,6 +1,7 @@
 class DrillsController < ApplicationController
   def index
-    @drills = Drill.order(created_at: "DESC").page(params[:page])
+    # @drills = Drill.order(created_at: "DESC").page(params[:page])
+    @drills = Drill.order(created_at: "DESC").page(params[:page]).includes(:problems, :user)
   end
 
   def show

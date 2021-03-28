@@ -417,4 +417,23 @@ $ rails t
 
 LoadError - cannot load such file -- rexml/document #10388
 
-[gem 'rexml'](https://github.com/CocoaPods/CocoaPods/issues/10388)
+[CocoaPods/CocoaPodsのIssue #10388](https://github.com/CocoaPods/CocoaPods/issues/10388)
+
+2ヶ月前
+[Rails 6\.1, Ruby 3\.0\.0: tests error as they cannot load rexml \- Stack Overflow](https://stackoverflow.com/questions/65479863/rails-6-1-ruby-3-0-0-tests-error-as-they-cannot-load-rexml)
+
+`gem 'rexml'`をGemfileに書いてみた。
+`gem`コマンドでドキュメントをインストールしないようにしたのが原因だったりするのかな。
+
+
+# シンタックスハイライト
+
+[コードのハイライト表示 JS ライブラリ ３種 \- Qiita](https://qiita.com/tadnakam/items/1323d03743fc0101aa50)
+
+
+markdown
+YAML front matter
+
+- front_matter_paser
+  - [Github](https://github.com/waiting-for-dev/front_matter_parser)
+  - [rubygems](https://rubygems.org/gems/front_matter_parser)

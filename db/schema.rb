@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "nickname"
     t.string "login_name"
-    t.string "image"
     t.string "icon"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["login_name"], name: "index_users_on_login_name"

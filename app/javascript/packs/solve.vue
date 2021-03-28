@@ -30,15 +30,18 @@
       </div>
     </div>
     <div v-else-if="state=='result'">
-      <div>{{ correct_count }}</div>
+      <div>正解数: {{ correct_count }}</div>
+      <div>出題数: {{ problems.length }}</div>
+      <div>正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
       <ol>
-        <li v-for="(problem, idx) in problems" :key="problem.id">
+        <li v-for="(problem, problem_idx) in problems" :key="problem_idx">
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
-          <div class="problem-title"> {{ problem.title }} </div>
+          <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
-          <div class="problem-selected_option"> {{ answerPaper[idx] }} </div>
-          <div class="problem-correct_option"> {{ problem.correct_option }} </div>
-          <div class="problem-explanation" v-html="compiledMarkdown(problem.explanation)"> </div>
+          <div class="problem-correct_option"> 問題の正解: {{ problem.correct_option + 1 }}. {{ problem.choices[problem.correct_option] }} </div>
+          <div class="problem-correct_option" v-if="answerPaper[problem.id]"> あなたの回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
+          <div class="problem-correct_option" v-else> あなたの回答: 回答してません</div>
+          <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </li>
       </ol>
 
@@ -119,7 +122,7 @@ export default {
       for(let i = 0; i < this.problems.length; i++){
         let problem = this.problems[i];
         console.log([problem.id])
-        if(this.answerPaper[problem.id] + 1 == problem.correct_option){
+        if(this.answerPaper[problem.id] == problem.correct_option){
           this.correct_count += 1
         }
       }

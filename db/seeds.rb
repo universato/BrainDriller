@@ -8,15 +8,15 @@
 module Seed
   def self.run_seed(path)
     if require_relative(path)
-      puts path + " : 実行されました"
+      puts "実行された: " + path
     else
-      puts path + " : 実行されませんでした"
+      puts "実行されず: " + path
     end
   end
 end
 
 Seed.run_seed("./seeds/user")
-Seed.run_seed("./seeds/drills")
-# Seed.run_seed("./seeds/cpa_csv")
-
-# require_relative "./seeds/problems"
+Seed.run_seed("./seeds/problems")
+Seed.run_seed("./seeds/cpa_csv")
+Seed.run_seed("./seeds/simple_problems")
+# Seed.run_seed("./seeds/drills")

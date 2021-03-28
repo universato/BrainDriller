@@ -8,12 +8,7 @@ module ApplicationHelper
       [[1, 1], [3, 3], [5, 5]] + ["#{max_problem}(全問)", max_problem]
       [10, 1, 3, 5, 10].map(&:to_s)
     else
-      #a = [1, 2, 3, 4, 5] + 10.step(max_problem, 10).step
-      # a << max_problem
-      # a = [[1, 1], [3, 3], [5, 5]]
-      # a.concat 10.step(max_problem - 1, 10).to_a
-      # a + ["#{max_problem}(全問)", max_problem]
-      a = [10, 1, 3, 5] + 10.step(max_problem, 10)
+      [10, 1, 3, 5, 10]
     end
   end
 
