@@ -27,6 +27,7 @@ class DrillsController < ApplicationController
   end
 
   def solve
+    render layout: 'logo_only'
   end
 
   private

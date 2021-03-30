@@ -12,6 +12,12 @@ body {
   white-space: nowrap;
 }
 
+header {
+  padding: 12px;
+  // padding-right: 80px;
+  // padding-left: 80px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 4px;
   padding: 4px;
@@ -24,6 +30,11 @@ main {
 
 label {
   // font-style: bold;
+  font-weight: bold;
+}
+
+.modest-logo-title {
+  size: 16px;
   font-weight: bold;
 }
 

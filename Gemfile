@@ -37,7 +37,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'marked-rails'
 gem 'carrierwave'
-gem 'mimemagic', '~>0.3.10'
+# gem 'mimemagic', '~>0.3.10'
 gem 'mini_magick'
 gem 'rexml'
 

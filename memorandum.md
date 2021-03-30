@@ -410,6 +410,8 @@ POST http://localhost:3000/api/drills/grade 404
   end
 ```
 
+う〜ん、Railsのバージョンを上げた際に、以下のエラーがでた記憶。
+
 ```
 $ rails t
 ~/rails/BrainDriller/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.7.2/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:34:in `require': cannot load such file -- rexml/document (LoadError)
@@ -437,3 +439,33 @@ YAML front matter
 - front_matter_paser
   - [Github](https://github.com/waiting-for-dev/front_matter_parser)
   - [rubygems](https://rubygems.org/gems/front_matter_parser)
+
+#
+
+[JavaScriptでブラウザバックを "ほぼ完全禁止" する方法 \| PisukeCode \- Web開発まとめ](https://pisuke-code.com/javascript-prohibit-browser-back/)
+
+```js
+history.pushState(null, null, location.href);
+window.addEventListener('popstate', (e) => {
+  history.go(1);
+});
+```
+
+[\+JavaScript\+ブラウザの戻るボタンの無効化 \- Free Flying](http://tuotehhou.y.ribbon.to/index.php?%2BJavaScript%2B%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%AE%E6%88%BB%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96)
+
+```js
+function redirect(url)
+{
+    var Backlen=history.length;
+    history.go(-Backlen);
+    window.location.replace(url);
+}
+```
+これ上手く行かない。なんか戻り続ける感じ。危険な感じする。
+
+```rb
+history.forward();
+```
+無反応、よくわからない。
+
+[JavaScriptだけでブラウザの「戻る」ボタンを無効化する方法 \- HIDARI日記（右）](https://hidari-lab.hatenablog.com/entry/2015/03/02/212818)

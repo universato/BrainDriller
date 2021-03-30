@@ -13,18 +13,19 @@
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <ol class="problem-choices">
             <li
-              v-for="(choice, idx) in currentProblem.choices"
-              :key="idx"
+              v-for="(choice, choiceNo) in currentProblem.choices"
+              :key="choiceNo"
               class="problem-choice"
-              @click="selectOption(idx)"
+              :class="[ answerPaper[currentProblem.id] === choiceNo ? 'selected-choice' : '' ]"
+              @click="selectOption(choiceNo)"
             >
               {{ choice }}
             </li>
           </ol>
         </div>
-        <div v-if="false && 0 < currentProblemIndex"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()" class="btn-next btn-std">わからない</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">次のクイズへ</button></div>
+        <div v-if="0 < currentProblemIndex"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()" class="btn-next btn-std">次のクイズへ</button></div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">わからない</button></div>
         <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()" class="btn-std">中断して採点する</button></div>
         <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()" class="btn-std">採点する</button></div>
       </div>
@@ -39,7 +40,7 @@
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
           <div class="problem-correct_option"> 問題の正解: {{ problem.correct_option + 1 }}. {{ problem.choices[problem.correct_option] }} </div>
-          <div class="problem-correct_option" v-if="answerPaper[problem.id]"> あなたの回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
+          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> あなたの回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
           <div class="problem-correct_option" v-else> あなたの回答: 回答してません</div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </li>
@@ -79,6 +80,11 @@ export default {
       }
     });
 
+    history.pushState(null, null, location.href);
+    window.onpopstate = () => {
+      history.go(1)
+    }
+
     const pathnames = location.pathname.split('/'); // ["", "solve", "5"]
     const drill_id = pathnames[2];
     const url = new URL(location.href);
@@ -103,9 +109,10 @@ export default {
   },
   methods: {
     selectOption(choiceNo) {
-      console.log(`selectOption Method ${choiceNo}`);
-      console.log(this.answerPaper);
+      // console.log(`selectOption Method ${choiceNo}`);
+      this.currentProblem.selectIndex = choiceNo;
       this.answerPaper[this.currentProblem.id] = choiceNo;
+      console.log(this.answerPaper);
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
@@ -117,11 +124,12 @@ export default {
     },
     grade() {
       console.log("method grade");
+      console.log(this.answerPaper);
       this.postAnswerPaper();
       this.correct_count = 0
       for(let i = 0; i < this.problems.length; i++){
         let problem = this.problems[i];
-        console.log([problem.id])
+        // console.log([problem.id])
         if(this.answerPaper[problem.id] == problem.correct_option){
           this.correct_count += 1
         }
@@ -146,14 +154,14 @@ export default {
       }).then(response => {
         return response;
       }).then(json => {
-        console.log(json)
-        console.log("posted Answer Paper")
+        // console.log(json)
+        // console.log("posted Answer Paper")
       }).catch(error => {
         console.warn('Failed to parsing', error)
       })
     },
     notSure() {
-      nextProblem();
+      this.nextProblem();
     },
     nextProblem() {
       if(this.problems.length - 1 <= this.currentProblemIndex) { return }
@@ -173,6 +181,10 @@ export default {
 </script>
 
 <style scoped>
+
+.selected-choice {
+  color: red;
+}
 
 .solve-drill {
   /* border: solid 1px #eee; */
