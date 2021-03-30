@@ -7,7 +7,7 @@ Rails.application.load_tasks
 
 # [rake db:migrate した時に発行される SQL を調べる方法 \- Qiita](https://qiita.com/pekepek/items/2dc9dfc9ed2b7f3b0f0c)
 task log: :environment do
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  ActiveRecord::Base.logger = Logger.new($stdout)
 end
 
 # [Rails・seedファイルを分割して管理する \- Qiita](https://qiita.com/masaki7555/items/d65f56958020cbca5ee0)

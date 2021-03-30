@@ -5,7 +5,10 @@ AllCops:
     - bin/*
     - config/environments/production.rb
     - config/initializers/filter_parameter_logging.rb
+    - config/initializers/impression.rb
     - config/puma.rb
+    - db/migrate/*_create_impressions_table.rb
+    - db/migrate/*_devise_create_users.rb
     - db/schema.rb
     - node_modules/**/*
     - vendor/**/*
@@ -25,6 +28,9 @@ Style/StringLiterals:
 # 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
 Layout/ExtraSpacing:
   AutoCorrect: false
+Layout/LineLength:
+  Exclude:
+    - config/initializers/devise.rb
 # デフォルトだとメソッドの開始ブロックの手前にスペースを要求してくるが、競プロ界隈では一般的ではないと思う。
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
@@ -107,6 +113,9 @@ Style/AndOr:
 # [*1..5]の代わりにArray(1..5)を使え、と警告がでるけど、[*1..5]の方が一般的では。もし、速度がArray(1..5)の方が速いなら、こっちを使うようにする。
 Style/ArrayCoercion:
   Enabled: false
+# 日本語コメントしたいかも……。
+Style/AsciiComments:
+  Enabled: false
 # 複数行のときのブロックに`{}`を使いたくなるときもあるので、自動修正はしない。
 # 2-3行なら`{}`も良いと思う。しかし、`{}`の中に`do end`は入れたくない。
 Style/BlockDelimiters:
@@ -115,6 +124,9 @@ Style/BlockDelimiters:
 # Matzは地上げしたいリテラルらしいし、わかりにくいかもしれないので、ケースバイケースで使えたらと思います。
 Style/CharacterLiteral:
   AutoCorrect: false
+# あまりメリットわからない。お好きにどうぞ、という感じする。
+Style/EmptyMethod:
+  Enabled: false
 # グローバル変数は原則禁止。ごくまれにグローバル変数を使いたいときがあったので、別個許容する。
 Style/GlobalVars:
   AutoCorrect: false
@@ -162,6 +174,9 @@ Style/SelfAssignment:
 # 1行におさめたくて、セミコロンを使いたくなる場面がごくわずかにあるので、自動修正はしない。
 Style/Semicolon:
   AutoCorrect: false
+# %i[ja en]って書くと読みやすい? シンタックスハイライトが効かないじゃん、という感じもする。
+Style/SymbolArray:
+  Enabled: false
 # Prefer ary[n..] over ary[n..-1].と言われるが、ary[n..-1]でわかりやすいと思う。
 Style/SlicingWithRange:
   Enabled: false
@@ -171,6 +186,13 @@ Style/SlicingWithRange:
 # `$DEFAULT_INPUT`は初めて聞いたかもしれないです。
 Style/SpecialGlobalVars:
   AutoCorrect: false
+# + で書いた方が意味合いが通りやすいときもある気がする。
+Style/StringConcatenation:
+  Enabled: false
+# 引数の末尾カンマ
+# diffのために、あってもいいと思った。
+Style/TrailingCommaInArguments:
+  Enabled: false
 # 末尾カンマの設定。配列の最後の要素にカンマを入れるか。個人的に見た目は美しくないと思うが、複数行だとdiffがわかりやすくなるし、どちからといえばカンマを入れる傾向が世間にあるのだとか。競プロRuby界隈ではあまり見たことないけど、複数行のときは積極的に使ってみたさがある。
 Style/TrailingCommaInArrayLiteral:
   Enabled: false

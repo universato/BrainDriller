@@ -80,7 +80,6 @@ end
 
 # CREATE TABLE "basic_choices" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "options" text NOT NULL, "correct_number" integer DEFAULT 0 NOT NULL)
 
-
 # 正誤問題 true or false 正解がどっちか(true or false)
 # 選択肢問題
 #   択一式 vs 複数選択
@@ -93,7 +92,6 @@ end
 
 # [クイズアプリにおけるデータベース設計のアンチパターン \- Qiita]
 # (https://qiita.com/kumackey/items/7ccbc949458bd0af22bd)
-
 
 # rails db:rollback
 

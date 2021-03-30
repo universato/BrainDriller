@@ -35,7 +35,7 @@ end
 
 ruby_user = User.find_by!(nick_name: "ruby")
 ruby_drill = Drill.find_or_create_by!(
-  user: ruby_user.id
+  user: ruby_user.id,
   title: "Ruby入門",
   guide: "Rubyの基本的な問題を扱っています。",
   state: "full_open",
@@ -52,7 +52,7 @@ ruby_drill.problems.create!(
 
 return if true
 
-ruby_drill = drill.problems.create!(
+drill.problems.create!(
   user: ruby_user,
   title: "RubyのArray",
   statement: statement ,
