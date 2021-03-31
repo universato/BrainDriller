@@ -1,14 +1,14 @@
 <template>
   <div id="app panel">
     <div v-if="drill" class="solve-drill">
-      <div class="drill-id"> ドリルID：{{ drill.id }} </div>
-      <div class="solve-drill-title"> ドリルのタイトル： {{ drill.title }} </div>
+      <span class="drill-id"> drill-ID：{{ drill.id }} </span>
+      <div class="solve-drill-title"> {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
       <div class="problem">
         <div v-if="currentProblem">
-          <div class="problem-id"> 問題ID{{ currentProblem.id }} </div>
-          <div class="problem-id"> {{ currentProblemIndex +1 }}問目 </div>
+          <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
+          <div class="problem-index"> {{ currentProblemIndex +1 }}問目 </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <ol class="problem-choices">
@@ -16,26 +16,28 @@
               v-for="(choice, choiceNo) in currentProblem.choices"
               :key="choiceNo"
               class="problem-choice"
-              :class="[ answerPaper[currentProblem.id] === choiceNo ? 'selected-choice' : '' ]"
+              :class="{'selected-choice': answerPaper[currentProblem.id] === choiceNo}"
               @click="selectOption(choiceNo)"
             >
               {{ choice }}
             </li>
           </ol>
         </div>
+        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">わからない</button></div>
         <div v-if="0 < currentProblemIndex"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
         <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()" class="btn-next btn-std">次のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">わからない</button></div>
         <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()" class="btn-std">中断して採点する</button></div>
         <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()" class="btn-std">採点する</button></div>
       </div>
     </div>
     <div v-else-if="state=='result'">
+      <div><a :href="resolveDrillURL">解き直す</a></div>
+      <div><a href="/drills">ドリル一覧に戻る</a></div>
       <div>正解数: {{ correct_count }}</div>
       <div>出題数: {{ problems.length }}</div>
       <div>正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
       <ol>
-        <li v-for="(problem, problem_idx) in problems" :key="problem_idx">
+        <li v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
@@ -175,6 +177,11 @@ export default {
     },
     compiledMarkdown(md) {
       return marked(md);
+    },
+  },
+  computed: {
+    resolveDrillURL() {
+      return location.href
     }
   }
 }
@@ -197,6 +204,7 @@ export default {
 
 .solve-drill-title {
   /* width: 800px; */
+  font-weight: bold;
   /* border: solid 1px #eee; */
   background-color: #fff;
 }
@@ -213,37 +221,42 @@ export default {
   background-color: #fff;
 }
 
+.drill-id, .problem-id {
+  color: hsl(0, 10%, 80%);
+}
+
 .problem-title {
   /* width: 800px; */
   /* border: solid 1px #eee; */
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .problem-statement {
   /* width: 800px; */
   /* border: solid 1px #eee; */
   padding: 16px;
-  background-color: #fff;
+  /* overflow-wrap: break-word; */
+  /* background-color: #fff; */
 }
 
 .problem-choice {
   /* width: 800px; */
   /* border: solid 1px #eee; */
   border-radius: 4px;
-  background-color: #e1e1e1;
+  /* background-color: #e1e1e1; */
   cursor: pointer;
   margin: 8px;
   padding: 8px;
 }
 
 .problem-choice:hover {
-  background-color: #efefef;
+  /* background-color: #efefef; */
 }
 
 .problem-explanation {
   /* width: 800px; */
   /* border: solid 1px #eee; */
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 p {

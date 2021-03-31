@@ -2,18 +2,24 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+:root {
+  --base-color: hsl(100, 50%, 50%);
+  --main-color: hsl(183, 53%, 80%);
+  --accent-color: hsl(100, 29%, 72%);
+}
+
 html {
   font-size: 62.5%;
 }
 
 body {
-  background-color: #afe0ca;
+  background-color: var(--main-color);
   font-size: 1.4em;
-  white-space: nowrap;
 }
 
 header {
   padding: 12px;
+  white-space: nowrap;
   // padding-right: 80px;
   // padding-left: 80px;
 }

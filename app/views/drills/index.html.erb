@@ -4,6 +4,7 @@
   <%= link_to 'ドリルを作成する', new_drill_path, class: "btn-std" %><br>
 <% end %>
 
+<% if false %>
 <% drill = @drills.first %>
 <div class="drills">
   <div class="drill-title"><%= link_to drill.title, drill, class: "drill-title" %></div>
@@ -13,6 +14,7 @@
   <div class="drill-view"><%= drill.impressions_count %>回</div>
   <div class="drill-user"><%= link_to drill.user, drill.user, class: "drill-user" %></div>
 </div>
+<% end %>
 
 <div class="drills">
   <% if @drills.nil? || @drills.size == 0 %>

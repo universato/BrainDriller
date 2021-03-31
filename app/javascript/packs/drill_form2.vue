@@ -10,9 +10,21 @@
         <textarea v-model="drillGuide" placeholder="" class="drill-guide"></textarea>
 
         <ul>
-          <li v-for="(problem) in problems" :key="problem.id">
-            <div> {{ problem.title }} </div>
-            <div> {{ problem.statement }} </div>
+          <li v-for="(problem, idx) in problems" :key="problem.id">
+            <label>問題のタイトル</label>
+            <input v-model="problem.title" name="problem[title]" class="problem-title" />
+            <textarea v-model="problem.statement" class="problem-statement"></textarea>
+            <ol>
+              <li
+                v-for="(choice) in problem.choices"
+                :key="choice"
+              >
+                <input :value="choice" class="choice-input">
+              </li>
+            </ol>
+            <div @click="addProblem(idx)">
+              + 問題を追加する
+            </div>
           </li>
         </ul>
 
@@ -32,6 +44,14 @@ export default {
       drillGuide: "",
       message: "ドリル作成",
       problems: [{id: null, title: '', statement: '', choices: ["選択肢1", "選択肢2", "選択肢3", "選択肢4"] }],
+    }
+  },
+  watch: {
+    problems: {
+      handler: function(val, oldVal) {
+        // alert('')
+      },
+      deep: true
     }
   },
   created() {
