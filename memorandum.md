@@ -624,3 +624,16 @@ error: failed to push some refs to 'https://git.heroku.com/brain-driller.git'
 ```
 
 `$ bundle lock　--add-platform x86_64-linux`
+
+`Gemfile.lock`に`x86_64-linux`が追加される。
+```
+PLATFORMS
+  x86_64-darwin-19
+  x86_64-linux
+```
+
+
+```
+remote:        Error: vue-loader requires @vue/compiler-sfc to be present in the dependency tree.
+remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-loader/dist/index.js:8
+```
