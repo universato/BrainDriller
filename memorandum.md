@@ -637,3 +637,37 @@ PLATFORMS
 remote:        Error: vue-loader requires @vue/compiler-sfc to be present in the dependency tree.
 remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-loader/dist/index.js:8
 ```
+
+
+```json
+{
+  "name": "brain-driller",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@popperjs/core": "^2.9.1",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "5.2.1",
+    "bootstrap": "^5.0.0-beta2",
+    "highlight.js": "^10.7.1",
+    "highlightjs": "^9.16.2",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "marked": "^2.0.1",
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0",
+    "vue": "^3.0.7",
+    "vue-loader": "16.0.0-rc.0",
+    "vue-template-compiler": "^2.6.12",
+    "@vue/compiler-sfc": "^3.0.11",
+    "vuex": "^3.6.2"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
+  }
+}
+
+```
