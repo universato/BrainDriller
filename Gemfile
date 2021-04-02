@@ -5,17 +5,15 @@ ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
-# gem 'sass-rails', '>= 6'
 gem 'sassc-rails'
+
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
+
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -33,20 +31,23 @@ gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
 gem 'ransack'
-gem 'redcarpet'
-gem 'coderay'
-gem 'marked-rails'
 gem 'carrierwave'
-# gem 'mimemagic', '~>0.3.10'
-gem 'mini_magick'
-gem 'rexml'
+# gem 'mini_magick'
+# gem 'rexml'
+
 
 group :development, :test do
+  gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # gem "factory_bot_rails"
   gem 'faker'
 end
+
+group :production do
+  gem 'pg'
+end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

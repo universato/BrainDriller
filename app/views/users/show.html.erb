@@ -8,39 +8,40 @@
         <section class="user_info">
           <%= image_tag @user.icon.to_s, size: '120x120', alt: 'icon', class: 'user-icon' %>
           <div class="user-name-title"><%= @user.nickname %></div>
-          <%= "登録メールアドレス: " %><%= @user.email %>
-
+          <% if @user == current_user ||  Rails.env.development? %>
+            <div><%= @user.email %></div>
+          <% end %>
         </section>
       </aside>
 
-      <table>
-        <tr>
-          <th>問題名</th>
-          <th>問題文</th>
-          <th>正答率</th>
-          <th>正解回数</th>
-          <th>提出回数</th>
-          <th>閲覧回数</th>
-        </tr>
-      <% @user.problems.each_with_index do |problem, i| %>
-        <% relation = @user_problem_relations[i] %>
-        <tr>
-          <td class="text-left"><%= link_to problem.title, problem %></td>
-          <td class="text-left"><%= link_to problem.statement[0,32], problem %></td>
-          <td ><%= (rate = relation.correct_answer_rate) ? "#{rate}%" : "-" %></td>
-          <td ><%= relation.number_of_correct_answers %></td>
-          <td ><%= relation.number_of_submissions %></td>
-          <td ><%= relation.number_of_views %></td>
-
-        </tr>
+      <% unless @user_problem_relations.empty? %>
+        <table>
+          <tr>
+            <th>問題名</th>
+            <th>問題文</th>
+            <th>正答率</th>
+            <th>正解回数</th>
+            <th>提出回数</th>
+            <th>閲覧回数</th>
+          </tr>
+        <% @user.problems.each_with_index do |problem, i| %>
+          <% relation = @user_problem_relations[i] %>
+          <tr>
+            <td class="text-left"><%= link_to problem.title, problem %></td>
+            <td class="text-left"><%= link_to problem.statement[0,32], problem %></td>
+            <td ><%= (rate = relation.correct_answer_rate) ? "#{rate}%" : "-" %></td>
+            <td ><%= relation.number_of_correct_answers %></td>
+            <td ><%= relation.number_of_submissions %></td>
+            <td ><%= relation.number_of_views %></td>
+          </tr>
+        <% end %>
+        </table>
       <% end %>
-      </table>
-
     </div>
   <% end %>
 </div>
 
-  <% if Rails.env.development? %>
+  <% if Rails.env.development? && false %>
     <div style="font-size: 8px;">
       Rails環境が環境のときのみ表示：<br>
       出題一覧(原則として公開、課金して非公開のものも作る?)<br>

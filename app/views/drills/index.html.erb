@@ -5,15 +5,16 @@
 <% end %>
 
 <% if false %>
-<% drill = @drills.first %>
-<div class="drills">
-  <div class="drill-title"><%= link_to drill.title, drill, class: "drill-title" %></div>
-  <div class="drill"><%= drill.problems.size %>問</div>
-  <div class="problem-count"><%= link_to "#{drill.problems.count}問", drill, class: "problem-count" %></div>
-  <div class="drill-view"><%= drill.number_of_views %>回</div>
-  <div class="drill-view"><%= drill.impressions_count %>回</div>
-  <div class="drill-user"><%= link_to drill.user, drill.user, class: "drill-user" %></div>
-</div>
+  <% drill = @drills.first %>
+  <div class="drills">
+    <div class="drill-title"><%= link_to drill.title, drill, class: "drill-title" %></div>
+    <div class="drill"><%= drill.problems.size %>問</div>
+    <div class="problem-count"><%= link_to "#{drill.problems.count}問", drill, class: "problem-count" %></div>
+    <div class="drill-view"><%= drill.number_of_views %>回</div>
+    <div class="drill-view"><%= drill.impressions_count %>回</div>
+    <%= image_tag drill.user.icon.to_s, size: '120x120', alt: 'icon', class: 'user-icon' %>
+    <div><%= link_to drill.user, drill.user, class: "drill-user" %></div>
+  </div>
 <% end %>
 
 <div class="drills">
@@ -35,7 +36,11 @@
     <% @drills.each do |drill| %>
       <tr>
         <td class="drill-title"><%= link_to drill.title, drill %></td>
-        <td class="drill-user"><%= link_to drill.user, drill.user, class: "drill-user" %>  </td>
+
+        <td class="drill-user">
+          <%= image_tag drill.user.icon.to_s, size: '32x32', alt: 'icon', class: 'user-icon' %>
+          <%= link_to drill.user, drill.user, class: "drill-user-name" %>
+        </td>
         <td class="problem-count"><%= drill.problems.size %>問</td>
         <td><%= drill.number_of_views %>回</td>
         <td><%= drill.impressions_count %>回</td>

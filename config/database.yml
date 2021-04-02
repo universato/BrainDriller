@@ -20,6 +20,7 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# herokuでは上書きされるから、別に変更する必要はないらしい。本当?
 production:
   <<: *default
   database: db/production.sqlite3

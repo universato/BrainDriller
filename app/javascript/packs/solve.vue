@@ -8,7 +8,7 @@
       <div class="problem">
         <div v-if="currentProblem">
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
-          <div class="problem-index"> {{ currentProblemIndex +1 }}問目 </div>
+          <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <ol class="problem-choices">
@@ -18,21 +18,23 @@
               class="problem-choice"
               :class="{'selected-choice': answerPaper[currentProblem.id] === choiceNo}"
               @click="selectOption(choiceNo)"
+              v-html="compiledMarkdown(choice)"
             >
-              {{ choice }}
             </li>
           </ol>
         </div>
         <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">わからない</button></div>
-        <div v-if="0 < currentProblemIndex"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="nextProblem()" class="btn-next btn-std">次のクイズへ</button></div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="grade()" class="btn-std">中断して採点する</button></div>
-        <div v-if="currentProblemIndex == problems.length - 1"><button @click="grade()" class="btn-std">採点する</button></div>
+        <div class="move-buttons">
+          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">中断して採点する</button></div>
+          <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">採点する</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std">次のクイズへ</button></div>
+        </div>
       </div>
     </div>
     <div v-else-if="state=='result'">
-      <div><a :href="resolveDrillURL">解き直す</a></div>
-      <div><a href="/drills">ドリル一覧に戻る</a></div>
+      <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
+      <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
       <div>正解数: {{ correct_count }}</div>
       <div>出題数: {{ problems.length }}</div>
       <div>正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
@@ -41,13 +43,14 @@
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
-          <div class="problem-correct_option"> 問題の正解: {{ problem.correct_option + 1 }}. {{ problem.choices[problem.correct_option] }} </div>
-          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> あなたの回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
-          <div class="problem-correct_option" v-else> あなたの回答: 回答してません</div>
+          <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. {{ problem.choices[problem.correct_option] }} </div>
+          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
+          <div class="problem-correct_option" v-else> 無回答 </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </li>
       </ol>
-
+      <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
+      <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
     </div>
   </div>
 </template>
@@ -55,9 +58,10 @@
 <script>
 import marked from 'marked';
 import hljs from 'highlight.js';
-//import vuePlugin from "@highlightjs/vue-plugin";
-// Vue.use(vuePlugin());
-// import hljs from 'highlightjs';
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export default {
   data() {
@@ -74,8 +78,11 @@ export default {
   },
   created() {
     marked.setOptions({
-      // code要素にdefaultで付くlangage-を削除
-      langPrefix: '',
+      // code要素にdefaultで付くlanguage-を削除
+      langPrefix: 'hljs language-',
+      sanitize: true,
+      gfm: false,
+      breaks: false,
       // highlightjsを使用したハイライト処理を追加
       highlight: function(code, lang) {
         return hljs.highlightAuto(code, [lang]).value
@@ -113,6 +120,7 @@ export default {
     selectOption(choiceNo) {
       // console.log(`selectOption Method ${choiceNo}`);
       this.currentProblem.selectIndex = choiceNo;
+      sleep(100);
       this.answerPaper[this.currentProblem.id] = choiceNo;
       console.log(this.answerPaper);
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
@@ -176,7 +184,7 @@ export default {
       this.currentProblem = this.problems[this.currentProblemIndex];
     },
     compiledMarkdown(md) {
-      return marked(md);
+      return marked(md.replace(/\n/g, "  \n"));
     },
   },
   computed: {
@@ -241,16 +249,16 @@ export default {
 
 .problem-choice {
   /* width: 800px; */
-  /* border: solid 1px #eee; */
+  border: solid 1px #eee;
   border-radius: 4px;
-  /* background-color: #e1e1e1; */
+  background-color: #e1e1e1;
   cursor: pointer;
   margin: 8px;
   padding: 8px;
 }
 
 .problem-choice:hover {
-  /* background-color: #efefef; */
+  background-color: #efefef;
 }
 
 .problem-explanation {
@@ -263,4 +271,30 @@ p {
   font-size: 2em;
   text-align: center;
 }
+
+.move-buttons {
+  margin: 16px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 4fr 5fr 4fr;
+  justify-content: space-between;
+}
+
+.btn-prev-frame {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.btn-grade-frame {
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: center;
+}
+
+.btn-next-frame {
+  grid-row: 1;
+  grid-column: 3;
+  justify-self: end;
+}
+
 </style>

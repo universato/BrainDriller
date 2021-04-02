@@ -1,5 +1,6 @@
 ja:
   word:
+    back: 戻る
     signup: 登録
     help: ヘルプ
     login: ログイン
@@ -19,6 +20,8 @@ ja:
     we_need_your_current_password_to_confirm_your_changes: パスワードを変更するときは、現在のパスワードを入力してください
   activerecord:
     errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
       models:
         user:
           attributes:
@@ -37,6 +40,10 @@ ja:
               too_short: パスワードが短いです。
             password_confirmation:
               confirmation: パスワードが異なっています。
+        problem:
+          attributes:
+            user:
+              required: "%{model}       %{attribute}"
     models:
       drill: ドリル
       problem: 問題

@@ -14,6 +14,7 @@ import '../stylesheets/application.scss'
 import '../stylesheets/drill.scss'
 import '../stylesheets/problems.scss'
 import '../stylesheets/user.scss'
+import '../stylesheets/highlightjs/hybrid.css'
 
 Rails.start()
 // Turbolinks.start()

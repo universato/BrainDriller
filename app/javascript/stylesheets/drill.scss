@@ -14,6 +14,12 @@
   padding: 16px;
 }
 
+.drill-id {
+  text-align: right;
+  color: rgba(4, 34, 26, 0.5);
+  font-size: 8px;
+}
+
 .drill-title {
   grid-column: 2;
   color: black;
@@ -35,13 +41,18 @@ a.drill-title:hover {
   // grid-column: 2;
 }
 
-.drill-user {
+.user-icon {
+
+}
+
+.drill-user-name {
   // grid-column: 2;
   color: #222;
+  line-height: 1.4em;
   text-decoration: none;
 }
 
-.drill-user:hover {
+.drill-user-name:hover {
   color: rgb(28, 77, 211);
   text-decoration: underline;
 }

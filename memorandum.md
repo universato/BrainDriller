@@ -469,3 +469,104 @@ history.forward();
 無反応、よくわからない。
 
 [JavaScriptだけでブラウザの「戻る」ボタンを無効化する方法 \- HIDARI日記（右）](https://hidari-lab.hatenablog.com/entry/2015/03/02/212818)
+
+
+CSS版のRuboCopみたいなの。
+[CSScomb](https://github.com/csscomb)
+[A mighty, modern style linter · stylelint](https://stylelint.io/)
+
+
+[marked\.jsでXSS対策の設定をする \- Qiita](https://qiita.com/hyakuson/items/cb204f84f854e9efc482)
+```js
+marked.setOptions({
+  sanitize: true,
+});
+```
+
+[MarkdownをHTMLに変換する · JavaScript Primer \#jsprimer](https://jsprimer.net/use-case/nodecli/md-to-html/)
+```
+```
+
+[marked\.jsを使ってリアルタイムにマークダウン変換したら、改行が反映されなかった \- Qiita](https://qiita.com/rf_p/items/16b5e3b9bf77584690ae)
+
+
+```
+marked.js:373 marked(): sanitize and sanitizer parameters are deprecated since version 0.7.0, should not be used and will be removed in the future. Read more here: https://marked.js.org/#/USING_ADVANCED.md#options
+```
+
+HTMLの`hljs`クラスに、背景色がつく。
+
+
+[【Railsエラー】vender/bundleにgemが入ってしまう時の解決方法｜TechTechMedia](https://techtechmedia.com/vender-bundle-solution/)
+
+`.bundle/config`の次の行を削除
+```
+BUNDLE_PATH: "vendor/bundle"
+```
+
+##
+
+```sh
+$ heroku login
+zsh: command not found: heroku
+```
+
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+`$ brew tap heroku/brew && brew install heroku`
+
+
+```
+==> Caveats
+==> heroku-node
+heroku-node is keg-only, which means it was not symlinked into /usr/local,
+because heroku-node is only used by Heroku CLI (heroku/brew/heroku), which explicitly requires from Cellar.
+
+If you need to have heroku-node first in your PATH, run:
+  echo 'export PATH="/usr/local/opt/heroku-node/bin:$PATH"' >> ~/.zshrc
+
+==> heroku
+To use the Heroku CLI's autocomplete --
+  Via homebrew's shell completion:
+    1) Follow homebrew's install instructions https://docs.brew.sh/Shell-Completion
+        NOTE: For zsh, as the instructions mention, be sure compinit is autoloaded
+              and called, either explicitly or via a framework like oh-my-zsh.
+    2) Then run
+      $ heroku autocomplete --refresh-cache
+  OR
+  Use our standalone setup:
+    1) Run and follow the install steps:
+      $ heroku autocomplete
+
+zsh completions have been installed to:
+  /usr/local/share/zsh/site-functions
+
+~/rails/BrainDriller
+$ heroku -v                                                                                 !+[main]
+ ›   Warning: Our terms of service have changed: https://dashboard.heroku.com/terms-of-service
+heroku/7.51.0 darwin-x64 node-v12.21.0
+```
+
+```
+$ heroku autocomplete                                                                       !+[main]
+Building the autocomplete cache... ?
+heroku: Press any key to open up the browser to login or q to exit: Building the autocomplete cache..
+
+Opening browser to https://cli-auth.heroku.com/auth/cli/browser/111111111111111111111111111111111111?requestor=222222222222222222222222222222222222222222222222222222222222222222222222222222222
+Logging in... done
+
+Setup Instructions for HEROKU CLI Autocomplete ---
+
+1) Add the autocomplete env var to your zsh profile and source it
+$ printf "$(heroku autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
+
+NOTE: After sourcing, you can run `$ compaudit -D` to ensure no permissions conflicts are present
+
+2) Test it out, e.g.:
+$ heroku <TAB>                 # Command completion
+$ heroku apps:info --<TAB>     # Flag completion
+$ heroku apps:info --app=<TAB> # Flag option completion
+
+Visit the autocomplete Dev Center doc at https://devcenter.heroku.com/articles/heroku-cli-autocomplete
+
+Enjoy!
+```

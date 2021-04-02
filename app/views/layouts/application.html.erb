@@ -7,12 +7,14 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <div class="main-body">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      <%= yield %>
-    </div>
+    <main>
+      <div class="main-body">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
     <%= render 'layouts/footer' %>
     <%= render 'layouts/labo' %>
   </body>
