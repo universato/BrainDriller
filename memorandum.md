@@ -576,3 +576,51 @@ $ heroku logs
 
 2021-04-02T09:48:59.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/786f7dcf-5eed-424f-aa45-3fc9b9111900/activity/builds/446de9a5-fc22-4392-b710-79998b86c7cf
 ```
+
+
+```
+$ git push heroku main                                                                        [main]
+Enumerating objects: 8979, done.
+Counting objects: 100% (8979/8979), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (7469/7469), done.
+Writing objects: 100% (8979/8979), 31.81 MiB | 71.00 KiB/s, done.
+Total 8979 (delta 1255), reused 8315 (delta 956), pack-reused 0
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Building on the Heroku-20 stack
+remote: -----> Determining which buildpack to use for this app
+remote:  !     Warning: Multiple default buildpacks reported the ability to handle this app. The first buildpack in the list below will be used.
+remote:                         Detected buildpacks: Ruby,Node.js
+remote:                         See https://devcenter.heroku.com/articles/buildpacks#buildpack-detect-order
+remote: -----> Ruby app detected
+remote: -----> Installing bundler 2.2.11
+remote: -----> Removing BUNDLED WITH version in the Gemfile.lock
+remote: -----> Compiling Ruby/Rails
+remote: -----> Using Ruby version: ruby-3.0.0
+remote: -----> Installing dependencies using bundler 2.2.11
+remote:        Running: BUNDLE_WITHOUT='development:test' BUNDLE_PATH=vendor/bundle BUNDLE_BIN=vendor/bundle/bin BUNDLE_DEPLOYMENT=1 bundle install -j4
+remote:        Your bundle only supports platforms ["x86_64-darwin-19"] but your local platform
+remote:        is x86_64-linux. Add the current platform to the lockfile with `bundle lock
+remote:        --add-platform x86_64-linux` and try again.
+remote:        Bundler Output: Your bundle only supports platforms ["x86_64-darwin-19"] but your local platform
+remote:        is x86_64-linux. Add the current platform to the lockfile with `bundle lock
+remote:        --add-platform x86_64-linux` and try again.
+remote:
+remote:  !
+remote:  !     Failed to install gems via Bundler.
+remote:  !
+remote:  !     Push rejected, failed to compile Ruby app.
+remote:
+remote:  !     Push failed
+remote: Verifying deploy...
+remote:
+remote: !       Push rejected to brain-driller.
+remote:
+To https://git.heroku.com/brain-driller.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://git.heroku.com/brain-driller.git'
+```
+
+`$ bundle lock　--add-platform x86_64-linux`
