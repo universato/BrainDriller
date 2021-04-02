@@ -671,3 +671,5 @@ remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-l
 }
 
 ```
+
+`"@vue/compiler-sfc": "^3.0.11",`が`"devDependencies"`にあって、どうも開発環境のみにあったみたいなので、変更した。

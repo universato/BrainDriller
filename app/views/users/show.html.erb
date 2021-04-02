@@ -6,7 +6,7 @@
     <div class="row">
       <aside class="">
         <section class="user_info">
-          <%= image_tag @user.icon.to_s, size: '120x120', alt: 'icon', class: 'user-icon' %>
+          <%= image_tag @user.icon_path, size: '120x120', alt: 'icon', class: 'user-icon' %>
           <div class="user-name-title"><%= @user.nickname %></div>
           <% if @user == current_user ||  Rails.env.development? %>
             <div><%= @user.email %></div>

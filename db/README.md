@@ -24,3 +24,8 @@ rails --tasks | grep db:
 
 `rails db:drop`をすると、テーブルを削除してしまう。
 `rails db:migrate`からやり直す必要がある。
+
+ユーザー
+ドリル
+問題
+の順番に作るのがDB的にはいいかもしれない。

@@ -38,7 +38,7 @@
         <td class="drill-title"><%= link_to drill.title, drill %></td>
 
         <td class="drill-user">
-          <%= image_tag drill.user.icon.to_s, size: '32x32', alt: 'icon', class: 'user-icon' %>
+          <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'user-icon' %>
           <%= link_to drill.user, drill.user, class: "drill-user-name" %>
         </td>
         <td class="problem-count"><%= drill.problems.size %>問</td>

@@ -53,7 +53,7 @@ ja:
         title: タイトル
         guide: ガイド
       user:
-        login_name: ID
+        login_name: ログイン名
         nickname: ハンドルネーム
         email: メールアドレス
         icon: アイコン

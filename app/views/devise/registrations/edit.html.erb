@@ -5,7 +5,7 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <%= image_tag resource.icon.to_s, size: "160x160", alt: "icon", class: "user-icon" %>
+      <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "user-icon" %>
       <div class="field">
         <%= f.label :icon %><br/>
         <%= f.file_field :icon %>
