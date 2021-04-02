@@ -570,3 +570,9 @@ Visit the autocomplete Dev Center doc at https://devcenter.heroku.com/articles/h
 
 Enjoy!
 ```
+
+```
+$ heroku logs
+
+2021-04-02T09:48:59.000000+00:00 app[api]: Build failed -- check your build output: https://dashboard.heroku.com/apps/786f7dcf-5eed-424f-aa45-3fc9b9111900/activity/builds/446de9a5-fc22-4392-b710-79998b86c7cf
+```
