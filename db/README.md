@@ -20,6 +20,7 @@ rails --tasks | grep db:
 ```
 
 `rails db:reset`が良いかもしれない。
+マイグレートからやり直す。
 
 `rails db:drop`をすると、テーブルを削除してしまう。
 `rails db:migrate`からやり直す必要がある。

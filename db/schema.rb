@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
   end
 
   create_table "problems", force: :cascade do |t|
-    t.integer "drill_id", null: false
     t.integer "user_id", null: false
     t.string "title", null: false
     t.string "statement", null: false
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
     t.boolean "in_order", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["drill_id"], name: "index_problems_on_drill_id"
     t.index ["user_id"], name: "index_problems_on_user_id"
   end
 
@@ -117,7 +115,6 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
   end
 
   add_foreign_key "drills", "users"
-  add_foreign_key "problems", "drills"
   add_foreign_key "problems", "users"
   add_foreign_key "user_problem_relations", "problems"
   add_foreign_key "user_problem_relations", "users"
