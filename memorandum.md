@@ -632,6 +632,8 @@ PLATFORMS
   x86_64-linux
 ```
 
+matchda.rbに参加した。
+
 
 ```
 remote:        Error: vue-loader requires @vue/compiler-sfc to be present in the dependency tree.
@@ -672,4 +674,8 @@ remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-l
 
 ```
 
-`"@vue/compiler-sfc": "^3.0.11",`が`"devDependencies"`にあって、どうも開発環境のみにあったみたいなので、変更した。
+`"@vue/compiler-sfc": "^3.0.11",`が`"devDependencies"`にあって、どうも開発環境のみにあったみたいなので、場所を変更した。
+
+
+マイグレーションファイルの順番でエラーになった。
+順番を変更して、難を逃れた。

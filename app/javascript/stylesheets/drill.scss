@@ -1,14 +1,11 @@
 .drill-panel {
-  // grid-column: 2;
-  // display: grid;
-  // grid-template-columns: 10% 80% 10%;
-  background-color: #fff;
+  background-color: var(--white-color);
   margin: 16px;
   padding: 16px;
 }
 
 .drills {
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 4px;
   margin: 16px;
   padding: 16px;
@@ -16,7 +13,7 @@
 
 .drill-id {
   text-align: right;
-  color: rgba(4, 34, 26, 0.5);
+  color: hsla(164, 79%, 7%, 0.5);
   font-size: 8px;
 }
 
@@ -34,20 +31,16 @@ a.drill-title:hover {
 }
 
 .drill-option {
-  // grid-column: 2;
 }
 
 .drill-guide {
-  // grid-column: 2;
 }
 
 .user-icon {
-
 }
 
 .drill-user-name {
-  // grid-column: 2;
-  color: #222;
+  color: hsl(0, 0%, 13%);
   line-height: 1.4em;
   text-decoration: none;
 }
@@ -58,5 +51,4 @@ a.drill-title:hover {
 }
 
 .drill-problem-count {
-  // grid-column: 2;
 }

@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :user_problem_relations, class_name: "UserProblemRelation", foreign_key: "user_id", dependent: :destroy
   has_many :problems, through: :user_problem_relations
 
-  validates :login_name, { presence: true, length: {maximum: 30} }
+  validates :email, presence: true, uniqueness: true
+  validates :login_name, presence: true, length: {maximum: 30}
   # validates :password, length: { minimum: 5 }
 
   mount_uploader :icon, IconUploader
