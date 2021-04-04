@@ -1,5 +1,5 @@
 
-<div class="panel">
+<div class="panel user-form">
   <h2 class="title"><%= t("word.signup") %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -7,25 +7,25 @@
 
     <div class="field">
       <%= f.label :login_name %><br />
-      <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name" %>
+      <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name", class: "oneline-field" %>
     </div>
 
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "oneline-field" %>
     </div>
 
     <div class="field">
       <%= f.label :password %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> 文字以上にしてください。)</em>
+      (<%= @minimum_password_length %> 文字以上)
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "oneline-field" %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "oneline-field" %>
     </div>
 
     <div class="actions">

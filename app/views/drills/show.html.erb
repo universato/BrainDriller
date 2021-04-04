@@ -4,7 +4,7 @@
     <h1 class="drill-title"><%= @drill.title %></h1>
   </div>
   <div class="drill-guide"><%= @drill.guide %></div>
-  <%= image_tag @drill.user.icon.to_s, size: '56x56', alt: 'icon', class: 'user-icon' %>
+  <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'user-icon' %>
   <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
 
   <div class="drill-problem-count">

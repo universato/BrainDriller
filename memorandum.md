@@ -679,3 +679,14 @@ remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-l
 
 マイグレーションファイルの順番でエラーになった。
 順番を変更して、難を逃れた。
+
+
+
+heroku
+
+`$ heroku run RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop`
+↓
+`Database 'daohau66v8a2bh' does not exist`
+
+
+[![Image from Gyazo](https://i.gyazo.com/58f87c9fd8a2605153004e4c92535023.png)](https://gyazo.com/58f87c9fd8a2605153004e4c92535023)

@@ -1,0 +1,19 @@
+.hljs {
+  font-style: none;
+  color: hsl(0, 0%, 87%);
+  background-color: #364549;
+  // background: #364549;
+}
+
+.hljs-string {
+  color: #41b7d7;
+}
+
+.hljs-comment {
+  color: hsl(190, 10%, 65%);
+}
+
+.hljs-symbol,
+.hljs-number {
+  color: #ff8095;
+}

@@ -43,8 +43,8 @@
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
-          <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. {{ problem.choices[problem.correct_option] }} </div>
-          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. {{ problem.choices[answerPaper[problem.id]] }} </div>
+          <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. <span v-html="compiledMarkdown(problem.choices[problem.correct_option])"></span> </div>
+          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
           <div class="problem-correct_option" v-else> 無回答 </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </li>
@@ -78,8 +78,7 @@ export default {
   },
   created() {
     marked.setOptions({
-      // code要素にdefaultで付くlanguage-を削除
-      langPrefix: 'hljs language-',
+      langPrefix: 'hljs ',
       sanitize: true,
       gfm: false,
       breaks: false,
@@ -184,7 +183,7 @@ export default {
       this.currentProblem = this.problems[this.currentProblemIndex];
     },
     compiledMarkdown(md) {
-      return marked(md.replace(/\n/g, "  \n"));
+      return marked(md);
     },
   },
   computed: {
@@ -199,6 +198,7 @@ export default {
 
 .selected-choice {
   color: red;
+  border: solid 1px black;
 }
 
 .solve-drill {
@@ -245,6 +245,10 @@ export default {
   padding: 16px;
   /* overflow-wrap: break-word; */
   /* background-color: #fff; */
+}
+
+.problem-choices {
+  margin: 0;
 }
 
 .problem-choice {

@@ -33,6 +33,10 @@ p {
   margin-bottom: 0px;
 }
 
+ol {
+  list-style-type: none;
+}
+
 main {
   max-width: 960px;
   margin: 0 auto;
@@ -45,6 +49,28 @@ label {
 
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   outline: 0;
+}
+
+code {
+  // font-style: italic;
+  font-size: 12.8px;
+  font-family: 'Source Code Pro', monospace;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,monospace;
+  color: hsl(0, 0%, 20%);
+  // background-color: hsl(0, 0%, 93%);
+}
+
+pre {
+  margin: 0;
+}
+
+pre code {
+  font-size: 12.8px;
+}
+
+.header__title {
+  font-size: 1.835rem;
+  font-family: "American Typewriter";
 }
 
 .modest-logo-title {
