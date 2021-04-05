@@ -21,23 +21,31 @@
               v-html="compiledMarkdown(choice)"
             >
             </li>
+            <li
+              class="problem-choice"
+              :class="{'selected-choice--not-sure': answerPaper[currentProblem.id] === 'notSure'}"
+              @click="selectOption('notSure')"
+            >
+              　わからない
+            </li>
           </ol>
         </div>
-        <div v-if="currentProblemIndex < problems.length - 1"><button @click="notSure()" class="btn-next btn-std">わからない</button></div>
         <div class="move-buttons">
-          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">前のクイズへ</button></div>
+          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">次の問題へ</button></div>
           <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">中断して採点する</button></div>
           <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">採点する</button></div>
-          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std">次のクイズへ</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std">次の問題へ</button></div>
         </div>
       </div>
     </div>
     <div v-else-if="state=='result'">
       <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
       <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
-      <div>正解数: {{ correct_count }}</div>
-      <div>出題数: {{ problems.length }}</div>
-      <div>正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
+      <div>今回の正解数: {{ correct_count }} </div>
+      <div>今回の不正数: {{ uncorrect_count }} </div>
+      <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
+      <div>今回の出題数: {{ problems.length }} </div>
+      <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
       <ol>
         <li v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
@@ -46,6 +54,11 @@
           <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. <span v-html="compiledMarkdown(problem.choices[problem.correct_option])"></span> </div>
           <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
           <div class="problem-correct_option" v-else> 無回答 </div>
+          <div style="font-size: 1.2em;">
+            <span v-if="!answerPaper[problem.id]" class="uncorrect">無回答でした</span>
+            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="correct">正解です</span>
+            <span v-else class="uncorrect">不正解です</span>
+          </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </li>
       </ol>
@@ -74,6 +87,8 @@ export default {
       currentProblem: null,
       answerPaper: {},
       correct_count: 0,
+      notSure_count: 0,
+      uncorrect_count: 0,
     }
   },
   created() {
@@ -126,9 +141,9 @@ export default {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
       } else if (this.currentProblemIndex == this.problems.length - 1) {
-        console.log("最後の問題です");
+        // console.log("最後の問題です");
       } else if (this.currentProblemIndex < 0 || this.problems.length - 1 < this.currentProblemIndex) {
-        console.log("問題番号が0未満になっているか、超越してます");
+        // console.log("問題番号が0未満になっているか、超越してます");
       }
     },
     grade() {
@@ -141,6 +156,10 @@ export default {
         // console.log([problem.id])
         if(this.answerPaper[problem.id] == problem.correct_option){
           this.correct_count += 1
+        } else if(this.answerPaper[problem.id] === "notSure" ){
+          this.notSure_count += 1
+        } else if(this.answerPaper[problem.id] && this.answerPaper[problem.id] && problem.correct_option){
+          this.uncorrect_count += 1
         }
       }
       this.state = "result"
@@ -169,9 +188,6 @@ export default {
         console.warn('Failed to parsing', error)
       })
     },
-    notSure() {
-      this.nextProblem();
-    },
     nextProblem() {
       if(this.problems.length - 1 <= this.currentProblemIndex) { return }
       this.currentProblemIndex += 1;
@@ -196,10 +212,6 @@ export default {
 
 <style scoped>
 
-.selected-choice {
-  color: red;
-  border: solid 1px black;
-}
 
 .solve-drill {
   /* border: solid 1px #eee; */
@@ -261,9 +273,26 @@ export default {
   padding: 8px;
 }
 
+.problem-choice.selected-choice {
+  background-color: hsl(103, 85%, 50%);
+}
+
+.problem-choice.selected-choice--not-sure {
+  background-color: hsl(220, 85%, 50%);
+}
+
 .problem-choice:hover {
   background-color: #efefef;
 }
+
+.problem-choice.selected-choice:hover {
+  background-color: hsl(103, 85%, 80%);
+}
+
+.problem-choice.selected-choice--not-sure:hover {
+  background-color: hsl(220, 85%, 80%);
+}
+
 
 .problem-explanation {
   /* width: 800px; */
@@ -299,6 +328,14 @@ p {
   grid-row: 1;
   grid-column: 3;
   justify-self: end;
+}
+
+.correct {
+  color: var(--correct-color);
+}
+
+.uncorrect {
+  color: var(--uncorrect-color);
 }
 
 </style>

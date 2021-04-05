@@ -36,7 +36,31 @@ ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HT
 = 36 \times 2 \times 5
 = 4 \times 9 \times 2 \times 5
 = 2^3 \times 3^2 \times 5",TRUE,素因数分解,算数,数学,基礎,,
-10,CSS,border,,,,,,,,,,,,,,
+10,CSS,border,"内側のalertクラスのあるdivタグの枠線は、何色になりますか。
+
+`HTML`
+```html
+<div class=""black-box"">
+   main
+  <div class=""alert"">
+    アラート
+  </div>
+  main
+</div>
+```
+
+`CSS`
+```css
+.black-box {
+  border: solid 1px black;
+}
+
+.alert {
+ color: red;
+ border: solid 1px;
+}
+```",黒色,赤色,無色,線は存在しない,2,"枠線は、継承されません。
+内側の枠線は、borderで色が指定されてないため、colorで指定された色の影響を受けます。colorは、文字色だけでなく、枠線の色にも影響する点に注意してください。",,,,,,,
 11,Ruby,Rubyの **,"Rubyで、`5 * 2`は10を返しますが、`5 ** 2`は何でしょう。
 ```ruby
 p 5 * 2  #=> 10
@@ -48,7 +72,7 @@ Python も ** は同様の定義です。",TRUE,四則演算,Ruby,基礎,入門,
 14,Ruby,Ruby の ** の優先順位,"```ruby
 p 5 ** 2 * 2 ** 2
 ```
-Rubyのこのコードを実行するとどうなりますか。",5,100,"2,500","390,625",2,"正解は、100です。
+Rubyのこのコードを実行するとどうなりますか。",5,100,2500,390625,2,"正解は、100です。
 問題を数式で表現すると5² x 2² = 100 となり、優先順位が自然でわかりやすいかもしれません。
 Rubyの優先順位は一般的な算数・数学と同じで、累乗 > 積商 > 和差の順に計算します。",TRUE,四則演算,Ruby,基礎,マニアック,,
 15,Ruby,Rubyの数値   80,"```ruby
@@ -300,7 +324,7 @@ p a
 対して、`concat`では、配列`a`に`[3]`が破壊的に結合されます。
 
 なお、JavaScriptの`concat`は、Rubyと異なり破壊的ではないです。",,,,,,,
-,Ruby,偽,Rubyで偽(falsy)となるオブジェクトを列挙したものとして正しいのはどれでしょうか。,false,"false, nil","false, 0, 0.0","false, null, undefined, 0, 0.0, 0n, NaN, [], """"",2,"Rubyで、偽(falsy)となるオブジェクトは、`nil`と`false`のみです。
+,Ruby,偽,Rubyで偽(falsy)となるオブジェクトを列挙したものとして正しいのはどれでしょうか。,false,"false, nil","false, 0, 0.0","false, null, undefined, 0, 0n, NaN, [], """"",2,"Rubyで、偽(falsy)となるオブジェクトは、`nil`と`false`のみです。
 他言語では`false`以外に`0`や空配列が偽となる言語もありますが、
 Rubyで偽(falsy)となるオブジェクトは2つだけなので、覚えやすいです。
 
@@ -878,6 +902,9 @@ p i #=> 0
 ,Ruby,エイリアスの多いメソッド,`Hash#key?`のエイリアスで**ない**メソッドは、どれでしょう。,`include?`,`member?`,`has_key?`,`have_key?`,4,"Rubyコアの中で、エイリアスが多いメソッドです。最多でしょうか?
 Rubyコアでメソッド名の中の動詞は原形で使われていることが多いですが、`has_key?`や`has_value`は珍しく三単現(三人称・単数形・現在形)です。
 
+【注意】
+`Hash#key?`というメソッドの他に、`Hash#key`という別のメソッドもあるので注意してください。
+
 【補足：原形のメソッド】
 原形のメソッドとして,`Array#include?`や`String#start_with?`などがあります。
 Rubyの生みの親のMatzさん自身は、原形で統一したいと考えているようです。
@@ -1290,5 +1317,501 @@ p Class.superclass #=> ?
 p Module.superclass #=> ?
 ```",`Object`,`BasicObject`,`Class`,`Module`,1,"`Module`は、`Object`クラスを継承しているクラスです。
 なお、`Module`を継承しているクラスとして、`Class`クラスがあります。",,,,,,,
+,Ruby,Module,"以下のコードを実行すると、どうなるでしょう。
+```ruby
+h = { A: 25, B: 25, AB: 25, O: 25 }
+p h.invert
+```","`{25=>:A, 25=>:B, 25=>:AB, 25=>:O}`と表示される。",`{25=>:A}`と表示される。,`{25=>:O}`と表示される。,エラーとなる,3,"Hashのキーは重複することはありません。
+`invert`はキーと値を反転させたハッシュを作るメソッドですが、キーとなる値が重複していた場合、最後のキーが値として反転したときに残ります。
+
+実際のところ、値が重複するようなケースで`invert`を使ってしまうと情報が失われてしまうので、使わない方がいいと思われる。",,,,,,,
+,Ruby,比較のメソッド,`object_id`が同じかどうか調べるメソッドはどれですか。,`==`,`===`,`eql?`,`equal?`,4,"基本的に使うのは`==`で、知識問題という感じがします。
+
+`x.equal?(y)`は、`x.object_id == y.object_id`と同じと考えられます。
+`[].equal?([])`でも`false`を返すので、最も等号が成り立つ条件が厳しいと考えられます。",,,,,,,
+,Ruby,===,"`===`はcase文の中で使われてる演算子(メソッド)です。
+`==`は使っても、通常`===`は明示的に使いません。
+
+さて、次のコードを実行すると、どうなりますか。
+```ruby
+p [] === []
+p Array === []
+p [] === Array
+```
+
+【ヒント】`String === ""str""`は`true`を返します。","```ruby
+p [] === []      #=> true
+p Array === [] #=> true
+p [] === Array #=> true
+```","```ruby
+p [] === []      #=> true
+p Array === [] #=> true
+p [] === Array #=> false
+```","```ruby
+p [] === []      #=> true
+p Array === [] #=> false
+p [] === Array #=> false
+```","```ruby
+p [] === []      #=> false
+p Array === [] #=> false
+p [] === Array #=> false
+```",1,"case文の中で`===`は使われています。
+```ruby
+a = []
+case a
+  when Array
+    ""Array""
+  else
+    ""Not Array""
+  end
+end
+```",,,,,,,
+,Ruby,三項演算子,"```ruby
+cond = true
+puts cond ? ""Yes"" : ""No""
+```","`""Yes""`と表示される。","`""No""`と表示される。",SyntaxErrorとなる。,NoMethodErrorとなる。,1,三項演算子です。簡易な条件分岐で用いられます。,,,,,,,
+,Ruby,三項演算子,"```ruby
+a = [1, 2, 3]
+puts a.empty ? ""Yes"" : ""No""
+```","`""Yes""`と表示される。","`""No""`と表示される。",SyntaxErrorとなる。,NoMethodErrorとなる。,4,配列に`empty?`メソッドはありますが、`empty`メソッドはないので、`NoMethodError`となります。,,,,,,,
+,Ruby,String#delete,"```ruby
+s = ""abcdef""
+s.delete(""b-d"")
+s.delete!(""c-e"")
+p s
+```","`""abf""`が表示される。","`""abdf""`が表示される。",SyntaxErrorとなる。,NoMethodErrorとなる。,1,"`Array`や`Hash`の`delete`メソッドは破壊的メソッドです。
+一方で、`String`には`delete`と`delete!`があり、`delete!`が破壊的メソッドです。
+`String#delete!`の引数で`""c-e""`とすると、`c`から`e`までの文字が削除されます。
+",,,,,,,
+,Ruby,Hash#delete,"`Array`の`delete`メソッドは、次の挙動をします。
+```ruby
+a = [:x, :y, :z, :w]
+a.delete(:a)
+a.delete(:y)
+p a #=> [:x, :z, :w]
+```
+
+`Hash`の`delete`メソッドについて、次のコードはどうなりますか。
+```ruby
+h = {0 => 1, 1 => 2, 10 => 1024}
+h.delete(1)
+h.delete(10)
+p h
+```","`{0=>1, 1=>2, 10=>1024}`","`{0=>1, 10=>1024}`",`{10=>1024}`,エラーとなる,2,"Arrayが添字ではなく要素を指定して削除して詰める。
+対して、Hashは値を指定削除するのかなと思いきや、キーを指定して削除する。`Hash#delete`は、`Array#delete`より`Array#delete_at`に近いような気もする。
+
+あまり使うメソッドではない気がするが、Ruby技術者認定試験Silverあたりにはでるかもしれないので、追加した。",,,,,,,
+,Ruby,Array#delete,"```ruby
+a = [0, 2, 4, 6, 8, 10, 0, 2, 4]
+a.delete_at(4)
+a.delete(2)
+p a
+```","`[0, 4, 6, 10, 0, 2, 4]`","`[0, 4, 8, 10, 0, 4]`","`[0, 2, 6, 10, 0, 2]`","`[0, 4, 6, 10, 0, 4]`",4,"`Array#delete`も`Array#delete_at`も破壊的メソッドです。
+
+ `delete_at(4)`なので、左から4番目の8を削除します。
+※0始まりで数えることに注意してください。
+
+次に、`delete(2)`で、要素が`2`のものを全て削除します。",,,,,,,
+,Ruby,Range#to_a,`p ('a'..'c').to_a`を実行すると、どうなりますか。,"`[""a"", ""b"", ""c""]`を出力する","`[""a""..""c""]`を出力する。","`[""a"", ""b""]`を出力する。",エラーとなる。,1,"`(1..3).to_a`が`[1, 2, 3]`となるように、
+`('a'..'c').to_a`は`[""a"", ""b"", ""c""]`となります。",,,,,,,
+,Ruby,配列の注意点,"```ruby
+a = ['xyz'] * 3
+a[0].tr!(""x-z"", ""a-c"")
+p a
+```","`[""abc"", ""xyz"", ""xyz""]`","`[""ayc"", ""xyz"", ""xyz""]`","`[""abc"", ""abc"", ""abc""]`","`[""ayc"", ""ayc"", ""ayc""]`",1,"次の方法で、配列の中身を同じ要素にすると、オブジェクトIDが全く同じ要素となります。
+```ruby
+a = [""xyz""] * 3
+p a[0].object_id == a[1].object_id #=> true
+```
+オブジェクトIDが同じ要素に対して、破壊的変更を加えると、同じオブジェクトを見てるので、他の要素が変わります。",,,,,,,
+,Ruby,tr,"```ruby
+p ""GTATGC"".tr(""ATCG"", ""TAGC"")
+```","`""GTTAGC""`","`""CATACG""`","`""GTATGC""`","`""CATAGC""`",2,"`tr`は文字列内の文字をスワップさせるときに便利です。
+本問では、`A`と`T`を入れ替え、`G`と`C`を入れ替えています。",,,,,,,
+,Ruby,String#reverse,"`""evil"".reverse`は何を返しますか","""EVIL""","""Evil""","""live""","""evil""",3,`reverse`は文字通り逆転させるメソッドです,,,,,,,
+,Ruby,?1,`p ?1`,`1`が出力される。,"`""1""`が出力される。",`49`が出力される。,SyntaxErrorとなる,2,"`""a""`や`""1""`のような1文字の文字列は、文字リテラルという表記で`?a`や`?1`と書くことができます。
+
+なお、Ruby 1.8以前では、`?1`で文字コードの数値49を返していました。",,,,,,,
+,Ruby,puts,"以下のコードを実行すると、どうなりますか。
+```ruby
+class User
+  def initialize(first, last)
+    @first = first
+    @last = last
+  end
+
+  def to_s
+    ""#{@first} #{@last}""
+  end
+end
+
+puts User.new(""Abraham"", ""Lincoln"")
+```",`#<User:0x0000000001f621a0>` と出力される。,`Abraham Lincoln`と出力される。,NoMethodErrorとなる。,TypeErrorが起きる,2,"ほとんどのオブジェクトは、Object#to_sを継承しているか、`to_s`が再定義されており、`to_s`を持ちます。
+そして、putsの内部では, 基本的に`to_s`が実行され、その返り値を利用します。
+本問では、`to_s`で文字列を返すように再定義されており、その返り値の文字列を出力します。",,,,,,,
+,Ruby,ローカル変数,"```ruby
+if false
+  foo = ""never""
+end
+
+p foo
+```",`nil`を出力する。,SyntaxErrorとなる,NameErrorとなる,NoMethodErrorとなる,1,"本問のコードはif文の条件式が`false`で`foo`に代入されることはありません。
+しかし、たとえ、実行されなくても、ローカル変数に代入する文があれば、ローカル変数が宣言されたことになり代入前に`nil`を返すようになっています。",,,,,,,
+,Ruby,Date,"```ruby
+require ""date""
+
+today = Date.today
+
+puts today.sunday? #=> true
+puts today.friday?   # ?
+```
+
+上記のコードで`today.sunday?`が`true`を返しましたが、`today.friday?`はどうなりますか?",`true`を返す,`false`を返す,`nil`を返す,NoMethodErrorとなる。,2,"`Date.today`は、今日の日付を返すクラスメソッド(特異メソッド)です。
+
+Dateクラスにはそれぞれの曜日を判定するメソッドが用意されています。
+いまコードで日曜日かの判定で`true`を返しているので、金曜日かの判定では`false`を返します。",,,,,,,
+,Ruby,Date,"```ruby
+require ""date""
+
+puts Date.new(2025, 4, 1) + 1
+```",2026-04-01,2025-05-01,2025-04-02,NoMethodError,3,日数として足します,,,,,,,
+,Ruby,reduce,"```ruby
+[].reduce(1, 2, 3)
+```
+
+このコードを実行すると、次のようなエラー文が表示されます。
+
+```
+Main.rb:1:in `reduce': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
+	from Main.rb:1:in `<main>'
+```
+
+このエラー文の意味として、相応しいものを選びなさい。",`reduce`というメソッドは存在しない。,`reduce`メソッドの引数の数が誤っている(引数に3が与えられた、期待は0から2だった),`reduce`メソッドの引数の数が誤っている(引数が3個与えられたが、期待している個数は0個から2個だった),`reduce`メソッドの引数の数が誤っている(引数が3個与えられたが、期待している個数は0個から1個だった),3,単純なエラー文ですね,,,,,,,
+,Ruby,Array#zip,"```ruby
+p [1, 2].zip([:a, :b, :c])
+p [1, 2, 3].zip([:a, :b])```","```ruby
+p [1, 2].zip([:a, :b, :c]) #=> [[1, :a], [2, :b]]
+p [1, 2, 3].zip([:a, :b])  #=> [[1, :a], [2, :b]]
+```","```ruby
+p [1, 2].zip([:a, :b, :c]) #=> [[1, :a], [2, :b]]
+p [1, 2, 3].zip([:a, :b])  #=> [[1, :a], [2, :b], [3, nil]]
+```","```ruby
+p [1, 2].zip([:a, :b, :c]) #=> [[1, :a], [1, :b], [1, :c], [2, :a], [2, :b], [2, :c]]
+p [1, 2, 3].zip([:a, :b])  #=> [[1, :a], [1, :b], [2, :a], [2, :b], [3, :a], [3, :b]]
+```",エラーになる,2,zipが、ジッパー(ファスナー)で締めるという意味の英単語です。,,,,,,,
+,Ruby,Array#product,"```ruby
+p [1, 2].product([:a, :b])
+```","`[[1, :a], [2, :b]]`","`[[1, :a], [1, :b], [2, :a], [2, :b]]`",TypeErrorになる,NoMethodErrorになる,2,productは積という意味です。集合どうしの積を求めています。,,,,,,,
+,Ruby,Hash#except,"```ruby
+h = { name: ""Hara"", age: 20, score: 90 }
+p h.except(:name, :address)
+p h
+```","```ruby
+h = { name: ""Hara"", age: 20, score: 0 }
+p h.except(:name, :address) #=> {:name=>""Hara""}
+p h #=> {:age=>20, :score=>0}
+```","```ruby
+h = { name: ""Hara"", age: 20, score: 0 }
+p h.except(:name, :address) #=> {:age=>20, :score=>0}
+p h #=> {:name=>""Hara"", :age=>20, :score=>0}
+```","```ruby
+h = { name: ""Hara"", age: 20, score: 0 }
+p h.except(:name, :address) #=> [""Hara"", nil]
+p h #=> {:age=>20, :score=>0}
+```","```ruby
+h = { name: ""Hara"", age: 20, score: 0 }
+p h.except(:name, :address) #=> [""Hara"", nil]
+p h #=> {:name=>""Hara"", :age=>20, :score=>0}
+```",2,"Rails(のActiveSupport)にあった機能ですが、
+Ruby 3.0(2020年12月リリース)でRubyコアに組み込まれました。
+
+Hash#deleteを使えば、引数にキーをとって破壊的に削除できましたが、破壊的に削除してしまうので、元の形のまま再利用できませんでした。",,,,,,,
+,Ruby,ancestors,"`Object`クラスの親クラス(`superclass`)は、`BasicObject`です。
+さて、下記のコードを実行すると、どうなりますか。
+```ruby
+p Object.ancestors
+```",`[BasicObject]`,"`[Object, BasicObject]`","`[Kernel, BasicObject]`","`[Object, Kernel, BasicObject]`",4,,,,,,,,
+,Ruby,super,"```ruby
+class ParentCounter
+  def initialize
+    @cnt = 0
+  end
+
+  def count
+    @cnt += 1
+  end
+end
+
+class ChildCounter < ParentCounter
+  def count
+    super
+    @cnt += 1
+  end
+end
+
+counter = ChildCounter.new
+p counter.count
+```",0,1,2,エラーとなる,3,,,,,,,,
+,Ruby,Date,今日の日付を知る方法として、選択肢の中から最も適切なものはどれでしょうか。,"```ruby
+require ""date""
+Date.new
+```","```ruby
+require ""date""
+Date.now
+```","```ruby
+require ""date""
+Date.today
+```","```ruby
+require ""date""
+Date.commercial
+```",3,"今日の日付を知りたいとき、`Date.today`を用います。
+`now`クラスメソッドがあるのは、`DateTime`クラスや`Time`クラスです。",,,,,,,
+,Ruby,定数探索,"```ruby
+CONST = 0
+
+module Foo
+  CONST = 1
+  module Foo
+    CONST = 2
+    p CONST
+    p Foo::CONST
+    p ::CONST
+    p ::Foo::CONST
+  end
+end
+```","```ruby
+CONST = 0
+
+module Foo
+  CONST = 1
+  module Foo
+    CONST = 2
+    p CONST          #=> 2
+    p Foo::CONST #=> 1
+    p ::CONST        #=> 2
+    p ::Foo::CONST #=> 0
+  end
+end
+```","```ruby
+CONST = 0
+
+module Foo
+  CONST = 1
+  module Foo
+    CONST = 2
+    p CONST          #=> 2
+    p Foo::CONST #=> 2
+    p ::CONST        #=> 2
+    p ::Foo::CONST #=> 0
+  end
+end
+```","```ruby
+CONST = 0
+
+module Foo
+  CONST = 1
+  module Foo
+    CONST = 2
+    p CONST          #=> 2
+    p Foo::CONST #=> 2
+    p ::CONST        #=> 0
+    p ::Foo::CONST #=> 1
+  end
+end
+```","```ruby
+CONST = 0
+
+module Foo
+  CONST = 1
+  module Foo
+    CONST = 2
+    p CONST          #=> 0
+    p Foo::CONST #=> 1
+    p ::CONST        #=>  2
+    p ::Foo::CONST #=> 2
+  end
+end
+```",3,"いま、`::CONST`に`0`, `::Foo::CONST`に`1`, `::Foo::Foo::CONST`に`2`が代入されます。
+`::`始まりはトップレベルを指しており、絶対参照のようなものです。
+`Foo`が2つある点に注意してください。
+トップレベルで定義される`Foo`と、その中で定義される`Foo`です。
+
+単に`CONST`と書かれている場合、自分の階層から順に探していくので、`2`を返します。
+次に`Foo::CONST`で、`Foo`自身も定数として、内側の階層から探し、`Foo::Foo`が見つかるので、その中の`CONST`定数を探し、`2`を返します。",,,,,,,
+,Ruby,$0と__FILE__,"いま、`main.rb`と`sub.rb`が同一のホームディレクトリ`/Users/aya`にあります。
+
+`main.rb`では、`sub.rb`を実行(ロード)するだけです。
+```ruby
+require_relative ""./sub""
+```
+
+`sub.rb`で出力します。何が出力されますか。
+```ruby
+p $0
+p __FILE__
+```
+
+なお、同一のホームディレクトリからコマンドを実行するものとします。","```ruby
+p $0          #=> ""main.rb""
+p __FILE__ #=> ""main.rb""
+```","```ruby
+p $0          #=> ""main.rb""
+p __FILE__ #=> ""/User/aya/sub.rb""
+```","```ruby
+p $0          #=> ""/User/aya/sub.rb""
+p __FILE__ #=> ""/User/aya/sub.rb""
+```",エラーとなる。,2,,,,,,,,
+,rbenv,,"`rbenv versions`
+このコマンドは、何をする。",rbenvのバージョンを表示,インストールされているRubyの一覧、実行される　Rubyのバージョン、,,,,,,,,,,,
+,Crystal,Crystal,"```crystal
+p 'Hello, World!'
+```
+これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
+```
+syntax error in eval:1
+Error: unterminated char literal, use double quotes for strings
+```","構文エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","ゼロ除算エラー
+0で割っています","構文エラー
+型を指定してください",1,"Crystalでは、文字と文字列を区別します。
+文字は、1文字と決まっています。",,,,,,,
+,Crystal,Crystal,"```crystal
+p []
+```
+これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
+```crystal
+syntax error in eval:1
+Error: for empty arrays use '[] of ElementType'
+```","構文エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","構文エラー
+空配列のために、'[] of  要素の型'を使ってください。","実行時エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
+空配列のために、'[] of  要素の型'を使ってください。",2,"Crystalの配列は、要素の型を決めなければなりません。
+これは、空配列を作るときでも、最初に要素の型を明示的に指定する必要があります。
+
+```crystal
+a = [] of String
+p a.class #=> Array(String)
+p typeof(a) #=> Array(String)
+```
+",,,,,,,
+,Crystal,Crystal,"```crystal
+a = [""foo"", ""bar"", ""baz""]
+b = %w[foo bar baz]
+
+p a == b
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、エラーとなる。,配列の初期化時に型の指定がないため、syntax error(構文エラー)となる。,1,文字列の配列を作るとき、%wの%記法が用意されています。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 'a' == ""a""
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,2,文字と文字列は異なるものとして、`false`を返します。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 1 == 1.0
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,1,本問では、Int32とFloat64を比較してますが、`true`を返します。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 1.class
+p 1.0.class
+```","```crystal
+p 1.class     #=> Int32
+p 1.0.class #=> Float32
+```","```crystal
+p 1.class     #=> Int32
+p 1.0.class #=> Float64
+```","```crystal
+p 1.class     #=> Int64
+p 1.0.class #=> Float32
+```","```crystal
+p 1.class     #=> Int64
+p 1.0.class #=> Float64
+```",2,整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。,,,,,,,
+,Crystal,Crystal,"```crystal
+a = [1, 2, 3]
+p a.inject{ |s, e| s += e }
+```",`6`を返す,`nil`を返す,`nil`と1を足そうとして、エラーになる。,`inject`が定義されてないため、エラーとなる。,4,"Rubyでは`reduce`と`inject`がエイリアスとして存在しています。
+しかし、Crystalは、エイリアスを持たない方針で、`reduce`のみです。",,,,,,,
+,Crystal,Crystal,"```crystal
+p 5 / 2
+```",`Int32`の`2`を返す,`Float64`の`2.5`を返す,`Float32`の`2.5`を返す。,`5 / 2`を返す。,2,"Crystalの整数どうしの`/`による商は、浮動小数点数を返します。
+`/`で浮動小数点数を返すようにすると、一般的な算数の答えに近い形となり、また`/`という記号で返り値の型が浮動小数点数だと推定できます。
+
+整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。",,,,,,,
+,Crystal,Crystal,"```crystal
+p nil.to_i
+```",`Int32`の`0`を返す,`Float64`の`0.0`を返す,`nil`を返す,エラーとなる,4,"```
+Error: undefined method 'to_i' for Nil
+```
+
+なお、Rubyでは、`nil.to_i`は`0`となります。",,,,,,,
+,Crystal,Crystal,"Crystalには円周率(π)と真の円周率(τ)を表す定数が用意されています。
+適切に呼べるものは、どれでしょうか。","```crystal
+p Math.PI
+p Math.TAU
+```","```crystal
+p Math:PI
+p Math:TAU
+```","```crystal
+p Math.:PI
+p Math.:TAU
+```","```crystal
+p Math::PI
+p Math::TAU
+```",4,"定数の呼び方は、コロン`:`を2つ並べます。
+
+なお、`Math`モジュールをトップレベルにインクルードすれば、
+トップレベルから直接`PI`を呼び出すことができます。
+```crystal
+include Math
+p PI #=> 3.141592653589793
+```
+
+τは、PythonやRustにもある真の円周率です。
+数学などで2πがよくでてきて、2πの方が数式を綺麗にシンプルに表せることが多いです。
+そのため、πよりも2πを円の定数として置いた方がいいという主張が存在します。",,,,,,,
+,JavaScript,Number,"```js
+console.log(5 / 2)
+```",2,3,2.5,エラーになる,3,"JavaScriptの数値リテラルで作られるNumberという数値データは、浮動小数点数型です。浮動小数点数どうしの割り算の結果は、浮動小数点数になります。
+
+JavaScriptは明示的に数値の型を指定したりしないです。
+しかし、とても大事なことなので、JavaScriptの基本的な数値データが、Numberという浮動小数点数であることは知っておくと他言語を習得するに理解が容易になります。",,,,,,,
+,JavaScript,BigInt,"```js
+console.log(5n / 2n)
+```",2,3,2.5,エラーになる,1,"2n, 5nというのは、BigIntという整数値データを作る数値リテラルです。BigIntどうしの`/`による商は、BigIntとなり端数がでるような場合は切り捨てられます。",,,,,,,
+,JavaScript,NumberとBigInt,"```js
+console.log(5n/ 2n)
+```",2,3,2.5,エラーになる,4,5はNumberという浮動小数点数のデータ、2nはBigIntという整数データになります。JavaScriptでは、この両者を足したり引いたりできません。,,,,,,,
+,JavaScript,文字列の置換,"```js
+const str = ""foo-foo-bar""
+console.log(str.replace(""foo"", ""bar""))
+```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,2,,,,,,,,
+,JavaScript,文字列の置換,"```js
+const str = ""foo-foo-bar""
+console.log(str.replace(/foo/g, ""bar""))
+```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,1,複数の対象を置換したいときは、`/foo/g`と正規表現にして`g`オプションをつけます。,,,,,,,
+,JavaScript,falsy,JavaScriptでfalsy(偽に相当)となるデータを列挙したものとして、最も適切なものを選びなさい。,false,"false, nil","false, 0","false, null, undefined, 0, 0n, NaN, [], """"",4,"JavaScriptは、偽となるものが多いですね。
+
+他のプログラミング言語で、例えばRubyだと、偽と判定されるものが`false`と`nil`だけです。
+",,,,,,,
+,JavaScript,累乗,"```ruby
+console.log(5 ** 2 * 2 ** 2)
+```",5,100,2500,390625,2,"`**`は累乗の演算子です。
+PythonやRubyでも、`**`の演算子として使われています。
+
+問題を数式で表現すると5² x 2² = 100 となり、優先順位が自然でわかりやすいかもしれません。
+JavaScriptの計算の優先順位は一般的な算数・数学と同じで、累乗 > 積商 > 和差の順に計算します。",,,,,,,
+,JavaScript,累乗,"```ruby
+console.log(2 ** 3 ** 2)
+```",64,512,構文エラーとなる,実行時エラーとなる,2,"+や-などの一般的な記号は、左から順番に計算されますが、 **は右から計算されます。
+これは、数式で表現したときの計算順序に合わせたものです。",,,,,,,
+,JavaScript,オブジェクト,"```js
+obj = { }
+console.log(obj[0])
+```",undefinedを返す,nullを返す,nilを返す,エラーになる,1,"nullではなく、undefinedを返します。
+
+nilがあるのは、Rubyなどです。",,,,,,,
+,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,,,,,,,,,
+,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
+,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
+,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,
+,英単語,,日曜日,Tuesday,Thursday,Saturday,Sunday,4,,,,,,,,
 99,日商簿記,株式会社の設立,"ある株式会社は設立にあたり1株当り50円で株式を100株発行し、出資者より現金を受け取った。発行額の全額を資本金とする。
 改題(日商簿記3級サンプル問題、2018 年 10 月）","資本金5,000円 / 現金5,000円","現金5,000円 / 資本金5,000円","有価証券5,000円 / 資本金5,000円",仕訳しない,2,TRUE,資本金,簿記3級,簿記,簡単,,,

@@ -5,7 +5,7 @@ class CreateDrills < ActiveRecord::Migration[6.1]
       t.references :user, foreign_key: true
       t.string :title, null: false, default: "無題"
       t.string :guide, null: false, default: "説明文なし"
-      t.integer :state, null: false, default: 0
+      t.integer :state, null: false, default: 0 # require_relative "app/models/drill.rb"
       t.integer :number_of_views, unsigned: true, null: false, default: 0
 
       t.timestamps

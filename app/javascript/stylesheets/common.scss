@@ -1,0 +1,51 @@
+.header__title {
+  font-size: 1.835rem;
+  font-family: "American Typewriter";
+}
+
+.modest-logo-title {
+  size: 16px;
+  font-weight: bold;
+}
+
+.main-body {
+}
+
+
+.title {
+  padding: 4px;
+  margin: 4px;
+}
+
+.field {
+  padding: 8px;
+  margin: 8px;
+}
+
+.action {
+  padding: 8px;
+  margin: 8px;
+}
+
+.panels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.panel {
+  padding: 16px;
+  margin: 8px;
+  border-radius: 4px;
+  border: none 0 #aaa;
+  background-color: #fafafa;
+}
+
+.user-icon {
+  border-radius: 50%;
+}
+
+.nav-link {
+  outline: none;
+}

@@ -61,9 +61,9 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       # t.integer :, default: 0, unsigned: true, null: false
       t.integer :correct_people_rate,  default: nil, limit: 1
 
-      t.integer :questioner # いや、これ不要。
+      # t.integer :questioner # いや、これ不要。
       t.boolean :open, default: false
-      t.boolean :in_order, default: true
+      # t.boolean :in_order, default: true
 
       t.timestamps
     end

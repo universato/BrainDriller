@@ -12,6 +12,11 @@ end
 create_user("uni")
 create_user("ruby")
 
+if true
+  puts "2ユーザーの作成で打ち切って、次にいきます"
+  return
+end
+
 return if User.count > 100
 
 # 追加のユーザーをまとめて生成する

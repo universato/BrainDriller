@@ -20,7 +20,9 @@ end
 user = drill.user
 
 problems.each do |problem|
-  statement, o1, o2, o3, o4, correct_option, explanation = problem.split("\n")
+  texts = problem.split("\n")
+  statement, o1, o2, o3, o4, correct_option = texts.shift(6)
+  explanation = texts.join("\n")
   Problem.create(
     drill: drill,
     user: user,
