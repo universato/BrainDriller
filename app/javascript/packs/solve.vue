@@ -31,7 +31,7 @@
           </ol>
         </div>
         <div class="move-buttons">
-          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">次の問題へ</button></div>
+          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">前の問題へ</button></div>
           <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">中断して採点する</button></div>
           <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">採点する</button></div>
           <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std">次の問題へ</button></div>
@@ -95,8 +95,8 @@ export default {
     marked.setOptions({
       langPrefix: 'hljs ',
       sanitize: true,
-      gfm: false,
-      breaks: false,
+      gfm: true,
+      breaks: true,
       // highlightjsを使用したハイライト処理を追加
       highlight: function(code, lang) {
         return hljs.highlightAuto(code, [lang]).value

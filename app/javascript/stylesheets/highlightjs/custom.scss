@@ -1,8 +1,11 @@
 .hljs {
   font-style: none;
   color: hsl(0, 0%, 87%);
-  background-color: #364549;
-  // background: #364549;
+  background-color: hsl(193, 15%, 25%);
+}
+
+.selected-choice .hljs:hover {
+  background-color: hsl(193, 15%, 50%);
 }
 
 .hljs-string {
