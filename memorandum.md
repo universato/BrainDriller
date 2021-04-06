@@ -710,3 +710,11 @@ PG
 rake aborted!
 ActiveModel::UnknownAttributeError: unknown attribute 'in_order' for Problem.
 ```
+
+
+`heroku logs`
+```
+ActionView::Template::Error (The asset "default_icon" is not present in the asset pipeline.):
+```
+
+`config/environments/production.rb`
