@@ -2,7 +2,7 @@
 class CreateDrills < ActiveRecord::Migration[6.1]
   def change
     create_table :drills do |t|
-      t.references :user, foreign_key: true
+      t.references :user, foreign_key: true, null: false
       t.string :title, null: false, default: "無題"
       t.string :guide, null: false, default: "説明文なし"
       t.integer :state, null: false, default: 0 # require_relative "app/models/drill.rb"

@@ -684,6 +684,7 @@ remote:            at Object.<anonymous> (/tmp/build_3890d96b/node_modules/vue-l
 
 heroku
 
+本番DBをふっとばす秘技。
 `$ heroku run RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop`
 ↓
 `Database 'daohau66v8a2bh' does not exist`

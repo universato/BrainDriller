@@ -13,7 +13,7 @@ create_user("uni")
 create_user("ruby")
 
 if true
-  puts "2ユーザーの作成で打ち切って、次にいきます"
+  puts "2ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
   return
 end
 

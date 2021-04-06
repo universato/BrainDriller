@@ -12,8 +12,8 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
   user = drill.user
 
   o1, o2, o3, o4 = row['o1'], row['o2'], row['o3'], row['o4']
-  if row['ans'].nil?
-    puts "#{i}行目の正解がないため、飛ばしました"
+  if row['statement'].nil? || row['ans'].nil?
+    puts "#{i}行目の問題文か正解がないため、飛ばしました"
     next
   elsif o1.nil? && o2.nil? && o3.nil? && o4.nil?
     puts "#{i}行目の選択肢が全て空欄であるため、飛ばしました"
@@ -22,6 +22,10 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
     puts "選択肢が同じものが検出されました. #{i}行目の#{(row['statement'] || "")[0, 100]}"
     p [o1, o2, o3, o4]
     exit
+  end
+
+  if o1.nil? || o2.nil? || o3.nil? || o4.nil?
+    puts "#{i}行目の選択肢に空欄があります。"
   end
 
   Problem.create!(

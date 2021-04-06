@@ -1661,6 +1661,10 @@ p __FILE__ #=> ""/User/aya/sub.rb""
 p $0          #=> ""/User/aya/sub.rb""
 p __FILE__ #=> ""/User/aya/sub.rb""
 ```",エラーとなる。,2,,,,,,,,
+,Ruby,,9の987654321乗を1000000007で割った余りを求める方法として適切なものはどれでしょうか。,`9 ** 987654321 % 1000000007`,"`pow(9, 98765432, 1000000007)`","`9.pow(98765432, 1000000007)`",`9.pow(98765432) % 1000000007`,3,"xのy乗を求めるとき、`x ** y`か`x.pow(y)`と書きます。
+さらに、このようなxのy乗をmで割った余りを求めるときは、`x.pow(y, m)`と書きます。
+
+`x ** y % m`と`x.pow(y) % m`と書いて実行すると、累乗の計算の段階で巨大な数となり計算結果が`Float::INFINITY`等になり、`%`で割ることで",,,,,,,
 ,rbenv,rbenv,"`rbenv versions`
 このコマンドは、何をする。",rbenvのバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,3,"複数形な点に注意してください。
 Rubyがrbenvを通じてインストールされてるか等は、このコマンドを実行して確かめられます。
@@ -1810,7 +1814,7 @@ console.log(obj[0])
 ```",undefinedを返す,nullを返す,nilを返す,エラーになる,1,"nullではなく、undefinedを返します。
 
 nilがあるのは、Rubyなどです。",,,,,,,
-,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,,,,,,,,,
+,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,4,カタカナ表記のウェンズデイと、実際のスペルがだいぶズレてる感じがありますね。,,,,,,,
 ,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
 ,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
 ,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,

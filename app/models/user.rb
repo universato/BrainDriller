@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :drills
   has_many :submissions
-  has_many :user_problem_relations, class_name: "UserProblemRelation", foreign_key: "user_id", dependent: :destroy
+  # has_many :user_problem_relations, class_name: "UserProblemRelation", foreign_key: "user_id", dependent: :destroy
   has_many :problems, through: :user_problem_relations
 
   validates :email, presence: true, uniqueness: true
