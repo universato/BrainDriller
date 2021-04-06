@@ -36,8 +36,6 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
     format: "basic_choices",
     choices: [o1, o2, o3, o4],
     correct_option: row['ans'].to_i - 1,
-    in_order: row['in_order'],
     explanation: row['explanation'] || '',
-    questioner: 1,
   )
 end

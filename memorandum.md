@@ -700,3 +700,13 @@ heroku
 問題の選択肢にナンバリング等があって欲しいけど書きたくない人は、自動的に書いて欲しいと思われる。
 ナンバリングの種類について、「1, 2, 3, 4」「ア、イ、ウ、エ」「a, b, c, d」「A, B, C, D」「Ⅰ, Ⅱ, Ⅲ」
 こういうので、悩むのはもったいないから、自分のケースだけで考えよう。
+
+
+## heroku
+
+PG
+
+```sh
+rake aborted!
+ActiveModel::UnknownAttributeError: unknown attribute 'in_order' for Problem.
+```
