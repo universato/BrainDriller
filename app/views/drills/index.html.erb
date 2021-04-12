@@ -17,37 +17,28 @@
   </div>
 <% end %>
 
-<div class="drills">
-  <% if @drills.blank? %>
-    <%= "ドリルが取得できませんでした。お困りでしたら、お問い合わせ下さい。" %>
-    <% if Rails.env.development? %><br>
-      【原因】(開発環境のみ表示):
-      <% if @drills.nil?  %><%= "@drillsがnil"  %>
-      <% elsif @drills.size == 0 %><%= "@drills.sizeが0" %>
-      <% else %><%= "不明: @drillsがnilでも、@drills.sizeが0でもない" %><% end %>
-    <% end %>
-  <% else %>
-    <table>
-      <tr>
-        <th>ドリル名</th>
-        <th>著者</th>
-        <th>問題数</th>
-        <th>全体の<br>閲覧数</th>
-        <th>全体の<br>閲覧数</th>
-      </tr>
+<% if @drills.blank? %>
+  <%= "ドリルが取得できませんでした。お困りでしたら、お問い合わせ下さい。" %>
+  <% if Rails.env.development? %><br>
+    【原因】(開発環境のみ表示):
+    <% if @drills.nil?  %><%= "@drillsがnil"  %>
+    <% elsif @drills.size == 0 %><%= "@drills.sizeが0" %>
+    <% else %><%= "不明: @drillsがnilでも、@drills.sizeが0でもない" %><% end %>
+  <% end %>
+<% else %>
+  <div class="drills">
     <% @drills.each do |drill| %>
-      <tr>
-        <td class="drill-title"><%= link_to drill.title, drill %></td>
-
-        <td class="drill-user">
+      <div class="index-drill">
+        <div class="drill-title"><%= link_to drill.title, drill %></div>
+        <div class="drill-user">
           <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'user-icon' %>
           <%= link_to drill.user, drill.user, class: "drill-user-name" %>
-        </td>
-        <td class="problem-count"><%= drill.problems.size %>問</td>
-        <td><%= drill.number_of_views %>回</td>
-        <td><%= drill.impressions_count %>回</td>
-      </tr>
+        </div>
+        <div class="problem-count"><%= drill.problems.size %>問</div>
+        <div><%= drill.number_of_views %>回</div>
+        <div><%= drill.impressions_count %>回</div>
+      </div>
     <% end %>
-    <table>
-  <% end %>
+  </div>
+<% end %>
 </div>

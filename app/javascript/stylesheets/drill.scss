@@ -5,10 +5,18 @@
 }
 
 .drills {
+  display: grid;
+
   background-color: var(--white-color);
   border-radius: 4px;
   margin: 16px;
   padding: 16px;
+}
+
+.index-drill {
+  display: grid;
+  border: solid 1px black;
+  border-radius: 4px;
 }
 
 .drill-id {
@@ -17,8 +25,7 @@
   font-size: 8px;
 }
 
-.drill-title {
-  grid-column: 2;
+.index-drill-title {
   color: black;
   font-weight: bold;
   text-decoration: none;
@@ -26,8 +33,8 @@
   padding: 12px;
 }
 
-a.drill-title:hover {
-  text-decoration: underline;
+.drill-title:hover {
+  // text-decoration: underline;
 }
 
 .drill-option {
