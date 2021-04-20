@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2021_03_23_224105) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "basic_choices", force: :cascade do |t|
     t.json "choices", null: false
     t.integer "correct_number", default: 0, null: false
   end
 
   create_table "drills", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id", null: false
     t.string "title", default: "無題", null: false
     t.string "guide", default: "説明文なし", null: false
     t.integer "state", default: 0, null: false
@@ -56,8 +59,8 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
   end
 
   create_table "problems", force: :cascade do |t|
-    t.integer "drill_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "drill_id", null: false
+    t.bigint "user_id", null: false
     t.string "title", null: false
     t.string "statement", null: false
     t.integer "format", null: false
@@ -68,15 +71,13 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
     t.integer "number_of_views", default: 0, null: false
     t.integer "number_of_submissions", default: 0, null: false
     t.integer "number_of_correct_answers", default: 0, null: false
-    t.integer "correct_answer_rate", limit: 1
+    t.integer "correct_answer_rate", limit: 2
     t.integer "number_of_viewers", default: 0, null: false
     t.integer "number_of_submitters", default: 0, null: false
     t.integer "number_of_one_shot_answerers", default: 0, null: false
     t.integer "number_of_last_shot_answerers", default: 0, null: false
-    t.integer "correct_people_rate", limit: 1
-    t.integer "questioner"
+    t.integer "correct_people_rate", limit: 2
     t.boolean "open", default: false
-    t.boolean "in_order", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["drill_id"], name: "index_problems_on_drill_id"
@@ -84,12 +85,12 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
   end
 
   create_table "user_problem_relations", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "problem_id"
+    t.bigint "user_id"
+    t.bigint "problem_id"
     t.integer "number_of_views", default: 0
     t.integer "number_of_submissions", default: 0
     t.integer "number_of_correct_answers", default: 0
-    t.integer "correct_answer_rate", limit: 1, default: 0
+    t.integer "correct_answer_rate", limit: 2, default: 0
     t.float "average_time"
     t.float "first_time"
     t.float "fastest_time"

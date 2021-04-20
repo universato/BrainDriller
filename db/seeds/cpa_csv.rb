@@ -26,7 +26,6 @@ CSV.foreach('db/csv/cpa.csv', headers: true) do |row|
     choices: %w[アイ アウ アエ イウ イエ ウエ],
     correct_option: row['ans'].to_i - 1,
     explanation: row['explanation'] || '',
-    questioner: 1,
     open: true
   )
 end
