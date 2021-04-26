@@ -3,6 +3,7 @@ ja:
     back: 戻る
     signup: 登録
     help: ヘルプ
+    password_reset: パスワードのリセット
     login: ログイン
     logout: ログアウト
     new_password: 新しいパスワード
@@ -17,10 +18,13 @@ ja:
     edit_profile: プロフィールを変更する
     leave_blank_if_you_don't_want_to_change_it: 変更しない場合は空欄にしてください
     we_need_your_current_password_to_confirm_your_changes: パスワードを変更するときは、現在のパスワードを入力してください
+  button:
+    login: ログインする
+    signup: 登録する
   link:
     signup: アカウント登録は、ここをクリック！
-    Forgot_your_password?: パスワードを覚えてないときは、こちらへ！
-    login: アカウント登録済みで、ログインできる方はこちらへ！
+    Forgot_your_password?: パスワードを覚えてないときはこちらへ！
+    login: アカウント登録済みでログインできる方はこちらへ！
   activerecord:
     errors:
       messages:

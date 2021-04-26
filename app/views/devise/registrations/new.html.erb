@@ -1,6 +1,6 @@
 
 <div class="panel form-panel">
-    <h2 class="title"><%= t("word.signup") %></h2>
+    <h2 class="title form-title"><%= t("word.signup") %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-panel'}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="actions form-action-item">
-        <%= f.submit t("word.signup"), class: "form-action-btn" %>
+        <%= f.submit t("button.signup"), class: "form-action-btn" %>
       </div>
     <% end %>
 

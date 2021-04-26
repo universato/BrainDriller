@@ -1,6 +1,6 @@
 
 <div class="panel form-panel">
-  <h2 class="title"><%= t("word.login") %></h2>
+  <h2 class="title form-title"><%= t("word.login") %></h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-panel' } ) do |f| %>
     <div class="form-item">
@@ -21,7 +21,7 @@
     <% end %>
 
     <div class="actions form-action-item">
-      <%= f.submit t("word.login"), class: "form-action-btn" %>
+      <%= f.submit t("button.login"), class: "form-action-btn" %>
     </div>
   <% end %>
 
