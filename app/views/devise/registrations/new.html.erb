@@ -1,37 +1,39 @@
 
-<div class="panel user-form">
-  <h2 class="title"><%= t("word.signup") %></h2>
+<div class="panel form-panel">
+    <h2 class="title"><%= t("word.signup") %></h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-panel'}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :login_name %><br />
-      <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name", class: "oneline-field" %>
-    </div>
+      <div class="form-item">
+        <%= f.label :login_name %><br />
+        <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name", class: "oneline-field form-item--input"  %>
+      </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "oneline-field" %>
-    </div>
+      <div class="form-item">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "oneline-field form-item--input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      (<%= @minimum_password_length %> 文字以上)
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: "oneline-field" %>
-    </div>
+      <div class="form-item">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        (<%= @minimum_password_length %> 文字以上)
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "oneline-field form-item--input" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "oneline-field" %>
-    </div>
+      <div class="form-item">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "oneline-field form-item--input" %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit t("word.signup") %>
-    </div>
-  <% end %>
+      <div class="actions form-action-item">
+        <%= f.submit t("word.signup"), class: "form-action-btn" %>
+      </div>
+    <% end %>
+
+  <div class="link-boxes">
+    <%= render "devise/shared/links" %>
+  </div>
 </div>
-
-<%= render "devise/shared/links" %>
