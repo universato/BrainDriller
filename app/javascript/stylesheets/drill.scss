@@ -6,7 +6,6 @@
 
 .drills {
   display: grid;
-
   background-color: var(--white-color);
   border-radius: 4px;
   margin: 16px;
@@ -14,9 +13,20 @@
 }
 
 .index-drill {
+  margin: 8px;
   display: grid;
-  border: solid 1px black;
+  border: solid 1px rgba(94, 90, 90, 0.822);
   border-radius: 4px;
+  text-decoration: none;
+  color: hsla(0, 20%, 9%, 0.733);
+}
+
+.index-drill:hover {
+  color: hsla(0, 20%, 9%, 0.733);
+}
+
+.index-drill:visited {
+  color: hsla(0, 20%, 9%, 0.733);
 }
 
 .drill-id {
@@ -27,23 +37,11 @@
 
 .index-drill-title {
   color: black;
+  font-size: 18px;
   font-weight: bold;
   text-decoration: none;
   margin: 12px;
   padding: 12px;
-}
-
-.drill-title:hover {
-  // text-decoration: underline;
-}
-
-.drill-option {
-}
-
-.drill-guide {
-}
-
-.user-icon {
 }
 
 .drill-user-name {
@@ -57,5 +55,17 @@
   text-decoration: underline;
 }
 
-.drill-problem-count {
+.grid {
+  display: grid;
+  place-content: center;
+  gap: 1ch;
+}
+
+.btn-box {
+  width: 80%;
+  // text-align: center;
+}
+
+.solve-btn {
+  width: 100%;
 }

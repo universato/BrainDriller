@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel grid">
   <div class="title-panel">
     <div class="drill-id">Drill ID: <%= @drill.id %> </div>
     <h1 class="drill-title"><%= @drill.title %></h1>
@@ -31,7 +31,9 @@
     <%# end %>
   </div>
 
-    <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big' %>
+  <div class="btn-box">
+    <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big solve-btn' %>
+  </div>
   <% end %>
 
   <% if Rails.env.development? %>

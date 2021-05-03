@@ -28,16 +28,18 @@
 <% else %>
   <div class="drills">
     <% @drills.each do |drill| %>
-      <div class="index-drill">
-        <div class="drill-title"><%= link_to drill.title, drill %></div>
+      <%= link_to drill, class: 'index-drill' do %>
+        <div class="index-drill-title"><%= drill.title  %></div>
         <div class="drill-user">
           <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'user-icon' %>
-          <%= link_to drill.user, drill.user, class: "drill-user-name" %>
+          <div class="">
+            <%= drill.user %>
+          </div>
         </div>
         <div class="problem-count"><%= drill.problems.size %>問</div>
         <div><%= drill.number_of_views %>回</div>
         <div><%= drill.impressions_count %>回</div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 <% end %>
