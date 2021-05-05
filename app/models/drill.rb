@@ -7,4 +7,8 @@ class Drill < ApplicationRecord
   validates :title, presence: true, length: { in: 1..32 }
   validates :user_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :state, presence: true
+
+  def to_s
+    title
+  end
 end

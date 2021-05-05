@@ -79,6 +79,10 @@ ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HT
 }
 ```",aタグ内でさらにタグを書いている点が誤り。,aタグをブロックにしている点が誤り。,aタグ内にaタグを書いている点が誤り。,誤りは存在しない,3,"HTML5以降では、aタグをブロックとして、aタグ内にタグを含めても問題ありません。
 ただし、aタグ内にaタグがあると、HTMLが正しく認識されません。",,,,,,,
+,CSS,flex,`flex-flow`は何と何を一括指定するプロパティですか。,`flex-basis`と`flex-grow`,`flex-basis`と`flex-wrap`,`flex-direction`と`flex-grow`,`flex-direction`と`flex-wrap`,4,"`flex-flow`は、`flex-direction`と`flex-wrap`の値を一括指定して流れを決めるプロパティです。
+`flex-direction`が方向で、`row`(行方向 = 左から右), `column`(列方向 = 上から下), `row-reverse`, `column-reverse`の4通りを指定します。
+`flex-wrap`が、`nowrap`, `wrap`, `wrap-reverse`の3通りです。
+4 * 3 で12通りの指定方法があります。",,,,,,,
 ,CSS,grid,"次のgridは、何行何列のグリッドを作りますか。
 
 ```css
@@ -89,6 +93,7 @@ ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HT
 }
 ```",3行2列,2行3列,3行3列,2行2列,2,"columnが列で、rowが行ですね。
 最後が複数形になる点に注意です。",,,,,,,
+,CSS,grid,gridでは、名前をつける方法がありますが、どのように指定しますか。,grid-template: 100px [t-start] 100px [t-end];,grid-template: 100px [t-starts] 100px [t-ends];,grid-template: 100px [t-begin] 100px [t-end];,grid-template: 100px [t-begins] 100px [t-ends];,1,,,,,,,,
 ,CSS,color,"`box` クラスの枠線は、何色になりますか。
 
 ```css

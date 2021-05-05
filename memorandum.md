@@ -727,3 +727,6 @@ ActionView::Template::Error (The asset "default_icon" is not present in the asse
 > この「config.assets.compile」ですが、動的にPreCompileをしてくれるオプションとのことで、Herokuなどの本番環境で動かすときは、「false」にして自分でPreCompileする方がいいみたいです。
 PreCompileは次のコマンドで実行できます。
 $ rake assets:precompile
+
+5/4 user#showのview作り直す。
+問題を解いてるときのロゴをクリックできるようにした。

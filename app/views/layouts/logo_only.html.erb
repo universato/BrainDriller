@@ -6,7 +6,11 @@
   </head>
 
   <body>
-    <header><div class="modest-logo-title">BrainDriller</div></header>
+    <header>
+      <div class="">
+        <%= link_to 'BrainDriller', '/', class: 'modest-logo-title' %>
+      </div>
+    </header>
     <main><%= yield %></main>
   </body>
 </html>

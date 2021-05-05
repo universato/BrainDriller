@@ -12,28 +12,27 @@
     <%= problems_count = @drill.problems.count %>
   </div>
 
-  <%= form_with url: "/solve/#{@drill.id}", method: "GET" do |f| %>
+  <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
+    <div class="drill-option">
+      <%# f.label :rand, "ランダムに出題する: " %>
+      <%# f.check_box :rand, {checked: true}, "true", nil %>
 
-  <div class="drill-option">
-    <%# f.label :rand, "ランダムに出題する: " %>
-    <%# f.check_box :rand, {checked: true}, "true", nil %>
+      <%= f.label :rand, "過去の回答に基づいて出題する", class: "label"%>
+      <%= f.check_box :rand, {checked: true, class: "random-option"}, "true", nil %>
+    </div>
 
-    <%= f.label :rand, "過去の回答に基づいて出題する" %>
-    <%= f.check_box :rand, {checked: true}, "true", nil %>
-  </div>
-
-  <div class="drill-option">
-    <div>問題数: </div>
-    <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem_number" %>
-      <%# problem_count_select_list(problems_count).each do |c| %>
-        <%#= content_tag(:option, c, value: c) %>
+    <div class="drill-option">
+      <div class="label problem-number-option-label">問題数: </div>
+      <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {selected: [problems_count, 10].min.to_s}, class: "problem-number-option" %>
+        <%# problem_count_select_list(problems_count).each do |c| %>
+          <%#= content_tag(:option, c, value: c) %>
+        <%# end %>
       <%# end %>
-    <%# end %>
-  </div>
+    </div>
 
-  <div class="btn-box">
-    <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big solve-btn' %>
-  </div>
+    <div class="btn-box">
+      <%= f.submit t("text.Solve_problems"), name: '', class: 'btn-std btn-big solve-btn' %>
+    </div>
   <% end %>
 
   <% if Rails.env.development? %>
