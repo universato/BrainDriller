@@ -10,6 +10,19 @@
   text-decoration: none;
 }
 
+.page-title {
+  text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
+}
+
+.nav-item {
+  text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
+}
+
+.nav-link {
+  outline: none;
+  text-shadow: hsla(0, 12%, 32%, 0.103) 0 1px 0;
+}
+
 .main-body {
 }
 
@@ -51,8 +64,4 @@
 
 .user-icon {
   border-radius: 50%;
-}
-
-.nav-link {
-  outline: none;
 }
