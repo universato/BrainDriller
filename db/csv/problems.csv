@@ -104,6 +104,162 @@ ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HT
 `#eee`は、`#EEE`や`#eeeeee`と同じです。
 RGBは、赤(Red)・緑(Green)・青(Blue)の光の三原色のことで、それぞれが混ざった場合により明るい色になります。今回は、白に近い灰色となります。
 ",,,,,,,
+,rbenv,rbenv,"`rbenv versions`
+このコマンドは、何をする。",rbenvのバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,3,"複数形な点に注意してください。
+Rubyがrbenvを通じてインストールされてるか等は、このコマンドを実行して確かめられます。
+なお、`rbenv --help`で、`rbenv`のもつコマンドと簡単な説明の一覧で確かめられます。",,,,,,,
+,Crystal,Crystal,"```crystal
+p 'Hello, World!'
+```
+これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
+```
+syntax error in eval:1
+Error: unterminated char literal, use double quotes for strings
+```","構文エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","ゼロ除算エラー
+0で割っています","構文エラー
+型を指定してください",1,"Crystalでは、文字と文字列を区別します。
+文字は、1文字と決まっています。",,,,,,,
+,Crystal,Crystal,"```crystal
+p []
+```
+これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
+```crystal
+syntax error in eval:1
+Error: for empty arrays use '[] of ElementType'
+```","構文エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","構文エラー
+空配列のために、'[] of  要素の型'を使ってください。","実行時エラー
+終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
+空配列のために、'[] of  要素の型'を使ってください。",2,"Crystalの配列は、要素の型を決めなければなりません。
+これは、空配列を作るときでも、最初に要素の型を明示的に指定する必要があります。
+
+```crystal
+a = [] of String
+p a.class #=> Array(String)
+p typeof(a) #=> Array(String)
+```
+",,,,,,,
+,Crystal,Crystal,"```crystal
+a = [""foo"", ""bar"", ""baz""]
+b = %w[foo bar baz]
+
+p a == b
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、エラーとなる。,配列の初期化時に型の指定がないため、syntax error(構文エラー)となる。,1,文字列の配列を作るとき、%wの%記法が用意されています。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 'a' == ""a""
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,2,文字と文字列は異なるものとして、`false`を返します。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 1 == 1.0
+```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,1,本問では、Int32とFloat64を比較してますが、`true`を返します。,,,,,,,
+,Crystal,Crystal,"```crystal
+p 1.class
+p 1.0.class
+```","```crystal
+p 1.class     #=> Int32
+p 1.0.class #=> Float32
+```","```crystal
+p 1.class     #=> Int32
+p 1.0.class #=> Float64
+```","```crystal
+p 1.class     #=> Int64
+p 1.0.class #=> Float32
+```","```crystal
+p 1.class     #=> Int64
+p 1.0.class #=> Float64
+```",2,整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。,,,,,,,
+,Crystal,Crystal,"```crystal
+a = [1, 2, 3]
+p a.inject{ |s, e| s += e }
+```",`6`を返す,`nil`を返す,`nil`と1を足そうとして、エラーになる。,`inject`が定義されてないため、エラーとなる。,4,"Rubyでは`reduce`と`inject`がエイリアスとして存在しています。
+しかし、Crystalは、エイリアスを持たない方針で、`reduce`のみです。",,,,,,,
+,Crystal,Crystal,"```crystal
+p 5 / 2
+```",`Int32`の`2`を返す,`Float64`の`2.5`を返す,`Float32`の`2.5`を返す。,`5 / 2`を返す。,2,"Crystalの整数どうしの`/`による商は、浮動小数点数を返します。
+`/`で浮動小数点数を返すようにすると、一般的な算数の答えに近い形となり、また`/`という記号で返り値の型が浮動小数点数だと推定できます。
+
+整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。",,,,,,,
+,Crystal,Crystal,"```crystal
+p nil.to_i
+```",`Int32`の`0`を返す,`Float64`の`0.0`を返す,`nil`を返す,エラーとなる,4,"```
+Error: undefined method 'to_i' for Nil
+```
+
+なお、Rubyでは、`nil.to_i`は`0`となります。",,,,,,,
+,Crystal,Crystal,"Crystalには円周率(π)と真の円周率(τ)を表す定数が用意されています。
+適切に呼べるものは、どれでしょうか。","```crystal
+p Math.PI
+p Math.TAU
+```","```crystal
+p Math:PI
+p Math:TAU
+```","```crystal
+p Math.:PI
+p Math.:TAU
+```","```crystal
+p Math::PI
+p Math::TAU
+```",4,"定数の呼び方は、コロン`:`を2つ並べます。
+
+なお、`Math`モジュールをトップレベルにインクルードすれば、
+トップレベルから直接`PI`を呼び出すことができます。
+```crystal
+include Math
+p PI #=> 3.141592653589793
+```
+
+τは、PythonやRustにもある真の円周率です。
+数学などで2πがよくでてきて、2πの方が数式を綺麗にシンプルに表せることが多いです。
+そのため、πよりも2πを円の定数として置いた方がいいという主張が存在します。",,,,,,,
+,JavaScript,Number,"```js
+console.log(5 / 2)
+```",2,3,2.5,エラーになる,3,"JavaScriptの数値リテラルで作られるNumberという数値データは、浮動小数点数型です。浮動小数点数どうしの割り算の結果は、浮動小数点数になります。
+
+JavaScriptは明示的に数値の型を指定したりしないです。
+しかし、とても大事なことなので、JavaScriptの基本的な数値データが、Numberという浮動小数点数であることは知っておくと他言語を習得するに理解が容易になります。",,,,,,,
+,JavaScript,BigInt,"```js
+console.log(5n / 2n)
+```",2,3,2.5,エラーになる,1,"2n, 5nというのは、BigIntという整数値データを作る数値リテラルです。BigIntどうしの`/`による商は、BigIntとなり端数がでるような場合は切り捨てられます。",,,,,,,
+,JavaScript,NumberとBigInt,"```js
+console.log(5n/ 2n)
+```",2,3,2.5,エラーになる,4,5はNumberという浮動小数点数のデータ、2nはBigIntという整数データになります。JavaScriptでは、この両者を足したり引いたりできません。,,,,,,,
+,JavaScript,文字列の置換,"```js
+const str = ""foo-foo-bar""
+console.log(str.replace(""foo"", ""bar""))
+```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,2,,,,,,,,
+,JavaScript,文字列の置換,"```js
+const str = ""foo-foo-bar""
+console.log(str.replace(/foo/g, ""bar""))
+```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,1,複数の対象を置換したいときは、`/foo/g`と正規表現にして`g`オプションをつけます。,,,,,,,
+,JavaScript,falsy,JavaScriptでfalsy(偽に相当)となるデータを列挙したものとして、最も適切なものを選びなさい。,false,"false, nil","false, 0","false, null, undefined, 0, 0n, NaN, [], """"",4,"JavaScriptは、偽となるものが多いですね。
+
+他のプログラミング言語で、例えばRubyだと、偽と判定されるものが`false`と`nil`だけです。
+",,,,,,,
+,JavaScript,累乗,"```ruby
+console.log(5 ** 2 * 2 ** 2)
+```",5,100,2500,390625,2,"`**`は累乗の演算子です。
+PythonやRubyでも、`**`の演算子として使われています。
+
+問題を数式で表現すると5² x 2² = 100 となり、優先順位が自然でわかりやすいかもしれません。
+JavaScriptの計算の優先順位は一般的な算数・数学と同じで、累乗 > 積商 > 和差の順に計算します。",,,,,,,
+,JavaScript,累乗,"```ruby
+console.log(2 ** 3 ** 2)
+```",64,512,構文エラーとなる,実行時エラーとなる,2,"+や-などの一般的な記号は、左から順番に計算されますが、 **は右から計算されます。
+これは、数式で表現したときの計算順序に合わせたものです。",,,,,,,
+,JavaScript,オブジェクト,"```js
+obj = { }
+console.log(obj[0])
+```",undefinedを返す,nullを返す,nilを返す,エラーになる,1,"nullではなく、undefinedを返します。
+
+nilがあるのは、Rubyなどです。",,,,,,,
+,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,4,カタカナ表記のウェンズデイと、実際のスペルがだいぶズレてる感じがありますね。,,,,,,,
+,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
+,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
+,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,
+,英単語,,日曜日,Tuesday,Thursday,Saturday,Sunday,4,,,,,,,,
+99,日商簿記,株式会社の設立,"ある株式会社は設立にあたり1株当り50円で株式を100株発行し、出資者より現金を受け取った。発行額の全額を資本金とする。
+改題(日商簿記3級サンプル問題、2018 年 10 月）","資本金5,000円 / 現金5,000円","現金5,000円 / 資本金5,000円","有価証券5,000円 / 資本金5,000円",仕訳しない,2,TRUE,資本金,簿記3級,簿記,簡単,,,
 11,Ruby,Rubyの **,"Rubyで、`5 * 2`は10を返しますが、`5 ** 2`は何でしょう。
 ```ruby
 p 5 * 2  #=> 10
@@ -1709,159 +1865,3 @@ p __FILE__ #=> ""/User/aya/sub.rb""
 さらに、このようなxのy乗をmで割った余りを求めるときは、`x.pow(y, m)`と書きます。
 
 `x ** y % m`と`x.pow(y) % m`と書いて実行すると、累乗の計算の段階で巨大な数となり計算結果が`Float::INFINITY`等になり、`%`で割ることで",,,,,,,
-,rbenv,rbenv,"`rbenv versions`
-このコマンドは、何をする。",rbenvのバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,3,"複数形な点に注意してください。
-Rubyがrbenvを通じてインストールされてるか等は、このコマンドを実行して確かめられます。
-なお、`rbenv --help`で、`rbenv`のもつコマンドと簡単な説明の一覧で確かめられます。",,,,,,,
-,Crystal,Crystal,"```crystal
-p 'Hello, World!'
-```
-これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
-```
-syntax error in eval:1
-Error: unterminated char literal, use double quotes for strings
-```","構文エラー
-終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
-終わりのない文字リテラル、文字列のためにはダブルクォートを使って","ゼロ除算エラー
-0で割っています","構文エラー
-型を指定してください",1,"Crystalでは、文字と文字列を区別します。
-文字は、1文字と決まっています。",,,,,,,
-,Crystal,Crystal,"```crystal
-p []
-```
-これをコンパイルしようとすると、以下のようにエラーがでます。なんと言われてますか。
-```crystal
-syntax error in eval:1
-Error: for empty arrays use '[] of ElementType'
-```","構文エラー
-終わりのない文字リテラル、文字列のためにはダブルクォートを使って","構文エラー
-空配列のために、'[] of  要素の型'を使ってください。","実行時エラー
-終わりのない文字リテラル、文字列のためにはダブルクォートを使って","実行時エラー
-空配列のために、'[] of  要素の型'を使ってください。",2,"Crystalの配列は、要素の型を決めなければなりません。
-これは、空配列を作るときでも、最初に要素の型を明示的に指定する必要があります。
-
-```crystal
-a = [] of String
-p a.class #=> Array(String)
-p typeof(a) #=> Array(String)
-```
-",,,,,,,
-,Crystal,Crystal,"```crystal
-a = [""foo"", ""bar"", ""baz""]
-b = %w[foo bar baz]
-
-p a == b
-```",`true`を返す,`false`を返す,異なるクラスを比べているため、エラーとなる。,配列の初期化時に型の指定がないため、syntax error(構文エラー)となる。,1,文字列の配列を作るとき、%wの%記法が用意されています。,,,,,,,
-,Crystal,Crystal,"```crystal
-p 'a' == ""a""
-```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,2,文字と文字列は異なるものとして、`false`を返します。,,,,,,,
-,Crystal,Crystal,"```crystal
-p 1 == 1.0
-```",`true`を返す,`false`を返す,異なるクラスを比べているため、構文エラーとなる。,異なるクラスを比べているため、実行時エラーとなる。,1,本問では、Int32とFloat64を比較してますが、`true`を返します。,,,,,,,
-,Crystal,Crystal,"```crystal
-p 1.class
-p 1.0.class
-```","```crystal
-p 1.class     #=> Int32
-p 1.0.class #=> Float32
-```","```crystal
-p 1.class     #=> Int32
-p 1.0.class #=> Float64
-```","```crystal
-p 1.class     #=> Int64
-p 1.0.class #=> Float32
-```","```crystal
-p 1.class     #=> Int64
-p 1.0.class #=> Float64
-```",2,整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。,,,,,,,
-,Crystal,Crystal,"```crystal
-a = [1, 2, 3]
-p a.inject{ |s, e| s += e }
-```",`6`を返す,`nil`を返す,`nil`と1を足そうとして、エラーになる。,`inject`が定義されてないため、エラーとなる。,4,"Rubyでは`reduce`と`inject`がエイリアスとして存在しています。
-しかし、Crystalは、エイリアスを持たない方針で、`reduce`のみです。",,,,,,,
-,Crystal,Crystal,"```crystal
-p 5 / 2
-```",`Int32`の`2`を返す,`Float64`の`2.5`を返す,`Float32`の`2.5`を返す。,`5 / 2`を返す。,2,"Crystalの整数どうしの`/`による商は、浮動小数点数を返します。
-`/`で浮動小数点数を返すようにすると、一般的な算数の答えに近い形となり、また`/`という記号で返り値の型が浮動小数点数だと推定できます。
-
-整数型では32bit、浮動小数点数型では64bitが一般によく使われると考えられてのことです。",,,,,,,
-,Crystal,Crystal,"```crystal
-p nil.to_i
-```",`Int32`の`0`を返す,`Float64`の`0.0`を返す,`nil`を返す,エラーとなる,4,"```
-Error: undefined method 'to_i' for Nil
-```
-
-なお、Rubyでは、`nil.to_i`は`0`となります。",,,,,,,
-,Crystal,Crystal,"Crystalには円周率(π)と真の円周率(τ)を表す定数が用意されています。
-適切に呼べるものは、どれでしょうか。","```crystal
-p Math.PI
-p Math.TAU
-```","```crystal
-p Math:PI
-p Math:TAU
-```","```crystal
-p Math.:PI
-p Math.:TAU
-```","```crystal
-p Math::PI
-p Math::TAU
-```",4,"定数の呼び方は、コロン`:`を2つ並べます。
-
-なお、`Math`モジュールをトップレベルにインクルードすれば、
-トップレベルから直接`PI`を呼び出すことができます。
-```crystal
-include Math
-p PI #=> 3.141592653589793
-```
-
-τは、PythonやRustにもある真の円周率です。
-数学などで2πがよくでてきて、2πの方が数式を綺麗にシンプルに表せることが多いです。
-そのため、πよりも2πを円の定数として置いた方がいいという主張が存在します。",,,,,,,
-,JavaScript,Number,"```js
-console.log(5 / 2)
-```",2,3,2.5,エラーになる,3,"JavaScriptの数値リテラルで作られるNumberという数値データは、浮動小数点数型です。浮動小数点数どうしの割り算の結果は、浮動小数点数になります。
-
-JavaScriptは明示的に数値の型を指定したりしないです。
-しかし、とても大事なことなので、JavaScriptの基本的な数値データが、Numberという浮動小数点数であることは知っておくと他言語を習得するに理解が容易になります。",,,,,,,
-,JavaScript,BigInt,"```js
-console.log(5n / 2n)
-```",2,3,2.5,エラーになる,1,"2n, 5nというのは、BigIntという整数値データを作る数値リテラルです。BigIntどうしの`/`による商は、BigIntとなり端数がでるような場合は切り捨てられます。",,,,,,,
-,JavaScript,NumberとBigInt,"```js
-console.log(5n/ 2n)
-```",2,3,2.5,エラーになる,4,5はNumberという浮動小数点数のデータ、2nはBigIntという整数データになります。JavaScriptでは、この両者を足したり引いたりできません。,,,,,,,
-,JavaScript,文字列の置換,"```js
-const str = ""foo-foo-bar""
-console.log(str.replace(""foo"", ""bar""))
-```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,2,,,,,,,,
-,JavaScript,文字列の置換,"```js
-const str = ""foo-foo-bar""
-console.log(str.replace(/foo/g, ""bar""))
-```",`bar-bar-bar`,`bar-foo-bar`,`foo-foo-foo`,エラーになる,1,複数の対象を置換したいときは、`/foo/g`と正規表現にして`g`オプションをつけます。,,,,,,,
-,JavaScript,falsy,JavaScriptでfalsy(偽に相当)となるデータを列挙したものとして、最も適切なものを選びなさい。,false,"false, nil","false, 0","false, null, undefined, 0, 0n, NaN, [], """"",4,"JavaScriptは、偽となるものが多いですね。
-
-他のプログラミング言語で、例えばRubyだと、偽と判定されるものが`false`と`nil`だけです。
-",,,,,,,
-,JavaScript,累乗,"```ruby
-console.log(5 ** 2 * 2 ** 2)
-```",5,100,2500,390625,2,"`**`は累乗の演算子です。
-PythonやRubyでも、`**`の演算子として使われています。
-
-問題を数式で表現すると5² x 2² = 100 となり、優先順位が自然でわかりやすいかもしれません。
-JavaScriptの計算の優先順位は一般的な算数・数学と同じで、累乗 > 積商 > 和差の順に計算します。",,,,,,,
-,JavaScript,累乗,"```ruby
-console.log(2 ** 3 ** 2)
-```",64,512,構文エラーとなる,実行時エラーとなる,2,"+や-などの一般的な記号は、左から順番に計算されますが、 **は右から計算されます。
-これは、数式で表現したときの計算順序に合わせたものです。",,,,,,,
-,JavaScript,オブジェクト,"```js
-obj = { }
-console.log(obj[0])
-```",undefinedを返す,nullを返す,nilを返す,エラーになる,1,"nullではなく、undefinedを返します。
-
-nilがあるのは、Rubyなどです。",,,,,,,
-,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,4,カタカナ表記のウェンズデイと、実際のスペルがだいぶズレてる感じがありますね。,,,,,,,
-,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
-,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
-,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,
-,英単語,,日曜日,Tuesday,Thursday,Saturday,Sunday,4,,,,,,,,
-99,日商簿記,株式会社の設立,"ある株式会社は設立にあたり1株当り50円で株式を100株発行し、出資者より現金を受け取った。発行額の全額を資本金とする。
-改題(日商簿記3級サンプル問題、2018 年 10 月）","資本金5,000円 / 現金5,000円","現金5,000円 / 資本金5,000円","有価証券5,000円 / 資本金5,000円",仕訳しない,2,TRUE,資本金,簿記3級,簿記,簡単,,,
