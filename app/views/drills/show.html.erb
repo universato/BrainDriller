@@ -1,9 +1,9 @@
 <div class="panel grid">
   <div class="title-panel">
     <div class="drill-id">Drill ID: <%= @drill.id %> </div>
-    <h1 class="drill-title"><%= @drill.title %></h1>
+    <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
   </div>
-  <div class="drill-guide"><%= @drill.guide %></div>
+  <div class="drill-guide"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
   <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'user-icon' %>
   <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
 

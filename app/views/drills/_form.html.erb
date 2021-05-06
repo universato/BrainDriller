@@ -1,5 +1,5 @@
 <% if Rails.env.development? %>
-  これはVue.jsに回すので封印かな。
+  <small>これはVue.jsに回すので封印かな。</small>
 <% end %>
 
 <div class="row">
@@ -10,9 +10,9 @@
       <%= f.text_field :title, class: 'form-control' %>
 
       <%= f.label :guide %>
-      <%= f.text_field :guide, class: 'form-control' %>
+      <%= f.text_area :guide, class: 'form-control' %>
 
-      <%= f.submit "作成する", class: "btn btn-primary" %>
+      <%= f.submit "編集する", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

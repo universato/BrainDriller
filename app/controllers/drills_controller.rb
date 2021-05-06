@@ -24,6 +24,9 @@ class DrillsController < ApplicationController
   end
 
   def update
+    @drill = Drill.find(params[:id])
+    @drill.update(drill_params)
+    redirect_to "/drills/#{params[:id]}"
   end
 
   def solve
@@ -32,6 +35,6 @@ class DrillsController < ApplicationController
 
   private
     def drill_params
-      params.require(:drill).permit(:title)
+      params.require(:drill).permit(:title, :guide)
     end
 end

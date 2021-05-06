@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_224105) do
   create_table "drills", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title", default: "無題", null: false
-    t.string "guide", default: "説明文なし", null: false
+    t.string "guide", default: "", null: false
     t.integer "state", default: 0, null: false
     t.integer "number_of_views", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false

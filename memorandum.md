@@ -730,3 +730,22 @@ $ rake assets:precompile
 
 5/4 user#showのview作り直す。
 問題を解いてるときのロゴをクリックできるようにした。
+
+#
+
+```ruby
+def update
+  @drill = Drill.find(params[:id])
+  @drill.update(drill_params)
+  redirect_to "/drills/#{params[:id]}"
+end
+```
+
+なぜか別の画面にいけない。
+`redirect_to`は文字列の最初に`/`が必要。
+
+#
+
+`simple_format(h(text))`
+
+これで改行だけはいけるみたい。
