@@ -16,7 +16,7 @@ module Seed
 end
 
 Seed.run_seed("./seeds/user")
-Seed.run_seed("./seeds/problems")
 Seed.run_seed("./seeds/cpa_csv")
 Seed.run_seed("./seeds/simple_problems")
+Seed.run_seed("./seeds/problems")
 # Seed.run_seed("./seeds/drills")
