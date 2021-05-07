@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show new create edit] do
     resources :solve
   end
+
+  get "tos" => "static_pages#tos"
+  get "policy" => "static_pages#policy"
 end
