@@ -1,14 +1,12 @@
 module ApplicationHelper
   def problem_count_select_list(max_problem)
+    default_options = [["#{max_problem}(全問)", max_problem]]
+    default_options.unshift([10, 10]) if max_problem > 10
     if max_problem < 10
-      # a = [*(1...max_problem)].map{ |el| [el, el] }
-      # a + ["#{max_problem}(全問)", max_problem]
-      [10, *(1...max_problem)]
-    elsif max_problem == 10
-      # [[1, 1], [3, 3], [5, 5]] + ["#{max_problem}(全問)", max_problem]
-      [10, 1, 3, 5, 10].map(&:to_s)
+      default_options + [*(1...max_problem)]
     else
-      [10, 1, 3, 5, 10]
+      options = ([1, 3, 5] + 10.step(max_problem, (max_problem / 10).ceil(-1)).to_a).map{ |e| [e, e] }
+      default_options + options
     end
   end
 end
