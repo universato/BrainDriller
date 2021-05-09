@@ -1,6 +1,5 @@
 <div class="panel grid">
   <div class="title-panel">
-    <div class="drill-id">Drill ID: <%= @drill.id %> </div>
     <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
   </div>
   <div class="drill-guide"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
