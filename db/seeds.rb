@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 module Seed
   def self.run_seed(path)
-    if require_relative(path)
-      puts "実行された: " + path
-    else
-      puts "実行されず: " + path
-    end
+    output = require_relative(path) ? "実行された: " : "実行されず: "
+    puts output + path
   end
 end
+
+# Problem.destroy_all
+# puts "問題を全て削除しました"
 
 Seed.run_seed("./seeds/user")
 Seed.run_seed("./seeds/cpa_csv")

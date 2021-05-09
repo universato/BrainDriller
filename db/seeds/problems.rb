@@ -2,7 +2,6 @@
 # https://qiita.com/kumasuke/items/545afaf5876d3dc52670
 require "csv"
 
-Problem.destroy_all
 first_user = User.first
 
 CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|

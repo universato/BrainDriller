@@ -10,22 +10,24 @@ end
 
 first_user = User.first
 
-CSV.foreach('db/csv/cpa.csv', headers: true) do |row|
+CSV.foreach('db/csv/cpa.csv', headers: true).with_index do |row, i|
   drill_title = row['title'].sub(/-.\d+/, '')
   drill = Drill.find_by(title: drill_title)
-  drill ||= Drill.create(title: drill_title, user: first_user)
+  drill ||= Drill.create!(title: drill_title, user: first_user)
 
   user = drill.user
 
-  @problem = Problem.create!(
+  Problem.create!(
     drill: drill,
     user: user,
-    format: :basic_choices,
     title: row['title'],
     statement: row['statement'],
+    format: "basic_choices",
     choices: %w[アイ アウ アエ イウ イエ ウエ],
     correct_option: row['ans'].to_i - 1,
     explanation: row['explanation'] || '',
-    open: true
+    # open: true
   )
 end
+
+# puts "#{__FILE__}が実行された"
