@@ -10,11 +10,20 @@ import "channels"
 
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/js/all'
+
+// import fs from "fs"
+// fs.readdirSync("../stylesheets").forEach(async file => {
+//   if(file.slice(-3 === "css")){
+//     await import(`.//stylesheets/${file}`)
+//   }
+// })
+
 import '../stylesheets/application.scss'
 import '../stylesheets/reset.scss'
 import '../stylesheets/common.scss'
 import '../stylesheets/button.scss'
 import '../stylesheets/drill.scss'
+import '../stylesheets/footer.scss'
 import '../stylesheets/form.scss'
 import '../stylesheets/problems.scss'
 import '../stylesheets/user.scss'
