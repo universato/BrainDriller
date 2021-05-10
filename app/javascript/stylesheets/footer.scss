@@ -1,0 +1,35 @@
+.footer {
+  margin-top: 20px;
+  padding: 8px;
+  width: 100%;
+  background-color: hsl(185, 51%, 96%);
+  text-align: center;
+}
+
+.footer-nav__items {
+  width: 56%;
+  margin: 0 auto;
+
+  display: flex;
+}
+
+.footer-nav__item {
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.footer-nav__link {
+  color: hsl(245, 89%, 46%);
+  text-decoration: none;
+}
+
+.footer-nav__link:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  color: hsl(0, 0%, 60%);
+  width: 25%;
+  margin: 8px auto 0;
+  text-align: center;
+}
