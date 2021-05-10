@@ -17,3 +17,9 @@ Pathname.glob(Rails.root.join('db/seeds/*.rb')) do |path|
   task("db:seed:#{path.basename('.*')}"  => :environment){ load(path) }
   task("db:seeds:#{path.basename('.*')}" => :environment){ load(path) }
 end
+
+# [Pathname.glob (Ruby リファレンスマニュアル)](https://docs.ruby-lang.org/ja/latest/method/Pathname/s/glob.html)
+# [Kernel#desc (Ruby 3.0.0 リファレンスマニュアル\)](https://docs.ruby-lang.org/ja/latest/method/Kernel/i/desc.html)
+# [Kernel#task (Ruby 3.0.0 リファレンスマニュアル)](https://docs.ruby-lang.org/ja/latest/method/Kernel/i/task.html)
+# [Kernel.task - Rake](https://ruby.github.io/rake/Rake/DSL.html#method-i-task)
+# [Kernel.desc - Rake](https://ruby.github.io/rake/Rake/DSL.html#method-i-desc)

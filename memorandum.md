@@ -749,3 +749,15 @@ end
 `simple_format(h(text))`
 
 これで改行だけはいけるみたい。
+
+#
+
+`a`タグで`reboot.scss`で「青色と下線」がつくのが結構鬱陶しいような。
+でも、装飾がなかったらなかったで、`a`タグであることを見逃してしまうかもしれない。
+
+# footer
+
+bootstrap `fixed-bottom`だと、常に表示されるぽくてダメ。
+
+
+[HTML \- Footerを画面の１番下に配置したいが固定したくない｜teratail](https://teratail.com/questions/133065)

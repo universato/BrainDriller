@@ -10,7 +10,9 @@ ja:
     new_password_confirmation: 新しいパスワード(確認用)
     update: 更新
     Update: 更新
+    privacy_policy: プライバシーポリシー
     submit: 送信
+    tos: 利用規約
   text:
     are_you_sure?: 本当にアカウントを削除しますか
     cancel_my_account: アカウントを削除する
