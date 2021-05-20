@@ -1,7 +1,6 @@
 <template>
   <div id="app panel">
     <div v-if="drill" class="solve-drill">
-      <span class="drill-id"> drill-ID：{{ drill.id }} </span>
       <div class="solve-drill-title"> {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
@@ -215,8 +214,8 @@ export default {
 
 .solve-drill {
   /* border: solid 1px #eee; */
-  margin: 8px;
-  padding: 8px;
+  /* margin: 8px; */
+  /* padding: 8px; */
   border: none 0 #fff;
   border-radius: 4px;
   background-color: #fff;
@@ -234,8 +233,8 @@ export default {
 }
 
 .problem {
-  margin: 8px;
-  padding: 8px;
+  margin: 8px 0 8px;
+  padding: 8px 0 8px;
   border: none 0 #fff;
   border-radius: 4px;
   background-color: #fff;
@@ -249,18 +248,22 @@ export default {
   /* width: 800px; */
   /* border: solid 1px #eee; */
   /* background-color: #fff; */
+  /* margin: 8px 0 8px; */
+  padding: 8px 0 8px;
 }
 
 .problem-statement {
   /* width: 800px; */
   /* border: solid 1px #eee; */
-  padding: 16px;
+  padding: 16px 0;
   /* overflow-wrap: break-word; */
   /* background-color: #fff; */
 }
 
 .problem-choices {
-  margin: 0;
+  border-top: 1px solid #ccc;
+  margin-top: 8px;
+  margin-left: 0;
 }
 
 .problem-choice {
@@ -269,7 +272,7 @@ export default {
   border-radius: 4px;
   background-color: #e1e1e1;
   cursor: pointer;
-  margin: 8px;
+  margin-top: 8px;
   padding: 8px;
 }
 

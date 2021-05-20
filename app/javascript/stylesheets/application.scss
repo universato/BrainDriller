@@ -18,7 +18,7 @@
 }
 
 * {
-  text-shadow: hsla(0, 12%, 32%, 0.103) 0 1px 0;
+  // text-shadow: hsla(0, 12%, 32%, 0.103) 0 1px 0;
 }
 
 html {
@@ -29,7 +29,8 @@ html {
 }
 
 body {
-  background-color: var(--main-color);
+  // background-color: var(--main-color);
+  background-color: hsl(210, 100%, 97%);
   font-size: 1.4em;
   line-height: 1.5em;
   padding:0;

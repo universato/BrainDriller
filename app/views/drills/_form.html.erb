@@ -1,9 +1,5 @@
-<% if Rails.env.development? %>
-  <small>これはVue.jsに回すので封印かな。</small>
-<% end %>
-
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="">
     <%= form_with(model: drill, local: true) do |f| %>
 
       <%= f.label :title %>

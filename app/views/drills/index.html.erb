@@ -12,7 +12,7 @@
     <div class="problem-count"><%= link_to "#{drill.problems.count}問", drill, class: "problem-count" %></div>
     <div class="drill-view"><%= drill.number_of_views %>回</div>
     <div class="drill-view"><%= drill.impressions_count %>回</div>
-    <%= image_tag drill.user.icon.to_s, size: '120x120', alt: 'icon', class: 'user-icon' %>
+    <%= image_tag drill.user.icon.to_s, size: '120x120', alt: 'icon', class: 'a-user-icon' %>
     <div><%= link_to drill.user, drill.user, class: "drill-user" %></div>
   </div>
 <% end %>
@@ -31,7 +31,7 @@
       <%= link_to drill, class: 'index-drill' do %>
         <div class="index-drill-title"><%= drill.title  %></div>
         <div class="drill-user">
-          <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'user-icon' %>
+          <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
           <div class="">
             <%= drill.user %>
           </div>

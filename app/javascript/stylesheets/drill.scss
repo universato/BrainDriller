@@ -7,17 +7,18 @@
 .drills {
   display: grid;
   background-color: var(--white-color);
+  border: 1px splid #ccc;
   border-radius: 4px;
-  margin: 16px;
-  padding: 16px;
+  // padding: 4px;
 }
 
 .index-drill {
-  margin: 8px;
-  padding: 8px;
+  // margin: 8px;
+  padding: 16px;
   display: grid;
+  // border: 1px #cccccc solid;
   border-bottom: 1px hsl(0, 0%, 90%) solid;
-  border-radius: 4px;
+  // border-radius: 4px;
   text-decoration: none;
   color: hsla(0, 20%, 9%, 0.733);
 }
@@ -37,12 +38,12 @@
 }
 
 .index-drill-title {
-  padding: 12px;
+  // padding: 12px;
   color: black;
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
-  text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
+  // text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
 }
 
 .stas {
@@ -52,6 +53,15 @@
 
 .stat {
   color: hsl(0, 0%, 60%);
+}
+
+.drill-user {
+  display: flex;
+}
+
+.drill-user > .a-user-icon {
+  width: 2.1rem;
+  height: 2.1rem;
 }
 
 .drill-user-name {
@@ -68,7 +78,7 @@
 .drill-title {
   margin: 0px;
   margin-bottom: 8px;
-  text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
+  // text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
 }
 
 .grid {
@@ -116,7 +126,7 @@
 
 .solve-btn {
   // margin: 0 auto;
-  width: 100%;
+  width: 320px;
 }
 
 
