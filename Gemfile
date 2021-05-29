@@ -33,7 +33,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave'
 # gem 'mini_magick'
-# gem 'rexml'
+gem 'rexml' # for rails test:all
 
 
 group :development, :test do
