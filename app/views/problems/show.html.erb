@@ -1,4 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<% pr = @problem %>
+
+<%= pr.title %><br>
+<%= pr.statement %><br>
+<%  pr.choices.each do |choice| %>
+  <%= choice %><br>
+<% end %>
+<br>
+正解:<br>
+<%= pr.correct_option %> <%= pr.choices[pr.correct_option] %> <br><br>
+<%= pr.explanation %><br>
+
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>

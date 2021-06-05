@@ -1,0 +1,5 @@
+<% @problems.each do |problem| %>
+  <% problem.title %><br>
+  <%= problem.id %>
+  <%= link_to problem.title, problem %><br>
+<% end %>
