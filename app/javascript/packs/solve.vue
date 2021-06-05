@@ -296,13 +296,6 @@ export default {
   background-color: hsl(220, 85%, 80%);
 }
 
-
-.problem-explanation {
-  /* width: 800px; */
-  /* border: solid 1px #eee; */
-  /* background-color: #fff; */
-}
-
 p {
   font-size: 2em;
   text-align: center;
