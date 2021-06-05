@@ -69,6 +69,7 @@
 
 <script>
 import marked from 'marked';
+import DOMPurify from 'dompurify';
 import hljs from 'highlight.js';
 
 function sleep(ms) {
@@ -93,7 +94,7 @@ export default {
   created() {
     marked.setOptions({
       langPrefix: 'hljs ',
-      sanitize: true,
+      // sanitize: true,
       gfm: true,
       breaks: true,
       // highlightjsを使用したハイライト処理を追加
@@ -198,7 +199,7 @@ export default {
       this.currentProblem = this.problems[this.currentProblemIndex];
     },
     compiledMarkdown(md) {
-      return marked(md);
+      return DOMPurify.sanitize(marked(md));
     },
   },
   computed: {
