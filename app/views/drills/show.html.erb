@@ -43,6 +43,9 @@
     <%= link_to "管理者編集", edit_drill_path(@drill) %>
     </div>
   <% end %>
+  <% if current_user&.admin? %>
+    <%= link_to "problems", drill_problems_path(@drill) %>
+  <% end %>
 </div>
 
 <%# @drill.problems.relation %>
