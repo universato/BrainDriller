@@ -12,6 +12,15 @@
       >
       </li>
     </ol>
+    <ol class="problem-choices">
+      <input
+        v-for="(choice, choiceNo) in choices"
+        :key="choiceNo"
+        class="problem-choice"
+        type="text"
+      >
+    </ol>
+    <div class="correct_option">{{ correct_option }}</div>
     <div class="btn">
       <button @click="saveProblem()" class="btn-std">問題を保存する</button>
     </div>
@@ -27,9 +36,11 @@ import hljs from 'highlight.js';
 export default {
   data() {
     return {
+      problem_id: null,
       title: "",
       statement: "",
       choices: [],
+      correct_option: null
     }
   },
   created() {
@@ -58,6 +69,7 @@ export default {
 
     const pathnames = location.pathname.split('/'); // ["", "problems", "5"]
     const problem_id = pathnames[2];
+    this.problem_id = problem_id;
     const url = new URL(location.href);
 
     fetch(`/api/problems/${problem_id}.json`, {
@@ -72,8 +84,8 @@ export default {
       this.problem = json.problem
       this.title = json.problem.title
       this.statement = json.problem.statement
-      this.statement = json.problem.statement
       this.choices = json.problem.choices
+      this.correct_option = json.problem.correct_option
     }).catch(error => {
       console.warn('Failed to parsing', error)
     })
@@ -82,17 +94,25 @@ export default {
     compiledMarkdown(md) {
       return DOMPurify.sanitize(marked(md));
     },
+    token() {
+      const meta = document.querySelector('meta[name="csrf-token"]')
+      return meta ? meta.getAttribute('content') : ''
+    },
     saveProblem() {
       console.log("method saveProblem");
       const body = {
-        problems: this.problems,
-        answer_paper: this.answerPaper
+        problem_id: this.problem_id,
+        title: this.title,
+        statement: this.statement,
+        choices: this.choices,
+        correct_option: this.correct_option
       }
-      fetch(`/api/problems/id`, {
-        method: 'POST',
+      fetch(`/api/problems/${this.problem_id}`, {
+        method: 'PATCH',
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
           "Content-Type": "application/json",
+          "X-CSRF-Token": this.token(),
         },
         credentials: 'same-origin',
         redirect: 'manual',

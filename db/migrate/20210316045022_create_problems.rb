@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateProblems < ActiveRecord::Migration[6.1]
   def change
     create_table :problems do |t|
@@ -59,7 +60,7 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       t.integer :number_of_last_shot_answerers, default: 0, unsigned: true, null: false
       # t.integer :number_of_respondents, default: 0, unsigned: true
       # t.integer :, default: 0, unsigned: true, null: false
-      t.integer :correct_people_rate,  default: nil, limit: 1
+      t.integer :correct_people_rate, default: nil, limit: 1
 
       # t.integer :questioner # いや、これ不要。
       t.boolean :open, default: false

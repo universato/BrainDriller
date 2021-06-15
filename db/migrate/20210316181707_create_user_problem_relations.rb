@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateUserProblemRelations < ActiveRecord::Migration[6.1]
   def change
     create_table :user_problem_relations do |t|
@@ -10,6 +11,7 @@ class CreateUserProblemRelations < ActiveRecord::Migration[6.1]
 
       t.integer :number_of_views, default: 0, unsigned: true
       t.integer :number_of_submissions, default: 0, unsigned: true
+      t.integer :current_streak, default: 0, unsigned: true
       # t.integer :number_of_answers
       t.integer :number_of_correct_answers, default: 0, unsigned: true
       t.integer :correct_answer_rate, default: 0, unsigned: true, limit: 1

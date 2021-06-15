@@ -761,3 +761,32 @@ bootstrap `fixed-bottom`だと、常に表示されるぽくてダメ。
 
 
 [HTML \- Footerを画面の１番下に配置したいが固定したくない｜teratail](https://teratail.com/questions/133065)
+
+# ユーザー
+
+開発環境
+
+`@example.com`
+`foobar`
+
+#
+
+$ rails g migration AddAdminToUsers
+
+```rb
+class AddAdminToUsers < ActiveRecord::Migration[6.1]
+  def change
+    add_column :users, :admin, :boolean, default: false
+  end
+end
+```
+
+```rb
+add_column :users, :admin, :boolean, default: false
+```
+
+#
+
+```rb
+User.pluck(:email)
+```

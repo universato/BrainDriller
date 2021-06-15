@@ -8,7 +8,7 @@ class DrillsController < ApplicationController
     @drill = Drill.find_by(id: params[:id])
     @drill.increment!(:number_of_views, 1)
     impressionist(@drill, nil, unique: [:session_hash])
-    @problems = @drill.problems
+    # @problems = @drill.problems
   end
 
   def new
@@ -33,8 +33,7 @@ class DrillsController < ApplicationController
     render layout: 'logo_only'
   end
 
-  private
-    def drill_params
-      params.require(:drill).permit(:title, :guide)
-    end
+  private def drill_params
+    params.require(:drill).permit(:title, :guide)
+  end
 end

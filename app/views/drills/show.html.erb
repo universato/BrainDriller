@@ -30,10 +30,19 @@
     </div>
   <% end %>
 
-  <% if Rails.env.development? %>
+  <%= @drill %>
+
+  <% if current_user == @drill.user ||  %>
     <hr>
     <div style="font-size: 8">
       <%= link_to "編集する", edit_drill_path(@drill) %>
     </div>
+  <% elsif current_user&.admin? %>
+    <hr>
+    <div style="font-size: 8">
+    <%= link_to "管理者編集", edit_drill_path(@drill) %>
+    </div>
   <% end %>
 </div>
+
+<%# @drill.problems.relation %>

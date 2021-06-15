@@ -18,7 +18,7 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
     puts "#{i}行目の選択肢が全て空欄であるため、飛ばしました"
     next
   elsif o1 == o2 || o1 == o3 || o1 == o4 || o2 == o3 || o3 == o4
-    puts "選択肢が同じものが検出されました. #{i}行目の#{(row['statement'] || "")[0, 100]}"
+    puts "選択肢が同じものが検出されました. #{i}行目の#{(row['statement'] || '')[0, 100]}"
     p [o1, o2, o3, o4]
     exit
   end

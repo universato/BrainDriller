@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
     @drills = @user.drills
 
-
     # @problems = @user.problems
     # @problems.each do |problem|
     #   @user_problem_relations << UserProblemRelation.find_by(user_id: @user.id, problem_id: problem.id)

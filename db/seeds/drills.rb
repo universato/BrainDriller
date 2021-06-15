@@ -43,7 +43,7 @@ ruby_drill = Drill.find_or_create_by!(
 ruby_drill.problems.create!(
   user: ruby_user,
   title: "Rubyの問題",
-  statement: statement ,
+  statement: statement,
   explanation: "説明文",
   format: "basic_choices",
   choices: ["Hello", "World", "puts", "try"],
@@ -55,7 +55,7 @@ return if true
 drill.problems.create!(
   user: ruby_user,
   title: "RubyのArray",
-  statement: statement ,
+  statement: statement,
   explanation: "説明文",
   format: "basic_choices",
   choices: ["Hello", "World", "puts", "try"],
@@ -71,7 +71,7 @@ drill = user.drills.create!(
 
 puts drill_id.to_s + "のドリルが作れらたはず……"
 
-statement = <<TEXT
+statement = <<~MARKDOWN
 ## Rubyの質問
 
 # あああああ
@@ -97,15 +97,14 @@ puts "Hello, World"
 <br>
 <hr>
 
-
 ```
-TEXT
+MARKDOWN
 
 10.times do
   drill.problems.create!(
     user: user,
     title: "Rubyの問題",
-    statement: statement ,
+    statement: statement,
     explanation: "説明文",
     format: "basic_choices",
     choices: ["Hello", "World", "puts", "try"],

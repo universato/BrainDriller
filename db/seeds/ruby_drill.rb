@@ -16,10 +16,9 @@ ruby_drill = Drill.find_or_create_by!(
   state: "full_open",
 )
 
-
-statement = <<TEXT
+statement = <<~MARKDOWN
 `[1, 2, 3].map{ |e| e * 2 }`は何を返しますか
-TEXT
+MARKDOWN
 choices = [
   "[1, 2, 3]",
   "[2, 4, 6]",

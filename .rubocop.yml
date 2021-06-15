@@ -28,9 +28,15 @@ Style/StringLiterals:
 # 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
 Layout/ExtraSpacing:
   AutoCorrect: false
+Layout/HeredocIndentation:
+  Exclude:
+    - db/seeds/drills.rb
+    - db/seeds/ruby_drill.rb
 Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
+    - app/models/user_problem_relation.rb
+    - db/migrate/*_create_problems.rb
 # デフォルトだとメソッドの開始ブロックの手前にスペースを要求してくるが、競プロ界隈では一般的ではないと思う。
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
@@ -62,6 +68,8 @@ Lint/ParenthesesAsGroupedExpression:
 # ブロックの外と中で同名の変数名を禁じる設定。名前をつけるの大変なときもあるので、部分的に許容。
 Lint/ShadowingOuterLocalVariable:
   AutoCorrect: false
+  Exclude:
+    - lib/scripts/cpa.rb
 # 原則的には`_`(アンダースコア)始まりの変数は禁止だと思うけど、書きたいときもあったので個別に判断して許す。
 Lint/UnderscorePrefixedVariableName:
   AutoCorrect: false
@@ -74,6 +82,10 @@ Lint/Void:
 # メソッドの複雑さの数値。代入の回数が増えたりして、複雑になると警告をだす。緩める。デフォルトが17かな。
 Metrics/AbcSize:
   Max: 47
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/development.rb
+    - db/seeds/problems.rb
 # クラスの行数がデフォルトが100行超えると警告。結構、超えるのあったので、設定する。
 Metrics/ClassLength:
   Max: 334
@@ -107,6 +119,9 @@ Naming/MethodParameterName:
 
 ## Style
 
+# private def みたいな書き方をするかどうか。
+Style/AccessModifierDeclarations:
+  Enabled: false
 # `&&`や`||`だけでなく、`and`や`or`も許す設定。微妙なところでエラーがでやすい気がしていて、あまり好きではない。個人的にはCrystalで`and`や`or`が使えないのもあって否定的。
 Style/AndOr:
   Enabled: false
@@ -124,12 +139,18 @@ Style/BlockDelimiters:
 # Matzは地上げしたいリテラルらしいし、わかりにくいかもしれないので、ケースバイケースで使えたらと思います。
 Style/CharacterLiteral:
   AutoCorrect: false
+# 一行
+Style/ConditionalAssignment:
+  Enabled: false
 # あまりメリットわからない。お好きにどうぞ、という感じする。
 Style/EmptyMethod:
   Enabled: false
 # グローバル変数は原則禁止。ごくまれにグローバル変数を使いたいときがあったので、別個許容する。
 Style/GlobalVars:
   AutoCorrect: false
+# 後置if文を使わせる設定。まぁ、長文だと、あまり後置if文は使いたくない。
+Style/IfUnlessModifier:
+  Enabled: false
 #  `select{ hoge != fuga }`ではなく、`reject`を使え、とあったけれど、十分`select`でわかりやすいと思いました。
 # 別に個別に許さなくても、全部許しても良さそう。
 Style/InverseMethods:
@@ -160,6 +181,9 @@ Style/OptionalArguments:
 # ただ、個人的には、可読性が落ちてると思っていて、多重代入が好きではないです。
 Style/ParallelAssignment:
   Enabled: false
+# Prefer Regexp.last_match(1) over $1
+Style/PerlBackrefs:
+  Enabled: false
 # 拡張子がついてる方が作ったファイルとわかりやすい気がしたから、.rbをつけることを許したい
 Style/RedundantFileExtensionInRequire:
   Enabled: false
@@ -175,6 +199,7 @@ Style/SelfAssignment:
 Style/Semicolon:
   AutoCorrect: false
 # %i[ja en]って書くと読みやすい? シンタックスハイライトが効かないじゃん、という感じもする。
+# 同様の設定が、WordArray。文字列の配列。
 Style/SymbolArray:
   Enabled: false
 # Prefer ary[n..] over ary[n..-1].と言われるが、ary[n..-1]でわかりやすいと思う。
@@ -198,6 +223,10 @@ Style/TrailingCommaInArrayLiteral:
   Enabled: false
 # 実行文が1行のwhile文でも、後置にしなくて良いようにする。すごく個人的には、Crystalだと後置if文が使えないし、別に良いかなと。
 Style/WhileUntilModifier:
+  Enabled: false
+# 文字列の配列のときに、%wや%Wを使えという設定。
+# 同様の設定が、SymbolArray。シンボルの配列。
+Style/WordArray:
   Enabled: false
 # `1 == x`のようなヨーダ記法(定数が左で、計算式が右)を認める設定。可読性が下がるが、`0 < x && x < 1`のように書きたいときや計算式が長い場合は、ヨーダ記法が容認できる。。
 Style/YodaCondition:

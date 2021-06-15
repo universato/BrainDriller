@@ -10,7 +10,7 @@ end
 
 first_user = User.first
 
-CSV.foreach('db/csv/cpa.csv', headers: true).with_index do |row, i|
+CSV.foreach('db/csv/cpa.csv', headers: true).with_index do |row, _i|
   drill_title = row['title'].sub(/-.\d+/, '')
   drill = Drill.find_by(title: drill_title)
   drill ||= Drill.create!(title: drill_title, user: first_user)
