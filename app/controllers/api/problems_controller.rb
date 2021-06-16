@@ -10,13 +10,14 @@ class API::ProblemsController < ApplicationController
   end
 
   def update
-    @problem = Problem.find(params[:id])
+    problem = Problem.find(params[:id])
 
-    @problem.title = params[:title]
-    @problem.statement = params[:statement]
-    @problem.choices = params[:choices]
-    @problem.correct_option = params[:correct_option]
-    @problem.save
+    problem.title = params[:title]
+    problem.statement = params[:statement]
+    problem.choices = params[:choices]
+    problem.correct_option = params[:correct_option]
+    explanation.correct_option = params[:explanation]
+    problem.save
   end
 
   private def problem_params

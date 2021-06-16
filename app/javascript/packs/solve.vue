@@ -212,7 +212,6 @@ export default {
 
 <style scoped>
 
-
 .solve-drill {
   /* border: solid 1px #eee; */
   /* margin: 8px; */

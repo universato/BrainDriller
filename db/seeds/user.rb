@@ -1,15 +1,16 @@
-def create_user(name)
+def create_user(name, admin: false)
   User.create(
     login_name: name,
     nickname: name,
     email: "#{name}@example.com",
+    admin: admin,
     password: "foobar",
     password_confirmation: "foobar",
   )
   # 何度も実行されることを想定すると、メアドでエラーが起きるかもしれないので、エラーはださない。
 end
 
-create_user("uni")
+create_user("uni", admin: true)
 create_user("ruby")
 
 if true

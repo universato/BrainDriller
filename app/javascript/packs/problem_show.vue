@@ -1,8 +1,27 @@
 <template>
   <div id="app panel">
-    <input type="text" v-model="title"><br>
-    <textarea type="textarea" v-model="statement"></textarea><br>
+    <div class="btn">
+      <button @click="saveProblem()" class="btn-std">問題を保存する</button>
+      <div v-if="isEdit">
+        <button @click="toShowMode()" class="btn-std">閲覧画面に切り替え</button>
+      </div>
+      <div v-else>
+        <button @click="toEditMode()" class="btn-std">編集画面に切り替え</button>
+      </div>
+    </div>
+
+    <div v-if="isEdit">
+      <input type="text" v-model="title"><br>
+    </div>
+    <div v-else>
+      <div>{{ title }}</div><br>
+    </div>
+    <div v-if="isEdit">
+      <textarea type="textarea" class="statement" v-model="statement"></textarea><br>
+    </div>
     <div class="problem-statement" v-html="compiledMarkdown(statement)"></div>
+
+    選択肢
     <ol class="problem-choices">
       <li
         v-for="(choice, choiceNo) in choices"
@@ -12,18 +31,38 @@
       >
       </li>
     </ol>
-    <ol class="problem-choices">
-      <input
-        v-for="(choice, choiceNo) in choices"
-        :key="choiceNo"
-        class="problem-choice"
-        type="text"
-      >
-    </ol>
+
+    選択肢
+    <div v-if="isEdit">
+      <ol class="problem-choices">
+        <input
+          v-for="(choice, choiceNo) in choices"
+          :key="choiceNo"
+          class="problem-choice"
+          type="text"
+        >
+      </ol>
+    </div>
+
+    正解
     <div class="correct_option">{{ correct_option }}</div>
+
+    <div v-if="isEdit">
+      <textarea type="textarea" class="explanation" v-model="explanation"></textarea><br>
+    </div>
+    <div class="explanation">{{ explanation }}</div>
+
     <div class="btn">
       <button @click="saveProblem()" class="btn-std">問題を保存する</button>
+      <div v-if="isEdit">
+        <button @click="toShowMode()" class="btn-std">閲覧画面に切り替え</button>
+      </div>
+      <div v-else>
+        <button @click="toEditMode()" class="btn-std">編集画面に切り替え</button>
+      </div>
     </div>
+
+    <a :href="drill_url()">ドリルの問題一覧</a>
   </div>
 </template>
 
@@ -36,11 +75,14 @@ import hljs from 'highlight.js';
 export default {
   data() {
     return {
+      drill_id: null,
       problem_id: null,
       title: "",
       statement: "",
+      explanation: "",
       choices: [],
-      correct_option: null
+      correct_option: null,
+      isEdit: false,
     }
   },
   created() {
@@ -81,11 +123,14 @@ export default {
     ).then(response => {
       return response.json()
     }).then(json => {
-      this.problem = json.problem
-      this.title = json.problem.title
-      this.statement = json.problem.statement
-      this.choices = json.problem.choices
-      this.correct_option = json.problem.correct_option
+      let problem = json.problem
+      this.drill_id = problem.drill_id
+      this.problem = problem
+      this.title = problem.title
+      this.statement = problem.statement
+      this.choices = problem.choices
+      this.correct_option = problem.correct_option
+      this.explanation = problem.explanation
     }).catch(error => {
       console.warn('Failed to parsing', error)
     })
@@ -105,7 +150,8 @@ export default {
         title: this.title,
         statement: this.statement,
         choices: this.choices,
-        correct_option: this.correct_option
+        correct_option: this.correct_option,
+        explanation: this.explanation
       }
       fetch(`/api/problems/${this.problem_id}`, {
         method: 'PATCH',
@@ -125,10 +171,29 @@ export default {
       }).catch(error => {
         console.warn('Failed to parsing', error)
       })
-    }
+    },
+    toEditMode() {
+      this.isEdit = true
+    },
+    toShowMode() {
+      this.isEdit = false
+    },
+    drill_url() {
+      return `/drills/${this.drill_id}/problems`
+    },
+  },
+  conputed: {
+
   }
 }
 </script>
 
 <style scoped>
+.statement {
+  width: 80%;
+}
+
+.explanation {
+  width: 80%;
+}
 </style>

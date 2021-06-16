@@ -790,3 +790,64 @@ add_column :users, :admin, :boolean, default: false
 ```rb
 User.pluck(:email)
 ```
+
+# rouge
+
+2017
+[RailsでMarkdownを読み書きする方法 \| 人と情報](https://www.tmp1024.com/articles/rails-use-markdown-of-redcarpet)
+ 
+2021年4月5日 21:54更新
+[【Rails】Markdownで記事を書く！『redcarpet＋rouge』の導入・使い方を解説【シンタックスハイラ \- AUTOVICE](https://www.autovice.jp/articles/40)
+
+`_rouge.scss.erb`
+```erb
+<%= Rouge::Themes::Base16.render(:scope => '.highlight') %>
+```
+
+
+を読み込むべきファイル。
+
+`assets/stylesheetsapplication.scss`
+```scss
+@import 'rouge';
+```
+
+Failed to compile.
+
+./app/javascript/stylesheets/application.scss (./node_modules/css-loader/dist/cjs.js??ref--3-1!./node_modules/postcss-loader/src??ref--3-2!./node_modules/sass-loader/dist/cjs.js??ref--3-3!./app/javascript/stylesheets/application.scss)
+Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+4 │ @import 'rouge';
+  │         ^^^^^^^
+  ╵
+  app/javascript/stylesheets/application.scss 4:9  root stylesheet
+
+
+# marked復習
+
+https://madogiwa0124.hatenablog.com/entry/2019/01/03/203334
+
+https://marked.js.org/#installation
+`$ npm install -g marked`
+`$ npm install marked`
+
+`$ npm install marked --save`だとこうだが、yarnを使うなら下記のコマンドかな。  
+`$ yarn add marked`
+```json
+{
+  "dependencies": {
+    "marked": "^2.0.7",
+  },
+}
+```
+`"marked"`が追加された。
+
+https://marked.js.org/#installation
+
+
+https://railsguides.jp/webpacker.html
+- `rails new myapp --webpack=<フレームワーク名>`のような方法で作成するか、
+- `rails webpacker:install:<フレームワーク名>`のように個別のコマンドラインタスクで作成する
+
+`bin/rails webpacker:install:vue`

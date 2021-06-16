@@ -36,5 +36,5 @@ ActiveStorage.start()
 
 require('./hello_vue.js')
 require('./solve_vue.js')
-require('./problem_edit.js')
+require('./problem_show.js')
 require('./drill_form_vue.js')

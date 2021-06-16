@@ -27,14 +27,17 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# gem 'redcarpet'
+# gem 'rouge'
+
+gem 'carrierwave'
 gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
 gem 'ransack'
-gem 'carrierwave'
+
 # gem 'mini_magick'
 gem 'rexml' # for rails test:all
-
 
 group :development, :test do
   gem 'pg'
