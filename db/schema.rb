@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_06_06_211101) do
 
   create_table "drills", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "title", default: "無題", null: false
+    t.string "title", default: "", null: false
     t.string "guide", default: "", null: false
     t.integer "state", default: 0, null: false
     t.integer "number_of_views", default: 0, null: false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_06_06_211101) do
     t.bigint "problem_id"
     t.integer "number_of_views", default: 0
     t.integer "number_of_submissions", default: 0
+    t.integer "current_streak", default: 0
     t.integer "number_of_correct_answers", default: 0
     t.integer "correct_answer_rate", limit: 2, default: 0
     t.float "average_time"

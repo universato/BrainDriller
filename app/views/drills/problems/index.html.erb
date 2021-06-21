@@ -1,6 +1,18 @@
+<%# @problem_map %>
+<%# @problem_map[182] %>
+
 <% @problems.each do |problem| %>
   <%# problem.title %><br>
   <%= problem.id %>
+  <% relation = @problem_map[problem.id] %>
   <%= link_to problem.title, problem %><br>
+  <% if Rails.env.development? %>
+    閲覧数(number_of_view): <%= relation&.number_of_views || 0 %><br>
+    提出数(number_of_submissions) <%= relation&.number_of_submissions || 0 %><br>
+    提出数(number_of_correct_answers) <%= relation&.number_of_correct_answers || 0 %><br>
+    連続正解数(current_streak) <%= relation&.current_streak || 0 %><br>
+    正解率(correct_answer_rate): <%= problem.correct_answer_rate %><br>
+    正解率(correct_answer_rate): <%= problem.correct_answer_rate %><br>
+  <% end %>
   <%# problem.created_at %><br>
 <% end %>

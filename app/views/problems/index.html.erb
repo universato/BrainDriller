@@ -44,28 +44,28 @@
     </tr>
     <% @problems.each do |problem| %>
       <% current_link = problem.user_problem_relations.find_by(user_id: current_user.id) %>
-        <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
-          <tr>
-        <% elsif 0 < current_link.number_of_correct_answers %>
-          <tr class="correct">
-        <% else %><tr class="wrong">
+      <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
+        <tr>
+      <% elsif 0 < current_link.number_of_correct_answers %>
+        <tr class="correct">
+      <% else %><tr class="wrong">
+      <% end %>
+        <td><%= link_to problem.id, problem %></td>
+        <td class="text-left"><strong><%= link_to problem.title, problem %></strong> </td>
+        <td class="text-left"><%= link_to problem.statement.truncate(32, omission: '……'),problem %> </td>
+        <td><%= (rate = problem.correct_answer_rate) ? "#{rate}%" : "-" %></td>
+        <td><%= "#{problem.number_of_correct_answers}回" %></td>
+        <td><%= "#{problem.number_of_views}回" %></td>
+        <% if current_link  %>
+          <td><%= current_link.correct_answer_rate %>%</td>
+          <td><%= current_link.number_of_correct_answers %>回</td>
+          <td><%= current_link.number_of_submissions %>回</td>
+        <% else %>
+          <td> - </td>
+          <td> 0回 </td>
+          <td> 0回 </td>
         <% end %>
-          <td><%= link_to problem.id, problem %></td>
-          <td class="text-left"><strong><%= link_to problem.title, problem %></strong> </td>
-          <td class="text-left"><%= link_to problem.statement.truncate(32, omission: '……'),problem %> </td>
-          <td><%= (rate = problem.correct_answer_rate) ? "#{rate}%" : "-" %></td>
-          <td><%= "#{problem.number_of_correct_answers}回" %></td>
-          <td><%= "#{problem.number_of_views}回" %></td>
-          <% if current_link  %>
-            <td><%= current_link.correct_answer_rate %>%</td>
-            <td><%= current_link.number_of_correct_answers %>回</td>
-            <td><%= current_link.number_of_submissions %>回</td>
-          <% else %>
-            <td> - </td>
-            <td> 0回 </td>
-            <td> 0回 </td>
-          <% end %>
-        </tr>
+      </tr>
     <% end %>
   </table>
 <% else %>
