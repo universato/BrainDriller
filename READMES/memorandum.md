@@ -868,3 +868,14 @@ Capybara::ElementNotFound: Unable to find field "user[login_name]" that is not d
     test/system/sign_up_test.rb:9:in `block (2 levels) in <class:SignUpTest>'
     test/system/sign_up_test.rb:8:in `block in <class:SignUpTest>'
 ```
+
+# number_of_submissions
+
+なぜ提出できないのか、
+
+# マークダウンで間違えたときの正規表現
+
+```
+[(.*)]\((.*)\)
+[$1]($2)
+```
