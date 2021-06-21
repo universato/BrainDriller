@@ -36,6 +36,7 @@ ja:
           attributes:
             email:
               blank: 空になっています。入力してください。
+              taken: 既に登録済みのメールアドレスです。
             login_name:
               too_long: 文字数の制限を超えています。
               blank: 空になっています。入力してください。

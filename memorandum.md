@@ -851,3 +851,18 @@ https://railsguides.jp/webpacker.html
 - `rails webpacker:install:<フレームワーク名>`のように個別のコマンドラインタスクで作成する
 
 `bin/rails webpacker:install:vue`
+
+
+
+# foo
+
+移動するURLを、「ログイン(sign_in)」と「登録`sing_up`」を取り違えていた。
+「登録`sing_up`」にはログイン名があったが、ログイン時にはなくて見つからなかった。
+
+```
+Error:
+SignUpTest#test_fooo:
+Capybara::ElementNotFound: Unable to find field "user[login_name]" that is not disabled within #<Capybara::Node::Element tag="form" path="/HTML/BODY[1]/MAIN[1]/DIV[1]/DIV[1]/FORM[1]">
+    test/system/sign_up_test.rb:9:in `block (2 levels) in <class:SignUpTest>'
+    test/system/sign_up_test.rb:8:in `block in <class:SignUpTest>'
+```
