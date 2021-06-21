@@ -10,6 +10,9 @@
       </div>
     </div>
 
+    <br>問題番号:
+    <div>{{ problem_id }}</div>
+
     <div v-if="isEdit">
       <input type="text" v-model="title"><br>
     </div>
@@ -45,7 +48,12 @@
     </div>
 
     正解
-    <div class="correct_option">{{ correct_option }}</div>
+    <div v-if="isEdit">
+      <input type="number" v-model.number="correct_option">
+    </div>
+    <div v-else>
+      <div class="correct_option">{{ correct_option }}</div>
+    </div>
 
     <div v-if="isEdit">
       <textarea type="textarea" class="explanation" v-model="explanation"></textarea><br>
@@ -68,7 +76,6 @@
 
 <script>
 import marked from 'marked';
-import createMarkdown from 'safe-marked';
 import DOMPurify from 'dompurify';
 import hljs from 'highlight.js';
 
@@ -96,18 +103,6 @@ export default {
         return hljs.highlightAuto(code, [lang]).value
       }
     });
-    // const markdown = createMarkdown({
-    //   marked: {
-    //     langPrefix: 'hljs ',
-    //     // sanitize: true,
-    //     gfm: true,
-    //     breaks: true,
-    //     // highlightjsを使用したハイライト処理を追加
-    //     highlight: function(code, lang) {
-    //       return hljs.highlightAuto(code, [lang]).value
-    //     }
-    //   }
-    // })
 
     const pathnames = location.pathname.split('/'); // ["", "problems", "5"]
     const problem_id = pathnames[2];
@@ -124,8 +119,9 @@ export default {
       return response.json()
     }).then(json => {
       let problem = json.problem
-      this.drill_id = problem.drill_id
       this.problem = problem
+      this.drill_id = problem.drill_id
+      this.problem_id = problem.id
       this.title = problem.title
       this.statement = problem.statement
       this.choices = problem.choices
