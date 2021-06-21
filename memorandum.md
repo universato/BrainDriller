@@ -854,7 +854,9 @@ https://railsguides.jp/webpacker.html
 
 
 
-# foo
+# Capybara 
+
+https://github.com/heartcombo/devise/wiki/How-To:-Test-with-Capybara
 
 移動するURLを、「ログイン(sign_in)」と「登録`sing_up`」を取り違えていた。
 「登録`sing_up`」にはログイン名があったが、ログイン時にはなくて見つからなかった。
