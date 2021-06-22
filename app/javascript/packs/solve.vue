@@ -10,6 +10,8 @@
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
           <div v-if="currentUserId">
             <div>連続正解数: {{ currentStreak }} </div>
+            <div>回答回数: {{ numberOfSubmissions }} </div>
+            <div>正解回数: {{ numberOfCorrectAnswers }} </div>
           </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
@@ -220,6 +222,22 @@ export default {
       let problemId = this.currentProblem.id;
       if(this.problemMap && this.problemMap.hasOwnProperty(problemId)){
         return this.problemMap[problemId].current_streak;
+      }else{
+        return 0;
+      }
+    },
+    numberOfSubmissions() {
+      let problemId = this.currentProblem.id;
+      if(this.problemMap && this.problemMap.hasOwnProperty(problemId)){
+        return this.problemMap[problemId].number_of_submissions;
+      }else{
+        return 0;
+      }
+    },
+    numberOfCorrectAnswers() {
+      let problemId = this.currentProblem.id;
+      if(this.problemMap && this.problemMap.hasOwnProperty(problemId)){
+        return this.problemMap[problemId].number_of_correct_answers;
       }else{
         return 0;
       }
