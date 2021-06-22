@@ -8,6 +8,9 @@
         <div v-if="currentProblem">
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
+          <div v-if="currentUserId">
+            <div>連続正解数: {{ currentStreak }} </div>
+          </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <ol class="problem-choices">
@@ -83,6 +86,7 @@ export default {
       message: "問題を解いています！",
       drill: null,
       problems: [],
+      problemMap: {},
       state: "solving",
       currentProblem: null,
       answerPaper: {},
@@ -113,6 +117,7 @@ export default {
     const url = new URL(location.href);
     // const isRand = url.searchParams.get('rand');
     // const is = url.searchParams.get('');
+    console.log(`/api/drills/${drill_id}.json${url.search}`);
     fetch(`/api/drills/${drill_id}.json${url.search}`, {
         method: 'GET',
         headers: { 'X-Requested-With': 'XMLHttpRequest', },
@@ -123,8 +128,13 @@ export default {
       return response.json()
     }).then(json => {
       this.drill = json.drill
-      this.problems = []
-      json.problems.forEach(r => { this.problems.push(r) })
+      // this.problems = []
+      // json.problems.forEach(r => { this.problems.push(r) })
+      this.problems = json.problems
+      this.problemMap = json.problemMap
+      console.log(json.currentUserId)
+      console.log(this.problemMap);
+      this.currentUserId = json.currentUserId
       this.currentProblem = this.problems[0];
     }).catch(error => {
       console.warn('Failed to parsing', error)
@@ -134,9 +144,9 @@ export default {
     selectOption(choiceNo) {
       // console.log(`selectOption Method ${choiceNo}`);
       this.currentProblem.selectIndex = choiceNo;
-      sleep(100);
+      sleep(100); // <- すぐに切り替わるといきなりすぎるかと思って、少し待機。
       this.answerPaper[this.currentProblem.id] = choiceNo;
-      console.log(this.answerPaper);
+      // console.log(this.answerPaper);
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
@@ -204,7 +214,15 @@ export default {
   },
   computed: {
     resolveDrillURL() {
-      return location.href
+      return location.href;
+    },
+    currentStreak() {
+      let problemId = this.currentProblem.id;
+      if(this.problemMap && this.problemMap.hasOwnProperty(problemId)){
+        return this.problemMap[problemId].current_streak;
+      }else{
+        return 0;
+      }
     }
   }
 }
