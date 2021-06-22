@@ -13,11 +13,11 @@
 
   <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
     <div class="drill-option">
-      <%# f.label :rand, "ランダムに出題する: " %>
-      <%# f.check_box :rand, {checked: true}, "true", nil %>
-
-      <%= f.label :rand, "過去の回答に基づいて出題する", class: "label"%>
+      <%= f.label :rand, "ランダムに出題する", class: "label"%>
       <%= f.check_box :rand, {checked: true, class: "random-option"}, "true", nil %>
+
+      <%= f.label :past, "過去の回答に基づいて出題する", class: "label"%>
+      <%= f.check_box :past, {checked: true, class: "random-option"}, "true", nil %>
     </div>
 
     <div class="drill-option">

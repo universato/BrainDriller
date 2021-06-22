@@ -14,8 +14,8 @@ rails s
 
 ## Links
 
-(memo-db)[READMES/memo-db.md]
-(memo-heroku)[READMES/memo-heroku.md]
-(memo-question)[READMES/memo-question.md]
-(memo-vuejs.md)[READMES/memo-vuejs.md]
-(memoraundum)[READMES/memorandum.md]
+[memo-db](READMES/memo-db.md)
+[memo-heroku](READMES/memo-heroku.md)
+[memo-question](READMES/memo-question.md)
+[memo-vuejs.md](READMES/memo-vuejs.md)
+[memoraundum](READMES/memorandum.md)

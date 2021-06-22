@@ -5,10 +5,14 @@ class API::DrillsController < API::ApplicationController
 
   def show
     @drill = Drill.find(params[:id])
-    if params[:rand]
-      @problems = @drill.problems.order("RANDOM()").limit(params[:num])
+
+    order = params[:rand] ? "RANDOM()" : :id
+    if current_user && params[:past]
+      ids = @drill.problems.pluck(:id)
+      @problem_map = UserProblemRelation.where(user_id: current_user.id, problem_id: ids).where("current_streak < 2").limit(params[:num])
+      @problems = Problem.where(id: @problem_map.pluck(:problem_id)).order(order)
     else
-      @problems = @drill.problems.limit(params[:num])
+      @problems = @drill.problems.order(order).limit(params[:num])
     end
   end
 
