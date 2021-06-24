@@ -2,11 +2,17 @@
 rails db
 select * from users;
 
-文末に`;`をつけ忘れがち。
+SQL文の文末に`;`をつけるの忘れがち。
 
 PostgreSQL
-`\dt;`でテーブル一覧。
+`\dt`でテーブル一覧。
+
 モデルを見る、という方法もあるな。
+
+```sql
+\q  終了
+\dt テーブル一覧
+```
 
 [db/README.md](../db/README.md)
 [db/README.md](db/README.md)

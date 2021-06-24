@@ -34,4 +34,9 @@ class API::DrillsController < API::ApplicationController
       user_problem_relation.save!
     end
   end
+
+  def mydrills
+    drill_ids = DrillLike.where(user: current_user).pluck(:drill_id)
+    @drills = Drill.find(drill_ids)
+  end
 end

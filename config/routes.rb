@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     resources :drills, only: %i[index show new create edit]
     resources :problems, only: %i[show edit update]
     post 'drills/grade', to: "drills#grade"
+    get 'mydrills', to: 'drills#mydrills'
+    resources :drill_likes, only: [:destroy]
   end
+
+  resources :drill_likes, only: [:create, :destroy]
 
   resources :users, only: %i[index show new create edit] do
     resources :solve

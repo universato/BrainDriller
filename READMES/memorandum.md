@@ -924,8 +924,8 @@ CSS
 1.2%
 ↓
 Ruby
-47.8%
  
+47.8%
 HTML
 30.5%
  
@@ -940,3 +940,26 @@ SCSS
  
 CSS
 1.1%
+
+#
+
+```sh
+$ rails g model DrillLikes user:references drill:references                                                                                                       +[add-mydrills]
+Running via Spring preloader in process 94600
+[WARNING] The model name 'DrillLikes' was recognized as a plural, using the singular 'DrillLike' instead. Override with --force-plural or setup custom inflection rules for this noun before running the generator.
+      invoke  active_record
+      create    db/migrate/20210624053714_create_drill_likes.rb
+      create    app/models/drill_like.rb
+      invoke    test_unit
+      create      test/models/drill_like_test.rb
+      create      test/fixtures/drill_likes.yml
+
+~/rails/BrainDriller
+$ rails db:migrate                                                                                                                                                +[add-mydrills]
+== 20210624053714 CreateDrillLikes: migrating =================================
+-- create_table(:drill_likes)
+   -> 0.0656s
+== 20210624053714 CreateDrillLikes: migrated (0.0657s) ========================
+```
+
+# なんで繋がらないのか。
