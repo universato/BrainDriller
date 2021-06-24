@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   end
 
   resources :problems
-  get 'favorite-problems', to: 'problems#favorite'
-  get 'solve/:id', to: 'drills#solve', as: "solve"
   get 'edit_profile', to: 'users#edit_profile', as: "edit_profile"
+  get 'favorite-problems', to: 'problems#favorite'
+  get 'mydrills', to: 'drills#mydrills'
+  get 'solve/:id', to: 'drills#solve', as: "solve"
 
   namespace :api do
     resources :drills, only: %i[index show new create edit]

@@ -33,6 +33,9 @@ class DrillsController < ApplicationController
     render layout: 'logo_only'
   end
 
+  def mydrills
+  end
+
   private def drill_params
     params.require(:drill).permit(:title, :guide)
   end
