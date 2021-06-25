@@ -43,7 +43,7 @@
       <th>提出数</th>
     </tr>
     <% @problems.each do |problem| %>
-      <% current_link = problem.user_problem_relations.find_by(user_id: current_user.id) %>
+      <% current_link = problem.user_problem_results.find_by(user_id: current_user.id) %>
       <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
         <tr>
       <% elsif 0 < current_link.number_of_correct_answers %>
@@ -84,7 +84,7 @@
     <th>提出数</th>
   </tr>
   <% @problems.each do |problem| %>
-    <% current_link = problem.user_problem_relations.find_by(user_id: current_user.id) if current_user %>
+    <% current_link = problem.user_problem_results.find_by(user_id: current_user.id) if current_user %>
       <% if current_link.nil? || 0 == current_link.number_of_submissions  %>
         <tr>
       <% elsif 0 < current_link.number_of_correct_answers %>

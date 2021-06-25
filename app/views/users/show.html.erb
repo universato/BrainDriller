@@ -22,7 +22,7 @@
         </section>
       </aside>
 
-      <% unless @user_problem_relations.empty? %>
+      <% unless @user_problem_results.empty? %>
         <table>
           <tr>
             <th>問題名</th>
@@ -33,7 +33,7 @@
             <th>閲覧回数</th>
           </tr>
         <% @user.problems.each_with_index do |problem, i| %>
-          <% relation = @user_problem_relations[i] %>
+          <% relation = @user_problem_results[i] %>
           <tr>
             <td class="text-left"><%= link_to problem.title, problem %></td>
             <td class="text-left"><%= link_to problem.statement[0,32], problem %></td>

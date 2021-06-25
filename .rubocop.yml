@@ -35,7 +35,7 @@ Layout/HeredocIndentation:
 Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
-    - app/models/user_problem_relation.rb
+    - app/models/user_problem_result.rb
     - db/migrate/*_create_problems.rb
 # デフォルトだとメソッドの開始ブロックの手前にスペースを要求してくるが、競プロ界隈では一般的ではないと思う。
 Layout/SpaceBeforeBlockBraces:

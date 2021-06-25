@@ -35,6 +35,7 @@ gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
 gem 'ransack'
+gem 'set'
 
 # gem 'mini_magick'
 gem 'rexml' # for rails test:all

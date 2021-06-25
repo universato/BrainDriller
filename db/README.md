@@ -70,7 +70,7 @@ rails g migration AddPartNumberToProducts part_number:string
 Drill.find_by(title: "Ruby").id
 ids = Drill.find_by(title: "Ruby").problems.pluck(:id) # => Array(Integer)
 u = User.find(1)
-relations = UserProblemRelation.where(user_id: 1, problem_id: ids)
+relations = UserProblemResult.where(user_id: 1, problem_id: ids)
 relations.to_h{ [_1.problem_id, _1] }
 relations.to_h{ [_1.problem_id, _1] }.keys
 ```

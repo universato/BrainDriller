@@ -20,9 +20,9 @@ PostgreSQL
 # DB
 
 ```rb
-UserProblemRelation.where(user_id: 1)
-UserProblemRelation.where(user_id: 1).size
-UserProblemRelation.where(user_id: 1).pluck(:number_of_submissions)
+UserProblemResult.where(user_id: 1)
+UserProblemResult.where(user_id: 1).size
+UserProblemResult.where(user_id: 1).pluck(:number_of_submissions)
 ```
 
 ```rb
@@ -31,7 +31,7 @@ User.find_by(login_name: "uni").id
 Drill.find_by(title: "Ruby").problems.pluck(:id, :number_of_submissions)
 Drill.find_by(title: "Ruby").problems.pluck(:id, :number_of_submissions, :number_of_views)
 Drill.find_by(title: "Ruby").problems.pluck(:id)
-UserProblemRelation.where(problem_id: [283, 181, 182, 284, 183])
+UserProblemResult.where(problem_id: [283, 181, 182, 284, 183])
 ```
 16, 1
 

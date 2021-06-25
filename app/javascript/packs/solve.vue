@@ -9,9 +9,10 @@
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
           <div v-if="currentUserId">
-            <div>連続正解数: {{ currentStreak }} </div>
-            <div>回答回数: {{ numberOfSubmissions }} </div>
-            <div>正解回数: {{ numberOfCorrectAnswers }} </div>
+            <div>あなたの連続正解数: {{ currentStreak }} </div>
+            <div>あなたの回答回数: {{ numberOfSubmissions }} </div>
+            <div>あなたの正解回数: {{ numberOfCorrectAnswers }} </div>
+            <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
           </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
@@ -179,6 +180,7 @@ export default {
     postAnswerPaper() {
       console.log("will post Answer Paper")
       const body = {
+        drill_id: this.drill.id,
         problems: this.problems,
         answer_paper: this.answerPaper
       }
@@ -213,8 +215,17 @@ export default {
     compiledMarkdown(md) {
       return DOMPurify.sanitize(marked(md));
     },
+    percent(a, b) {
+      // `${a / b * 100}`; percent(20, 100) //=> 20.0
+      if(b === 0){
+        return "-"
+      }else{
+        return (Math.round(a / b * 1000) / 10).toFixed(1);
+      }
+    },
   },
   computed: {
+
     resolveDrillURL() {
       return location.href;
     },

@@ -12,13 +12,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id]) || User.find_by(login_name: params[:id])
-    @user_problem_relations = []
+    @user_problem_results = []
 
     @drills = @user.drills
 
     # @problems = @user.problems
     # @problems.each do |problem|
-    #   @user_problem_relations << UserProblemRelation.find_by(user_id: @user.id, problem_id: problem.id)
+    #   @user_problem_results << UserProblemResult.find_by(user_id: @user.id, problem_id: problem.id)
     # end
   end
 

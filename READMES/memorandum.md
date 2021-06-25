@@ -73,7 +73,7 @@ Exiting
 
 `rails webpacker:install:vue`
 
-`rails g model UserProblemRelation`
+`rails g model UserProblemResult`
 
 [RailsでBootstrapとFont\-AwesomeはWebpackerで今時っぽく使おう \- Qiita](https://qiita.com/rhistoba/items/f724dae231d7e28bf477)
 `yarn add bootstrap jquery popper.js`
@@ -962,4 +962,32 @@ $ rails db:migrate                                                              
 == 20210624053714 CreateDrillLikes: migrated (0.0657s) ========================
 ```
 
-# なんで繋がらないのか。
+2カラムによるうユニークインデックスだけ追加した。
+
+# なんで繋がらないのか?
+
+# 
+
+```r
+rails g migration AddCountsToDrills problem_size:integer number_of_problem_mastered:integer
+```
+
+```r
+rails g model DrillPersonalResult user:references drill:references number_of_problem_mastered:integer
+```
+
+追加
+```rb
+default: 0, null: false
+add_index :drill_personal_results, [:user_id, :drill_id], unique: true
+```
+
+
+```rb
+Rails.
+```
+
+# モデル・テーブルの名称変更のとき
+
+`UserProblemRelation` -> `UserProblemResult`
+- モデル、Migrationのファイル名も変えて、統一させる。

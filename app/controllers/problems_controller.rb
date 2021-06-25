@@ -2,7 +2,7 @@ class ProblemsController < ApplicationController
   def index
     @all_problem_size = Problem.count
     if current_user
-      @problems = current_user.problems.order(created_at: "ASC").includes(:user_problem_relations)
+      @problems = current_user.problems.order(created_at: "ASC").includes(:user_problem_results)
     else
       @problems = Problem.order(created_at: "ASC").page(params[:page])
     end
