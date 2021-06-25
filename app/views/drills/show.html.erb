@@ -7,8 +7,11 @@
   <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
 
   <div class="drill-problem-count">
-    このドリルの問題数:
-    <%= problems_count = @drill.problems.count %>
+    このドリルの問題数: <%= problems_count = @drill.problems.size %>
+    <br>
+    <% if current_user %>
+     習得問題数: <%= @drill_user_result&.number_of_problem_mastered || 0 %>
+    <% end %>
   </div>
 
   <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>

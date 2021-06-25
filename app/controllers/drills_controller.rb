@@ -9,6 +9,10 @@ class DrillsController < ApplicationController
     @drill.increment!(:number_of_views, 1)
     impressionist(@drill, nil, unique: [:session_hash])
     # @problems = @drill.problems
+
+    if current_user
+      @drill_user_result = DrillUserResult.find_by(user: current_user, drill: @drill)
+    end
   end
 
   def new

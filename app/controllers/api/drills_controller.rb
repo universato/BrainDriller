@@ -55,7 +55,7 @@ class API::DrillsController < API::ApplicationController
       user_problem_result.save!
     end
 
-    # update_number_of_problem_mastered(drill_id)
+    update_number_of_problem_mastered(drill_id)
   end
 
   private def update_number_of_problem_mastered(drill_id)
