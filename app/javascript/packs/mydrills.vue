@@ -3,6 +3,8 @@
     <div v-for="drill in drills" :key="drill.id">
       タイトル: {{ drill.title }}
       全体閲覧数{{ drill.number_of_views }}
+      ドリルID{{ drill.id }}
+      習得数{{ number_of_problem_mastered(drill.id) }}
       <br>
       <div v-if="likes[drill.id]">
         <button @click="unlikeDrill(drill)">Unlike Drill </button>
@@ -39,12 +41,19 @@ export default {
       this.drills.forEach((drill) => {
         this.likes[drill.id] = true;
       })
-      // console.log(this.drills);
+      this.drill_user_result =  json.drill_user_result
     }).catch(error => {
       console.warn('Failed to parsing', error)
     })
   },
   methods: {
+    number_of_problem_mastered(drill_id) {
+      if (this.drill_user_result[drill_id]){
+        return this.drill_user_result[drill_id].number_of_problem_mastered;
+      } else {
+        return 0;
+      }
+    },
     likeDrill(drill) {
       this.likes[drill.id] = true;
       const params = {

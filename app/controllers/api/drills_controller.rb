@@ -77,5 +77,6 @@ class API::DrillsController < API::ApplicationController
   def mydrills
     drill_ids = DrillLike.where(user: current_user).pluck(:drill_id)
     @drills = Drill.find(drill_ids)
+    @drill_user_result = DrillUserResult.where(drill: drill_ids, user: current_user).to_h{ [_1.drill_id, _1] }
   end
 end
