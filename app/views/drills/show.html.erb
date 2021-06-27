@@ -10,7 +10,10 @@
     このドリルの問題数: <%= problems_count = @drill.problems.size %>
     <br>
     <% if current_user %>
-     習得問題数: <%= @drill_user_result&.number_of_problem_mastered || 0 %>
+     習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %>
+     <% if @driill_is_mastered %>
+       習得済み
+     <% end %>
     <% end %>
   </div>
 
@@ -19,8 +22,10 @@
       <%= f.label :rand, "ランダムに出題する", class: "label"%>
       <%= f.check_box :rand, {checked: true, class: "random-option"}, "true", nil %>
 
-      <%= f.label :past, "過去の回答に基づいて出題する", class: "label"%>
-      <%= f.check_box :past, {checked: true, class: "random-option"}, "true", nil %>
+      <% unless @driill_is_mastered %>
+        <%= f.label :past, "過去の回答に基づいて出題する", class: "label"%>
+        <%= f.check_box :past, {checked: true, class: "random-option"}, "true", nil %>
+      <% end %>
     </div>
 
     <div class="drill-option">

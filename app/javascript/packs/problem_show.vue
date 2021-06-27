@@ -17,7 +17,7 @@
       <input type="text" v-model="title"><br>
     </div>
     <div v-else>
-      <div>{{ title }}</div><br>
+      <div>ドリル名: {{ title }}</div><br>
     </div>
     <div v-if="isEdit">
       <textarea type="textarea" class="statement" v-model="statement"></textarea><br>
@@ -38,12 +38,13 @@
     選択肢
     <div v-if="isEdit">
       <ol class="problem-choices">
-        <input
+        <li
           v-for="(choice, choiceNo) in choices"
           :key="choiceNo"
           class="problem-choice"
           type="text"
         >
+        </li>
       </ol>
     </div>
 

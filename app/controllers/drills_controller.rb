@@ -8,10 +8,15 @@ class DrillsController < ApplicationController
     @drill = Drill.find_by(id: params[:id])
     @drill.increment!(:number_of_views, 1)
     impressionist(@drill, nil, unique: [:session_hash])
-    # @problems = @drill.problems
+    @problems = @drill.problems
+    @problem_size = @problems.size
 
     if current_user
       @drill_user_result = DrillUserResult.find_by(user: current_user, drill: @drill)
+      @number_of_problem_mastered = @drill_user_result&.number_of_problem_mastered
+      if @problem_size == @number_of_problem_mastered
+        @driill_is_mastered = true
+      end
     end
   end
 
