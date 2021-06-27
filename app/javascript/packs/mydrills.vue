@@ -1,5 +1,6 @@
 <template>
   <div id="app panel">
+    <button @click="reverseDrills" class="btn btn-primary">逆順する</button>
     <div v-for="drill in drills" :key="drill.id">
       タイトル: {{ drill.title }}
       全体閲覧数{{ drill.number_of_views }}
@@ -9,10 +10,10 @@
       習得率{{ percent(number_of_problem_mastered(drill.id), drill.problem_size) }}%
       <br>
       <div v-if="likes[drill.id]">
-        <button @click="unlikeDrill(drill)">Unlike Drill </button>
+        <button @click="unlikeDrill(drill)" class="btn btn-primary">Unlike Drill </button>
       </div>
       <div v-else>
-        <button @click="likeDrill(drill)">Like Drill </button>
+        <button @click="likeDrill(drill)" class="btn btn-primary">Like Drill </button>
       </div>
     </div>
   </div>
@@ -111,6 +112,9 @@ export default {
         return (Math.round(a / b * 1000) / 10).toFixed(1);
       }
     },
+    reverseDrills() {
+      this.drills.reverse();
+    }
   },
   computed: {
     token () {
