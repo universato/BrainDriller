@@ -5,6 +5,8 @@
       全体閲覧数{{ drill.number_of_views }}
       ドリルID{{ drill.id }}
       習得数{{ number_of_problem_mastered(drill.id) }}
+      習得数{{ drill.problem_size }}
+      習得率{{ percent(number_of_problem_mastered(drill.id), drill.problem_size) }}%
       <br>
       <div v-if="likes[drill.id]">
         <button @click="unlikeDrill(drill)">Unlike Drill </button>
@@ -100,7 +102,15 @@ export default {
       }).catch(error => {
         console.warn('Failed to parsing', error)
       })
-    }
+    },
+    percent(a, b) {
+      // `${a / b * 100}`; percent(20, 100) //=> 20.0
+      if(b === 0){
+        return "-"
+      }else{
+        return (Math.round(a / b * 1000) / 10).toFixed(1);
+      }
+    },
   },
   computed: {
     token () {
