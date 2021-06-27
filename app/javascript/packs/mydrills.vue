@@ -1,6 +1,7 @@
 <template>
   <div id="app panel">
     <button @click="reverseDrills" class="btn btn-primary">逆順する</button>
+    <button @click="sortUnmasteredDrills" class="btn btn-primary">未習得率</button>
     <div v-for="drill in drills" :key="drill.id">
       タイトル: {{ drill.title }}
       全体閲覧数{{ drill.number_of_views }}
@@ -25,6 +26,7 @@ export default {
     return {
       drills: [],
       likes: {},
+      drillReversed: false,
     }
   },
   created() {
@@ -114,6 +116,16 @@ export default {
     },
     reverseDrills() {
       this.drills.reverse();
+    },
+    sortUnmasteredDrills() {
+      let p1, p2;
+      this.drills.sort((drill1, drill2) => {
+        p1 = this.percent(this.number_of_problem_mastered(drill1.id), drill1.problem_size);
+        p2 = this.percent(this.number_of_problem_mastered(drill2.id), drill2.problem_size);
+        return p1 - p2;
+      })
+      this.drillReversed = !this.drillReversed;
+      if (this.drillReversed) { this.drills.reverse(); }
     }
   },
   computed: {
