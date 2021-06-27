@@ -1,7 +1,7 @@
 <template>
   <div id="app panel">
     <button @click="reverseDrills" class="btn btn-primary">逆順する</button>
-    <button @click="sortUnmasteredDrills" class="btn btn-primary">未習得率</button>
+    <button @click="sortUnmasteredDrills" class="btn btn-primary">{{ drillReversed ? "未習得率順" : "習得率順" }}</button>
     <div v-for="drill in drills" :key="drill.id">
       タイトル: {{ drill.title }}
       全体閲覧数{{ drill.number_of_views }}
