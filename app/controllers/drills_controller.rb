@@ -1,7 +1,8 @@
 class DrillsController < ApplicationController
   def index
     # @drills = Drill.order(created_at: "DESC").page(params[:page])
-    @drills = Drill.order(created_at: "DESC").page(params[:page]).includes(:problems, :user)
+    # @drills = Drill.order(created_at: "DESC").page(params[:page]).includes(:problems, :user)
+    @drills = Drill.order(created_at: "DESC").page(params[:page]).where(state: :full_open).includes(:problems, :user)
   end
 
   def show
@@ -25,7 +26,22 @@ class DrillsController < ApplicationController
   end
 
   def create
-    render json: {}
+    drill_title = params[:drillTitle]
+    drill_guide = params[:drillGuide]
+    drill_guide = params[:drillGuide]
+
+    Drill.create!(
+      user: current_user,
+      title: drill_title,
+      guide: drill_guide,
+      state: :full_open,
+    )
+
+    puts "\n" * 9
+    p "before create"
+    pp params
+    puts "create"
+    puts "\n" * 9
   end
 
   def edit
