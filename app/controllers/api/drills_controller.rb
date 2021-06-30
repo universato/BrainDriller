@@ -8,6 +8,7 @@ class API::DrillsController < API::ApplicationController
   def show
     @current_user_id = current_user&.id
     @drill = Drill.find(params[:id])
+    @drill_user = @drill.user.slice(:id, :login_name)
     order = params[:rand] ? "RANDOM()" : :id
     if current_user && params[:past]
       set_problems_when_past

@@ -26,15 +26,11 @@ class DrillsController < ApplicationController
   end
 
   def create
-    drill_title = params[:drillTitle]
-    drill_guide = params[:drillGuide]
-    drill_guide = params[:drillGuide]
-
     Drill.create!(
       user: current_user,
-      title: drill_title,
-      guide: drill_guide,
-      state: :full_open,
+      title: params[:drillTitle],
+      guide: params[:drillGuide],
+      state: params[:drillState],
     )
 
     # puts "\n" * 9
@@ -49,9 +45,10 @@ class DrillsController < ApplicationController
   end
 
   def update
-    @drill = Drill.find(params[:id])
+    @drill = Drill.find_by(id: params[:id], user: current_uesr)
     @drill.title = params[:drillTitle]
     @drill.guide = params[:drillGuide]
+    @drill.state = params[:drillState]
     @drill.save
   end
 

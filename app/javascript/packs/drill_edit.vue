@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    ドリル作成者<div>{{ drillUserName }}</div>
     <div v-if="drillOnEdit">
       <button @click="saveDrillAndCloseEdit">保存して編集終了</button><br>
       ドリルのタイトル(必須): <input type="text" v-model="title">
@@ -25,6 +25,11 @@
     <div v-else>
       ドリルをロード中です。
     </div>
+    <div>
+      このドリルの状態は、{{ drillStateJP }} です。
+    </div>
+    <button @click="updateDrillAsDraft">下書きで保存する</button>
+    <button @click="updateDrillAsOpen">公開で保存する</button>
 
     <div v-for="(problem, index) in problems" :key="index">
       <br><br>
@@ -70,7 +75,9 @@ export default {
       drill: null,
       title: "",
       guide: "",
+      drillState: null,
       drillOnEdit: false,
+      drillUser: null,
       problems: [],
       isEdit: [],
       loaded: false,
@@ -108,6 +115,8 @@ export default {
       this.drillId =  json.drill.id
       this.title = json.drill.title
       this.guide = json.drill.guide
+      this.drillState = json.drill.state
+      this.drillUser = json.drillUser
       this.problems = json.problems
       this.isEdit =  new Array(this.problems.length).fill(false);
       this.loaded = true;
@@ -130,13 +139,24 @@ export default {
       this.saveDrill();
       this.drillOnEdit = false;
     },
+    updateDrillAsDraft() {
+      console.log("updateDrillAsDraft()")
+      this.drillState = "draft";
+      this.saveDrill();
+    },
+    updateDrillAsOpen() {
+      console.log("updateDrillAsOpen()")
+      this.drillState = "full_open";
+      this.saveDrill();
+    },
     saveDrill(){
       console.log("saveDrill")
       // console.log(this.token);
       const params = {
         drillTitle: this.title,
         drillGuide: this.guide,
-        problems: this.problems
+        drillState: this.drillState,
+        problems: this.problems,
       }
       fetch(`/drills/${this.drillId}`, {
         method: 'PATCH',
@@ -166,6 +186,24 @@ export default {
   computed: {
     problem_link(id) {
       return "problems/" + id
+    },
+    drillStateJP() {
+      if(this.drillState === "full_open") {
+        return "公開"
+      } else if(this.drillState === "draft") {
+        return "下書き"
+      } else {
+        // console.log(this.drillState)
+        // console.log("シークレット")
+        return "シークレット"
+      }
+    },
+    drillUserName() {
+      if(this.drillUser) {
+        return this.drillUser.login_name;
+      } else {
+        return "";
+      }
     }
   }
 }
