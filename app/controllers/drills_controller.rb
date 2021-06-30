@@ -37,11 +37,11 @@ class DrillsController < ApplicationController
       state: :full_open,
     )
 
-    puts "\n" * 9
-    p "before create"
-    pp params
-    puts "create"
-    puts "\n" * 9
+    # puts "\n" * 9
+    # p "before create"
+    # pp params
+    # puts "create"
+    # puts "\n" * 9
   end
 
   def edit
@@ -50,8 +50,9 @@ class DrillsController < ApplicationController
 
   def update
     @drill = Drill.find(params[:id])
-    @drill.update(drill_params)
-    redirect_to "/drills/#{params[:id]}"
+    @drill.title = params[:drillTitle]
+    @drill.guide = params[:drillGuide]
+    @drill.save
   end
 
   def solve

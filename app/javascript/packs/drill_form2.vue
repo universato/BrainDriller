@@ -1,14 +1,13 @@
 <template>
   <div id="app">
-    "aaaaaaaaa"
     <p>{{ message }}</p>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <label for="drill_title">ドリルのタイトル</label>
-        <input v-model="drillTitle" type="text" name="drill[title]" id="drill_title" class="drill-title" />
+        <input v-model="drillTitle" type="text" name="drill[title]" id="drill_title" class="drill-title form-title" />
 
         <div>ガイド</div>
-        <textarea v-model="drillGuide" placeholder="" class="drill-guide"></textarea>
+        <textarea v-model="drillGuide" placeholder="" class="drill-guide form-title"></textarea>
 
         <ul>
           <li v-for="(problem, idx) in problems" :key="problem.id">
@@ -32,42 +31,20 @@
         <div @click="createDrill()" class="btn btn-primary">
           作成する
         </div>
-
-        <button @click="openModal">開く</button>
-        <MyModal @close="closeModal" v-if="modal">
-          <template v-slot:header>
-            <p>Vue.js Modal Window!</p>
-          </template>
-
-          <template v-slot:body>
-            <textarea v-model="input"></textarea>
-          </template>
-
-
-          <div><input v-model="message"></div>
-          <button @click="doSend">送信</button>
-
-          <template v-slot:footer>
-          </template>
-        </MyModal>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MyModal from './MyModal.vue'
 export default {
-  components: { MyModal },
   data() {
     return {
       drillTitle: "",
       drillGuide: "",
       message: "ドリル作成",
       problems: [{id: null, title: '', statement: '', choices: ["選択肢1", "選択肢2", "選択肢3", "選択肢4"] }],
-      modal: false,
       message: '',
-      showModal: false,
     }
   },
   watch: {
@@ -121,24 +98,6 @@ export default {
           console.warn('Failed to parsing', error)
         })
     },
-    openModal() {
-      console.log("openModal")
-      this.modal = true
-    },
-    closeModal() {
-      console.log("closeModal")
-      this.modal = false
-    },
-    doSend() {
-      console.log("doSend()")
-      if (this.message.length > 0) {
-        alert(this.message)
-        this.message = ''
-        this.closeModal()
-      } else {
-        alert('メッセージを入力してください')
-      }
-    }
   },
   computed: {
     token () {

@@ -991,3 +991,8 @@ Rails.
 
 `UserProblemRelation` -> `UserProblemResult`
 - モデル、Migrationのファイル名も変えて、統一させる。
+
+
+# v-forで回してるのをv-modelで編集できないのが地味に不便
+
+これ直接でなければいけるらしい。
