@@ -61,6 +61,13 @@
         </div>
       </div>
     </div>
+
+    <br><br>
+    <button @click="addProblem">問題の入力欄を追加する</button>
+    <br><br>
+    <button @click="updateDrillAsDraft">下書きで保存する</button>
+    <br>
+    <button @click="updateDrillAsOpen">公開で保存する</button>
   </div>
 </template>
 
@@ -149,6 +156,15 @@ export default {
       this.drillState = "full_open";
       this.saveDrill();
     },
+    addProblem() {
+      this.problems.push({
+        title: "",
+        statement: "",
+        choices: ["", "", "", ""],
+        correctOption: 0,
+      })
+      this.isEdit.push(true);
+    },
     saveDrill(){
       console.log("saveDrill")
       // console.log(this.token);
@@ -170,7 +186,13 @@ export default {
         body: JSON.stringify(params)
       })
         .then(response => {
-          // return response.json()
+          console.log(response)
+          console.log(response.headers)
+          console.log(response.status)
+          console.log(response.statusText)
+          console.log(response.type)
+          console.log(response.url)
+          console.log(response.body)
         })
         .then(json=> {
         })

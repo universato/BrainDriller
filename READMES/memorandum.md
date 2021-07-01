@@ -993,6 +993,33 @@ Rails.
 - モデル、Migrationのファイル名も変えて、統一させる。
 
 
-# v-forで回してるのをv-modelで編集できないのが地味に不便
+## v-forで回してるのをv-modelで編集できないのが地味に不便
 
 これ直接でなければいけるらしい。
+
+## フォームを統一させる。
+
+URL:drills/new 
+-> routes 
+-> controllers/drills#new
+-> views/drills/new.html.erb -> id="js-drill-edit" ("js-drill-form")
+-> javascript/packs/application.js 
+-> javascript/drill_edit.js
+-> javascript/drill_edit.vue -> fetch
+-> routes 
+-> conrollers/api/drills_controller#new
+-> views/api
+
+ドリルがあるか？
+タイトルかガイドがあれば、ドリルはある。保存されているとは限らない。
+タイトルは必須。タイトルがあれば、ドリルを仮保存=下書き(ドラフト)できる。
+仮保存(問題も保存できるが、タイトルだけはできない)。
+
+タイトルを書いたら、仮保存などしてなくても、
+
+[必須] ドリルを保存するためには、タイトルが必須。1文字以上のタイトル。
+[たぶん必須] 問題を保存するためには、ドリルが必須。
+結論、問題を保存するためには、ドリルのタイトルが1文字以上必要。
+
+新規作成時は、編集モードで開いて欲しい。
+編集時は、閲覧モードで開いて欲しい。

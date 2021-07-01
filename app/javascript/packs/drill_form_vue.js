@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './drill_form2.vue'
+import App from './drill_form.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const selector = '#js-drill-form';

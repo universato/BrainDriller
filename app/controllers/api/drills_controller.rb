@@ -3,6 +3,13 @@ class API::DrillsController < API::ApplicationController
     @drills = Drill.order(created_at: "DESC").page(params[:page]).per(2)
   end
 
+  def new
+    @drill = Drill.new
+    @drill_user = current_user
+    @problems = []
+    @current_user_id = current_user.id
+  end
+
   THRESHOLD_OF_PROBLEM_MASTERED = 2
 
   def show

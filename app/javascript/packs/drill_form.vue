@@ -1,117 +1,171 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <label for="drill_title">ドリルのタイトル</label>
-        <input v-model="drillTitle" type="text" name="drill[title]" id="drill_title" class="drill-title" />
-
-        <div>ガイド</div>
-        <textarea v-model="drillGuide" placeholder="" class="drill-guide"></textarea>
-
-        <ul>
-          <li v-for="(problem) in problems" :key="problem.id">
-            <div> {{ problem.title }} </div>
-            <div> {{ problem.statement }} </div>
-          </li>
-        </ul>
-
-        <div @click="createDrill()" class="btn btn-primary">
-          作成する
-        </div>
-      </div>
-    </div>
+    <button @click="saveDrillAndCloseEdit">見出し部分の保存して編集終了</button><br>
+    ドリルのタイトル(必須): <input type="text" v-model="title">
+    <br>
+    ドリルの説明: <textarea v-model="guide" class="statement"></textarea>
+    <button @click="saveDrill">ドリルを仮保存して、問題を追加していく</button>
   </div>
 </template>
 
 <script>
+import marked from 'marked';
+import DOMPurify from 'dompurify';
+import hljs from 'highlight.js';
+
 export default {
   data() {
     return {
-      drillTitle: "",
-      drillGuide: "",
-      message: "ドリル作成",
-      problems: [{id: null, title: '', statement: '', choices: ["選択肢1", "選択肢2", "選択肢3", "選択肢4"] }],
+      drill: null,
+      title: "",
+      guide: "",
+      drillState: null,
+      drillOnEdit: true,
+      drillUser: null,
+      problems: [],
+      isEdit: [],
+      loaded: false,
+      showModal: false,
     }
   },
   created() {
+    marked.setOptions({
+      langPrefix: 'hljs ',
+      // sanitize: true,
+      gfm: true,
+      breaks: true,
+      // highlightjsを使用したハイライト処理を追加
+      highlight: function(code, lang) {
+        return hljs.highlightAuto(code, [lang]).value
+      }
+    });
+
+    const pathnames = location.pathname.split('/'); // ["", "drills", "5"]
+    const drill_id = pathnames[2];
+    const url = new URL(location.href);
+
+    fetch(`/api/drills/${drill_id}.json`, {
+        method: 'GET',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'same-origin',
+        redirect: 'manual',
+      }
+    ).then(response => {
+      return response.json()
+    }).then(json => {
+      this.drill =  json.drill
+      this.drillId =  json.drill.id
+      this.title = json.drill.title
+      this.guide = json.drill.guide
+      this.drillState = json.drill.state
+      this.drillUser = json.drillUser
+      this.problems = json.problems
+      this.isEdit =  new Array(this.problems.length).fill(false);
+      this.loaded = true;
+    }).catch(error => {
+      console.warn('Failed to parsing', error)
+    })
   },
   methods: {
-    addProblem(idx) {
-      const n = this.problems.length
-      const problem = {
-        id: n,
-        title: `aaaaaaaaaa${n}`,
-        statement: 'bbbbbbbbbb',
-        choices: ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
-      }
-      this.problems.splice(idx + 1, 0, problem)
-      // this.problems.push(problem)
-      console.log("問題を追加しました")
+    compiledMarkdown(md) {
+      return DOMPurify.sanitize(marked(md));
     },
-    createDrill() {
-      console.log("createDrill")
-      console.log(this.token);
+    deleteProblemAt(problem_index) {
+      let check = confirm('本当に削除しますか。OKなら削除です。');
+      if(check){
+        this.problems.splice(problem_index, 1);
+        this.isEdit.splice(problem_index, 1);
+      }
+    },
+    saveDrillAndCloseEdit() {
+      this.saveDrill();
+      this.drillOnEdit = false;
+    },
+    updateDrillAsDraft() {
+      console.log("updateDrillAsDraft()")
+      this.drillState = "draft";
+      this.saveDrill();
+    },
+    updateDrillAsOpen() {
+      console.log("updateDrillAsOpen()")
+      this.drillState = "full_open";
+      this.saveDrill();
+    },
+    addProblem() {
+      this.problems.push({
+        title: "",
+        statement: "",
+        choices: ["", "", "", ""],
+        correctOption: 0,
+      })
+      this.isEdit.push(true);
+    },
+    saveDrill(){
+      console.log("saveDrill")
+      // console.log(this.token);
       const params = {
-        drillTitle: this.drillTitle,
-        drillGuide: this.drillGuide,
-        problems: this.problems
+        drillTitle: this.title,
+        drillGuide: this.guide,
+        drillState: this.drillState,
+        problems: this.problems,
       }
       fetch(`/drills`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
           'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-Token': this.token
+          'X-CSRF-Token': this.token()
         },
         credentials: 'same-origin',
         redirect: 'manual',
         body: JSON.stringify(params)
       })
         .then(response => {
-          return response.json()
+          return response.json();
         })
         .then(json=> {
+          console.log(json);
+          location.href = json.redirect_edit_url;
         })
         .catch(error => {
           console.warn('Failed to parsing', error)
         })
-    }
-  },
-  computed: {
-    token () {
+    },
+    token() {
       const meta = document.querySelector('meta[name="csrf-token"]')
       return meta ? meta.getAttribute('content') : ''
     },
+  },
+  computed: {
+    problem_link(id) {
+      return "problems/" + id
+    },
+    drillStateJP() {
+      if(this.drillState === "full_open") {
+        return "公開"
+      } else if(this.drillState === "draft") {
+        return "下書き"
+      } else {
+        // console.log(this.drillState)
+        // console.log("シークレット")
+        return "シークレット"
+      }
+    },
+    drillUserName() {
+      if(this.drillUser) {
+        return this.drillUser.login_name;
+      } else {
+        return "";
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-.drill-title {
-  width: 480px;
-}
-
-.drill-guide {
-  height: 160px;
-  width: 800px;
-}
-
-.problem-title {
-  width: 480px;
-}
-
-.problem-statement {
-  height: 160px;
-  width: 800px;
-}
-
-.choice-input {
-  width: 560px;
-}
-
-p {
-  font-size: 2em;
-  text-align: center;
+.statement {
+  width: 80%;
 }
 </style>

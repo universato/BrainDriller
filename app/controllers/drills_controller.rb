@@ -26,11 +26,11 @@ class DrillsController < ApplicationController
   end
 
   def create
-    Drill.create!(
+    drill = Drill.new(
       user: current_user,
       title: params[:drillTitle],
       guide: params[:drillGuide],
-      state: params[:drillState],
+      state: :full_open,
     )
 
     # puts "\n" * 9
@@ -38,6 +38,19 @@ class DrillsController < ApplicationController
     # pp params
     # puts "create"
     # puts "\n" * 9
+    if drill.save!
+      # puts "\n" * 9
+      # p "/drills/#{drill[:id]}/edit"
+      # binding.irb
+      json = {
+        status: 200,
+        message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
+        redirect_edit_url: "/drills/#{drill[:id]}/edit"
+      }
+      render status: 200, json: json
+      # redirect_to "/drills/#{drill[:id]}/edit"
+    else
+    end
   end
 
   def edit
@@ -45,11 +58,24 @@ class DrillsController < ApplicationController
   end
 
   def update
-    @drill = Drill.find_by(id: params[:id], user: current_uesr)
+    @drill = Drill.find_by(id: params[:id], user: current_user)
     @drill.title = params[:drillTitle]
     @drill.guide = params[:drillGuide]
     @drill.state = params[:drillState]
     @drill.save
+
+    params[:problems].each do |problem_param|
+      problem = Problem.find_or_create_by(id: problem_param[:id])
+      problem.user ||= current_user
+      problem.drill_id ||= @drill[:id]
+      problem.title = problem_param[:title]
+      problem.statement = problem_param[:statement]
+      problem.format = "basic_choices"
+      problem.choices = problem_param[:choices]
+      problem.correct_option = 1
+      problem.explanation = problem_param[:explanation] || ""
+      problem.save!
+    end
   end
 
   def solve
