@@ -22,7 +22,10 @@ class API::DrillsController < API::ApplicationController
     else
       @problems = @drill.problems.order(order).limit(params[:num])
       if current_user
-        @problem_map = UserProblemResult.where(user_id: current_user.id, problem_id: @problems.pluck(:id)).to_h{ [_1.problem_id, _1] }
+        @problem_map = UserProblemResult.where(
+          user_id: current_user.id,
+          problem_id: @problems.pluck(:id)
+        ).to_h{ [_1.problem_id, _1] }
       end
     end
   end
@@ -34,10 +37,16 @@ class API::DrillsController < API::ApplicationController
   private def set_problems_when_past
     order = params[:rand] ? "RANDOM()" : :id
     drill_problem_ids = @drill.problems.pluck(:id)
-    mastered_ids = UserProblemResult.where(user_id: current_user.id, problem_id: drill_problem_ids).where("current_streak >= 2").pluck(:problem_id)
+    mastered_ids = UserProblemResult.where(
+      user_id: current_user.id,
+      problem_id: drill_problem_ids
+    ).where("current_streak >= 2").pluck(:problem_id)
     ids = (Set[*drill_problem_ids] - Set[*mastered_ids]).to_a
     @problems = Problem.where(id: ids).order(order).limit(params[:num])
-    @problem_map = UserProblemResult.where(user_id: current_user.id, problem_id: @problems.map(&:id)).to_h{ [_1.problem_id, _1 ] }
+    @problem_map = UserProblemResult.where(
+      user_id: current_user.id,
+      problem_id: @problems.map(&:id)
+    ).to_h{ [_1.problem_id, _1] }
   end
 
   def grade
