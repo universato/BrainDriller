@@ -13,10 +13,9 @@ end
 create_user("uni", admin: true)
 create_user("ruby")
 
-if true
-  puts "2ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
-  return
-end
+puts "2ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
+
+__END__
 
 return if User.count > 100
 

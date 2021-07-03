@@ -50,7 +50,7 @@ ruby_drill.problems.create!(
   correct_option: 1,
 )
 
-return if true
+__END__
 
 drill.problems.create!(
   user: ruby_user,
