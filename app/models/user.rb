@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :problems, through: :user_problem_results
 
   validates :email, presence: true, uniqueness: true
-  validates :login_name, presence: true, length: { maximum: 30 }, uniqueness: true
+  validates :login_name, presence: true, length: { in: 1..30 }, uniqueness: true
   # validates :password, length: { minimum: 5 }
 
   mount_uploader :icon, IconUploader
