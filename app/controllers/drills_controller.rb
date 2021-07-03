@@ -40,7 +40,6 @@ class DrillsController < ApplicationController
         redirect_edit_url: "/drills/#{drill[:id]}/edit"
       }
       render status: 200, json: json
-    else
     end
   end
 
