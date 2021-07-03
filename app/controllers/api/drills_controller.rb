@@ -22,7 +22,7 @@ class API::DrillsController < API::ApplicationController
     else
       @problems = @drill.problems.order(order).limit(params[:num])
       if current_user
-        @problem_map = UserProblemResult.where(user_id: current_user.id, problem_id: @problems.pluck(:id)).to_h{ [_1.problem_id, _1 ] }
+        @problem_map = UserProblemResult.where(user_id: current_user.id, problem_id: @problems.pluck(:id)).to_h{ [_1.problem_id, _1] }
       end
     end
   end
