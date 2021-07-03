@@ -5,6 +5,7 @@ ruby '~> 3.0.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
+
 gem 'puma', '~> 5.0'
 gem 'sassc-rails'
 
@@ -34,6 +35,7 @@ gem 'carrierwave'
 gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
+gem 'pg'
 gem 'ransack'
 gem 'set'
 
@@ -41,7 +43,6 @@ gem 'set'
 gem 'rexml' # for rails test:all
 
 group :development, :test do
-  gem 'pg'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # gem "factory_bot_rails"
@@ -49,11 +50,6 @@ group :development, :test do
   gem 'minitest'
   gem 'simplecov'
 end
-
-group :production do
-  gem 'pg'
-end
-
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -72,7 +68,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
