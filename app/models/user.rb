@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # has_many :user_problem_results, class_name: "UserProblemResult", foreign_key: "user_id", dependent: :destroy
   has_many :problems, through: :user_problem_results
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, length: { in: 3..200 }
   validates :login_name, presence: true, length: { in: 1..30 }, uniqueness: true
   # validates :password, length: { minimum: 5 }
 
