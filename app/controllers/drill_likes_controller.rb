@@ -8,14 +8,6 @@ class DrillLikesController < ApplicationController
   end
 
   def destroy
-    puts "\n" * 9
-    # pp params
-    # p current_user.drill_likes
-    # drill =
-    # DrillLike.destroy(params[:id])
-    # current_user.drill_likes.find_by(drill_id: params[:id]).destroy
-
-
     drill_like = DrillLike.find(params[:id])
     drill = Drill.find(drill_like.drill_id)
     drill_like.destroy

@@ -33,22 +33,13 @@ class DrillsController < ApplicationController
       state: :full_open,
     )
 
-    # puts "\n" * 9
-    # p "before create"
-    # pp params
-    # puts "create"
-    # puts "\n" * 9
     if drill.save!
-      # puts "\n" * 9
-      # p "/drills/#{drill[:id]}/edit"
-      # binding.irb
       json = {
         status: 200,
         message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
         redirect_edit_url: "/drills/#{drill[:id]}/edit"
       }
       render status: 200, json: json
-      # redirect_to "/drills/#{drill[:id]}/edit"
     else
     end
   end
