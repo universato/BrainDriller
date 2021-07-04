@@ -3,12 +3,11 @@ require "test_helper"
 class DrillTest < ActiveSupport::TestCase
   test "create drill" do
     user = users(:smith)
-    before_drill_size = Drill.all.size
-    drill = user.drills.create({
+    drill = user.drills.build({
       title: "Our Drill",
       guide: "",
     })
-    assert_equal before_drill_size + 1, Drill.all.size
+    assert_difference('Drill.count', 1){ drill.save }
     assert_equal drill.user.id, user.id
     assert_equal "draft", drill.state
     assert_equal 0, drill.problems.size
