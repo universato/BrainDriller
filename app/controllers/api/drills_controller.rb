@@ -1,6 +1,6 @@
 class API::DrillsController < API::ApplicationController
   def index
-    @drills = Drill.order(created_at: "DESC").page(params[:page]).per(2)
+    @drills = Drill.order(created_at: "DESC").where(state: "full_open").page(params[:page]).per(10)
   end
 
   def new
