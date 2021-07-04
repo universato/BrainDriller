@@ -2,15 +2,23 @@
 AllCops:
   Exclude:
     - Gemfile
-    - bin/*
+    - Gemfile.lock
+    - app/assets/**/*
+    - app/javascript/**/*
+    - app/views/**/*
+    - bin/**/*
     - config/environments/production.rb
     - config/initializers/filter_parameter_logging.rb
     - config/initializers/impression.rb
     - config/puma.rb
+    - coverage
     - db/migrate/*_create_impressions_table.rb
     - db/migrate/*_devise_create_users.rb
     - db/schema.rb
+    - log
     - node_modules/**/*
+    - test/fixtures
+    - tmp
     - vendor/**/*
   NewCops: enable
 
@@ -28,6 +36,8 @@ Style/StringLiterals:
 # 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
 Layout/ExtraSpacing:
   AutoCorrect: false
+Layout/FirstHashElementIndentation:
+  Enabled: false
 Layout/HeredocIndentation:
   Exclude:
     - db/seeds/drills.rb
@@ -217,6 +227,8 @@ Style/StringConcatenation:
 # 引数の末尾カンマ
 # diffのために、あってもいいと思った。
 Style/TrailingCommaInArguments:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
   Enabled: false
 # 末尾カンマの設定。配列の最後の要素にカンマを入れるか。個人的に見た目は美しくないと思うが、複数行だとdiffがわかりやすくなるし、どちからといえばカンマを入れる傾向が世間にあるのだとか。競プロRuby界隈ではあまり見たことないけど、複数行のときは積極的に使ってみたさがある。
 Style/TrailingCommaInArrayLiteral:

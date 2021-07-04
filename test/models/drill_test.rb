@@ -18,8 +18,6 @@ class DrillTest < ActiveSupport::TestCase
   end
 
   test "empty user raise error" do
-    user = users(:smith)
-    before_drill_size = Drill.all.size
     drill = Drill.new({
       user_id: nil,
       title: "Thsi is title",
@@ -30,7 +28,6 @@ class DrillTest < ActiveSupport::TestCase
 
   test "empty title raises Error" do
     user = users(:smith)
-    before_drill_size = Drill.all.size
     drill = user.drills.create({
       title: "",
       guide: "This is guide...",
