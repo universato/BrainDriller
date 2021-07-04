@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <button @click="saveDrillAndCloseEdit">見出し部分の保存して編集終了</button><br>
-    ドリルのタイトル(必須): <input type="text" v-model="title">
+    ドリルのタイトル(必須): <input type="text" v-model="title" id="drill-title" class="drill-title">
     <br>
-    ドリルの説明: <textarea v-model="guide" class="statement"></textarea>
+    ドリルの説明: <textarea v-model="guide" class="statement"  id="drill-guide"></textarea>
     <button @click="saveDrill">ドリルを仮保存して、問題を追加していく</button>
   </div>
 </template>
