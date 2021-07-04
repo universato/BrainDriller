@@ -2,7 +2,14 @@ ruby:
   user: ruby
   title: ruby入門
   guide: "Rubyの入門用のドリルです。"
+  state: full_open
 crystal-lang:
   user: uni
   title: Crystal入門
   guide: "Crystalの入門用ドリルです。Rubyとの差異に注意しましょう"
+  state: full_open
+draft:
+  user: uni
+  title: draft-drill
+  guide: "this is draft"
+  state: draft

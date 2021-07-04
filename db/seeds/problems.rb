@@ -1,9 +1,7 @@
-# 【Rails】rake seedコマンドでCSVファイルからDBに読み込ませる方法 - Qiita
-# https://qiita.com/kumasuke/items/545afaf5876d3dc52670
 require "csv"
 
 first_user = User.first
-
+problems = []
 CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
   drill = Drill.find_by(title: row['drill_title'])
   drill ||= Drill.create(title: row['drill_title'], user: first_user)
@@ -27,14 +25,28 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
     puts "#{i}行目の選択肢に空欄があります。"
   end
 
-  Problem.create!(
-    drill: drill,
-    user: user,
+  time = Time.now
+
+  problems << {
+    drill_id: drill.id,
+    user_id: user.id,
     title: row['title'] || '',
     statement: row['statement'],
     format: "basic_choices",
     choices: [o1, o2, o3, o4],
     correct_option: row['ans'].to_i - 1,
     explanation: row['explanation'] || '',
-  )
+    created_at: time,
+    updated_at: time,
+  }
 end
+
+Problem.insert_all!(problems)
+
+__END__
+
+# 【Rails】rake seedコマンドでCSVファイルからDBに読み込ませる方法 - Qiita
+# https://qiita.com/kumasuke/items/545afaf5876d3dc52670
+
+# Before 3.13s
+# After 0.7099

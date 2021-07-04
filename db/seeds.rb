@@ -7,8 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 module Seed
   def self.run_seed(path)
+    s = Time.now
     output = require_relative(path) ? "実行された: " : "実行されず: "
-    puts output + path
+    puts output + path + " ,time: #{Time.now - s} s"
   end
 end
 
@@ -21,5 +22,13 @@ Seed.run_seed("./seeds/simple_problems")
 Seed.run_seed("./seeds/problems")
 # Seed.run_seed("./seeds/drills")
 
-Seed.run_seed("./seeds/open_drill")
 Seed.run_seed("./seeds/update_problem_size")
+
+if Rails.env.development?
+  Seed.run_seed("./seeds/open_drill")
+end
+
+# 2021/7/4
+# $ time rails db:reset
+# rails db:reset  5.81s user 1.38s system 46% cpu 15.423 total
+# rails db:reset  4.14s user 1.38s system 46% cpu 15.423 total
