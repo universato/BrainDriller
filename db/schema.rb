@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "impressions_count", default: 0
-    t.integer "problem_size", default: -1, null: false
+    t.integer "problem_size", default: 0, null: false
     t.index ["user_id"], name: "index_drills_on_user_id"
   end
 
