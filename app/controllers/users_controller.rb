@@ -15,11 +15,6 @@ class UsersController < ApplicationController
     @user_problem_results = []
 
     @drills = @user.drills
-
-    # @problems = @user.problems
-    # @problems.each do |problem|
-    #   @user_problem_results << UserProblemResult.find_by(user_id: @user.id, problem_id: problem.id)
-    # end
   end
 
   def edit_profile

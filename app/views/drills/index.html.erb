@@ -4,19 +4,6 @@
   <%= link_to 'ドリルを作成する', new_drill_path, class: "btn-std" %><br>
 <% end %>
 
-<% if false %>
-  <% drill = @drills.first %>
-  <div class="drills">
-    <div class="drill-title"><%= link_to drill.title, drill, class: "drill-title" %></div>
-    <div class="drill"><%= drill.problems.size %>問</div>
-    <div class="problem-count"><%= link_to "#{drill.problems.count}問", drill, class: "problem-count" %></div>
-    <div class="drill-view"><%= drill.number_of_views %>回</div>
-    <div class="drill-view"><%= drill.impressions_count %>回</div>
-    <%= image_tag drill.user.icon.to_s, size: '120x120', alt: 'icon', class: 'a-user-icon' %>
-    <div><%= link_to drill.user, drill.user, class: "drill-user" %></div>
-  </div>
-<% end %>
-
 <% if @drills.blank? %>
   <%= "ドリルが取得できませんでした。お困りでしたら、お問い合わせ下さい。" %>
   <% if Rails.env.development? %><br>

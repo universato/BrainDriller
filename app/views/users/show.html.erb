@@ -1,5 +1,3 @@
-<%# "公開用の問題一覧queと、非公開の解答一覧にわけたいans" %>
-
 <div class="panel">
   <div>作成したドリル一覧</div>
   <% @drills.each do |drill| %>
@@ -7,10 +5,8 @@
   <% end %>
 </div>
 
-
 <div class="panel">
   <% if current_user && @user.id == current_user.id %>
-    <%# link_to "あなたの提出一覧", submissions_user_url(@user) %>
     <div class="row">
       <aside class="">
         <section class="user_info">
@@ -48,19 +44,3 @@
     </div>
   <% end %>
 </div>
-
-  <% if Rails.env.development? && false %>
-    <div style="font-size: 8px;">
-      Rails環境が環境のときのみ表示：<br>
-      出題一覧(原則として公開、課金して非公開のものも作る?)<br>
-      下書きとしての非公開は問題として使えない。他者の閲覧と機能が制限される<br>
-      他者への非公開(自分のみ利用)は、他者の利用のみが制限される<br>
-      下書きは非公開というより未公開、未公開から非公開・限定公開・公開のどれかになるのかな<br>
-      下書きに戻したい状況とは? 間違っていることを書いていたが、すぐに修正できない状況かな<br>
-      やってく中で実例を見ないとわからない気がする<br>
-      Twitterみたいに、下書きに戻したり編集できないと、削除するか(鍵アカウントにするか、追記で謝るか)<br>
-      回答。なんか出題よりもsensitiveな情報だと思うので、原則として非公開。公開機能を設けても良いけど、大変そうだから後回し<br>
-      どうして出題よりも回答情報はsensitiveだと思うのか、しっかり考えたい。<br>
-      ans_no<br>
-    </div>
-  <% end %>

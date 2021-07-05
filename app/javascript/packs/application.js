@@ -33,7 +33,6 @@ Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
 
-require('./hello_vue.js')
 require('./solve_vue.js')
 require('./problem_show.js')
 require('./drill_edit.js')

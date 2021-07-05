@@ -3,28 +3,3 @@
 <% pr = @problem %>
 
 <div id="js-problem-show"></div>
-
-
-
-<% if false %>
-  <%= pr.title %><br>
-  <%# pr.statement %><br>
-  問題文:<br>
-  <div>
-    <%# Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true).render(pr.statement).html_safe %>
-    <%= markdown(pr.statement) %>
-  </div>
-  <br>
-  選択肢:<br>
-  <%  pr.choices.each do |choice| %>
-    <%= markdown(choice) %>
-    <%# choice %><br>
-  <% end %>
-  <br>
-  正解:<br>
-  <%= pr.correct_option %> <%= pr.choices[pr.correct_option] %> <br><br>
-  <%= pr.explanation %><br>
-
-  <%= link_to 'Edit', edit_problem_path(@problem) %> |
-  <%= link_to 'Back', problems_path %>
-<% end %>
