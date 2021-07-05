@@ -1029,3 +1029,10 @@ URL:drills/new
 `UserProblemRelation` -> `UserProblemResult`
 UserProblemResult -> ProblemUserResult
 - モデル、Migrationのファイル名も変えて、統一させる。
+
+
+# ドリルテンプレート
+
+CSV
+YAML
+Markdown -- 

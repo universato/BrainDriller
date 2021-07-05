@@ -4,7 +4,7 @@ first_user = User.first
 problems = []
 CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
   drill = Drill.find_by(title: row['drill_title'])
-  drill ||= Drill.create(title: row['drill_title'], user: first_user)
+  drill ||= Drill.create(title: row['drill_title'], user: first_user, state: "full_open")
 
   user = drill.user
 
