@@ -25,7 +25,7 @@ Seed.run_seed("./seeds/problems")
 Seed.run_seed("./seeds/update_problem_size")
 
 if Rails.env.development?
-  Seed.run_seed("./seeds/open_drill")
+  Seed.run_seed("./seeds/open_drills")
 end
 
 # 2021/7/4
