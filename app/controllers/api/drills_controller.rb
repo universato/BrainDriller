@@ -91,10 +91,6 @@ class API::DrillsController < API::ApplicationController
     drill_user_result.save!
   end
 
-  def info
-    @drill_map = Drill.find(params[:id])
-  end
-
   def mydrills
     drill_ids = DrillLike.where(user: current_user).pluck(:drill_id)
     @drills = Drill.find(drill_ids)
