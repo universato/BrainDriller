@@ -158,6 +158,10 @@ Style/EmptyMethod:
 # グローバル変数は原則禁止。ごくまれにグローバル変数を使いたいときがあったので、別個許容する。
 Style/GlobalVars:
   AutoCorrect: false
+# if current_user でif文を書きたかった。
+Style/GuardClause:
+  Exclude:
+    - app/controllers/drills_controller.rb
 # 後置if文を使わせる設定。まぁ、長文だと、あまり後置if文は使いたくない。
 Style/IfUnlessModifier:
   Enabled: false

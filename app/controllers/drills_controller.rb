@@ -15,9 +15,7 @@ class DrillsController < ApplicationController
     if current_user
       @drill_user_result = DrillUserResult.find_by(user: current_user, drill: @drill)
       @number_of_problem_mastered = @drill_user_result&.number_of_problem_mastered
-      if @problem_size == @number_of_problem_mastered
-        @driill_is_mastered = true
-      end
+      @driill_is_mastered = true if @problem_size == @number_of_problem_mastered
     end
   end
 
@@ -33,13 +31,17 @@ class DrillsController < ApplicationController
       state: :full_open,
     )
 
-    if drill.save!
+    begin
+      drill.save!
       json = {
         status: 200,
         message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
         redirect_edit_url: "/drills/#{drill[:id]}/edit"
       }
       render status: 200, json: json
+    rescue ActiveRecord::RecordInvalid => e
+      # [TODO]
+      puts e
     end
   end
 
