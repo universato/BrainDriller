@@ -1,6 +1,6 @@
 ruby:
   user: ruby
-  title: ruby入門
+  title: Ruby入門ドリル
   guide: "Rubyの入門用のドリルです。"
   state: full_open
 crystal-lang:
@@ -13,3 +13,13 @@ draft:
   title: draft-drill
   guide: "this is draft"
   state: draft
+cheating:
+  user: uni
+  title: Cheating-drill
+  state: full_open
+  guide: "this is cheating drill"
+firsts:
+  user: uni
+  title: Firsts
+  state: full_open
+  guide: "All ansewers of problems are first choices!"

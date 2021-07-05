@@ -20,9 +20,30 @@ class DrillsTest < ApplicationSystemTestCase
     click_button "問題を追加していく"
   end
 
-  test "drills" do
+  test "solve drill" do
     login_as_basic_member
 
     visit 'drills'
+    click_on "Firsts"
+    find(".solve-btn").click
+
+    # 1st problem
+    assert_text "Correct"
+    assert_text "わからない"
+    assert_text "中断して採点する"
+    first(".problem-choice").click
+
+    # 2nd problem
+    assert_text "Correct"
+    assert_text "わからない"
+    assert_text "中断して採点する"
+    first(".problem-choice").click
+
+    # 3rd problem
+    assert_no_text "中断して採点する"
+    assert_text "採点する"
+    first(".problem-choice").click
+    assert_no_text "中断して採点する"
+    assert_text "採点する"
   end
 end

@@ -1,18 +1,72 @@
 ruby1:
   user: ruby
   drill: ruby
-  title: ""
+  title: "Array#map"
   format: basic_choices
   statement:  "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
-  explanation: "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
   choices: ["[1, 2, 3]", "[2, 3, 6]", "[1, 2, 3, 4, 5, 6]"]
+  explanation: "mapは配列を作るメソッドです。\n"
   correct_option: 1
 ruby2:
   user: ruby
   drill: ruby
-  title: ""
+  title: "文字列の*"
   format: basic_choices
-  statement:  "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
-  explanation: "[1, 2, 3].map{ |e| e * 2 }は何を返しますか"
-  choices: ["[1, 2, 3]", "[2, 3, 6]", "[1, 2, 3, 4, 5, 6]"]
+  statement:  "'a' * 5は何を返しますか"
+  choices: ["['a', 'a', 'a']", "'aaaaa'", "エラーになる"]
+  explanation: "String#*が呼ばれています"
   correct_option: 1
+firsts1:
+  user: uni
+  drill: firsts
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解は最初です"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初のドリルです"
+  correct_option: 0
+firsts2:
+  user: uni
+  drill: firsts
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解は最初です"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初のドリルです"
+  correct_option: 0
+firsts3:
+  user: uni
+  drill: firsts
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解は最初です"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初のドリルです"
+  correct_option: 0
+cheating1:
+  user: uni
+  drill: cheating
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解はどれですか"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初です"
+  correct_option: 0
+cheating2:
+  user: uni
+  drill: cheating
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解はどれですか"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初です"
+  correct_option: 0
+cheating3:
+  user: uni
+  drill: cheating
+  title: "正解は最初"
+  format: basic_choices
+  statement:  "正解はどれですか"
+  choices: ["Correct", "Incorrect1", "Incorrect2"]
+  explanation: "正解は最初です"
+  correct_option: 0

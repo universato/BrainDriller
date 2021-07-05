@@ -19,3 +19,29 @@ rails s
 [memo-question](READMES/memo-question.md)
 [memo-vuejs.md](READMES/memo-vuejs.md)
 [memoraundum](READMES/memorandum.md)
+
+# テスト方法
+
+```r
+rails t
+rails t test/system/drills_test.rb:23
+```
+
+```s
+rails test:all
+HEADED=1 rails test:all
+```
+
+#
+
+```s
+rails s
+rails server 
+```
+
+```s
+./bin/webpack-dev-server
+bin/webpack-dev-server
+```
+
+`bin`ディレクトリ内に入っているRubyコードを呼んでいる。
