@@ -2,8 +2,8 @@ class UserProblemResult < ApplicationRecord
   belongs_to :user, foreign_key: 'user_id'
   belongs_to :problem, foreign_key: 'problem_id'
 
-  validates :user_id,    presence: true,  numericality: { only_integer: true, greater_than: 0 }
-  validates :problem_id, presence: true,  numericality: { only_integer: true, greater_than: 0 }
+  validates :user_id,    presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :problem_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   # 問題の閲覧回数
   # 問題の回答回数
