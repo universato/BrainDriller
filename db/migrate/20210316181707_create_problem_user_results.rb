@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateUserProblemResults < ActiveRecord::Migration[6.1]
+class CreateProblemUserResults < ActiveRecord::Migration[6.1]
   def change
-    create_table :user_problem_results do |t|
+    create_table :problem_user_results do |t|
       t.references :user,    index: true, foreign_key: true
       t.references :problem, index: true, foreign_key: true
 
@@ -23,8 +23,8 @@ class CreateUserProblemResults < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    # add_index :user_problem_results, :user_id
-    # add_index :user_problem_results, :problem_id
-    add_index :user_problem_results, [:user_id, :problem_id], unique: true
+    # add_index :problem_user_results, :user_id
+    # add_index :problem_user_results, :problem_id
+    add_index :problem_user_results, [:user_id, :problem_id], unique: true
   end
 end

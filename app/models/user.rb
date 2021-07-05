@@ -6,8 +6,8 @@ class User < ApplicationRecord
   has_many :drills
   has_many :drill_likes, class_name: "DrillLike", foreign_key: "user_id", dependent: :destroy
   has_many :submissions
-  # has_many :user_problem_results, class_name: "UserProblemResult", foreign_key: "user_id", dependent: :destroy
-  has_many :problems, through: :user_problem_results
+  # has_many :problem_user_results, class_name: "ProblemUserResult", foreign_key: "user_id", dependent: :destroy
+  has_many :problems, through: :problem_user_results
 
   validates :email, presence: true, uniqueness: true, length: { in: 3..200 }
   validates :login_name, presence: true, length: { in: 1..30 }, uniqueness: true

@@ -1023,3 +1023,9 @@ URL:drills/new
 
 新規作成時は、編集モードで開いて欲しい。
 編集時は、閲覧モードで開いて欲しい。
+
+# モデルの名称変更
+
+`UserProblemRelation` -> `UserProblemResult`
+UserProblemResult -> ProblemUserResult
+- モデル、Migrationのファイル名も変えて、統一させる。

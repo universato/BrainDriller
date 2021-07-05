@@ -22,7 +22,7 @@ class API::DrillsController < API::ApplicationController
     else
       @problems = @drill.problems.order(order).limit(params[:num])
       if current_user
-        @problem_map = UserProblemResult.where(
+        @problem_map = ProblemUserResult.where(
           user_id: current_user.id,
           problem_id: @problems.pluck(:id)
         ).to_h{ [_1.problem_id, _1] }
@@ -37,13 +37,13 @@ class API::DrillsController < API::ApplicationController
   private def set_problems_when_past
     order = params[:rand] ? "RANDOM()" : :id
     drill_problem_ids = @drill.problems.pluck(:id)
-    mastered_ids = UserProblemResult.where(
+    mastered_ids = ProblemUserResult.where(
       user_id: current_user.id,
       problem_id: drill_problem_ids
     ).where("current_streak >= 2").pluck(:problem_id)
     ids = (Set[*drill_problem_ids] - Set[*mastered_ids]).to_a
     @problems = Problem.where(id: ids).order(order).limit(params[:num])
-    @problem_map = UserProblemResult.where(
+    @problem_map = ProblemUserResult.where(
       user_id: current_user.id,
       problem_id: @problems.map(&:id)
     ).to_h{ [_1.problem_id, _1] }
@@ -61,15 +61,15 @@ class API::DrillsController < API::ApplicationController
     problems = params[:problems]
     problems.each do |problem|
       problem_id = problem[:id]
-      user_problem_result = UserProblemResult.find_or_create_by(user: user, problem_id: problem_id)
-      user_problem_result.number_of_submissions += 1
+      problem_user_result = ProblemUserResult.find_or_create_by(user: user, problem_id: problem_id)
+      problem_user_result.number_of_submissions += 1
       if answer_paper[problem_id.to_s] == problem[:correct_option]
-        user_problem_result.number_of_correct_answers += 1
-        user_problem_result.current_streak += 1
+        problem_user_result.number_of_correct_answers += 1
+        problem_user_result.current_streak += 1
       else
-        user_problem_result.current_streak = 0
+        problem_user_result.current_streak = 0
       end
-      user_problem_result.save!
+      problem_user_result.save!
     end
 
     update_number_of_problem_mastered(drill_id)
@@ -81,7 +81,7 @@ class API::DrillsController < API::ApplicationController
     drill_id = drill_id.id if drill_id.is_a?(Drill)
     number_of_problem_mastered = 0
     problem_ids = Drill.find(drill_id).problems.pluck(:id)
-    UserProblemResult.where(user: current_user, problem_id: problem_ids).each do |problem_result|
+    ProblemUserResult.where(user: current_user, problem_id: problem_ids).each do |problem_result|
       if problem_result.current_streak >= THRESHOLD_OF_PROBLEM_MASTERED
         number_of_problem_mastered += 1
       end

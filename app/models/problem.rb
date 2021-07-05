@@ -1,6 +1,6 @@
 class Problem < ApplicationRecord
   is_impressionable counter_cache: true
-  has_many :user_problem_results
+  has_many :problem_user_results
 
   belongs_to :drill
   belongs_to :user

@@ -80,6 +80,24 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "problem_user_results", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "problem_id"
+    t.integer "number_of_views", default: 0
+    t.integer "number_of_submissions", default: 0
+    t.integer "current_streak", default: 0
+    t.integer "number_of_correct_answers", default: 0
+    t.integer "correct_answer_rate", limit: 2, default: 0
+    t.float "average_time"
+    t.float "first_time"
+    t.float "fastest_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["problem_id"], name: "index_problem_user_results_on_problem_id"
+    t.index ["user_id", "problem_id"], name: "index_problem_user_results_on_user_id_and_problem_id", unique: true
+    t.index ["user_id"], name: "index_problem_user_results_on_user_id"
+  end
+
   create_table "problems", force: :cascade do |t|
     t.bigint "drill_id", null: false
     t.bigint "user_id", null: false
@@ -106,24 +124,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.index ["user_id"], name: "index_problems_on_user_id"
   end
 
-  create_table "user_problem_results", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "problem_id"
-    t.integer "number_of_views", default: 0
-    t.integer "number_of_submissions", default: 0
-    t.integer "current_streak", default: 0
-    t.integer "number_of_correct_answers", default: 0
-    t.integer "correct_answer_rate", limit: 2, default: 0
-    t.float "average_time"
-    t.float "first_time"
-    t.float "fastest_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["problem_id"], name: "index_user_problem_results_on_problem_id"
-    t.index ["user_id", "problem_id"], name: "index_user_problem_results_on_user_id_and_problem_id", unique: true
-    t.index ["user_id"], name: "index_user_problem_results_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -146,8 +146,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
   add_foreign_key "drill_user_results", "drills"
   add_foreign_key "drill_user_results", "users"
   add_foreign_key "drills", "users"
+  add_foreign_key "problem_user_results", "problems"
+  add_foreign_key "problem_user_results", "users"
   add_foreign_key "problems", "drills"
   add_foreign_key "problems", "users"
-  add_foreign_key "user_problem_results", "problems"
-  add_foreign_key "user_problem_results", "users"
 end
