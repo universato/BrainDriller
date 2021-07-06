@@ -200,7 +200,7 @@ JavaScriptは明示的に数値の型を指定したりしないです。
 console.log(5n / 2n)
 ```",2,3,2.5,エラーになる,1,"2n, 5nというのは、BigIntという整数値データを作る数値リテラルです。BigIntどうしの`/`による商は、BigIntとなり端数がでるような場合は切り捨てられます。",,,,,,,
 ,JavaScript,NumberとBigInt,"```js
-console.log(5n/ 2n)
+console.log(5 / 2n)
 ```",2,3,2.5,エラーになる,4,5はNumberという浮動小数点数のデータ、2nはBigIntという整数データになります。JavaScriptでは、この両者を足したり引いたりできません。,,,,,,,
 ,JavaScript,文字列の置換,"```js
 const str = ""foo-foo-bar""
