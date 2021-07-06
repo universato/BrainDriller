@@ -1,0 +1,24 @@
+title: YAML
+guide: |
+ このドリルは、YAMLの基礎を抑えることを目的としたドリルです。
+ 基礎を抑えましょう。
+problems:
+-
+ - カレンダーのスペル
+ - カレンダーの正しいスペルはどれ?
+ -
+  - calendar
+  - calender
+  - kalendar
+  - kalender
+ - 1
+-
+ - 砂糖を英語にすると
+ - 砂糖の正しいスペルは?
+ -
+  - sugar
+  - suger
+  - shugar
+  - shgeer
+ - 1
+-
