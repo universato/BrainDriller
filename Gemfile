@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'carrierwave'
 gem 'devise'
+gem 'dotenv-rails'
 gem 'impressionist'
 gem 'kaminari'
 gem 'pg'
