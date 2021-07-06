@@ -5,11 +5,6 @@ class UsersController < ApplicationController
     @users = User.page(params[:page]).per(15)
   end
 
-  def submissions
-    @user = User.find(params[:id])
-    @submissions = @user.submissions
-  end
-
   def show
     @user = User.find_by(id: params[:id]) || User.find_by(login_name: params[:id])
     @problem_user_results = []
