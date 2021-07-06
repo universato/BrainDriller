@@ -1047,3 +1047,36 @@ Markdown --
 
 第2引数は文字列の必要あり。
 スラッシュ始まりかどうかで、絶対パスになるか相対パスかで変わる。
+
+# heroku README
+
+[Heroku\+SendGrid\+Rails6（devise）の本番環境でメール送信する方法](https://asalworld.com/1404/)
+
+```r
+$ heroku addons:add sendgrid:starter
+Creating sendgrid:starter on ⬢ brain-driller... free
+Created sendgrid-pointy-57322 as SENDGRID_PASSWORD, SENDGRID_USERNAME
+Use heroku addons:docs sendgrid to view documentation
+```
+
+`heroku addons:docs sendgrid`
+-> https://devcenter.heroku.com/articles/sendgrid
+
+
+```r
+$ heroku config:get SENDGRID_USERNAME
+$ heroku config:get SENDGRID_PASSWORD
+```
+
+### Mailgun
+
+```r
+$ heroku addons:create mailgun:starter 
+```
+
+```r
+$ heroku config:get MAILGUN_SMTP_PORT
+$ heroku config:get MAILGUN_SMTP_SERVER
+$ heroku config:get MAILGUN_SMTP_LOGIN
+$ heroku config:get MAILGUN_SMTP_PASSWORD 
+```
