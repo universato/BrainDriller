@@ -1036,3 +1036,14 @@ UserProblemResult -> ProblemUserResult
 CSV
 YAML
 Markdown -- 
+
+
+# ERB
+
+```rb
+<%= link_to "#{user.login_name}", "#{user.id}" %>
+<%= link_to "#{user.login_name}", "/users/#{user.id}" %>
+```
+
+第2引数は文字列の必要あり。
+スラッシュ始まりかどうかで、絶対パスになるか相対パスかで変わる。

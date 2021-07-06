@@ -2,11 +2,11 @@
 
 <%= paginate @users %>
 
-<table>
+<ul>
   <% @users.each do |user| %>
-    <tr>
-      <td><p><%= user.id %></p></td>
-      <td><p><%= link_to "#{user.login_name}", "users/#{user.id}" %></p></td>
-    </tr>
+    <li>
+      <%= user.id %>.
+      <%= link_to "#{user.login_name}", "/users/#{user.id}" %>
+    </li>
   <% end %>
-</table>
+</ul>
