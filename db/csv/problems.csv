@@ -1,118 +1,4 @@
 ID,drill_title,title,statement,o1,o2,o3,o4,ans,explanation,in_order,tag0,tag1,tag2,tag3,private_memo,drill_id
-1,雑学,日本一の高い山は,日本一の高い山は?,富士山,北岳,奥穂高岳,間ノ岳,1,"富士山は3776mと日本一高いです。
-続いて、北岳3193m、奥穂高岳3190m、間ノ岳3190mと並びます。",FALSE,山,日本の山,常識,易しい,,
-2,雑学,日本一の低い山は,日本一の高い山は富士山ですが、2番目は?,富士山,北岳,奥穂高岳,間ノ岳,2,"富士山は3776mですが、2番目は北岳3193mです。
-続いて、奥穂高岳3190m、間ノ岳3190mと並びます。",FALSE,山,日本の山,雑学,難しい,,
-3,HTML,<HTMLタグ>大文字小文字,HTMLタグは、<h1>や<p>などの小文字ですか。<H1>や<P>などの大文字ですか。,小文字,大文字,両方とも動く,,3,HTMLタグは、小文字でも大文字でも動きます。,TRUE,HTMLタグ,HTML,入門,基礎,混ぜても動く?,
-4,HTML,<HTMLタグ>改行タグ,"下記のHTMLの文章Aと文章Bに改行を入れるために、???に書くべきタグは何でしょうか。
-```html
-<div>文章A???文章B</div>
-```",<h1>,<p>,<hr>,<br>,4,"改行するタグは、line break(改行)からきている<br>タグです。
-「壊す」や「一休み」の意味合いであるbreakが改行をするのは独特な感じがするかもしれませが、
-一文を壊したり一休みしたりすると考えると良いでしょう。",FALSE,HTMLタグ,HTML,入門,基礎,,
-5,HTML,<HTMLタグ>見出しタグ,横に水平の線を引くHTMLタグは。,<h1>,<p>,<hr>,<br>,3,"<hr>は、horizontal rule(水平な罫線、横型の罫線)を作るタグです。
-日本語のルール(Rule)は「(スポーツの)規則・きまり」の意味合いで使われることが多いですが、
-ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HTMLタグ,HTML,入門,基礎,,
-6,HTML,<HTMLタグ>HTMLの意味,HTMLは何の略?,HighLevel Markup Language,HyperText Markup Language,HighLevel Makeup Language,HyperText Makeup Language,2,"HTMLの最初の説明で必ずといっていいほど書いてありますが、
-知らなくても困らないので意外にソラですぐ言える人は多くないかもしれません。
-なお、makeupは化粧の意味合いです。",TRUE,HTMLタグ,HTML,雑学,基礎,,
-7,HTML,<HTMLタグ>見出しタグ,見出しをつけるタグは,<head>,<header>,<hr>,"<h1>, <h2>, …… ,<h6>",4,<h1> ~ <h6>のhは、heading(見出し)の意味合いです。よく使いますね。,FALSE,HTMLタグ,HTML,雑学,基礎,,
-,HTML,title属性,"一般に、title属性が示すものはなんですか。
-```html
-<a href=""http://example.com"" title=""example.comへのリンク"">example.com<a>
-```",補足情報,題名,字幕,称号,1,"titleタグは、ウェブページのタイトルです。
-title属性は、一般に補足情報です。",,,,,,,
-8,算数,【算数】2の11乗は,2^{11}を求めて下さい。,256,512,"1,024","2,048",4,"2^{10} = 1024 ≒ 10^3 は有名なので、覚えておくと良いでしょう。
-2^1 = 2
-2^2 = 4
-2^3 = 8
-2^4 = 16
-2^5 = 32
-2^6 = 64
-2^7 = 128
-2^8 = 256
-2^9 = 512
-2^{10} = 1024",TRUE,,算数,数学,基礎,,
-9,算数,【算数】和,1 + 2 + 3 + …… + 10 を求めて下さい。,25,35,45,55,4,( 1 + 10 ) \times 10 / 2 = 55,TRUE,数列,算数,数学,基礎,,
-10,算数,【算数】素因数分解,360を素因数分解して下さい。,2^3 \times 3^2,2^3 \times 3^3,2^2 \times 3^2 \times 5,2^3 \times 3^2 \times 5,4,"素因数分解とは、ある数を素数の積の形で表すことです。
-360は、10で割れることがすぐにわかると思います。
-360
-= 36 \times 10
-= 36 \times 2 \times 5
-= 4 \times 9 \times 2 \times 5
-= 2^3 \times 3^2 \times 5",TRUE,素因数分解,算数,数学,基礎,,
-10,CSS,border,"内側のalertクラスのあるdivタグの枠線は、何色になりますか。
-
-`HTML`
-```html
-<div class=""black-box"">
-   main
-  <div class=""alert"">
-    アラート
-  </div>
-  main
-</div>
-```
-
-`CSS`
-```css
-.black-box {
-  border: solid 1px black;
-}
-
-.alert {
- color: red;
- border: solid 1px;
-}
-```",黒色,赤色,無色,線は存在しない,2,"枠線は、継承されません。
-内側の枠線は、borderで色が指定されてないため、colorで指定された色の影響を受けます。colorは、文字色だけでなく、枠線の色にも影響する点に注意してください。",,,,,,,
-11,CSS,aタグ,"次のHTMLコード・CSSで誤っている点はどれですか。
-
-```html
-<a href=""class"" class=""block"">
-  ブロック1
-  <a href=""https://example.com"">
-    インライン
-  </a>
-  ブロック2
-</a>
-```
-
-```css
-.block {
-  display: block;
-}
-```",aタグ内でさらにタグを書いている点が誤り。,aタグをブロックにしている点が誤り。,aタグ内にaタグを書いている点が誤り。,誤りは存在しない,3,"HTML5以降では、aタグをブロックとして、aタグ内にタグを含めても問題ありません。
-ただし、aタグ内にaタグがあると、HTMLが正しく認識されません。",,,,,,,
-,CSS,flex,`flex-flow`は何と何を一括指定するプロパティですか。,`flex-basis`と`flex-grow`,`flex-basis`と`flex-wrap`,`flex-direction`と`flex-grow`,`flex-direction`と`flex-wrap`,4,"`flex-flow`は、`flex-direction`と`flex-wrap`の値を一括指定して流れを決めるプロパティです。
-`flex-direction`が方向で、`row`(行方向 = 左から右), `column`(列方向 = 上から下), `row-reverse`, `column-reverse`の4通りを指定します。
-`flex-wrap`が、`nowrap`, `wrap`, `wrap-reverse`の3通りです。
-4 * 3 で12通りの指定方法があります。",,,,,,,
-,CSS,grid,"次のgridは、何行何列のグリッドを作りますか。
-
-```css
-.container {
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px;
-}
-```",3行2列,2行3列,3行3列,2行2列,2,"columnが列で、rowが行ですね。
-最後が複数形になる点に注意です。",,,,,,,
-,CSS,grid,gridでは、名前をつける方法がありますが、どのように指定しますか。,grid-template: 100px [t-start] 100px [t-end];,grid-template: 100px [t-starts] 100px [t-ends];,grid-template: 100px [t-begin] 100px [t-end];,grid-template: 100px [t-begins] 100px [t-ends];,1,,,,,,,,
-,CSS,color,"`box` クラスの枠線は、何色になりますか。
-
-```css
-.box {
-  border: 1px solid #eee;
-}
-```",赤,緑,青,灰色,4,"`#`始まりは、16進数によるRGBの指定となります。
-`#eee`は、`#EEE`や`#eeeeee`と同じです。
-RGBは、赤(Red)・緑(Green)・青(Blue)の光の三原色のことで、それぞれが混ざった場合により明るい色になります。今回は、白に近い灰色となります。
-",,,,,,,
-,rbenv,rbenv,"`rbenv versions`
-このコマンドは、何をする。",rbenvのバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,3,"複数形な点に注意してください。
-Rubyがrbenvを通じてインストールされてるか等は、このコマンドを実行して確かめられます。
-なお、`rbenv --help`で、`rbenv`のもつコマンドと簡単な説明の一覧で確かめられます。",,,,,,,
 ,Crystal,Crystal,"```crystal
 p 'Hello, World!'
 ```
@@ -217,6 +103,93 @@ p PI #=> 3.141592653589793
 τは、PythonやRustにもある真の円周率です。
 数学などで2πがよくでてきて、2πの方が数式を綺麗にシンプルに表せることが多いです。
 そのため、πよりも2πを円の定数として置いた方がいいという主張が存在します。",,,,,,,
+10,CSS,border,"内側のalertクラスのあるdivタグの枠線は、何色になりますか。
+
+`HTML`
+```html
+<div class=""black-box"">
+   main
+  <div class=""alert"">
+    アラート
+  </div>
+  main
+</div>
+```
+
+`CSS`
+```css
+.black-box {
+  border: solid 1px black;
+}
+
+.alert {
+ color: red;
+ border: solid 1px;
+}
+```",黒色,赤色,無色,線は存在しない,2,"枠線は、継承されません。
+内側の枠線は、borderで色が指定されてないため、colorで指定された色の影響を受けます。colorは、文字色だけでなく、枠線の色にも影響する点に注意してください。",,,,,,,
+11,CSS,aタグ,"次のHTMLコード・CSSで誤っている点はどれですか。
+
+```html
+<a href=""class"" class=""block"">
+  ブロック1
+  <a href=""https://example.com"">
+    インライン
+  </a>
+  ブロック2
+</a>
+```
+
+```css
+.block {
+  display: block;
+}
+```",aタグ内でさらにタグを書いている点が誤り。,aタグをブロックにしている点が誤り。,aタグ内にaタグを書いている点が誤り。,誤りは存在しない,3,"HTML5以降では、aタグをブロックとして、aタグ内にタグを含めても問題ありません。
+ただし、aタグ内にaタグがあると、HTMLが正しく認識されません。",,,,,,,
+,CSS,flex,`flex-flow`は何と何を一括指定するプロパティですか。,`flex-basis`と`flex-grow`,`flex-basis`と`flex-wrap`,`flex-direction`と`flex-grow`,`flex-direction`と`flex-wrap`,4,"`flex-flow`は、`flex-direction`と`flex-wrap`の値を一括指定して流れを決めるプロパティです。
+`flex-direction`が方向で、`row`(行方向 = 左から右), `column`(列方向 = 上から下), `row-reverse`, `column-reverse`の4通りを指定します。
+`flex-wrap`が、`nowrap`, `wrap`, `wrap-reverse`の3通りです。
+4 * 3 で12通りの指定方法があります。",,,,,,,
+,CSS,grid,"次のgridは、何行何列のグリッドを作りますか。
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px;
+}
+```",3行2列,2行3列,3行3列,2行2列,2,"columnが列で、rowが行ですね。
+最後が複数形になる点に注意です。",,,,,,,
+,CSS,grid,gridでは、名前をつける方法がありますが、どのように指定しますか。,grid-template: 100px [t-start] 100px [t-end];,grid-template: 100px [t-starts] 100px [t-ends];,grid-template: 100px [t-begin] 100px [t-end];,grid-template: 100px [t-begins] 100px [t-ends];,1,,,,,,,,
+,CSS,color,"`box` クラスの枠線は、何色になりますか。
+
+```css
+.box {
+  border: 1px solid #eee;
+}
+```",赤,緑,青,灰色,4,"`#`始まりは、16進数によるRGBの指定となります。
+`#eee`は、`#EEE`や`#eeeeee`と同じです。
+RGBは、赤(Red)・緑(Green)・青(Blue)の光の三原色のことで、それぞれが混ざった場合により明るい色になります。今回は、白に近い灰色となります。
+",,,,,,,
+3,HTML,<HTMLタグ>大文字小文字,HTMLタグは、<h1>や<p>などの小文字ですか。<H1>や<P>などの大文字ですか。,小文字,大文字,両方とも動く,,3,HTMLタグは、小文字でも大文字でも動きます。,TRUE,HTMLタグ,HTML,入門,基礎,混ぜても動く?,
+4,HTML,<HTMLタグ>改行タグ,"下記のHTMLの文章Aと文章Bに改行を入れるために、???に書くべきタグは何でしょうか。
+```html
+<div>文章A???文章B</div>
+```",<h1>,<p>,<hr>,<br>,4,"改行するタグは、line break(改行)からきている<br>タグです。
+「壊す」や「一休み」の意味合いであるbreakが改行をするのは独特な感じがするかもしれませが、
+一文を壊したり一休みしたりすると考えると良いでしょう。",FALSE,HTMLタグ,HTML,入門,基礎,,
+5,HTML,<HTMLタグ>見出しタグ,横に水平の線を引くHTMLタグは。,<h1>,<p>,<hr>,<br>,3,"<hr>は、horizontal rule(水平な罫線、横型の罫線)を作るタグです。
+日本語のルール(Rule)は「(スポーツの)規則・きまり」の意味合いで使われることが多いですが、
+ruleには「定規」や「罫線」の意味合いがあります。",FALSE,HTMLタグ,HTML,入門,基礎,,
+6,HTML,<HTMLタグ>HTMLの意味,HTMLは何の略?,HighLevel Markup Language,HyperText Markup Language,HighLevel Makeup Language,HyperText Makeup Language,2,"HTMLの最初の説明で必ずといっていいほど書いてありますが、
+知らなくても困らないので意外にソラですぐ言える人は多くないかもしれません。
+なお、makeupは化粧の意味合いです。",TRUE,HTMLタグ,HTML,雑学,基礎,,
+7,HTML,<HTMLタグ>見出しタグ,見出しをつけるタグは,<head>,<header>,<hr>,"<h1>, <h2>, …… ,<h6>",4,<h1> ~ <h6>のhは、heading(見出し)の意味合いです。よく使いますね。,FALSE,HTMLタグ,HTML,雑学,基礎,,
+,HTML,title属性,"一般に、title属性が示すものはなんですか。
+```html
+<a href=""http://example.com"" title=""example.comへのリンク"">example.com<a>
+```",補足情報,題名,字幕,称号,1,"titleタグは、ウェブページのタイトルです。
+title属性は、一般に補足情報です。",,,,,,,
 ,JavaScript,Number,"```js
 console.log(5 / 2)
 ```",2,3,2.5,エラーになる,3,"JavaScriptの数値リテラルで作られるNumberという数値データは、浮動小数点数型です。浮動小数点数どうしの割り算の結果は、浮動小数点数になります。
@@ -258,13 +231,29 @@ console.log(obj[0])
 ```",undefinedを返す,nullを返す,nilを返す,エラーになる,1,"nullではなく、undefinedを返します。
 
 nilがあるのは、Rubyなどです。",,,,,,,
-,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,4,カタカナ表記のウェンズデイと、実際のスペルがだいぶズレてる感じがありますね。,,,,,,,
-,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
-,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
-,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,
-,英単語,,日曜日,Tuesday,Thursday,Saturday,Sunday,4,,,,,,,,
-99,日商簿記,株式会社の設立,"ある株式会社は設立にあたり1株当り50円で株式を100株発行し、出資者より現金を受け取った。発行額の全額を資本金とする。
-改題(日商簿記3級サンプル問題、2018 年 10 月）","資本金5,000円 / 現金5,000円","現金5,000円 / 資本金5,000円","有価証券5,000円 / 資本金5,000円",仕訳しない,2,TRUE,資本金,簿記3級,簿記,簡単,,,
+,,,,,,,,,,,,,,,,
+,JavaScript,,"それぞれ何を返しますか。
+```js
+console.log(null && true || true)
+console.log(true || true && null)
+```","true
+true","true
+false","false
+true","false
+false",1,"`||`と`&&`の優先順位は、`&&`の方が高いため、`&&`から計算されます。
+`null && true`の返り値は、`null`です。
+また、`null || true`の返り値は、`true`です。
+
+`(null && true) || true` => `null || true` => `true`
+`null || (true && null)` => `true || null` => `true`
+
+なお、C言語やRubyなどでも、`&&`の方が`||`よりも優先的に計算されます。",,,,,,,
+,rbenv,rbenv,"`rbenv -v`
+このコマンドは、何をする。",rbenv自身のバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,1,ショートオプションでは`-v`ですが、ロングオプションで`--version`と指定することも可能です。,,,,,,,
+,rbenv,rbenv,"`rbenv versions`
+このコマンドは、何をする。",rbenv自身のバージョンを表示,現在のRubyバージョン、及び、その指定方法,インストールされているRubyの一覧、実行されるRubyのバージョン、そのバージョンが何で指定されているか,rbenvにそのようなコマンドはないので、エラーになる,3,"複数形な点に注意してください。
+Rubyがrbenvを通じてインストールされてるか等は、このコマンドを実行して確かめられます。
+なお、`rbenv --help`で、`rbenv`のもつコマンドと簡単な説明の一覧で確かめられます。",,,,,,,
 11,Ruby,Rubyの **,"Rubyで、`5 * 2`は10を返しますが、`5 ** 2`は何でしょう。
 ```ruby
 p 5 * 2  #=> 10
@@ -1898,3 +1887,33 @@ d.unshift(0)
 d.each_slice(2).map{ _2 - _1 }
 ```",4,each_consを使わない方法がちょっと速いかもしれない。,,,,,,,
 ,Rubyで競プロ,,,,,,,,,,,,,,,
+99,日商簿記,株式会社の設立,"ある株式会社は設立にあたり1株当り50円で株式を100株発行し、出資者より現金を受け取った。発行額の全額を資本金とする。
+改題(日商簿記3級サンプル問題、2018 年 10 月）","資本金5,000円 / 現金5,000円","現金5,000円 / 資本金5,000円","有価証券5,000円 / 資本金5,000円",仕訳しない,2,TRUE,資本金,簿記3級,簿記,簡単,,,
+8,算数,【算数】2の11乗は,2^{11}を求めて下さい。,256,512,"1,024","2,048",4,"2^{10} = 1024 ≒ 10^3 は有名なので、覚えておくと良いでしょう。
+2^1 = 2
+2^2 = 4
+2^3 = 8
+2^4 = 16
+2^5 = 32
+2^6 = 64
+2^7 = 128
+2^8 = 256
+2^9 = 512
+2^{10} = 1024",TRUE,,算数,数学,基礎,,
+9,算数,【算数】和,1 + 2 + 3 + …… + 10 を求めて下さい。,25,35,45,55,4,( 1 + 10 ) \times 10 / 2 = 55,TRUE,数列,算数,数学,基礎,,
+10,算数,【算数】素因数分解,360を素因数分解して下さい。,2^3 \times 3^2,2^3 \times 3^3,2^2 \times 3^2 \times 5,2^3 \times 3^2 \times 5,4,"素因数分解とは、ある数を素数の積の形で表すことです。
+360は、10で割れることがすぐにわかると思います。
+360
+= 36 \times 10
+= 36 \times 2 \times 5
+= 4 \times 9 \times 2 \times 5
+= 2^3 \times 3^2 \times 5",TRUE,素因数分解,算数,数学,基礎,,
+,英単語,,水曜日,Wensday,Wednsday,Wenesday,Wednesday,4,カタカナ表記のウェンズデイと、実際のスペルがだいぶズレてる感じがありますね。,,,,,,,
+,英単語,,火曜日,Tuesday,Thursday,Saturday,Sunday,1,,,,,,,,
+,英単語,,木曜日,Tuesday,Thursday,Saturday,Sunday,2,,,,,,,,
+,英単語,,土曜日,Tuesday,Thursday,Saturday,Sunday,3,,,,,,,,
+,英単語,,日曜日,Tuesday,Thursday,Saturday,Sunday,4,,,,,,,,
+1,雑学,日本一の高い山は,日本一の高い山は?,富士山,北岳,奥穂高岳,間ノ岳,1,"富士山は3776mと日本一高いです。
+続いて、北岳3193m、奥穂高岳3190m、間ノ岳3190mと並びます。",FALSE,山,日本の山,常識,易しい,,
+2,雑学,日本一の低い山は,日本一の高い山は富士山ですが、2番目は?,富士山,北岳,奥穂高岳,間ノ岳,2,"富士山は3776mですが、2番目は北岳3193mです。
+続いて、奥穂高岳3190m、間ノ岳3190mと並びます。",FALSE,山,日本の山,雑学,難しい,,

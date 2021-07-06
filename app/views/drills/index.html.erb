@@ -5,7 +5,7 @@
 <% end %>
 
 <% if @drills.blank? %>
-  <%= "ドリルがありません。" %>
+  <div> ドリルがありません。</div>
 <% else %>
   <div class="drills">
     <% @drills.each do |drill| %>
