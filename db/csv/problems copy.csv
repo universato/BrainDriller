@@ -1,1 +1,45 @@
 ID,drill_title,title,statement,o1,o2,o3,o4,ans,explanation,in_order,tag0,tag1,tag2,tag3,private_memo,drill_id
+,Rails,ActiveRecordの全更新update_all,"次のメソッドは、全ユーザーの`name`カラムを`""田中""`に更新します。
+```rb
+User.update(name: ""田中"")
+```
+","SQL1回で、全ユーザーの`name`カラムを`""田中""`に更新します。
+","SQL1回で、全ユーザーの`name`カラムを`""田中""`に更新します。
+そして、同時に更新時刻である`updated_at`も更新します。","SQLをユーザーの回数発行し、全ユーザーの`name`カラムを`""田中""`に更新します。
+","SQLをユーザーの回数発行し、全ユーザーの`name`カラムを`""田中""`に更新します。
+そして、同時に更新時刻である`updated_at`も更新します。",1,"発行されるSQLは1回です。`insert_all`や`upsert_all`も1回です。
+
+`updated_at`は自動で更新されません。更新したい場合は、指定する必要があります。
+
+`where`メソッドで範囲を限定することで、条件に合う全ユーザーに対して更新できます。",,,,,,,
+,Rails,ActiveRecordの全削除,"次のメソッド`destroy_all`と`delete_all`は、全ユーザーを削除します。
+```rb
+User.delete_all
+User.destroy_all
+```
+発行されるSQLの回数は、それぞれ何回でしょう。
+なお、登録されているユーザー数をNとします。","`User.delete_all` …… 1回
+`User.destroy_all` …… 1回","`User.delete_all` …… 1回
+`User.destroy_all` …… N回","`User.delete_all` …… N回
+`User.destroy_all` …… 1回","`User.delete_all` …… N回
+`User.destroy_all` …… N回",2,"`_all`が接尾語のメソッドの多くは、SQLを発行する回数が1回です。
+しかし、`destroy_all`は、SQLをN回発行するので注意してください。",,,,,,,
+,,,"次はどちらもmoviesテーブルから、全レコードのtitleカラムを取得するコードです。
+```rb
+Movie.pluck(:title)
+Movie.all.map(&:title)
+```","```rb
+Movie.all.map(&:title)
+```
+
+`SELECT ""movies"".* FROM ""movies""`",,,,,,,,,,,,
+,,,"次のメソッドを呼び出したとき、発行されるSQLは何でしょうか。
+```sql
+User.where(name: '鈴木')
+```","````rb
+SELECT ""users"".* FROM ""users"" WHERE ""users"".""name"" = '鈴木'`
+```","````rb
+SELECT ""users"".* FROM ""users"" WHERE ""users"".""name"" LIKE '鈴木'`
+```","````rb
+SELECT ""users"".* FROM ""users"" WHERE ""users"".""name"" LIKE '%鈴木%'`
+```",,,,,,,,,,
