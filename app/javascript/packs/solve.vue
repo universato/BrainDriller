@@ -60,7 +60,7 @@
           <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
           <div class="problem-correct_option" v-else> 無回答 </div>
           <div style="font-size: 1.2em;">
-            <span v-if="!answerPaper[problem.id]" class="uncorrect">無回答でした</span>
+            <span v-if="answerPaper[problem.id] === undefined" class="uncorrect">無回答でした</span>
             <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="correct">正解です</span>
             <span v-else class="uncorrect">不正解です</span>
           </div>
