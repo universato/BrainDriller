@@ -5,13 +5,7 @@
 <% end %>
 
 <% if @drills.blank? %>
-  <%= "ドリルが取得できませんでした。お困りでしたら、お問い合わせ下さい。" %>
-  <% if Rails.env.development? %><br>
-    【原因】(開発環境のみ表示):
-    <% if @drills.nil?  %><%= "@drillsがnil"  %>
-    <% elsif @drills.size == 0 %><%= "@drills.sizeが0" %>
-    <% else %><%= "不明: @drillsがnilでも、@drills.sizeが0でもない" %><% end %>
-  <% end %>
+  <%= "ドリルがありません。" %>
 <% else %>
   <div class="drills">
     <% @drills.each do |drill| %>
