@@ -19,3 +19,30 @@ heroku run rake db:seed
 `heroku pg:psql`
 `\t` テーブル一覧
 `quit` 終了
+
+
+# 作り直し
+
+```
+heroku create アプリ名
+git push heroku main
+```
+
+1ユーザーにつき、無料でHerokuに5つアプリケーションを登録できる。
+`heroku create アプリ名`で、アプリ名を指定してherokuにWebアプリを入れる箱を作る。
+
+```
+heroku create brain-driller
+git push heroku main
+```
+remote: Verifying deploy... done.
+To https://git.heroku.com/brain-driller.git
+ * [new branch]      main -> main
+
+We're sorry, but something went wrong.
+↓
+
+```
+heroku addons:add heroku-postgresql   
+heroku run rake db:create
+```
