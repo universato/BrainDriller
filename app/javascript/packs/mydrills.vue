@@ -1,21 +1,31 @@
 <template>
   <div id="app panel">
-    <button @click="reverseDrills" class="btn btn-primary">逆順する</button>
-    <button @click="sortUnmasteredDrills" class="btn btn-primary">{{ drillReversed ? "未習得率順" : "習得率順" }}</button>
-    <div v-for="drill in drills" :key="drill.id">
-      タイトル: {{ drill.title }}
-      全体閲覧数{{ drill.number_of_views }}
-      ドリルID{{ drill.id }}
-      習得数{{ number_of_problem_mastered(drill.id) }}
-      習得数{{ drill.problem_size }}
-      習得率{{ percent(number_of_problem_mastered(drill.id), drill.problem_size) }}%
-      <br>
-      <div v-if="likes[drill.id]">
-        <button @click="unlikeDrill(drill)" class="btn btn-primary">Unlike Drill </button>
+    <div v-if="isLoaded">
+      <div v-if="drills.length === 0">
+        現在、あなたがマイドリルとして登録されているドリルはありません。
       </div>
       <div v-else>
-        <button @click="likeDrill(drill)" class="btn btn-primary">Like Drill </button>
+        <button @click="reverseDrills" class="btn btn-primary">逆順する</button>
+        <button @click="sortUnmasteredDrills" class="btn btn-primary">{{ drillReversed ? "未習得率順" : "習得率順" }}</button>
+        <div v-for="drill in drills" :key="drill.id">
+          タイトル: {{ drill.title }}
+          全体閲覧数{{ drill.number_of_views }}
+          ドリルID{{ drill.id }}
+          習得数{{ number_of_problem_mastered(drill.id) }}
+          習得数{{ drill.problem_size }}
+          習得率{{ percent(number_of_problem_mastered(drill.id), drill.problem_size) }}%
+          <br>
+          <div v-if="likes[drill.id]">
+            <button @click="unlikeDrill(drill)" class="btn btn-primary">Unlike Drill</button>
+          </div>
+          <div v-else>
+            <button @click="likeDrill(drill)" class="btn btn-primary">Like Drill</button>
+          </div>
+        </div>
       </div>
+    </div>
+    <div v-else>
+      <div>ロード中</div>
     </div>
   </div>
 </template>
@@ -27,6 +37,7 @@ export default {
       drills: [],
       likes: {},
       drillReversed: false,
+      isLoaded: false,
     }
   },
   created() {
@@ -50,6 +61,7 @@ export default {
     }).catch(error => {
       console.warn('Failed to parsing', error)
     })
+    this.isLoaded = true;
   },
   methods: {
     number_of_problem_mastered(drill_id) {
