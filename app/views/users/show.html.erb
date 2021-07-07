@@ -1,7 +1,13 @@
 <div class="panel">
-  <div>作成したドリル一覧</div>
-  <% @drills.each do |drill| %>
-    <div><%= link_to drill.title, drill %></div>
+
+
+  <% if @drills.blank? %>
+    <div><%= @user.login_name %>の作成したドリルはありません。
+  <% else %>
+    <div><%= @user.login_name %>の作成したドリル一覧</div>
+    <% @drills.each do |drill| %>
+      <div><%= link_to drill.title, drill %></div>
+    <% end %>
   <% end %>
 </div>
 
