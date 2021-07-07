@@ -575,7 +575,12 @@ p h[:name]
 h = { :name => ""Smith"", :age => 20 } # 一般的な表記
 h = { name: ""Smith"", age: 20 }       # キーがSymbolのときにだけできる短縮表記
 ```
-キーがSymbolのときは後者の短縮表記で書くのが一般的です。",,,,,,,
+キーがSymbolのときは後者の短縮表記で書くのが一般的です。
+この短縮表記は、Ruby 1.9(2007/12/25リリース)で導入されました。",,,,,,,
+,Ruby,Symbol,"```rb
+p ""name"" == :name
+p :""name"" == :name
+```",,,,,,,,,,,,,
 ,Ruby,Array#grep,"```ruby
 p ""str"".methods.grep(/each/).sort
 ```
