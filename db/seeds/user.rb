@@ -6,6 +6,7 @@ def create_user(name, admin: false)
     admin: admin,
     password: "foobar",
     password_confirmation: "foobar",
+    confirmed_at: Time.current,
   )
   # 何度も実行されることを想定すると、メアドでエラーが起きるかもしれないので、エラーはださない。
 end
