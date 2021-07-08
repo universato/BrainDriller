@@ -1080,3 +1080,35 @@ $ heroku config:get MAILGUN_SMTP_SERVER
 $ heroku config:get MAILGUN_SMTP_LOGIN
 $ heroku config:get MAILGUN_SMTP_PASSWORD 
 ```
+
+
+# Ruby バージョンアップ
+
+バージョンアップさせる前に、テストが動くかどうかちゃんと確かめよう。
+
+```
+rails s
+rails test:all
+git push heroku main
+rubocop
+```
+
+`bundle update`したら、言われた。
+```
+RubyZip 3.0 is coming!
+**********************
+
+The public API of some Rubyzip classes has been modernized to use named
+parameters for optional arguments. Please check your usage of the
+following classes:
+  * `Zip::File`
+  * `Zip::Entry`
+  * `Zip::InputStream`
+  * `Zip::OutputStream`
+
+Please ensure that your Gemfiles and .gemspecs are suitably restrictive
+to avoid an unexpected breakage when 3.0 is released (e.g. ~> 2.3.0).
+See https://github.com/rubyzip/rubyzip for details. The Changelog also
+lists other enhancements and bugfixes that have been implemented since
+version 2.3.0.
+```
