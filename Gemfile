@@ -33,7 +33,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'carrierwave'
 gem 'devise'
-gem 'dotenv-rails'
 gem 'impressionist'
 gem 'kaminari'
 gem 'pg'
@@ -47,6 +46,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # gem "factory_bot_rails"
+  gem 'dotenv-rails'
   gem 'faker'
   gem 'minitest'
   gem 'simplecov'

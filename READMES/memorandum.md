@@ -1135,3 +1135,274 @@ ActionView::Template::Error: Missing host to link to! Please provide the :host p
 # Gem Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
+
+# GitHub Actions
+
+```yml
+name: Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: BrainDriller_test
+          RAILS_ENV: test
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    container:
+      image: ruby:3.0.2
+      env:
+        RAILS_ENV: test
+        POSTGRES_HOST: postgres
+        RAILS_DATABASE_USER: postgres
+        RAILS_DATABASE_PASSWORD: password
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up node and yarn
+      run: |
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        curl -sL https://deb.nodesource.com/setup_16.x | bash -
+        apt install -y nodejs yarn
+    - name: Build and setup
+      run: |
+        bundle -j 4
+        bin/rails yarn:install db:setup assets:precompile
+        bin/rails test
+```
+
+
+```
+node -v
+v16.2.0
+```
+
+```
+Couldn't create 'BrainDriller_development' database. Please check your configuration.
+rails aborted!
+ActiveRecord::NoDatabaseError: could not connect to server: No such file or directory
+```
+
+
+## Circle CI
+
+https://circleci.com/docs/ja/2.0/postgres-config/
+```yml
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-ruby-rails
+
+    # Primary container image where all commands run
+
+    docker:
+      - image: circleci/ruby:3.0.1-buster
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+
+    # Service container image available at `host: localhost`
+
+      - image: circleci/postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle-test_test
+
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
+
+      # Qiita: "You must use Bundler 2 or greater with this lockfile" に対応する
+      # https://qiita.com/tanakaworld/items/e15ff9dbdd4b628378c2
+      - run:
+          name: setup bundler
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            sudo gem install bundler
+
+      # Bundle install dependencies
+      - run:
+          name: Install dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+
+      - run: sudo apt install -y postgresql-client || true
+
+      # Store bundle cache
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
+      - run:
+          name: Parallel RSpec
+          command: bin/rails test
+
+      # Save artifacts
+      - store_test_results:
+          path: /tmp/test-results
+```
+
+
+```r
+#!/bin/bash -eo pipefail
+bundle check || bundle install --jobs 4 --retry 3
+You must use Bundler 2 or greater with this lockfile.
+You must use Bundler 2 or greater with this lockfile.
+
+Exited with code exit status 20
+CircleCI received exit code 20
+```
+↓
+これRubyのバージョンを上げるのが正しかった。imageのRubyバージョンを上げる。
+
+```yml
+    docker:
+      - image: circleci/ruby:3.0.2-node-browsers
+```
+
+
+
+```yml
+BUNDLER_VERSION: 2.2.22
+```
+こっちは関係なかった。
+
+#### Deperecated
+
+```
+Install missing gems with `bundle install`
+[DEPRECATED] The `--path` flag is deprecated because it relies on being remembered across bundler invocations, which bundler will no longer do in future versions. Instead please use `bundle config set --local path 'vendor/bundle'`, and stop using this flag
+Fetching gem metadata from https://rubygems.org/
+```
+↓なんかエラーがでるので、エラー文どおりに書き換えた。
+```yml
+      - run:
+          name: Install dependencies
+          command: |
+            bundle config set --local path 'vendor/bundle
+            bundle check || bundle install --jobs 4 --retry 3
+```
+
+```
+bin/rails test:all
+rails aborted!
+Webdrivers::BrowserNotFound: Failed to find Chrome binary.
+```
+
+
+[CircleCI: CircleCI のビルド済み Docker イメージ](https://circleci.com/docs/ja/2.0/circleci-images/#ruby)
+最新のタグをクリックすると全部見れる。3.0.2もあった。
+↓
+https://circleci.com/docs/2.0/docker-image-tags.json
+
+
+`ruby:3.0.1-node-browsers`をつかわなければいけないっぽい。
+ただヘッドレスブラウザは上手くいかなかったので、諦める。
+
+(#28)
+`- restore_cache:`よりも手前にbundlerのアップデートを持ってきたら、キャッシュできた。
+```yml
+      - run:
+          name: Update Bundler
+          command: gem install bundler:2.2.22
+```
+
+dockerで`BUNDLER_VERSION: 2.2.22`と指定したら、`command: gem install bundler:2.2.22`とコマンドを叩く必要があるっぽい。
+
+```yml
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-ruby-rails
+
+    # Primary container image where all commands run
+
+    docker:
+      - image: circleci/ruby:3.0.2-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+          BUNDLER_VERSION: 2.2.22
+
+    # Service container image available at `host: localhost`
+
+      - image: circleci/postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle-test_test
+
+    steps:
+      - checkout
+
+      - run:
+          name: Update Bundler
+          command: gem install bundler:2.2.22
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
+
+      # Bundle install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            bundle config set --local path 'vendor/bundle'
+            bundle check || bundle install --jobs 4 --retry 3
+
+      - run: sudo apt install -y postgresql-client || true
+
+      # Store bundle cache
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
+
+      - run:
+          name: Test
+          command: bin/rails test
+
+      # Save artifacts
+      - store_test_results:
+          path: /tmp/test-results
+```
