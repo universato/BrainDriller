@@ -1094,7 +1094,7 @@ rubocop
 ```
 
 `bundle update`したら、言われた。
-```
+```md
 RubyZip 3.0 is coming!
 **********************
 
@@ -1113,10 +1113,25 @@ lists other enhancements and bugfixes that have been implemented since
 version 2.3.0.
 ```
 
+# devise
+
+認証周りでテストを追加。
+
+fixtures/users.ymlの各ユーザーに次の行を追加した。認証済み扱いにするため。
+```yml
+  confirmed_at: <%= Time.now %>
+```
+
 # 登録のテストで失敗する。
 
-```rb
+```md
 Error:
 SignUpTest#test_sign_up:
 ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+```
+
+下記を`config/enviroments/test.rb`にも追加した。
+```rb
+# Gem Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 ```
