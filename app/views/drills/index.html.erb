@@ -11,6 +11,7 @@
     <% @drills.each do |drill| %>
       <%= link_to drill, class: 'index-drill' do %>
         <div class="index-drill-title"><%= drill.title  %></div>
+        <div><%= drill.guide  %></div>
         <div class="drill-user">
           <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
           <div class="">
