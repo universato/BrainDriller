@@ -13,6 +13,8 @@ end
 
 create_user("uni", admin: true)
 create_user("ruby")
+create_user("normal_user")
+create_user("normal")
 
 puts "2ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
 
