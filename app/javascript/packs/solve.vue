@@ -227,7 +227,7 @@ export default {
   computed: {
 
     resolveDrillURL() {
-      return location.href;
+      return `/drills/${this.drill.id}`
     },
     currentStreak() {
       let problemId = this.currentProblem.id;
