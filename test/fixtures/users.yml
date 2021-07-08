@@ -3,25 +3,31 @@ uni:
   nickname: uni
   email: uni@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: <%= Time.now %>
 admin:
   login_name: admin
   nickname: admin
   email: admin@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: <%= Time.now %>
 smith:
   login_name: smith
   nickname: smith
   email: smith@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: <%= Time.now %>
 ruby:
   login_name: ruby
   nickname: ruby
   email: ruby@example.com
+  confirmed_at: <%= Time.now %>
 kaikei:
   login_name: kaikei
   nickname: uni
   email: kaikei@example.com
+  confirmed_at: <%= Time.now %>
 kigyo:
   login_name: ruby
   nickname: ruby
   email: kigyo@example.com
+  confirmed_at: <%= Time.now %>

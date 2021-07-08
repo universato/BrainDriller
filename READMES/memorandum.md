@@ -1112,3 +1112,11 @@ See https://github.com/rubyzip/rubyzip for details. The Changelog also
 lists other enhancements and bugfixes that have been implemented since
 version 2.3.0.
 ```
+
+# 登録のテストで失敗する。
+
+```rb
+Error:
+SignUpTest#test_sign_up:
+ActionView::Template::Error: Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true
+```
