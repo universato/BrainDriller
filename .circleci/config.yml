@@ -55,24 +55,6 @@ jobs:
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --immutable
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
-      # - run:
-      #     name: Compile Webpacker
-      #     command: |
-      #       RAILS_ENV=test bundle exec rails webpacker:compile
-
       - run:
           name: Test
           command: bin/rails test

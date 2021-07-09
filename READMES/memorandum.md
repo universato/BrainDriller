@@ -1545,3 +1545,24 @@ ArgumentError: SMTP From address may not be blank: nil
 [CircleCI での Yarn \(npm の代替\) の使用 \- CircleCI](https://circleci.com/docs/ja/2.0/yarn/#caching)
 
 yarn install自体は、そんなに時間がかかってないかもしれない。12s - 21s
+
+使ってないのでいったん削除。
+```yml
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      # - run:
+      #     name: Compile Webpacker
+      #     command: |
+      #       RAILS_ENV=test bundle exec rails webpacker:compile
+```
