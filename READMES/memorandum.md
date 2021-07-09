@@ -1538,3 +1538,10 @@ Error:
 SignUpTest#test_sign_up:
 ArgumentError: SMTP From address may not be blank: nil
 ```
+
+## キャッシュ
+
+[依存関係のキャッシュ \- CircleCI](https://circleci.com/docs/ja/2.0/caching/#yarn-node)
+[CircleCI での Yarn \(npm の代替\) の使用 \- CircleCI](https://circleci.com/docs/ja/2.0/yarn/#caching)
+
+yarn install自体は、そんなに時間がかかってないかもしれない。12s - 21s
