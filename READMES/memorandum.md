@@ -1178,16 +1178,114 @@ jobs:
 ```
 
 
+```s
+psql -V
+psql --version
+```
+
+> psql (PostgreSQL) 13.3
+
 ```
 node -v
 v16.2.0
 ```
+
+いくつかのバージョンを書き換えてみる。
+```yml
+postgres:
+        image: postgres:13
+image: ruby:3.0.0
+node-version: '16'
+```
+
+2020/10/10
+[Qiita: Rails \+ Postgres \+ github actions でCIを構築する](https://qiita.com/souhei-etou/items/95e8bcb3a54dcfc942d8)
+```yml
+image: ruby:2.5.3
+image: postgres:12
+node-version: '12'`
+```
+
+```yml
+- name: bundler set up
+        run: |
+          gem install bundler
+          bundle install
+```
+GmefilenのバージョンとRubyのconfig.ymlのRubyバージョンが違っているとエラーになる。
+
+
+#### https://github.com/ruby/setup-ruby
+
+```yml
+- uses: actions/checkout@v1
+- uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+```
+
+`3.0`じゃなくて、`'3.0'`って書く必要があるっぽい。あと、細かいバージョン指定ができないっぽい。
+↓
+```
+Run actions/setup-ruby@v1
+  with:
+    ruby-version: 3.0
+------------------------
+NOTE: This action is deprecated and is no longer maintained.
+Please, migrate to "https://github.com/ruby/setup-ruby", which is being actively maintained.
+------------------------
+```
+
+リンク先と同じにしてみる。
+
+```yml
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+```
+
+##### 
+
+[Docker: postgres](https://hub.docker.com/_/postgres/)
+13.3
+
+```
+Run bundle exec rails db:migrate
+rails aborted!
+ActiveRecord::ConnectionNotEstablished: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+/__w/RailsAppName/RailsAppName/bin/rails:5:in `<top (required)>'
+/__w/RailsAppName/RailsAppName/bin/spring:10:in `require'
+/__w/RailsAppName/RailsAppName/bin/spring:10:in `block in <top (required)>'
+/__w/RailsAppName/RailsAppName/bin/spring:7:in `<top (required)>'
+
+Caused by:
+PG::ConnectionBad: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+/__w/RailsAppName/RailsAppName/bin/rails:5:in `<top (required)>'
+/__w/RailsAppName/RailsAppName/bin/spring:10:in `require'
+/__w/RailsAppName/RailsAppName/bin/spring:10:in `block in <top (required)>'
+/__w/RailsAppName/RailsAppName/bin/spring:7:in `<top (required)>'
+```
+
+[このコードわからん: Rails + RSpec + postgresをGitHub Actionsで自動テスト](https://hai3.net/blog/rails-rspec-postgres-github-action/)
 
 ```
 Couldn't create 'BrainDriller_development' database. Please check your configuration.
 rails aborted!
 ActiveRecord::NoDatabaseError: could not connect to server: No such file or directory
 ```
+
+##
+
+[Pibit: GitHub Actions with Rails, Postgres and RSpec](https://www.pibit.nl/github/actions/rails/postgres/rspec/tutorial/example/2019/09/23/github-actions-with-rails-postgres-and-rspec/)
+
+
+https://github.com/rails/webpacker/issues/2478
+[rails/webpacker Issue#2478 ActionView::Template::Error: Webpacker can't find application in /app/public/packs/manifest.json](https://github.com/rails/webpacker/issues/2478)
 
 
 ## Circle CI
