@@ -1504,3 +1504,37 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
+
+
+## ブラウザテスト
+
+[Qiita: Railsで1日以上詰まったエラー](https://qiita.com/negisys/items/2bf88659f584fe45b686)
+```
+Webpacker::Manifest::MissingEntryError in hogehoge
+
+Showing /Users/yuhiisk/Work/sites/smout/app/views/layouts/application.html.slim where line #10 raised:
+Webpacker can't find application.js in /Users/yuhiisk/Work/sites/smout/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+```
+
+```rb
+yarn install
+ENV=test rails webpacker:compile
+```
+
+`rails test:all`
+```
+.......2021-07-09 20:35:26 +0000 Rack app ("POST /users" - (127.0.0.1)): #<ArgumentError: SMTP From address may not be blank: nil>
+E
+
+Error:
+SignUpTest#test_sign_up:
+ArgumentError: SMTP From address may not be blank: nil
+```

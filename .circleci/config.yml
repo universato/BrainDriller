@@ -55,6 +55,12 @@ jobs:
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
+      # - run:
+      #     name: Compile Webpacker
+      #     command: |
+      #       yarn install
+      #       RAILS_ENV=test bundle exec rails webpacker:compile
+
       - run:
           name: Test
           command: bin/rails test
