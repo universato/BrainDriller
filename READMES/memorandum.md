@@ -1288,6 +1288,11 @@ https://github.com/rails/webpacker/issues/2478
 [rails/webpacker Issue#2478 ActionView::Template::Error: Webpacker can't find application in /app/public/packs/manifest.json](https://github.com/rails/webpacker/issues/2478)
 
 
+```
+yarn install
+
+```
+
 ## Circle CI
 
 https://circleci.com/docs/ja/2.0/postgres-config/
@@ -1545,8 +1550,9 @@ ArgumentError: SMTP From address may not be blank: nil
 [CircleCI での Yarn \(npm の代替\) の使用 \- CircleCI](https://circleci.com/docs/ja/2.0/yarn/#caching)
 
 yarn install自体は、そんなに時間がかかってないかもしれない。12s - 21s
+キャッシュをすると、これが6mぐらいになる。
 
-使ってないのでいったん削除。
+js周りのテストはCircleCIでは使ってないのでいったん削除。
 ```yml
       - restore_cache:
           name: Restore Yarn Package Cache
