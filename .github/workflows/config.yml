@@ -46,9 +46,19 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
 
+      - name: Cache node modules
+        uses: actions/cache@v2.1.4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: yarn install
+        run: yarn install --check-files
+
       - name: Compile Webpacker
         run: |
-          yarn install
           RAILS_ENV=test bundle exec rails webpacker:compile
 
       - name: Run Test All
