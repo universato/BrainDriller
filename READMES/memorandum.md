@@ -1572,3 +1572,19 @@ js周りのテストはCircleCIでは使ってないのでいったん削除。
       #     command: |
       #       RAILS_ENV=test bundle exec rails webpacker:compile
 ```
+
+
+#### CIテストエラー
+
+```
+.........Capybara starting Puma...
+* Version 5.3.2 , codename: Sweetnighter
+* Min threads: 0, max threads: 4
+* Listening on http://127.0.0.1:42349
+2021-07-09 22:29:19 +0000 Rack app ("POST /users" - (127.0.0.1)): #<ArgumentError: SMTP From address may not be blank: nil>
+E
+
+Error:
+SignUpTest#test_sign_up:
+ArgumentError: SMTP From address may not be blank: nil
+```
