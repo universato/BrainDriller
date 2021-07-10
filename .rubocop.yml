@@ -166,6 +166,10 @@ Style/GlobalVars:
 Style/GuardClause:
   Exclude:
     - app/controllers/drills_controller.rb
+# symbol: :symbolみたいな書き方が好きじゃないので。
+Style/HashSyntax:
+  Exclude:
+    - config/environments/development.rb
 # 後置if文を使わせる設定。まぁ、長文だと、あまり後置if文は使いたくない。
 Style/IfUnlessModifier:
   Enabled: false
