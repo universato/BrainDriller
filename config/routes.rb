@@ -12,9 +12,7 @@ Rails.application.routes.draw do
     resources :problems, only: [:index], controller: "drills/problems"
   end
 
-  resources :problems
   get 'edit_profile', to: 'users#edit_profile', as: "edit_profile"
-  get 'favorite-problems', to: 'problems#favorite'
   get 'mydrills', to: 'drills#mydrills'
   get 'solve/:id', to: 'drills#solve', as: "solve"
 
