@@ -1,4 +1,4 @@
-require "test_helper"
+require_relative "../test_helper.rb"
 
 class DrillTest < ActiveSupport::TestCase
   test "create drill" do

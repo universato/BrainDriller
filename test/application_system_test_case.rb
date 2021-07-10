@@ -1,4 +1,4 @@
-require "test_helper"
+require_relative "./test_helper.rb"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   if ENV['HEADED'] || ENV['H']
