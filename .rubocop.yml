@@ -83,6 +83,10 @@ Lint/ShadowingOuterLocalVariable:
 # 原則的には`_`(アンダースコア)始まりの変数は禁止だと思うけど、書きたいときもあったので個別に判断して許す。
 Lint/UnderscorePrefixedVariableName:
   AutoCorrect: false
+# 他から引用したコードだったりで、使わなくてもどんなパラメータが来るのか知っておきたいみたいな。
+Lint/UnusedBlockArgument:
+  Exclude:
+    - test/test_helper.rb
 # 例示用・説明用に何もしないけど、変数だけ書きたいことがあったので、そこは許しても良さそう。
 Lint/Void:
   AutoCorrect: false
