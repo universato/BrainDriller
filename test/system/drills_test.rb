@@ -45,5 +45,8 @@ class DrillsTest < ApplicationSystemTestCase
     first(".problem-choice").click
     assert_no_text "中断して採点する"
     assert_text "採点する"
+    click_button "採点する"
+
+    # result
   end
 end
