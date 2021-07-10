@@ -23,3 +23,8 @@ firsts:
   title: Firsts
   state: full_open
   guide: "All ansewers of problems are first choices!"
+eleven_problems:
+  user: uni
+  title: Eleven Problems
+  state: full_open
+  guide: "Eleven Problems!"
