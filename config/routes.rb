@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "drills#index"
 
+  draw :admin
   draw :api
 
   devise_for :users, controllers: {
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :drill_likes, only: [:create, :destroy]
 
-  resources :users, only: %i[index show new create edit] do
+  resources :users, only: %i[show new create edit] do
     resources :solve
   end
 

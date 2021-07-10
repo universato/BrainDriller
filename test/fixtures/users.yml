@@ -10,6 +10,7 @@ admin:
   email: admin@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
   confirmed_at: <%= Time.now %>
+  admin: true
 smith:
   login_name: smith
   nickname: smith
