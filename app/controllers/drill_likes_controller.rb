@@ -1,5 +1,5 @@
 class DrillLikesController < ApplicationController
-  # before_action :logged_in_user
+  before_action :logged_in_user
 
   def create
     drill = Drill.find(params[:drill_id])
@@ -9,6 +9,7 @@ class DrillLikesController < ApplicationController
 
   def destroy
     drill_like = DrillLike.find(params[:id])
+    raise unless drill_like.user == current_user
     drill = Drill.find(drill_like.drill_id)
     drill_like.destroy
     redirect_to drill

@@ -4,6 +4,5 @@ Rails.application.routes.draw do
     resources :problems, only: %i[show edit update]
     post 'drills/grade', to: "drills#grade"
     get 'mydrills', to: 'drills#mydrills'
-    resources :drill_likes, only: [:destroy]
   end
 end
