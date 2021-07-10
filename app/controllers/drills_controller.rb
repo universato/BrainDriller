@@ -31,18 +31,13 @@ class DrillsController < ApplicationController
       state: :full_open,
     )
 
-    begin
-      drill.save!
-      json = {
-        status: 200,
-        message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
-        redirect_edit_url: "/drills/#{drill[:id]}/edit"
-      }
-      render status: 200, json: json
-    rescue ActiveRecord::RecordInvalid => e
-      # [TODO]
-      puts e
-    end
+    drill.save!
+    json = {
+      status: 200,
+      message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
+      redirect_edit_url: "/drills/#{drill[:id]}/edit"
+    }
+    render status: 200, json: json
   end
 
   def edit
@@ -75,9 +70,5 @@ class DrillsController < ApplicationController
   end
 
   def mydrills
-  end
-
-  private def drill_params
-    params.require(:drill).permit(:title, :guide)
   end
 end
