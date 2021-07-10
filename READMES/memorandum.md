@@ -1590,6 +1590,12 @@ ArgumentError: SMTP From address may not be blank: nil
 ```
 
 
+#### SimpleCov
+
+[Qiita: SimpleCovとRails 6のMinitest](https://qiita.com/kazutosato/items/382afd90caf64b644e77)
+
+[simplecov Issue#718 SimpleCov showing incorrect coverage result when parallelize is enabled in Rails 6.0.0 beta3](https://github.com/simplecov-ruby/simplecov/issues/718#issuecomment-538201587)
+
 #### RailsのCI環境でChildProcess::Error
 
 [Qiita: RailsのCI環境でChildProcess::Errorが発生する場合の対処法](https://qiita.com/patorash/items/f8433ece0d291eb5a5da)
