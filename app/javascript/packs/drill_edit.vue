@@ -39,17 +39,19 @@
       <br>
       問題No. {{ index }}<br>
       <div v-if="isEdit[index]">
-        問題の見出し<input v-model="problems[index].title">
-        <br>問題文<br>
-        <textarea v-model="problems[index].statement" class="statement"></textarea>
-        <br>選択肢<br>
-        <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex">
-          <textarea v-model="problems[index].choices[choiceIndex]" class="statement"></textarea>
-        </div>
+        <form class="problem-form">
+          問題の見出し<input v-model="problems[index].title" class="problem-title" name="problem-title">
+          <br>問題文<br>
+          <textarea v-model="problems[index].statement" class="statement"></textarea>
+          <br>選択肢<br>
+          <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex">
+            <textarea v-model="problems[index].choices[choiceIndex]" class="statement"></textarea>
+          </div>
 
-        <button @click="problems[index].choices.push('')">選択肢の追加</button>
-        <br><br>
-        <button @click="deleteProblemAt(index)">問題No.{{ index }}の削除</button>
+          <button @click="problems[index].choices.push('')">選択肢の追加</button>
+          <br><br>
+          <button @click="deleteProblemAt(index)">問題No.{{ index }}の削除</button>
+        </form>
       </div>
       <div v-else>
         問題の見出し<div> {{ problems[index].title}} </div>

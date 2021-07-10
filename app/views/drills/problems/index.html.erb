@@ -1,8 +1,8 @@
 <% @problems.each do |problem| %>
-  <%# problem.title %><br>
+  <% problem.title %><br>
   <%= problem.id %>
-  <% relation = @problem_map[problem.id] %>
-  <% if Rails.env.development? %>
+  <% if Rails.env.development? && relation = @problem_map&.fetch(problem.id) %>
+    【開発環境のみ表示】
     閲覧数(number_of_view): <%= relation&.number_of_views || 0 %><br>
     提出数(number_of_submissions) <%= relation&.number_of_submissions || 0 %><br>
     提出数(number_of_correct_answers) <%= relation&.number_of_correct_answers || 0 %><br>
