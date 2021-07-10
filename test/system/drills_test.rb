@@ -14,6 +14,20 @@ class DrillsTest < ApplicationSystemTestCase
     click_button "問題を追加していく"
   end
 
+  test "update drill" do
+    user = users(:uni)
+    login_as(user, scope: :user)
+    visit "/drills/#{user.drills.last.id}"
+    click_link "編集する"
+    click_button "編集画面へ"
+    within(:css, 'form#drill-form') do
+      fill_in "drill-title", with: "Drill Title"
+      fill_in "drill-guide", with: "Drill Guide"
+    end
+    click_button "下書きで保存する", match: :first
+    click_button "公開で保存する", match: :first
+  end
+
   test "solve drill" do
     login_as(users(:smith), scope: :user)
 

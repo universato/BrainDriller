@@ -2,16 +2,18 @@
   <div id="app">
     ドリル作成者<div>{{ drillUserName }}</div>
     <div v-if="drillOnEdit">
-      <button @click="saveDrillAndCloseEdit">保存して編集終了</button><br>
-      ドリルのタイトル(必須): <input type="text" v-model="title">
-      <br>
-      ドリルの説明: <textarea v-model="guide" class="statement"></textarea>
+      <form id="drill-form" class="drill-form">
+        <button @click="saveDrillAndCloseEdit">保存して編集終了</button><br>
+        ドリルのタイトル(必須): <input type="text" v-model="title" name="drill-title">
+        <br>
+        ドリルの説明: <textarea v-model="guide" class="statement" name="drill-guide"></textarea>
+      </form>
     </div>
     <div v-else>
       <button @click="drillOnEdit = !drillOnEdit">編集画面へ</button>
       ドリルのタイトル(必須): <div>{{ title }} </div>
       <br>
-      ドリルの説明: <div v-html="compiledMarkdown(guide)"> </div>
+      ドリルの説明: <div v-html="compiledMarkdown(guide)" > </div>
     </div>
     <div v-if="loaded">
       <br><br>
