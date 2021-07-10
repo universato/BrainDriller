@@ -1588,3 +1588,18 @@ Error:
 SignUpTest#test_sign_up:
 ArgumentError: SMTP From address may not be blank: nil
 ```
+
+
+#### RailsのCI環境でChildProcess::Error
+
+[Qiita: RailsのCI環境でChildProcess::Errorが発生する場合の対処法](https://qiita.com/patorash/items/f8433ece0d291eb5a5da)
+> 症状の詳細は、webdriversがchromedriverのアップデートをしようとするが、並列でそれが行われてしまい、片方のプロセスが起動できなかったということです。
+> そこで、並列テストが実行される前にchromedriverのアップデートをしておけば、この問題は発生しなくなると考えました。（上記のPRもそういうことをやっていますが）
+
+```yml
+steps:
+  # 略。ただし、DB作成後でないとrails runnerが失敗するので注意。
+  - run:
+      name: Update chromedriver
+      command: env RAILS_ENV=test bin/rails runner "Webdrivers::Chromedriver.update"
+```

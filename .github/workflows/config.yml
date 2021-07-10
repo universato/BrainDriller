@@ -46,6 +46,9 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
 
+      - name: Update chromedriver
+        run: env RAILS_ENV=test bin/rails runner "Webdrivers::Chromedriver.update"
+
       - name: Cache node modules
         uses: actions/cache@v2.1.4
         with:

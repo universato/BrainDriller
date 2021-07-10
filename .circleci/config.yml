@@ -55,6 +55,10 @@ jobs:
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
+      - run:
+          name: Update chromedriver
+          command: env RAILS_ENV=test bin/rails runner "Webdrivers::Chromedriver.update"
+
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
