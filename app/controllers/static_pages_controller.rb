@@ -1,7 +1,3 @@
 class StaticPagesController < ApplicationController
-  def tos
-  end
-
-  def policy
-  end
+  # actions: tos, policy
 end
