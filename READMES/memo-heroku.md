@@ -13,6 +13,10 @@ heroku run rake db:seed
 本番DBをふっとばす秘技。
 `$ heroku run RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:drop`
 
+`heroku run`が、herokuにコマンドを叩かせるコマンド。
+`RAILS_ENV=production` RAILSの環境をproductionに設定。
+`DISABLE_DATABASE_ENVIRONMENT_CHECK=1` なんだろう。
+
 `heroku pg:reset -a [アプリ名]` 確認を求められるので、アプリ名を入れる。
 `heroku pg:reset --confirm [アプリ名]` 確認を省略できる。
 
