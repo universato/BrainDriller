@@ -28,3 +28,37 @@ end
 # [るりま: Kernel#task](https://docs.ruby-lang.org/ja/latest/method/Kernel/i/task.html)
 # [Rake:  Kernel.task](https://ruby.github.io/rake/Rake/DSL.html#method-i-task)
 # [Rake:  Kernel.desc](https://ruby.github.io/rake/Rake/DSL.html#method-i-desc)
+
+desc 'Print out all defined routes with filtering'
+task :routes do
+  routes = `rails routes`
+  routes = routes.split("\n")
+  routes.shift
+
+  routes = routes.select{ _1.index(ENV["V"] || '') && _1.index(ENV["V1"] || '') && _1.index(ENV["V2"] || '') }
+
+  if ENV["OP"]&.start_with?("A") || ENV["AND"] || ENV["A"]
+    routes = routes.select{ _1.index(ENV["F"]) } if ENV["F"]
+    routes = routes.select{ _1.index(ENV["F1"]) } if ENV["F1"]
+    routes = routes.select{ _1.index(ENV["F1"]) } if ENV["F2"]
+  else
+    routes = routes.select{ _1.index(ENV["F"] || '') && _1.index(ENV["F1"] || '') && _1.index(ENV["F2"] || '') }
+  end
+
+  routes.map! do |route|
+    route.gsub!("(.:format)", "")
+    row = route.split
+    row.unshift("") if row.size == 3
+    row
+  end
+
+  prefixes, verbs, uris, actions = routes.transpose
+  max_prefix_size = prefixes.map(&:size).max
+    max_verb_size =    verbs.map(&:size).max
+     max_uri_size =     uris.map(&:size).max
+  max_action_size =  actions.map(&:size).max
+
+  puts routes.map!{ |prefix, verb, uri, action|
+    "#{prefix.rjust max_prefix_size} #{verb.ljust max_verb_size} #{uri.ljust max_uri_size} #{action.ljust max_action_size}"
+  }
+end
