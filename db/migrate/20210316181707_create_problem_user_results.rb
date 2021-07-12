@@ -14,11 +14,6 @@ class CreateProblemUserResults < ActiveRecord::Migration[6.1]
       t.integer :current_streak, default: 0, unsigned: true
       # t.integer :number_of_answers
       t.integer :number_of_correct_answers, default: 0, unsigned: true
-      t.integer :correct_answer_rate, default: 0, unsigned: true, limit: 1
-
-      t.float :average_time
-      t.float :first_time
-      t.float :fastest_time
 
       t.timestamps
     end

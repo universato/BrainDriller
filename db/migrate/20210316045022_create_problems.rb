@@ -44,7 +44,6 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       t.integer :number_of_views, default: 0, unsigned: true, null: false
       t.integer :number_of_submissions, default: 0, unsigned: true, null: false
       t.integer :number_of_correct_answers, default: 0, unsigned: true, null: false
-      t.integer :correct_answer_rate,  default: nil, limit: 1
 
       # 何をもって正解とするのか。最後の質問での正解者数か。それとも初回正解者数か。
       # 重複なしの閲覧人数 :number_of_viewers (=openers)
@@ -56,14 +55,11 @@ class CreateProblems < ActiveRecord::Migration[6.1]
       # 人数による正解率
       t.integer :number_of_viewers,    default: 0, unsigned: true, null: false
       t.integer :number_of_submitters, default: 0, unsigned: true, null: false
-      t.integer :number_of_one_shot_answerers, default: 0, unsigned: true, null: false
-      t.integer :number_of_last_shot_answerers, default: 0, unsigned: true, null: false
       # t.integer :number_of_respondents, default: 0, unsigned: true
       # t.integer :, default: 0, unsigned: true, null: false
-      t.integer :correct_people_rate, default: nil, limit: 1
 
       # t.integer :questioner # いや、これ不要。
-      t.boolean :open, default: false
+      # t.boolean :open, default: false
       # t.boolean :in_order, default: true
 
       t.timestamps

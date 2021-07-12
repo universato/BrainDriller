@@ -87,10 +87,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.integer "number_of_submissions", default: 0
     t.integer "current_streak", default: 0
     t.integer "number_of_correct_answers", default: 0
-    t.integer "correct_answer_rate", limit: 2, default: 0
-    t.float "average_time"
-    t.float "first_time"
-    t.float "fastest_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["problem_id"], name: "index_problem_user_results_on_problem_id"
@@ -111,13 +107,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.integer "number_of_views", default: 0, null: false
     t.integer "number_of_submissions", default: 0, null: false
     t.integer "number_of_correct_answers", default: 0, null: false
-    t.integer "correct_answer_rate", limit: 2
     t.integer "number_of_viewers", default: 0, null: false
     t.integer "number_of_submitters", default: 0, null: false
-    t.integer "number_of_one_shot_answerers", default: 0, null: false
-    t.integer "number_of_last_shot_answerers", default: 0, null: false
-    t.integer "correct_people_rate", limit: 2
-    t.boolean "open", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["drill_id"], name: "index_problems_on_drill_id"
