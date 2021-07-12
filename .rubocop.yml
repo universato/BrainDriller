@@ -36,17 +36,26 @@ Style/StringLiterals:
 # 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
 Layout/ExtraSpacing:
   AutoCorrect: false
+  Exclude:
+    - Rakefile
 Layout/FirstHashElementIndentation:
   Enabled: false
 Layout/HeredocIndentation:
   Exclude:
     - db/seeds/drills.rb
     - db/seeds/ruby_drill.rb
+Layout/IndentationConsistency:
+  Exclude:
+    - Rakefile
 Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
     - app/models/problem_user_result.rb
     - db/migrate/*_create_problems.rb
+    - Rakefile
+Layout/SpaceAroundOperators:
+  Exclude:
+    - Rakefile
 # デフォルトだとメソッドの開始ブロックの手前にスペースを要求してくるが、競プロ界隈では一般的ではないと思う。
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
@@ -66,6 +75,8 @@ Lint/AmbiguousOperator:
 # 警告がでている部分を見てみたら大丈夫そうだったので、個別に許す。
 Lint/AmbiguousBlockAssociation:
   AutoCorrect: false
+  Exclude:
+    - Rakefile
 # `x * x`で警告がでるが、`x**2`よりも少し遅かったので許容したい。でも、なんでもかんでも許容するのは良くないかもしれない。
 Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: false
@@ -100,6 +111,7 @@ Metrics/BlockLength:
   Exclude:
     - config/environments/development.rb
     - db/seeds/problems.rb
+    - test/system/drills_test.rb
 # クラスの行数がデフォルトが100行超えると警告。結構、超えるのあったので、設定する。
 Metrics/ClassLength:
   Max: 334
