@@ -11,4 +11,11 @@ class UsersTest < ApplicationSystemTestCase
   test "show" do
     visit "/users/#{users(:smith).id}"
   end
+
+  test "user edit profile" do
+    login_as(users(:uni), scope: :user)
+    visit root_path
+    click_link "アカウント", match: :first, exact: true
+    click_link "設定", match: :first, exact: true
+  end
 end
