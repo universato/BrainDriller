@@ -46,6 +46,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'faker'
   gem 'minitest'
+  gem 'irb', ">= 1.3.6"
   gem 'simplecov'
 end
 
