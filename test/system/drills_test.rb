@@ -63,6 +63,7 @@ class DrillsTest < ApplicationSystemTestCase
     click_on "解き直す", match: :first
 
     # drill#show
+    find("#past").click
     find(".solve-btn").click
 
     assert_text "中断して採点する"
