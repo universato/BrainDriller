@@ -23,6 +23,7 @@ heroku run rake db:seed
 
 # 作り直し
 
+例
 ```
 heroku create アプリ名
 git push heroku main
@@ -31,6 +32,7 @@ git push heroku main
 1ユーザーにつき、無料でHerokuに5つアプリケーションを登録できる。
 `heroku create アプリ名`で、アプリ名を指定してherokuにWebアプリを入れる箱を作る。
 
+具体例
 ```
 heroku create brain-driller
 git push heroku main
