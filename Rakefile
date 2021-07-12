@@ -29,6 +29,11 @@ end
 # [Rake:  Kernel.task](https://ruby.github.io/rake/Rake/DSL.html#method-i-task)
 # [Rake:  Kernel.desc](https://ruby.github.io/rake/Rake/DSL.html#method-i-desc)
 
+# rake routes F=devise
+# rake routes V=GET F=devise
+# rake routes V1=PATCH V2=PUT
+# rake routes F1=devise F2=users
+# rake routes F1=devise OP=AND F2=users
 desc 'Print out all defined routes with filtering'
 task :routes do
   routes = `rails routes`
