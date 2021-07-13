@@ -118,8 +118,6 @@ export default {
     const pathnames = location.pathname.split('/'); // ["", "solve", "5"]
     const drill_id = pathnames[2];
     const url = new URL(location.href);
-    // const isRand = url.searchParams.get('rand');
-    // const is = url.searchParams.get('');
     console.log(`/api/drills/${drill_id}.json${url.search}`);
     fetch(`/api/drills/${drill_id}.json${url.search}`, {
         method: 'GET',
@@ -131,8 +129,6 @@ export default {
       return response.json()
     }).then(json => {
       this.drill = json.drill
-      // this.problems = []
-      // json.problems.forEach(r => { this.problems.push(r) })
       this.problems = json.problems
       this.problemMap = json.problemMap
       console.log(json.currentUserId)
@@ -145,18 +141,12 @@ export default {
   },
   methods: {
     selectOption(choiceNo) {
-      // console.log(`selectOption Method ${choiceNo}`);
       this.currentProblem.selectIndex = choiceNo;
       sleep(100); // <- すぐに切り替わるといきなりすぎるかと思って、少し待機。
       this.answerPaper[this.currentProblem.id] = choiceNo;
-      // console.log(this.answerPaper);
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
-      } else if (this.currentProblemIndex == this.problems.length - 1) {
-        // console.log("最後の問題です");
-      } else if (this.currentProblemIndex < 0 || this.problems.length - 1 < this.currentProblemIndex) {
-        // console.log("問題番号が0未満になっているか、超越してます");
       }
     },
     grade() {
@@ -166,7 +156,6 @@ export default {
       this.correct_count = 0
       for(let i = 0; i < this.problems.length; i++){
         let problem = this.problems[i];
-        // console.log([problem.id])
         if(this.answerPaper[problem.id] == problem.correct_option){
           this.correct_count += 1
         } else if(this.answerPaper[problem.id] === "notSure" ){
@@ -196,8 +185,6 @@ export default {
       }).then(response => {
         return response;
       }).then(json => {
-        // console.log(json)
-        // console.log("posted Answer Paper")
       }).catch(error => {
         console.warn('Failed to parsing', error)
       })
@@ -260,18 +247,13 @@ export default {
 <style scoped>
 
 .solve-drill {
-  /* border: solid 1px #eee; */
-  /* margin: 8px; */
-  /* padding: 8px; */
   border: none 0 #fff;
   border-radius: 4px;
   background-color: #fff;
 }
 
 .solve-drill-title {
-  /* width: 800px; */
   font-weight: bold;
-  /* border: solid 1px #eee; */
   background-color: #fff;
 }
 
@@ -292,19 +274,11 @@ export default {
 }
 
 .problem-title {
-  /* width: 800px; */
-  /* border: solid 1px #eee; */
-  /* background-color: #fff; */
-  /* margin: 8px 0 8px; */
   padding: 8px 0 8px;
 }
 
 .problem-statement {
-  /* width: 800px; */
-  /* border: solid 1px #eee; */
   padding: 16px 0;
-  /* overflow-wrap: break-word; */
-  /* background-color: #fff; */
 }
 
 .problem-choices {
@@ -314,7 +288,6 @@ export default {
 }
 
 .problem-choice {
-  /* width: 800px; */
   border: solid 1px #eee;
   border-radius: 4px;
   background-color: #e1e1e1;
