@@ -43,11 +43,47 @@ class UserTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::RecordInvalid){ user.save! }
   end
 
+  # Instagram 数値始まり、アンダースコア連続
+  # フィヨルドブートキャンプ、英数字、ハイフン、(ただしハイフンの先頭・末尾の不可、ハイフン連続不可)
+  # Twitter: アンダースコア(先頭・末尾OK、連続OK)
   test "unique login_name" do
     user = standard_user
     user.login_name = "uni"
     assert_not user.valid?
     assert_raise(ActiveRecord::RecordInvalid){ user.save! }
+
+    user.login_name = "AAAA"
+    assert user.valid?
+
+    user.login_name = "uni123"
+    assert user.valid?
+
+    user.login_name = "u3333"
+    assert user.valid?
+
+    user.login_name = "UNI"
+    assert_not user.valid?
+    assert_raise(ActiveRecord::RecordInvalid){ user.save! }
+
+    user.login_name = "11uni"
+    assert_not user.valid?
+    assert_raise(ActiveRecord::RecordInvalid){ user.save! }
+  end
+
+  test "unique login_name with underscore" do
+    user = standard_user
+
+    user.login_name = "abc_xyz"
+    assert_not user.valid?
+    assert_raise(ActiveRecord::RecordInvalid){ user.save! }
+
+    user.login_name = "__abc_xyz__"
+    assert_not user.valid?
+    assert_raise(ActiveRecord::RecordInvalid){ user.save! }
+  end
+
+  test "unique login_name with hyphen" do
+    user = standard_user
 
     user.login_name = "-aaaaaaaaaaaaaaaaaa"
     assert_not user.valid?
@@ -62,18 +98,11 @@ class UserTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::RecordInvalid){ user.save! }
 
     user.login_name = "abc-xyz"
-    assert user.valid?
-
-    user.login_name = "abc_xyz"
     assert_not user.valid?
     assert_raise(ActiveRecord::RecordInvalid){ user.save! }
 
-    user.login_name = "AAAA"
+    user.login_name = "u3333"
     assert user.valid?
-
-    user.login_name = "UNI"
-    assert_not user.valid?
-    assert_raise(ActiveRecord::RecordInvalid){ user.save! }
   end
 
   test "unique email" do

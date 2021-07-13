@@ -17,14 +17,18 @@ class User < ApplicationRecord
   #   with: /\A[a-z\d](?:[a-z\d]|-(?=[a-z\d]))*\z/i,
   #   message: 'は半角英数字と-（ハイフン）のみが使用できます 先頭と最後にハイフンを使用することはできません ハイフンを連続して使用することはできません'
   # }
+  # login_name_format = {
+  #   with: /\A[a-z](?:[a-z]|-(?=[a-z]))*\z/i,
+  #   message: 'は半角の英小文字と半角数字と-（半角ハイフン）のみが使用できます 先頭と最後にハイフンを使用することはできません ハイフンを連続して使用することはできません'
+  # }
   login_name_format = {
-    with: /\A[a-z](?:[a-z]|-(?=[a-z]))*\z/i,
-    message: 'は半角の英小文字と半角数字と-（半角ハイフン）のみが使用できます 先頭と最後にハイフンを使用することはできません ハイフンを連続して使用することはできません'
+    with: /\A[a-z][a-z0-9]*\z/i,
+    message: 'は半角の英小文字と数字のみ使用できます。ただし、数字始まりにすることはできません。'
   }
 
   validates :login_name,
     presence: true,
-    length: {in: 4..30},
+    length: {in: 1..30},
     uniqueness: {case_sensitive: false},
     format: login_name_format
 
