@@ -40,14 +40,21 @@ task :routes do
   routes = routes.split("\n")
   routes.shift
 
-  routes = routes.select{ _1.index(ENV["V"] || '') && _1.index(ENV["V1"] || '') && _1.index(ENV["V2"] || '') }
+  routes = routes.select{
+    _1.index(ENV["V"]&.upcase || '') &&
+    _1.index(ENV["V1"]&.upcase || '') &&
+    _1.index(ENV["V2"]&.upcase || '')
+  }
 
   if ENV["OP"]&.start_with?("A") || ENV["AND"] || ENV["A"]
     routes = routes.select{ _1.index(ENV["F"]) } if ENV["F"]
     routes = routes.select{ _1.index(ENV["F1"]) } if ENV["F1"]
-    routes = routes.select{ _1.index(ENV["F1"]) } if ENV["F2"]
+    routes = routes.select{ _1.index(ENV["F2"]) } if ENV["F2"]
   else
-    routes = routes.select{ _1.index(ENV["F"] || '') && _1.index(ENV["F1"] || '') && _1.index(ENV["F2"] || '') }
+    r1 = routes.select{ ENV["F"] and _1.index(ENV["F"]) }
+    r2 = routes.select{ ENV["F1"] and _1.index(ENV["F1"]) }
+    r3 = routes.select{ ENV["F2"] and _1.index(ENV["F2"]) }
+    routes = r1 | r2 | r3
   end
 
   routes.map! do |route|
