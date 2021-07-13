@@ -2,7 +2,6 @@ ja:
   word:
     back: 戻る
     signup: 登録
-    help: ヘルプ
     password_reset: パスワードのリセット
     login: ログイン
     logout: ログアウト
