@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_205108) do
+ActiveRecord::Schema.define(version: 2021_07_13_193059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_205108) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "impressions_count", default: 0
     t.integer "problem_size", default: 0, null: false
+    t.index ["user_id", "title"], name: "index_drills_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_drills_on_user_id"
   end
 
