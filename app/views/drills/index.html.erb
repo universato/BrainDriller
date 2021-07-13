@@ -2,32 +2,28 @@
 
 <% if current_user&.admin? %>
   <%= link_to 'ドリルを作成する', new_drill_path, class: "btn-std" %><br>
+  <div><%= "ドリルがありません" if @drills.blank? %></div>
 <% end %>
 
-<% if @drills.blank? %>
-  <div> ドリルがありません。</div>
-<% else %>
-  <div class="drills">
-    <% @drills.each do |drill| %>
-      <%= link_to drill, class: 'index-drill' do %>
-        <div class="index-drill-title"><%= drill.title  %></div>
-        <div><%= drill.guide  %></div>
+<div class="drills">
+  <% @drills.each do |drill| %>
+    <%= link_to drill, class: 'index-drill' do %>
+      <div class="index-drill-title"><%= drill.title  %></div>
+      <div><%= drill.guide  %></div>
 
-        <div class="problem-count">問題数<%= drill.problems.size %>問</div>
-        <% if current_user&.admin? %>
-          <div class="drill-user">
-            <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
-            <div class="">
-              <%= drill.user %>
-            </div>
+      <div class="problem-count">問題数<%= drill.problems.size %>問</div>
+      <% if current_user&.admin? %>
+        <div class="drill-user">
+          <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
+          <div class="">
+            <%= drill.user %>
           </div>
-          <div class="stats">
-            <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
-            <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
-          </div>
-        <% end %>
+        </div>
+        <div class="stats">
+          <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
+          <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
+        </div>
       <% end %>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
 </div>
