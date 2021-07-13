@@ -9,16 +9,12 @@
   background-color: var(--white-color);
   border: 1px splid #ccc;
   border-radius: 4px;
-  // padding: 4px;
 }
 
 .index-drill {
-  // margin: 8px;
   padding: 16px;
   display: grid;
-  // border: 1px #cccccc solid;
   border-bottom: 1px hsl(0, 0%, 90%) solid;
-  // border-radius: 4px;
   text-decoration: none;
   color: hsla(0, 20%, 9%, 0.733);
 }
@@ -38,12 +34,10 @@
 }
 
 .index-drill-title {
-  // padding: 12px;
   color: black;
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
-  // text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
 }
 
 .stas {
@@ -78,27 +72,20 @@
 .drill-title {
   margin: 0px;
   margin-bottom: 8px;
-  // text-shadow: hsla(0, 41%, 24%, 0.4) 0 1px 0;
 }
 
 .grid {
   display: grid;
-  // place-content: center;
-  // gap: 1ch;
 }
 
 .btn-box {
   margin: 0 autp;
   width: 80%;
-  // text-align: center;
 }
 
 .solve-drill-form {
   display: flex;
   flex-flow: column;
-  // justify-content: center;
-  // justify-items: center;
-  // grid-template-columns: 600px;
 }
 
 .drill-option {
@@ -119,19 +106,8 @@
 
 .problem-number-option {
   flex: 1;
-  // width: 100%;
-  // width: 800px;
 }
-
 
 .solve-btn {
-  // margin: 0 auto;
   width: 320px;
-}
-
-
-
-.btn-big-solve {
-  // margin: 0 auto;
-  // disp
 }

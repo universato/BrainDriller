@@ -17,10 +17,6 @@
     box-sizing: border-box;
 }
 
-* {
-  // text-shadow: hsla(0, 12%, 32%, 0.103) 0 1px 0;
-}
-
 html {
   font-size: 62.5%;
   padding:0;
@@ -29,7 +25,6 @@ html {
 }
 
 body {
-  // background-color: var(--main-color);
   background-color: hsl(210, 100%, 97%);
   font-size: 1.4em;
   line-height: 1.5em;
@@ -43,11 +38,6 @@ body {
 header {
   padding: 12px;
   white-space: nowrap;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  // margin: 4px;
-  // padding: 4px;
 }
 
 p {
@@ -75,12 +65,10 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
 }
 
 code {
-  // font-style: italic;
   font-size: 12.8px;
   font-family: 'Source Code Pro', monospace;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,monospace;
   color: hsl(0, 0%, 20%);
-  // background-color: hsl(0, 0%, 93%);
 }
 
 // preのマージンが上下0pxだと、並べた時にくっついてしまう。

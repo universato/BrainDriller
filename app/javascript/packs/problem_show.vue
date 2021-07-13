@@ -163,8 +163,6 @@ export default {
       }).then(response => {
         return response;
       }).then(json => {
-        // console.log(json)
-        // console.log("posted Answer Paper")
       }).catch(error => {
         console.warn('Failed to parsing', error)
       })
@@ -179,9 +177,6 @@ export default {
       return `/drills/${this.drill_id}/problems`
     },
   },
-  conputed: {
-
-  }
 }
 </script>
 

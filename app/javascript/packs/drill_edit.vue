@@ -170,8 +170,6 @@ export default {
       this.isEdit.push(true);
     },
     saveDrill(){
-      console.log("saveDrill")
-      // console.log(this.token);
       const params = {
         drillTitle: this.title,
         drillGuide: this.guide,
@@ -190,13 +188,13 @@ export default {
         body: JSON.stringify(params)
       })
         .then(response => {
-          console.log(response)
-          console.log(response.headers)
-          console.log(response.status)
-          console.log(response.statusText)
-          console.log(response.type)
-          console.log(response.url)
-          console.log(response.body)
+          // console.log(response)
+          // console.log(response.headers)
+          // console.log(response.status)
+          // console.log(response.statusText)
+          // console.log(response.type)
+          // console.log(response.url)
+          // console.log(response.body)
         })
         .then(json=> {
         })
@@ -219,8 +217,6 @@ export default {
       } else if(this.drillState === "draft") {
         return "下書き"
       } else {
-        // console.log(this.drillState)
-        // console.log("シークレット")
         return "シークレット"
       }
     },

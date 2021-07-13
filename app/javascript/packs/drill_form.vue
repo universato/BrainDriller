@@ -148,8 +148,6 @@ export default {
       } else if(this.drillState === "draft") {
         return "下書き"
       } else {
-        // console.log(this.drillState)
-        // console.log("シークレット")
         return "シークレット"
       }
     },
