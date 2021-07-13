@@ -13,14 +13,18 @@
           【開発】<%= current_user.email %>でログイン中
           <% end %>
         <% end %>
-        <li class="nav-item"><%= link_to "トップ", root_path, class: "nav-link" %></li>
+        <% if false %>
+          <li class="nav-item"><%= link_to "トップ", root_path, class: "nav-link" %></li>
+        <% end %>
         <% if user_signed_in? %>
           <li class="dropdown nav-item" >
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
               アカウント
             </a>
             <ul class="dropdown-menu">
-              <li class="nav-item"><%= link_to "プロフィール", user_path(current_user), class: "nav-link" %></li>
+              <% if current_user&.admin? %>
+                <li class="nav-item"><%= link_to "プロフィール", user_path(current_user), class: "nav-link" %></li>
+              <% end %>
               <li class="nav-item"><%= link_to "設定", edit_user_registration_path, class: "nav-link"  %></li>
               <li class="nav-item">
                 <%= link_to t("word.logout"), destroy_user_session_path, method: :delete, class: "nav-link" %>
