@@ -11,8 +11,6 @@
         <% if Rails.env.development? %>
           <% if current_user %>
           【開発】<%= current_user.email %>でログイン中
-          <% else %>
-            【開発】ログアウト中
           <% end %>
         <% end %>
         <% if current_user %>
