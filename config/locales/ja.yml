@@ -1,15 +1,16 @@
 ja:
   word:
     back: 戻る
-    signup: 登録
-    password_reset: パスワードのリセット
+    join_free: 無料会員登録
     login: ログイン
     logout: ログアウト
     new_password: 新しいパスワード
     new_password_confirmation: 新しいパスワード(確認用)
     update: 更新
     Update: 更新
+    password_reset: パスワードのリセット
     privacy_policy: プライバシーポリシー
+    signup: 登録
     submit: 送信
     tos: 利用規約
   text:

@@ -33,6 +33,9 @@
           </li>
         <% else %>
           <li class="nav-item">
+            <%= link_to t("word.signup"), new_user_registration_path, class: "nav-link", tabindex: "-1", aria_disabled: "true" %>
+          </li>
+          <li class="nav-item">
             <%= link_to t("word.login"), new_user_session_path, class: "nav-link", tabindex: "-1", aria_disabled: "true" %>
           </li>
         <% end %>
