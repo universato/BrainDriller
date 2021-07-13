@@ -50,3 +50,5 @@ rails test test/system/drills_test.rb:76
 ```
 
 Correctの文字は画像で見えている。
+
+2021/7/14, また落ちた。
