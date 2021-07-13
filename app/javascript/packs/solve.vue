@@ -46,13 +46,15 @@
     <div v-else-if="state=='result'">
       <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
       <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
-      <div>今回の正解数: {{ correct_count }} </div>
-      <div>今回の不正数: {{ uncorrect_count }} </div>
-      <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
-      <div>今回の出題数: {{ problems.length }} </div>
-      <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
-      <ol>
-        <li v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
+      <div class="summary row">
+        <div>今回の正解数: {{ correct_count }} </div>
+        <div>今回の不正数: {{ uncorrect_count }} </div>
+        <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
+        <div>今回の出題数: {{ problems.length }} </div>
+        <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
+      </div>
+      <div>
+        <div v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
@@ -65,8 +67,8 @@
             <span v-else class="uncorrect">不正解です</span>
           </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
-        </li>
-      </ol>
+        </div>
+      </div>
       <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
       <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
     </div>
@@ -212,7 +214,6 @@ export default {
     },
   },
   computed: {
-
     resolveDrillURL() {
       return `/drills/${this.drill.id}`
     },
