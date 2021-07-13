@@ -50,3 +50,24 @@ rails test test/system/drills_test.rb:76
 ```
 
 Correctの文字は画像で見えている。
+
+## CircleCIで落ちる。
+
+```
+..............S...[Screenshot Image]: /home/circleci/circleci-demo-ruby-rails/tmp/screenshots/failures_test_solve_drill_by_logout_user.png
+F
+
+Failure:
+DrillsTest#test_solve_drill_by_logout_user [/home/circleci/circleci-demo-ruby-rails/test/system/drills_test.rb:84]:
+expected to find text "Correct" in "BrainDriller". (However, it was found 1 time including non-visible text.)
+
+
+rails test test/system/drills_test.rb:76
+
+.[Screenshot Image]: /home/circleci/circleci-demo-ruby-rails/tmp/screenshots/failures_test_solve_drill.png
+.F
+
+Failure:
+DrillsTest#test_solve_drill [/home/circleci/circleci-demo-ruby-rails/test/system/drills_test.rb:43]:
+expected to find text "Correct" in "BrainDriller". (However, it was found 1 time including non-visible text.)
+```

@@ -13,6 +13,7 @@ class SignUpTest < ApplicationSystemTestCase
       fill_in "user[password]", with: "foobar"
       fill_in "user[password_confirmation]", with: "foobar"
     end
+    skip if ENV["CI_SKIP_TEST"]
     click_button "登録する"
   end
 
