@@ -1,5 +1,45 @@
+class UserCreator
+  def self.insert_all
+    user_creator = self.new
+    yield(user_creator)
+    user_creator.insert_all
+  end
+
+  def initialize
+    @users = []
+  end
+
+  def add(name, admin: false)
+    time = Time.now
+    user = {
+      login_name: name,
+      nickname: name,
+      email: "#{name}@example.com",
+      admin: admin,
+      encrypted_password: "$2a$12$gl/HZYEZJUz85.Lrrw.TJeQgmMZXAnPkDY69.FYNjkEMsLuF9S69S", # "foobar"
+      confirmed_at: Time.current,
+      created_at: time,
+      updated_at: time,
+    }
+    @users << user
+  end
+
+  def insert_all
+    User.insert_all(@users)
+  end
+end
+
+UserCreator.insert_all do |user_creator|
+  user_creator.add("uni", admin: true)
+  user_creator.add("ruby")
+  user_creator.add("normal")
+end
+
+puts "#{User.all.size}ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
+__END__
+
 def create_user(name, admin: false)
-  User.create!(
+  User.create(
     login_name: name,
     nickname: name,
     email: "#{name}@example.com",
@@ -14,8 +54,6 @@ end
 create_user("uni", admin: true)
 create_user("ruby")
 create_user("normal")
-
-puts "2ユーザーの作成で打ち切って、次にいきます l.#{__LINE__}"
 
 __END__
 
