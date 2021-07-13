@@ -6,6 +6,7 @@ class DrillLikesTest < ApplicationSystemTestCase
   include Warden::Test::Helpers
 
   test "solve drill" do
+    skip
     login_as(users(:smith), scope: :user)
 
     visit '/drills'

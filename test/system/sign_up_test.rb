@@ -19,7 +19,6 @@ class SignUpTest < ApplicationSystemTestCase
   test "sign_in and sign_out" do
     logout(:user)
     visit '/'
-    assert_no_text "マイドリル"
     assert_text "ログイン"
     click_on "ログイン"
     # visit '/users/sign_in'
@@ -29,13 +28,11 @@ class SignUpTest < ApplicationSystemTestCase
     end
     click_button "ログインする"
     assert_text "ログインしました"
-    assert_text "マイドリル"
 
     click_on "アカウント"
     click_on "ログアウト"
 
     assert_text "ログアウトしました"
     assert_text "ログイン"
-    assert_no_text "マイドリル"
   end
 end
