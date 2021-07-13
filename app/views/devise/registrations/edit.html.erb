@@ -7,13 +7,13 @@
 
       <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
       <div class="field">
-        <%= f.label :icon %><br/>
-        <%= f.file_field :icon %>
+        <%= f.label :icon, class: "form-label" %><br/>
+        <%= f.file_field :icon, class: "form-control" %>
       </div>
 
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.label :email, class: "form-label" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -21,8 +21,8 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :current_password %><br />
-        <%= f.password_field :current_password, autocomplete: "current-password" %>
+        <%= f.label :current_password, class: "form-label" %><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
       </div>
 
       <div class="actions">
@@ -42,8 +42,8 @@
       <% end %>
 
       <div class="field">
-        <%= f.label :password, t("word.new_password") %><br />
-        <%= f.password_field :password, autocomplete: "new-password" %>
+        <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         <% if @minimum_password_length %>
           <br />
           <em><%= @minimum_password_length %> characters minimum</em>
@@ -51,13 +51,13 @@
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, t("word.new_password_confirmation") %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
 
       <div class="field">
-        <%= f.label :current_password %><br />
-        <%= f.password_field :current_password, autocomplete: "current-password" %>
+        <%= f.label :current_password, class: "form-label" %><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
       </div>
 
       <div class="actions">
