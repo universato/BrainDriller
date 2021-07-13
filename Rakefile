@@ -50,7 +50,7 @@ task :routes do
     routes = routes.select{ _1.index(ENV["F"]) } if ENV["F"]
     routes = routes.select{ _1.index(ENV["F1"]) } if ENV["F1"]
     routes = routes.select{ _1.index(ENV["F2"]) } if ENV["F2"]
-  else
+  elsif ENV["F"] || ENV["F1"] || ENV["F2"]
     r1 = routes.select{ ENV["F"] and _1.index(ENV["F"]) }
     r2 = routes.select{ ENV["F1"] and _1.index(ENV["F1"]) }
     r3 = routes.select{ ENV["F2"] and _1.index(ENV["F2"]) }
