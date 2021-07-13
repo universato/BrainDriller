@@ -34,6 +34,9 @@ Style/StringLiterals:
 ## Layout
 
 # 余計な空白を見栄えのために欲しくなることもたまにあるので、自動修正はしない。
+Layout/ArgumentAlignment:
+  Exclude:
+    - app/models/user.rb
 Layout/ExtraSpacing:
   AutoCorrect: false
   Exclude:
@@ -62,6 +65,9 @@ Layout/SpaceBeforeBlockBraces:
 # Arrayリテラルの中にスペースを入れたくなることがあるので、自動修正はしない。
 Layout/SpaceInsideArrayLiteralBrackets:
   AutoCorrect: false
+Layout/SpaceInsideHashLiteralBraces:
+  Exclude:
+    - app/models/user.rb
 # デフォルトだと(0..10)を推奨してくるが、(0 .. 10)の方が見やすい気がするので許したい。
 Layout/SpaceInsideRangeLiteral:
   Enabled: false
