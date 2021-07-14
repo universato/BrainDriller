@@ -19,6 +19,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def edit_profile
+    @user = current_user
+    self.edit
+  end
+
   # ## PUT /resource
   # def update
   #   super

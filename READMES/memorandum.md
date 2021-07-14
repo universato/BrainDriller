@@ -1666,3 +1666,45 @@ puts path = File.expand_path('../../log/', __dir__)
 
 `rails tmp:clear`
 ```
+
+# idの重複
+
+### edit_user
+
+[DOM] Found 2 elements with non-unique id #edit_user: (More info: https://goo.gl/9p2vKq) 
+
+```html
+<form class="edit_user" id="edit_user" action="/users" accept-charset="UTF-8" method="post"><input type="hidden" name="_method" value="put"><input type="hidden" name="authenticity_token" value="p7Ph8CS7LwPmrVFTQr26Yg0lxFxEdfpmLplleGuy1oBksfnPGmpZvvGOvUUg0nI8i89dLS1NCglZWDvKdImUag">
+      
+
+
+       <div class="row g-3">
+        <div class="field">
+          <label class="form-label" for="user_password">新しいパスワード</label><br>
+          <input autocomplete="new-password" class="form-control fs-4" type="password" name="user[password]" id="user_password">
+            <em>6 文字以上の入力が必要です</em>
+        </div>
+
+        <div class="field">
+          <label class="form-label" for="user_password_confirmation">新しいパスワード(確認用)</label><br>
+          <input autocomplete="new-password" class="form-control fs-4" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+        </div>
+
+        <div class="field">
+          <label class="form-label" for="user_current_password">現在のパスワード</label><br>
+          <input autocomplete="current-password" class="form-control fs-4" type="password" name="user[current_password]" id="user_current_password">
+        </div>
+
+        <div class="actions mt-3">
+          <input type="submit" name="commit" value="パスワードを更新する" class="w-100 btn btn-primary btn-lg fs-4" data-disable-with="パスワードを更新する">
+        </div>
+    </div></form>
+```
+
+[DOM] Found 2 elements with non-unique id #user_current_password: (More info: https://goo.gl/9p2vKq)
+
+```r
+<input autocomplete=​"current-password" class=​"form-control fs-4" type=​"password" name=​"user[current_password]​" id=​"user_current_password">​
+
+<input autocomplete=​"current-password" class=​"form-control fs-4" type=​"password" name=​"user[current_password]​" id=​"user_current_password">
+```

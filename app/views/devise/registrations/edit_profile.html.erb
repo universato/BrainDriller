@@ -21,19 +21,6 @@
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div class="field">
-          <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control fs-4" %>
-          <% if @minimum_password_length %>
-            <em><%= @minimum_password_length %> 文字以上の入力が必要です</em>
-          <% end %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control fs-4" %>
-        </div>
-
         <div class="col-12">
           <%= f.label :current_password, class: "form-label" %><br />
           <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
@@ -48,8 +35,12 @@
 
   <hr class="mt-5">
 
+  <%= link_to "reset password", edit_user_password_url %>
+
+  <hr class="mt-5">
+
   <div class="pt-3 pb-3">
-    <h2 class="h3">退会処理</h2>
+    <h2 class="h3">パスワードの変更</h2>
     <div>アカウントが完全に削除されると、データは戻りません</div>
 
     <p> <%= button_to t("text.cancel_my_account"), registration_path(User), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger btn-lg mt-5 fs-4" %></p>

@@ -1,17 +1,54 @@
-<% if current_user %>
-  <%= form_with(model: current_user) do |form| %>
-    <div class="field">
-      <%= form.label :login_name, class: "form-label" %>
-      <%= form.text_field :login_name, class: "form-control" %>
-    </div>
+<div class="container w-50">
+  <div class="row">
+    <h2 class="h3 pt-4">プロフィール編集 <%# resource_name.to_s.humanize %></h2>
 
-    <div class="field">
-      <%= form.label :nickname, class: "form-label" %>
-      <%= form.text_field :nickname, class: "form-control" %>
-    </div>
+    <% resource = current_user %>
+    <% resource_name = :user %>
+    <%= form_for(resource, as: resource_name, url: registration_path(User), html: { method: :put, class: "col-12" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="actions">
-      <%= form.submit t("text.edit_profile"), class: "btn btn-primary" %>
+      <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
+      <div class="field mb-3">
+        <%= f.label :icon, class: "form-label" %><br/>
+        <%= f.file_field :icon, class: "form-control fs-4" %>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12">
+          <%= f.label :email, class: "form-label" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control fs-4" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="col-12">
+          <%= f.label :current_password, class: "form-label" %><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "プロフィールを更新する", class: "w-100 btn btn-primary btn-lg fs-4" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+  </div>
+
+  <hr class="mt-5">
+
+  <%= link_to "reset password", edit_user_password_url %>
+
+  <hr class="mt-5">
+
+  <div class="pt-3 pb-3">
+    <h2 class="h3">パスワードの変更</h2>
+    <div>アカウントが完全に削除されると、データは戻りません</div>
+
+    <p> <%= button_to t("text.cancel_my_account"), registration_path(User), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger btn-lg mt-5 fs-4" %></p>
+  </div>
+
+  <hr class="mt-5 mb-4">
+
+  <%= link_to t("word.back"), :back, class: "fs-3" %>
+</div>
