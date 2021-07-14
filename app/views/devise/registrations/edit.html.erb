@@ -8,13 +8,13 @@
       <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
       <div class="field mb-3">
         <%= f.label :icon, class: "form-label" %><br/>
-        <%= f.file_field :icon, class: "form-control" %>
+        <%= f.file_field :icon, class: "form-control fs-4" %>
       </div>
 
       <div class="row g-3">
         <div class="col-12">
           <%= f.label :email, class: "form-label" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control fs-4" %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -23,11 +23,11 @@
 
         <div class="col-12">
           <%= f.label :current_password, class: "form-label" %><br />
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
         </div>
 
         <div class="actions">
-          <%= f.submit "プロフィールを更新する", class: "w-100 btn btn-primary btn-lg" %>
+          <%= f.submit "プロフィールを更新する", class: "w-100 btn btn-primary btn-lg fs-4" %>
         </div>
       <% end %>
     </div>
@@ -48,7 +48,7 @@
        <div class="row g-3">
         <div class="field">
           <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control fs-4" %>
           <% if @minimum_password_length %>
             <em><%= @minimum_password_length %> 文字以上の入力が必要です</em>
           <% end %>
@@ -56,16 +56,16 @@
 
         <div class="field">
           <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control fs-4" %>
         </div>
 
         <div class="field">
           <%= f.label :current_password, class: "form-label" %><br />
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
         </div>
 
         <div class="actions mt-3">
-          <%= f.submit "パスワードを更新する", class: "w-100 btn btn-primary btn-lg" %>
+          <%= f.submit "パスワードを更新する", class: "w-100 btn btn-primary btn-lg fs-4" %>
         </div>
       <% end %>
     </div>
@@ -77,10 +77,10 @@
     <h2 class="h3">パスワードの変更</h2>
     <div>アカウントが完全に削除されると、データは戻りません</div>
 
-    <p> <%= button_to t("text.cancel_my_account"), registration_path(User), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger btn-lg mt-5" %></p>
+    <p> <%= button_to t("text.cancel_my_account"), registration_path(User), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger btn-lg mt-5 fs-4" %></p>
   </div>
 
   <hr class="mt-5 mb-4">
 
-  <%= link_to t("word.back"), :back %>
+  <%= link_to t("word.back"), :back, class: "fs-3" %>
 </div>
