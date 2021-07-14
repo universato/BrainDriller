@@ -1,38 +1,42 @@
-<div class="">
-  <div class="">
-    <h2>プロフィール編集画面 <%# resource_name.to_s.humanize %></h2>
+<div class="container">
+  <div class="row">
+    <h2 class="h3 pt-4">プロフィール編集 <%# resource_name.to_s.humanize %></h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "col-12" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
-      <div class="field">
+      <div class="field mb-3">
         <%= f.label :icon, class: "form-label" %><br/>
         <%= f.file_field :icon, class: "form-control" %>
       </div>
 
-      <div class="field">
-        <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
+      <div class="row g-3">
+        <div class="col-12">
+          <%= f.label :email, class: "form-label" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="col-12">
+          <%= f.label :current_password, class: "form-label" %><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "プロフィールを更新する", class: "w-100 btn btn-primary btn-lg" %>
+        </div>
       <% end %>
-
-      <div class="field">
-        <%= f.label :current_password, class: "form-label" %><br />
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit t("word.update"), class: "w-100 btn btn-primary btn-lg" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 
-  <div class="panel">
-    <h2>パスワードの変更 <%# resource_name.to_s.humanize %></h2>
+  <hr class="mt-5">
+
+  <div class="">
+    <h2 class="h3 pt-4">パスワードの変更</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -41,36 +45,42 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="field">
-        <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-        <% if @minimum_password_length %>
-          <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
-      </div>
+       <div class="row g-3">
+        <div class="field">
+          <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> 文字以上の入力が必要です</em>
+          <% end %>
+        </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-      </div>
+        <div class="field">
+          <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
 
-      <div class="field">
-        <%= f.label :current_password, class: "form-label" %><br />
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-      </div>
+        <div class="field">
+          <%= f.label :current_password, class: "form-label" %><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+        </div>
 
-      <div class="actions">
-        <%= f.submit t("word.update"), class: "w-100 btn btn-primary btn-lg" %>
-      </div>
-    <% end %>
+        <div class="actions mt-3">
+          <%= f.submit "パスワードを更新する", class: "w-100 btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="panel">
-    <h3 class="text-danger"><%= t("text.cancel_my_account") %></h3>
+  <hr class="mt-5">
 
-    <p> <%= button_to t("text.cancel_my_account"), registration_path(resource_name), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger" %></p>
+  <div class="pt-3 pb-3">
+    <h2 class="h3">パスワードの変更</h2>
+    <div>アカウントが完全に削除されると、データは戻りません</div>
+
+    <p> <%= button_to t("text.cancel_my_account"), registration_path(User), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger btn-lg mt-5" %></p>
   </div>
+
+  <hr class="mt-5 mb-4">
+
+  <%= link_to t("word.back"), :back %>
 </div>
-
-<%= link_to t("word.back"), :back %>
