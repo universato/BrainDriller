@@ -1,17 +1,17 @@
 <% if current_user %>
   <%= form_with(model: current_user) do |form| %>
     <div class="field">
-      <%= form.label :login_name %>
-      <%= form.text_field :login_name %>
+      <%= form.label :login_name, class: "form-label" %>
+      <%= form.text_field :login_name, class: "form-control" %>
     </div>
 
     <div class="field">
-      <%= form.label :nickname %>
-      <%= form.text_field :nickname %>
+      <%= form.label :nickname, class: "form-label" %>
+      <%= form.text_field :nickname, class: "form-control" %>
     </div>
 
     <div class="actions">
-      <%= form.submit t("text.edit_profile") %>
+      <%= form.submit t("text.edit_profile"), class: "btn btn-primary" %>
     </div>
   <% end %>
 <% end %>

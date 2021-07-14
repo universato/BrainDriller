@@ -26,7 +26,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit t("word.update"), class: "btn-std" %>
+        <%= f.submit t("word.update"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit t("word.update"), class: "btn-std" %>
+        <%= f.submit t("word.update"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
@@ -69,7 +69,7 @@
   <div class="panel">
     <h3 class="text-danger"><%= t("text.cancel_my_account") %></h3>
 
-    <p> <%= button_to t("text.cancel_my_account"), registration_path(resource_name), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn-std" %></p>
+    <p> <%= button_to t("text.cancel_my_account"), registration_path(resource_name), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-primary" %></p>
   </div>
 </div>
 
