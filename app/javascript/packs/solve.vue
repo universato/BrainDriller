@@ -8,7 +8,7 @@
         <div v-if="currentProblem">
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
-          <div v-if="currentUserId">
+          <div v-if="currentUserId" class="text-muted">
             <div>あなたの連続正解数: {{ currentStreak }} </div>
             <div>あなたの回答回数: {{ numberOfSubmissions }} </div>
             <div>あなたの正解回数: {{ numberOfCorrectAnswers }} </div>
@@ -16,8 +16,8 @@
           </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
-          <ol class="problem-choices">
-            <li
+          <div class="problem-choices">
+            <div
               v-for="(choice, choiceNo) in currentProblem.choices"
               :key="choiceNo"
               class="problem-choice"
@@ -25,15 +25,15 @@
               @click="selectOption(choiceNo)"
               v-html="compiledMarkdown(choice)"
             >
-            </li>
-            <li
+            </div>
+            <div
               class="problem-choice"
               :class="{'selected-choice--not-sure': answerPaper[currentProblem.id] === 'notSure'}"
               @click="selectOption('notSure')"
             >
               　わからない
-            </li>
-          </ol>
+            </div>
+          </div>
         </div>
         <div class="move-buttons">
           <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">前の問題へ</button></div>
@@ -323,7 +323,7 @@ p {
 }
 
 .move-buttons {
-  margin: 16px;
+  margin-top: 16px;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 4fr 5fr 4fr;
