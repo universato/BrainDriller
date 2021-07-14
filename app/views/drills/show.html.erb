@@ -1,40 +1,40 @@
-<div class="panel grid">
+<div class="container">
   <div class="title-panel">
     <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
   </div>
   <div class="drill-guide"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
-  <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'a-user-icon' %>
-  <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
 
   <div class="drill-problem-count">
     このドリルの問題数: <%= problems_count = @drill.problems.size %>
     <br>
     <% if current_user %>
-     習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %>
-     <% if @driill_is_mastered %>
-       習得済み
-     <% end %>
+    習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %>
+    <% if @driill_is_mastered %>
+      習得済み
+    <% end %>
     <% end %>
   </div>
 
   <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
-    <div class="drill-option">
-      <%= f.label :rand, "ランダムに出題する", class: "label"%>
-      <%= f.check_box :rand, {checked: true, class: "random-option"}, "true", nil %>
-
-      <% unless @driill_is_mastered %>
-        <%= f.label :past, "過去の回答に基づいて出題する", class: "label"%>
-        <%= f.check_box :past, {checked: true, class: "random-option"}, "true", nil %>
-      <% end %>
+    <div class="form-check">
+      <%= f.check_box :rand, {checked: true, class: "form-check-input"}, "true", nil %>
+      <%= f.label :rand, "ランダムに出題する", class: "form-check-label" %>
     </div>
 
-    <div class="drill-option">
-      <div class="label problem-number-option-label">問題数: </div>
-      <%= f.select :num,  options_for_select(problem_count_select_list(problems_count)), {}, class: "problem-number-option" %>
+    <% unless @driill_is_mastered %>
+      <div class="form-check">
+        <%= f.check_box :past, {checked: true, class: "form-check-input"}, "true", nil %>
+        <%= f.label :past, "過去の回答に基づいて出題する", class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <div class="">
+      <label for="num">問題数: </label>
+      <%= f.select :num, options_for_select(problem_count_select_list(problems_count)), {}, class: "problem-number-option" %>
     </div>
 
     <div class="btn-box">
-      <%= f.submit t("text.Solve_problems"), name: '', class: 'w-100 btn btn-primary btn-lg' %>
+      <%= f.submit t("text.Solve_problems"), class: 'w-100 btn btn-primary btn-lg solve-btn' %>
     </div>
   <% end %>
 
@@ -55,6 +55,9 @@
 </div>
 
 <% if current_user&.admin? %>
+  <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'a-user-icon' %>
+  <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
+
   <% if DrillLike.exists?(user: current_user, drill: @drill) %>
     <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
       <%= f.submit "Unlike", class: "btn btn-primary" %>
