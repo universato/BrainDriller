@@ -5,8 +5,4 @@ class UsersController < ApplicationController
 
     @drills = @user.drills
   end
-
-  def edit_profile
-    authenticate_user!
-  end
 end
