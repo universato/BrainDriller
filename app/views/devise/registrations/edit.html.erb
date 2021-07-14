@@ -1,5 +1,5 @@
-<div class="panels">
-  <div class="panel">
+<div class="">
+  <div class="">
     <h2>プロフィール編集画面 <%# resource_name.to_s.humanize %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit t("word.update"), class: "btn btn-primary" %>
+        <%= f.submit t("word.update"), class: "w-100 btn btn-primary btn-lg" %>
       </div>
     <% end %>
   </div>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit t("word.update"), class: "btn btn-primary" %>
+        <%= f.submit t("word.update"), class: "w-100 btn btn-primary btn-lg" %>
       </div>
     <% end %>
   </div>
@@ -69,7 +69,7 @@
   <div class="panel">
     <h3 class="text-danger"><%= t("text.cancel_my_account") %></h3>
 
-    <p> <%= button_to t("text.cancel_my_account"), registration_path(resource_name), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-primary" %></p>
+    <p> <%= button_to t("text.cancel_my_account"), registration_path(resource_name), data: { confirm: t("text.are_you_sure?") }, method: :delete, class: "btn btn-danger" %></p>
   </div>
 </div>
 
