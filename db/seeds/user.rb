@@ -7,17 +7,17 @@ class UserCreator
 
   def initialize
     @users = []
+    @encrypted_password = Devise::Encryptor.digest(User, 'foobar')
   end
 
   def add(name, admin: false)
     time = Time.current
-    encrypted_password = Devise::Encryptor.digest(User, 'foobar'), # "foobar"
     user = {
       login_name: name,
       nickname: name,
       email: "#{name}@example.com",
       admin: admin,
-      encrypted_password: encrypted_password
+      encrypted_password: @encrypted_password,
       confirmed_at: time,
       created_at: time,
       updated_at: time,
