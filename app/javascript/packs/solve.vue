@@ -5,6 +5,11 @@
     </div>
     <div v-if="state=='solving'">
       <div class="problem">
+        <span v-for="(el, i) in answerStatus" :key="i">
+          <span v-if="el=='notSure'"> ・ </span>
+          <span v-else-if="el >= 0">✓</span>
+          <span v-else> − </span>
+        </span>
         <div v-if="currentProblem">
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
@@ -98,6 +103,7 @@ export default {
       correct_count: 0,
       notSure_count: 0,
       uncorrect_count: 0,
+      answerStatus: []
     }
   },
   created() {
@@ -137,6 +143,9 @@ export default {
       console.log(this.problemMap);
       this.currentUserId = json.currentUserId
       this.currentProblem = this.problems[0];
+
+      let n = Object.keys(this.problems).length;
+      this.answerStatus = new Array(n)
     }).catch(error => {
       console.warn('Failed to parsing', error)
     })
@@ -144,8 +153,9 @@ export default {
   methods: {
     selectOption(choiceNo) {
       this.currentProblem.selectIndex = choiceNo;
-      sleep(100); // <- すぐに切り替わるといきなりすぎるかと思って、少し待機。
       this.answerPaper[this.currentProblem.id] = choiceNo;
+      this.answerStatus[this.currentProblemIndex] = choiceNo;
+      sleep(100); // <- すぐに切り替わるといきなりすぎるかと思って、少し待機。
       if(0 <=  this.currentProblemIndex && this.currentProblemIndex < this.problems.length - 1) {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
