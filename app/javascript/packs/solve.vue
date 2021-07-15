@@ -52,6 +52,7 @@
       <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
       <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
       <div class="summary row">
+        <div> 回答時間{{ elaspedTime }} </div>
         <div>今回の正解数: {{ correct_count }} </div>
         <div>今回の不正数: {{ uncorrect_count }} </div>
         <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
@@ -103,7 +104,9 @@ export default {
       correct_count: 0,
       notSure_count: 0,
       uncorrect_count: 0,
-      answerStatus: []
+      answerStatus: [],
+      startTime: new Date(),
+      endTime: new Date(),
     }
   },
   created() {
@@ -143,7 +146,6 @@ export default {
       console.log(this.problemMap);
       this.currentUserId = json.currentUserId
       this.currentProblem = this.problems[0];
-
       let n = Object.keys(this.problems).length;
       this.answerStatus = new Array(n)
     }).catch(error => {
@@ -162,6 +164,7 @@ export default {
       }
     },
     grade() {
+      this.endTime = new Date();
       console.log("method grade");
       console.log(this.answerPaper);
       this.postAnswerPaper();
@@ -250,7 +253,18 @@ export default {
       }else{
         return 0;
       }
-    }
+    },
+    elaspedTime() {
+      let ms = this.endTime - this.startTime;
+      let seconds = Math.floor(ms / 1000);
+      let minutes = Math.floor(seconds / 60);
+      let second = seconds % 60;
+      if (minutes > 0){
+        return `${minutes}分 ${second}秒 (=${seconds}秒)`
+      } else {
+        return `${seconds}秒`
+      }
+    },
   }
 }
 </script>
