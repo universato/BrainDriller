@@ -18,7 +18,6 @@ import '@fortawesome/fontawesome-free/js/all'
 // })
 
 import '../stylesheets/application.scss'
-import '../stylesheets/reset.scss'
 import '../stylesheets/common.scss'
 import '../stylesheets/button.scss'
 import '../stylesheets/drill.scss'

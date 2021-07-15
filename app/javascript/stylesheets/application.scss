@@ -57,10 +57,6 @@ main {
   flex-grow: 1;
 }
 
-label {
-  font-weight: bold;
-}
-
 textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   outline: 0;
 }
