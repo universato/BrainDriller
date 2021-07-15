@@ -39,8 +39,4 @@ class User < ApplicationRecord
   def icon_path
     icon.to_s.presence || "default_icon"
   end
-
-  def to_s
-    login_name
-  end
 end
