@@ -78,8 +78,8 @@
           <div class="problem-correct_option" v-else> 無回答 </div>
           <div style="font-size: 1.2em;">
             <span v-if="answerPaper[problem.id] === undefined" class="uncorrect">無回答でした</span>
-            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="correct">正解です</span>
-            <span v-else class="uncorrect">不正解です</span>
+            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="text-success">正解です</span>
+            <span v-else class="text-danger">不正解です</span>
           </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </div>
