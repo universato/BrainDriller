@@ -51,7 +51,16 @@
     <div v-else-if="state=='result'">
       <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
       <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
-      <div class="summary row">
+      <div class="">
+        <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
+          <span v-if="answerPaper[problem.id] === undefined">-</span>
+          <span
+            v-else-if="problem.correct_option===answerPaper[problem.id]"
+            class="text-success"
+          >○</span>
+          <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
+          <span v-else class="text-danger">✗</span>
+        </span>
         <div> 回答時間{{ elaspedTime }} </div>
         <div>今回の正解数: {{ correct_count }} </div>
         <div>今回の不正数: {{ uncorrect_count }} </div>
