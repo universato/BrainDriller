@@ -24,7 +24,9 @@ import '../stylesheets/drill.scss'
 import '../stylesheets/footer.scss'
 import '../stylesheets/form.scss'
 import '../stylesheets/user.scss'
-import '../stylesheets/highlightjs/hybrid.css'
+// import '../stylesheets/highlightjs/hybrid.css'
+import '../stylesheets/highlightjs/arta.css'
+import '../stylesheets/highlightjs/one-dark-reasonable.css'
 import '../stylesheets/highlightjs/custom.scss'
 
 Rails.start()

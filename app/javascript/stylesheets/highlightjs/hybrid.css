@@ -6,12 +6,9 @@
 vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 */
 
-/*background color*/
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  /* background: #1d1f21; */
+  background: #1d1f21;
+  color: #c5c8c6;
 }
 
 /*selection color*/
@@ -23,11 +20,6 @@ vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 .hljs::-moz-selection,
 .hljs span::-moz-selection {
   background: #373b41;
-}
-
-/*foreground color*/
-.hljs {
-  color: #c5c8c6;
 }
 
 /*color: fg_yellow*/
@@ -49,7 +41,7 @@ vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 .hljs-literal,
 .hljs-deletion,
 .hljs-link {
-  color: #cc6666
+ color: #cc6666
 }
 
 /*color: fg_green*/
@@ -66,7 +58,7 @@ vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 .hljs-attribute,
 .hljs-code,
 .hljs-selector-id {
-  color: #b294bb;
+ color: #b294bb;
 }
 
 /*color: fg_blue*/
@@ -74,7 +66,7 @@ vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 .hljs-selector-tag,
 .hljs-bullet,
 .hljs-tag {
-  color: #81a2be;
+ color: #81a2be;
 }
 
 /*color: fg_aqua*/
@@ -88,7 +80,6 @@ vim-hybrid theme by w0ng (https://github.com/w0ng/vim-hybrid)
 /*color: fg_orange*/
 .hljs-type,
 .hljs-built_in,
-.hljs-builtin-name,
 .hljs-quote,
 .hljs-section,
 .hljs-selector-class {

@@ -4,6 +4,13 @@
   background-color: hsl(193, 15%, 25%);
 }
 
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  /* background: #1d1f21; */
+}
+
 .selected-choice .hljs:hover {
   background-color: hsl(193, 15%, 50%);
 }
