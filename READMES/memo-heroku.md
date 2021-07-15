@@ -23,7 +23,12 @@ heroku run rake db:seed
 `heroku pg:psql`
 `\t` テーブル一覧
 `quit` 終了
+`SELECT COUNT(*) FROM users;` ユーザー数を確かめる。
 
+```sql
+SELECT COUNT(*) FROM users;
+SELECT email, encrypted_password FROM users;
+```
 
 # 作り直し
 

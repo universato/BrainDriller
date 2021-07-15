@@ -10,14 +10,15 @@ class UserCreator
   end
 
   def add(name, admin: false)
-    time = Time.now
+    time = Time.current
+    encrypted_password = Devise::Encryptor.digest(User, 'foobar'), # "foobar"
     user = {
       login_name: name,
       nickname: name,
       email: "#{name}@example.com",
       admin: admin,
-      encrypted_password: "$2a$12$gl/HZYEZJUz85.Lrrw.TJeQgmMZXAnPkDY69.FYNjkEMsLuF9S69S", # "foobar"
-      confirmed_at: Time.current,
+      encrypted_password: encrypted_password
+      confirmed_at: time,
       created_at: time,
       updated_at: time,
     }
