@@ -56,7 +56,7 @@
 
 <% if current_user&.admin? %>
   <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'a-user-icon' %>
-  <div class="drill-use"><%= link_to @drill.user, @drill.user, class: "drill-user-name" %></div>
+  <div class="drill-use"><%= link_to @drill.user.login_name, @drill.user, class: "drill-user-name" %></div>
 
   <% if DrillLike.exists?(user: current_user, drill: @drill) %>
     <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
