@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-6 col-xs-12 ml-0">
           <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
-          <input type="text" v-model="title" id="drill-title" class="form-control form-control-lg fs-3">
+          <input type="text" v-model.trim="title" id="drill-title" class="form-control form-control-lg fs-3">
         </div>
       </div>
       <div class="row mt-4">
