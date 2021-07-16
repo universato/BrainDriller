@@ -14,7 +14,6 @@
           <label for="drill-guide">ドリルの説明:</label>
           <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 12rem"></textarea>
         </div>
-
         <div class="col-md-6 col-xs-12">
           <div>プレビュー</div>
           <div v-html="compiledMarkdown(guide)" class="markdown-form__preview fs-4"> </div>
@@ -23,9 +22,10 @@
     </div>
     <div v-else>
       <button @click="drillOnEdit = !drillOnEdit" class="btn btn-secondary fs-4">編集画面へ</button><br>
-      ドリルのタイトル(必須): <div>{{ title }} </div>
-      <br>
-      ドリルの説明: <div v-html="compiledMarkdown(guide)" > </div>
+      ドリルのタイトル(必須):
+      <div class="fs-1">{{ title }} </div> <br>
+      ドリルの説明:
+      <div v-html="compiledMarkdown(guide)" class="fs-4"> </div>
     </div>
     <div v-if="loaded">
       <br><br>
