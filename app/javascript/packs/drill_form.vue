@@ -1,10 +1,25 @@
 <template>
-  <div id="app">
-    <button @click="saveDrillAndCloseEdit">見出し部分の保存して編集終了</button><br>
-    ドリルのタイトル(必須): <input type="text" v-model="title" id="drill-title" class="drill-title">
-    <br>
-    ドリルの説明: <textarea v-model="guide" class="statement"  id="drill-guide"></textarea>
-    <button @click="saveDrill">ドリルを仮保存して、問題を追加していく</button>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-md-6 col-xs-12 ml-0">
+        <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
+        <input type="text" v-model="title" id="drill-title" class="form-control form-control-lg fs-3">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-6 col-xs-12 ml-0">
+        <label for="drill-guide">ドリルの説明:</label>
+        <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 120px"></textarea>
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+        <div>プレビュー</div>
+        <div v-html="compiledMarkdown(guide)" class="fs-4" style="height: 100%"> </div>
+      </div>
+    </div>
+    <button @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center">
+      ドリルを仮保存して、問題を追加していく
+    </button>
   </div>
 </template>
 

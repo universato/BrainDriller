@@ -2,15 +2,27 @@
   <div id="app">
     ドリル作成者<div>{{ drillUserName }}</div>
     <div v-if="drillOnEdit">
-      <form id="drill-form" class="drill-form">
-        <button @click="saveDrillAndCloseEdit">保存して編集終了</button><br>
-        ドリルのタイトル(必須): <input type="text" v-model="title" name="drill-title">
-        <br>
-        ドリルの説明: <textarea v-model="guide" class="statement" name="drill-guide"></textarea>
-      </form>
+      <button @click="saveDrillAndCloseEdit" class="btn btn-secondary fs-4">保存して編集終了</button><br>
+      <div class="row">
+        <div class="col-md-6 col-xs-12 ml-0">
+          <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
+          <input type="text" v-model="title" id="drill-title" class="form-control form-control-lg fs-3">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-6 col-xs-12 ml-0">
+          <label for="drill-guide">ドリルの説明:</label>
+          <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 120px"></textarea>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <div>プレビュー</div>
+          <div v-html="compiledMarkdown(guide)" class="fs-4" style="height: 100%"> </div>
+        </div>
+      </div>
     </div>
     <div v-else>
-      <button @click="drillOnEdit = !drillOnEdit">編集画面へ</button>
+      <button @click="drillOnEdit = !drillOnEdit" class="btn btn-secondary fs-4">編集画面へ</button><br>
       ドリルのタイトル(必須): <div>{{ title }} </div>
       <br>
       ドリルの説明: <div v-html="compiledMarkdown(guide)" > </div>
@@ -30,27 +42,28 @@
     <div>
       このドリルの状態は、{{ drillStateJP }} です。
     </div>
-    <button @click="updateDrillAsDraft">下書きで保存する</button>
-    <button @click="updateDrillAsOpen">公開で保存する</button>
+    <button @click="updateDrillAsDraft" class="btn btn-primary fs-4">下書きで保存する</button>
+    <button @click="updateDrillAsOpen" class="btn btn-primary fs-4 mx-3">公開で保存する</button>
 
     <div v-for="(problem, index) in problems" :key="index">
       <br><br>
-      <button @click="isEdit[index] = !isEdit[index]">切り替え</button>
+      <button @click="isEdit[index] = !isEdit[index]" class="btn btn-secondary fs-4">切り替え</button>
       <br>
-      問題No. {{ index }}<br>
+      問題No. {{ index + 1 }}<br>
       <div v-if="isEdit[index]">
         <form class="problem-form">
-          問題の見出し<input v-model="problems[index].title" class="problem-title" name="problem-title">
-          <br>問題文<br>
-          <textarea v-model="problems[index].statement" class="statement"></textarea>
+          <label for="problem-title">問題の見出し</label>
+          <input v-model="problems[index].title" class="form-control" name="problem-title">
+          <label for="problem-statement">問題文</label>
+          <textarea v-model="problems[index].statement" class="form-control"></textarea>
           <br>選択肢<br>
           <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex">
-            <textarea v-model="problems[index].choices[choiceIndex]" class="statement"></textarea>
+            <textarea v-model="problems[index].choices[choiceIndex]" class="form-control"></textarea>
           </div>
 
-          <button @click="problems[index].choices.push('')">選択肢の追加</button>
+          <button @click="problems[index].choices.push('')" class="btn btn-secondary fs-4">+選択肢の追加</button>
           <br><br>
-          <button @click="deleteProblemAt(index)">問題No.{{ index }}の削除</button>
+          <button @click="deleteProblemAt(index)" class="btn btn-danger fs-4">問題No.{{ index + 1 }}の削除</button>
         </form>
       </div>
       <div v-else>
@@ -67,11 +80,12 @@
     </div>
 
     <br><br>
-    <button @click="addProblem">問題の入力欄を追加する</button>
+    <button @click="addProblem" class="btn btn-primary fs-4">問題の入力欄を追加する</button>
     <br><br>
-    <button @click="updateDrillAsDraft">下書きで保存する</button>
-    <br>
-    <button @click="updateDrillAsOpen">公開で保存する</button>
+    <div v-if="problems.length > 0">
+      <button @click="updateDrillAsDraft" class="btn btn-primary fs-4">下書きで保存する</button>
+      <button @click="updateDrillAsOpen" class="btn btn-primary fs-4 mx-3">公開で保存する</button>
+    </div>
   </div>
 </template>
 
