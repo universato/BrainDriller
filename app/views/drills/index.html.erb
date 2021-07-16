@@ -1,7 +1,7 @@
 <h1 class="page-title">ドリル</h1>
 
 <% if current_user&.admin? %>
-  <%= link_to 'ドリルを作成する', new_drill_path, class: "btn-std" %><br>
+  <%= link_to 'ドリルを作成する', new_drill_path, class: "btn btn-primary w-100 fs-4 mb-3" %><br>
   <div><%= "ドリルがありません" if @drills.blank? %></div>
 <% end %>
 
