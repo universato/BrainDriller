@@ -73,6 +73,14 @@
           <div class="problem-id"> 問題ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
+          <div
+            v-for="(choice, choiceNo) in problem.choices"
+            :key="choiceNo"
+            class="problem-choice"
+            :class="markedChoice(choiceNo, problem.correct_option, answerPaper[problem.id])"
+          >
+            <span v-html="compiledMarkdown(choice)"></span>
+          </div>
           <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. <span v-html="compiledMarkdown(problem.choices[problem.correct_option])"></span> </div>
           <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
           <div class="problem-correct_option" v-else> 無回答 </div>
@@ -234,6 +242,20 @@ export default {
         return (Math.round(a / b * 1000) / 10).toFixed(1);
       }
     },
+    markedChoice(choiceNo, correctNo, selectedNo){
+      if(choiceNo === correctNo && correctNo === selectedNo){
+        // 選ばれた正解
+        return `selected-correct-choice bg-success`
+      }else if(choiceNo === correctNo){
+        // 選ばれなかった正解
+        return `correct-choice bg-info`
+      }else if(choiceNo === selectedNo) {
+        // 選ばれた不正解
+        return `selected-uncorrect-choice bg-danger`
+      }else {
+        return ``
+      }
+    }
   },
   computed: {
     resolveDrillURL() {
