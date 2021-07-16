@@ -49,8 +49,7 @@
       </div>
     </div>
     <div v-else-if="state=='result'">
-      <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
-      <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
+      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">解き直す</a>
       <div class="">
         <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
           <span v-if="answerPaper[problem.id] === undefined">-</span>
@@ -92,8 +91,7 @@
           <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
         </div>
       </div>
-      <a :href="resolveDrillURL" class="btn-std button-link">解き直す</a>
-      <a href="/drills" class="btn-std button-link">ドリル一覧に戻る</a>
+      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 py-3 mt-1">解き直す</a>
     </div>
   </div>
 </template>
