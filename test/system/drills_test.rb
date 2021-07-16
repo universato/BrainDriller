@@ -11,7 +11,7 @@ class DrillsTest < ApplicationSystemTestCase
     visit '/drills/new'
     fill_in "drill-title", with: "Drill Title"
     fill_in "drill-guide", with: "Drill Guide"
-    click_button "問題を追加していく"
+    click_button "ドリルを非公開で仮保存"
   end
 
   test "update drill" do
