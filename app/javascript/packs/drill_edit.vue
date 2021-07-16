@@ -12,12 +12,12 @@
       <div class="row mt-4">
         <div class="col-md-6 col-xs-12 ml-0">
           <label for="drill-guide">ドリルの説明:</label>
-          <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 120px"></textarea>
+          <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 12rem"></textarea>
         </div>
 
         <div class="col-md-6 col-xs-12">
           <div>プレビュー</div>
-          <div v-html="compiledMarkdown(guide)" class="fs-4" style="height: 100%"> </div>
+          <div v-html="compiledMarkdown(guide)" class="markdown-form__preview fs-4"> </div>
         </div>
       </div>
     </div>

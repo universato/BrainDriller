@@ -4,21 +4,22 @@
       <div class="col-md-6 col-xs-12 ml-0">
         <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
         <input type="text" v-model="title" id="drill-title" class="form-control form-control-lg fs-3">
+        <div :class="{ 'text-danger': title.length === 0 }"> 文字数:<span>{{ title.length }}</span> </div>
       </div>
     </div>
     <div class="row mt-4">
       <div class="col-md-6 col-xs-12 ml-0">
         <label for="drill-guide">ドリルの説明:</label>
-        <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 120px"></textarea>
+        <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 12rem"></textarea>
       </div>
 
       <div class="col-md-6 col-xs-12">
         <div>プレビュー</div>
-        <div v-html="compiledMarkdown(guide)" class="fs-4" style="height: 100%"> </div>
+        <div v-html="compiledMarkdown(guide)" class="markdown-form__preview fs-4"> </div>
       </div>
     </div>
-    <button @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center">
-      ドリルを仮保存して、問題を追加していく
+    <button @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center" :disabled="title.length === 0">
+      ドリルを非公開で仮保存
     </button>
   </div>
 </template>
