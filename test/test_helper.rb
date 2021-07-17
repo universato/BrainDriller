@@ -11,8 +11,8 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+  ## Run tests in parallel with specified workers
+  # parallelize(workers: :number_of_processors)
 
   unless ENV['CI_SKIP_TEST']
     parallelize_setup do |worker|
