@@ -53,12 +53,13 @@
       <div v-if="isEdit[index]">
         <form class="problem-form">
           <label for="problem-title">問題の見出し</label>
-          <input v-model="problems[index].title" class="form-control" name="problem-title">
+          <input v-model="problems[index].title" class="form-control fs-4" name="problem-title" id="problem-title">
           <label for="problem-statement">問題文</label>
-          <textarea v-model="problems[index].statement" class="form-control"></textarea>
+          <textarea v-model="problems[index].statement" id="problem-statement" class="form-control fs-4"></textarea>
           <br>選択肢<br>
+
           <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex">
-            <textarea v-model="problems[index].choices[choiceIndex]" class="form-control"></textarea>
+            <textarea v-model="problems[index].choices[choiceIndex]" class="form-control fs-4"></textarea>
           </div>
 
           <button @click="problems[index].choices.push('')" class="btn btn-secondary fs-4">+選択肢の追加</button>
@@ -67,13 +68,14 @@
         </form>
       </div>
       <div v-else>
-        問題の見出し<div> {{ problems[index].title}} </div>
-        問題文: <div v-html="compiledMarkdown(problems[index].statement)"></div>
-        <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex">
-          <div
-            v-html="compiledMarkdown(problems[index].choices[choiceIndex])"
-            class="statement"
-          >
+        <div class="fs-3 my-2"> {{ problems[index].title}} </div>
+        <div v-html="compiledMarkdown(problems[index].statement)" class="fs-3 mb-2"></div>
+        <div class="problem-choices">
+          <div v-for="(choice, choiceIndex) in problems[index].choices" :key="choiceIndex" class="problem-choice fs-3">
+            <div
+              v-html="compiledMarkdown(problems[index].choices[choiceIndex])"
+            >
+            </div>
           </div>
         </div>
       </div>
@@ -248,5 +250,20 @@ export default {
 <style scoped>
 .statement {
   width: 80%;
+}
+
+.problem-choices {
+  /* border-top: 1px solid #ccc; */
+  margin-top: 8px;
+  margin-left: 0;
+}
+
+.problem-choice {
+  /* border: solid 1px #eee; */
+  /* border-radius: 4px; */
+  background-color: #e1e1e1;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 8px;
 }
 </style>

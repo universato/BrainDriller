@@ -18,9 +18,12 @@
         <div v-html="compiledMarkdown(guide)" class="markdown-form__preview fs-4"> </div>
       </div>
     </div>
-    <button @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center" :disabled="title.length === 0">
+    <button type="button" @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center" :disabled="title.length === 0">
       ドリルを非公開で仮保存
     </button>
+    <div @click="error = ''" class="text-danger">
+      {{ error }}
+    </div>
   </form>
 </template>
 
@@ -42,6 +45,7 @@ export default {
       isEdit: [],
       loaded: false,
       showModal: false,
+      error: "",
     }
   },
   created() {
@@ -143,7 +147,12 @@ export default {
         })
         .then(json=> {
           console.log(json);
-          location.href = json.redirect_edit_url;
+          if(json.status == 200){
+            location.href = json.redirect_edit_url;
+          }else if(json.status == 400){
+            this.error = "ドリルの保存に失敗しました。タイトルが重複している可能性や、文字数の条件を満たしていません x";
+            // console.log("ドリルの保存に失敗しました。タイトルが重複している可能性や、文字数の条件を満たしていません")
+          }
         })
         .catch(error => {
           console.warn('Failed to parsing', error)
