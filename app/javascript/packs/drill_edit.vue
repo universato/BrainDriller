@@ -4,13 +4,13 @@
     <form v-if="drillOnEdit" id="drill-form">
       <button @click="saveDrillAndCloseEdit" class="btn btn-secondary fs-4">保存して編集終了</button><br>
       <div class="row">
-        <div class="col-md-6 col-xs-12 ml-0">
-          <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
+        <div class="col-md-6 col-xs-12">
+          <label for="drill-title" class="col-12 mt-2">ドリルのタイトル(必須):</label>
           <input type="text" v-model.trim="title" id="drill-title" class="form-control form-control-lg fs-3">
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-md-6 col-xs-12 ml-0">
+        <div class="col-md-6 col-xs-12 me-0">
           <label for="drill-guide">ドリルの説明:</label>
           <textarea v-model="guide" class="form-control fs-4" id="drill-guide" style="height: 12rem"></textarea>
         </div>
@@ -21,7 +21,7 @@
       </div>
     </form>
     <div v-else>
-      <button @click="drillOnEdit = !drillOnEdit" class="btn btn-secondary fs-4">編集画面へ</button><br>
+      <button @click="drillOnEdit = !drillOnEdit" class="btn btn-secondary fs-4 mt-2">編集画面へ</button><br>
       ドリルのタイトル(必須):
       <div class="fs-1">{{ title }} </div> <br>
       ドリルの説明:
