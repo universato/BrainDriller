@@ -11,6 +11,18 @@ admin:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
   confirmed_at: <%= Time.now %>
   admin: true
+adam:
+  login_name: adam
+  nickname: adam
+  email: adam@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: <%= Time.now %>
+bob:
+  login_name: bob
+  nickname: bob
+  email: bob@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: <%= Time.now %>
 smith:
   login_name: smith
   nickname: smith
