@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     ドリル作成者<div>{{ drillUserName }}</div>
-    <div v-if="drillOnEdit">
+    <form v-if="drillOnEdit" id="drill-form">
       <button @click="saveDrillAndCloseEdit" class="btn btn-secondary fs-4">保存して編集終了</button><br>
       <div class="row">
         <div class="col-md-6 col-xs-12 ml-0">
@@ -19,7 +19,7 @@
           <div v-html="compiledMarkdown(guide)" class="markdown-form__preview fs-4"> </div>
         </div>
       </div>
-    </div>
+    </form>
     <div v-else>
       <button @click="drillOnEdit = !drillOnEdit" class="btn btn-secondary fs-4">編集画面へ</button><br>
       ドリルのタイトル(必須):

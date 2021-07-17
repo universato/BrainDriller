@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="container">
-    <div class="row">
+  <form id="app drill-form" class="container">
+    <div  class="row">
       <div class="col-md-6 col-xs-12 ml-0">
         <label for="drill-title" class="col-12">ドリルのタイトル(必須):</label>
         <input type="text" v-model="title" id="drill-title" class="form-control form-control-lg fs-3">
@@ -21,7 +21,7 @@
     <button @click="saveDrill" class="btn btn-primary fs-4 w-75 my-3 text-center" :disabled="title.length === 0">
       ドリルを非公開で仮保存
     </button>
-  </div>
+  </form>
 </template>
 
 <script>
