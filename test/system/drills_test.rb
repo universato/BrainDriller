@@ -6,7 +6,7 @@ class DrillsTest < ApplicationSystemTestCase
   include Warden::Test::Helpers
 
   test "create drill" do
-    login_as(users(:smith), scope: :user)
+    login_as(users(:admin), scope: :user)
 
     visit '/drills/new'
     fill_in "drill-title", with: "Drill Title"

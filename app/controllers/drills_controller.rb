@@ -21,14 +21,17 @@ class DrillsController < ApplicationController
 
   def new
     authenticate_user!
+    redirect_to root_path unless current_user&.admin?
   end
 
   def create
+    return unless current_user&.admin?
+
     drill = Drill.new(
       user: current_user,
       title: params[:drillTitle],
       guide: params[:drillGuide],
-      state: :full_open,
+      state: :draft,
     )
 
     begin
@@ -52,10 +55,14 @@ class DrillsController < ApplicationController
   end
 
   def edit
+    authenticate_user!
     @drill = Drill.find(params[:id])
+    redirect_to root_path unless @drill.user == current_user || current_user&.admin?
   end
 
   def update
+    return unless current_user&.admin?
+
     @drill = Drill.find_by(id: params[:id], user: current_user)
     @drill.title = params[:drillTitle]
     @drill.guide = params[:drillGuide]

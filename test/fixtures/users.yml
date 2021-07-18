@@ -3,6 +3,7 @@ uni:
   nickname: uni
   email: uni@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  admin: true
   confirmed_at: <%= Time.now %>
 admin:
   login_name: admin
