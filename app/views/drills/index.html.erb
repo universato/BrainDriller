@@ -8,8 +8,8 @@
 <div class="drills">
   <% @drills.each do |drill| %>
     <%= link_to drill, class: 'index-drill' do %>
-      <div class="index-drill-title"><%= drill.title  %></div>
-      <div><%= drill.guide  %></div>
+      <div class="index-drill-title"><%= drill.title %></div>
+      <div><%= drill.guide %></div>
 
       <div class="problem-count">問題数<%= drill.problems.size %>問</div>
       <% if current_user&.admin? %>

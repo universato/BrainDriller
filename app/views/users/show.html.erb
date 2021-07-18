@@ -37,10 +37,10 @@
           <tr>
             <td class="text-left"><%= link_to problem.title, problem %></td>
             <td class="text-left"><%= link_to problem.statement[0,32], problem %></td>
-            <td ><%= (rate = relation.correct_answer_rate) ? "#{rate}%" : "-" %></td>
-            <td ><%= relation.number_of_correct_answers %></td>
-            <td ><%= relation.number_of_submissions %></td>
-            <td ><%= relation.number_of_views %></td>
+            <td><%= (rate = relation.correct_answer_rate) ? "#{rate}%" : "-" %></td>
+            <td><%= relation.number_of_correct_answers %></td>
+            <td><%= relation.number_of_submissions %></td>
+            <td><%= relation.number_of_views %></td>
           </tr>
         <% end %>
         </table>

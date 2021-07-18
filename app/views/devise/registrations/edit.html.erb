@@ -7,13 +7,13 @@
 
       <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
       <div class="field mb-3">
-        <%= f.label :icon, class: "form-label" %><br/>
+        <%= f.label :icon, class: "form-label" %><br>
         <%= f.file_field :icon, class: "form-control fs-4" %>
       </div>
 
       <div class="row g-3">
         <div class="col-12">
-          <%= f.label :email, class: "form-label" %><br />
+          <%= f.label :email, class: "form-label" %><br>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control fs-4" %>
         </div>
 
@@ -22,7 +22,7 @@
         <% end %>
 
         <div class="field">
-          <%= f.label :password, t("word.new_password"), class: "form-label" %><br />
+          <%= f.label :password, t("word.new_password"), class: "form-label" %><br>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control fs-4" %>
           <% if @minimum_password_length %>
             <em><%= @minimum_password_length %> 文字以上の入力が必要です</em>
@@ -30,12 +30,12 @@
         </div>
 
         <div class="field">
-          <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br />
+          <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control fs-4" %>
         </div>
 
         <div class="col-12">
-          <%= f.label :current_password, class: "form-label" %><br />
+          <%= f.label :current_password, class: "form-label" %><br>
           <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
         </div>
 
