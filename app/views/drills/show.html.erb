@@ -8,10 +8,10 @@
     このドリルの問題数: <%= problems_count = @drill.problems.size %>
     <br>
     <% if current_user %>
-    習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %>
-    <% if @driill_is_mastered %>
-      習得済み
-    <% end %>
+      習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %>
+      <% if @driill_is_mastered %>
+        習得済み
+      <% end %>
     <% end %>
   </div>
 
