@@ -64,11 +64,6 @@ class CreateProblems < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-
-    create_table :basic_choices do |t|
-      t.json :choices, null: false
-      t.integer :correct_number, default: 0, null: false
-    end
   end
 end
 

@@ -35,7 +35,7 @@ end
 # rake routes F1=devise F2=users
 # rake routes F1=devise OP=AND F2=users
 desc 'Print out all defined routes with filtering'
-task :routes do
+task :routes => :environment do
   routes = `rails routes`
   routes = routes.split("\n")
   routes.shift

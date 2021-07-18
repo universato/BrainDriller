@@ -15,11 +15,6 @@ ActiveRecord::Schema.define(version: 2021_07_13_193059) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "basic_choices", force: :cascade do |t|
-    t.json "choices", null: false
-    t.integer "correct_number", default: 0, null: false
-  end
-
   create_table "drill_likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "drill_id", null: false
@@ -133,7 +128,7 @@ ActiveRecord::Schema.define(version: 2021_07_13_193059) do
     t.string "icon"
     t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["login_name"], name: "index_users_on_login_name"
+    t.index ["login_name"], name: "index_users_on_login_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

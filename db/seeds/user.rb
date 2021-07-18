@@ -26,7 +26,7 @@ class UserCreator
   end
 
   def insert_all
-    User.insert_all(@users)
+    User.insert_all!(@users)
   end
 end
 

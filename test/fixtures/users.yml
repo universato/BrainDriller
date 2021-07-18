@@ -37,11 +37,11 @@ ruby:
   confirmed_at: <%= Time.now %>
 kaikei:
   login_name: kaikei
-  nickname: uni
+  nickname: kaikei
   email: kaikei@example.com
   confirmed_at: <%= Time.now %>
 kigyo:
-  login_name: ruby
-  nickname: ruby
+  login_name: kigyo
+  nickname: kigyo
   email: kigyo@example.com
   confirmed_at: <%= Time.now %>

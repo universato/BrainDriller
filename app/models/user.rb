@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :drills
-  has_many :drill_likes, class_name: "DrillLike", foreign_key: "user_id", dependent: :destroy
+  has_many :drill_likes, class_name: "DrillLike", dependent: :destroy
   has_many :submissions
   # has_many :problem_user_results, class_name: "ProblemUserResult", foreign_key: "user_id", dependent: :destroy
   has_many :problems, through: :problem_user_results

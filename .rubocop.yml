@@ -7,6 +7,7 @@ AllCops:
     - app/javascript/**/*
     - app/views/**/*
     - bin/**/*
+    - config/environments/development.rb
     - config/environments/production.rb
     - config/initializers/filter_parameter_logging.rb
     - config/initializers/impression.rb
@@ -21,6 +22,8 @@ AllCops:
     - tmp
     - vendor/**/*
   NewCops: enable
+
+
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -114,10 +117,12 @@ Lint/Void:
 Metrics/AbcSize:
   Max: 47
 Metrics/BlockLength:
+  Max: 32
   Exclude:
     - config/environments/development.rb
     - db/seeds/problems.rb
     - test/system/drills_test.rb
+    - Rakefile # 32
 # クラスの行数がデフォルトが100行超えると警告。結構、超えるのあったので、設定する。
 Metrics/ClassLength:
   Max: 334
@@ -188,6 +193,7 @@ Style/GuardClause:
 Style/HashSyntax:
   Exclude:
     - config/environments/development.rb
+    - Rakefile
 # 後置if文を使わせる設定。まぁ、長文だと、あまり後置if文は使いたくない。
 Style/IfUnlessModifier:
   Enabled: false
@@ -231,6 +237,9 @@ Style/RedundantFileExtensionInRequire:
 # 個人的には、1行だけのメソッドには`retrun`は不要で、複数行あって枝分かれで`return`があるときはあっても良い気がする。
 Style/RedundantReturn:
   AutoCorrect: false
+# 冗長なself.newがあってもよいと思った。
+Style/RedundantSelf:
+  Enabled: false
 # a = a + 1をa += 1に書き換えるようにいう設定。
 # 配列のときに、平均的にa = a + [0]の方が速そうだったので、個別に除外する。
 Style/SelfAssignment:
@@ -273,3 +282,30 @@ Style/WordArray:
 # `1 == x`のようなヨーダ記法(定数が左で、計算式が右)を認める設定。可読性が下がるが、`0 < x && x < 1`のように書きたいときや計算式が長い場合は、ヨーダ記法が容認できる。。
 Style/YodaCondition:
   Enabled: false
+
+require:
+  - rubocop-rails
+Rails/BulkChangeTable:
+  Exclude:
+    - db/migrate/2021*_add_names_to_users.rb
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - app/models/drill.rb
+    - app/models/problem.rb
+    - app/models/user.rb
+# 200や400よりも、:okや:bad_requestを使うべきらしい。
+Rails/HttpStatus:
+  Exclude:
+    - app/controllers/drills_controller.rb
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/users/registrations_controller.rb
+Rails/Output:
+  Enabled: false
+# validationをskipするから、insert_all!やinsert_allは使うべきではないらしい。いったん外しておくか。
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/controllers/drills_controller.rb
+    - db/seeds/cpa_csv.rb
+    - db/seeds/problems.rb
+    - db/seeds/user.rb

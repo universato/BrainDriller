@@ -3,7 +3,7 @@
 require "csv"
 require "json"
 
-unless Rails.env == 'development'
+unless Rails.env.development?
   puts "developmentでないため、終了します。"
   exit
 end
@@ -17,7 +17,7 @@ CSV.foreach('db/csv/cpa.csv', headers: true).with_index do |row, _i|
   drill ||= Drill.create!(title: drill_title, user: first_user)
 
   user = drill.user
-  time = Time.now
+  time = Time.current
 
   problems << {
     drill_id: drill.id,

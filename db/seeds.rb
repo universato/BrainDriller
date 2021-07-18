@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 module Seed
   def self.run_seed(path)
-    s = Time.now
+    s = Time.current
     output = require_relative(path) ? "実行された: " : "実行されず: "
-    puts output + path + " ,time: #{Time.now - s} s"
+    puts output + path + " ,time: #{Time.current - s} s"
   end
 end
 

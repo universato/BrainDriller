@@ -25,7 +25,7 @@ CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
     puts "#{i}行目の選択肢に空欄があります。"
   end
 
-  time = Time.now
+  time = Time.current
 
   problems << {
     drill_id: drill.id,
