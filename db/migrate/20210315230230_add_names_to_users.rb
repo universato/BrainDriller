@@ -3,7 +3,7 @@
 class AddNamesToUsers < ActiveRecord::Migration[6.1]
   def change
     add_column :users, :nickname, :string
-    add_column :users, :login_name, :string
+    add_column :users, :login_name, :string, unique: true
     add_index :users, :login_name
   end
 end
