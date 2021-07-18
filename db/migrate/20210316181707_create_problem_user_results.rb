@@ -6,9 +6,6 @@ class CreateProblemUserResults < ActiveRecord::Migration[6.1]
       t.references :user,    index: true, foreign_key: true
       t.references :problem, index: true, foreign_key: true
 
-      # t.integer :user_id, unsigned: true
-      # t.integer :problem_id, unsigned: true
-
       t.integer :number_of_views, default: 0, unsigned: true
       t.integer :number_of_submissions, default: 0, unsigned: true
       t.integer :current_streak, default: 0, unsigned: true
@@ -18,8 +15,6 @@ class CreateProblemUserResults < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    # add_index :problem_user_results, :user_id
-    # add_index :problem_user_results, :problem_id
     add_index :problem_user_results, [:user_id, :problem_id], unique: true
   end
 end
