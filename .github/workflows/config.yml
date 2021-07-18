@@ -70,4 +70,3 @@ jobs:
           RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          CI_SKIP_TEST: true
