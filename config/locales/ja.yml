@@ -16,9 +16,11 @@ ja:
   text:
     are_you_sure?: 本当にアカウントを削除しますか
     cancel_my_account: アカウントを削除する
+    didnt_receive_confirmation_instructions: "確認のメールを再度受信する"
     Solve_problems: 問題を解く
     edit_profile: プロフィールを変更する
     leave_blank_if_you_don't_want_to_change_it: 変更しない場合は空欄にしてください
+    resend_confirmation_instructions: アカウント認証のメールを再送信
     we_need_your_current_password_to_confirm_your_changes: パスワードを変更するときは、現在のパスワードを入力してください
   button:
     login: ログインする
