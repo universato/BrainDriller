@@ -9,4 +9,9 @@ module ApplicationHelper
       default_options + options
     end
   end
+
+  def percent(numerator, denominator)
+     r = numerator.to_f / denominator.to_f
+     r.nan? ? "- %" : sprintf("%5.1f", r) + "%"
+  end
 end
