@@ -5,10 +5,9 @@
   <div class="drill-guide"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
 
   <div class="drill-problem-count">
-    このドリルの問題数: <%= problems_count = @drill.problems.size %>
-    <br>
+    <div>このドリルの問題数: <%= problems_count = @drill.problems.size %> 問</div>
     <% if current_user %>
-      <div>習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %></div>
+      <div>習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %> 問</div>
       <div>習得問題率: <%= percent(@drill_user_result&.number_of_problem_mastered, @drill.problems.size) %></div>
       <% if @driill_is_mastered %>
         習得済み

@@ -14,9 +14,9 @@
           <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
           <div v-if="currentUserId" class="text-muted">
-            <div>あなたの連続正解数: {{ currentStreak }} </div>
-            <div>あなたの回答回数: {{ numberOfSubmissions }} </div>
-            <div>あなたの正解回数: {{ numberOfCorrectAnswers }} </div>
+            <div>あなたの連続正解数: {{ currentStreak }} 回</div>
+            <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
+            <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
             <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
           </div>
           <div class="problem-title"> {{ currentProblem.title }} </div>
