@@ -182,6 +182,10 @@ Style/ConditionalAssignment:
 # あまりメリットわからない。お好きにどうぞ、という感じする。
 Style/EmptyMethod:
   Enabled: false
+# イレギュラーな数がきたときに、0にした。分母・分子、どちらに来るかわからないような。
+Style/FloatDivision:
+  Exclude:
+    - app/helpers/application_helper.rb
 # グローバル変数は原則禁止。ごくまれにグローバル変数を使いたいときがあったので、別個許容する。
 Style/GlobalVars:
   AutoCorrect: false
