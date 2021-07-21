@@ -4,15 +4,17 @@
       <div class="solve-drill-title"> {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
-      <div class="problem">
+      <div class="w-100 text-center">
         <span v-for="(el, i) in answerStatus" :key="i">
           <span v-if="el=='notSure'"> ・ </span>
-          <span v-else-if="el >= 0">✓</span>
+          <span v-else-if="el >= 0" class="text-success">✓</span>
           <span v-else> − </span>
         </span>
+      </div>
+      <div class="problem">
         <div v-if="currentProblem">
-          <span class="problem-id"> problem-ID:{{ currentProblem.id }} </span>
-          <div class="problem-index"> {{ currentProblemIndex + 1 }}問目 </div>
+          <span class="problem-id" v-if="false"> problem-ID:{{ currentProblem.id }} </span>
+          <div class="problem-index fs-3"> {{ currentProblemIndex + 1 }}問目 </div>
           <div v-if="currentUserId" class="text-muted">
             <div>あなたの連続正解数: {{ currentStreak }} 回</div>
             <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
@@ -41,31 +43,34 @@
           </div>
         </div>
         <div class="move-buttons">
-          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std">前の問題へ</button></div>
-          <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">中断して採点する</button></div>
-          <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std">採点する</button></div>
-          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std">次の問題へ</button></div>
+          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std p-3 fs-4">前の問題へ</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std p-3 fs-4">中断して採点する</button></div>
+          <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std p-3 fs-4">採点する</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std p-3 fs-4">次の問題へ</button></div>
         </div>
       </div>
     </div>
     <div v-else-if="state=='result'">
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">解き直す</a>
       <div class="">
-        <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
-          <span v-if="answerPaper[problem.id] === undefined">-</span>
-          <span
-            v-else-if="problem.correct_option===answerPaper[problem.id]"
-            class="text-success"
-          >○</span>
-          <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
-          <span v-else class="text-danger">✗</span>
-        </span>
-        <div> 回答時間{{ elaspedTime }} </div>
-        <div>今回の正解数: {{ correct_count }} </div>
-        <div>今回の不正数: {{ uncorrect_count }} </div>
-        <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
-        <div>今回の出題数: {{ problems.length }} </div>
-        <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
+        <div class="bg-light my-4 rounded">
+          <h3>サマリー</h3>
+          <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
+            <span v-if="answerPaper[problem.id] === undefined">-</span>
+            <span
+              v-else-if="problem.correct_option===answerPaper[problem.id]"
+              class="text-success"
+            >○</span>
+            <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
+            <span v-else class="text-danger">✗</span>
+          </span>
+          <div> 回答時間{{ elaspedTime }} </div>
+          <div>今回の正解数: {{ correct_count }} </div>
+          <div>今回の不正数: {{ uncorrect_count }} </div>
+          <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
+          <div>今回の出題数: {{ problems.length }} </div>
+          <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
+        </div>
       </div>
       <div>
         <div v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
