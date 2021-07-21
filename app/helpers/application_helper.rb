@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def percent(numerator, denominator)
-     r = numerator.to_f / denominator.to_f
+     r = (numerator.to_f / denominator.to_f) * 100
      r.nan? ? "- %" : sprintf("%5.1f", r) + "%"
   end
 end
