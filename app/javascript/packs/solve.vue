@@ -52,8 +52,8 @@
     </div>
     <div v-else-if="state=='result'">
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">解き直す</a>
-      <div class="">
-        <div class="bg-light my-4 rounded">
+      <div>
+        <div class="bg-light p-5 my-4 rounded">
           <h3>サマリー</h3>
           <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
             <span v-if="answerPaper[problem.id] === undefined">-</span>
@@ -73,8 +73,9 @@
         </div>
       </div>
       <div>
-        <div v-for="(problem, problem_idx) in problems" :key="problem_idx" class="panel">
-          <div class="problem-id"> 問題ID{{ problem.id }} </div>
+        <div v-for="(problem, problem_idx) in problems" :key="problem_idx" class="bg-light p-5 my-4 rounded">
+          <h3>{{ problem_idx + 1 }} 問目</h3>
+          <div class="problem-id" v-if="false"> Problem ID{{ problem.id }} </div>
           <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
           <div

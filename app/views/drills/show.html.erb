@@ -21,7 +21,7 @@
       <%= f.label :rand, "ランダムに出題する", class: "form-check-label" %>
     </div>
 
-    <% unless @driill_is_mastered %>
+    <% if current_user && !@driill_is_mastered %>
       <div class="form-check">
         <%= f.check_box :past, {checked: true, class: "form-check-input"}, "true", nil %>
         <%= f.label :past, "過去の回答に基づいて出題する", class: "form-check-label" %>
