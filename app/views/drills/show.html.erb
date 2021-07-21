@@ -2,7 +2,7 @@
   <div class="title-panel">
     <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
   </div>
-  <div class="drill-guide"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
+  <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
 
   <div class="drill-problem-count">
     <div>このドリルの問題数: <%= problems_count = @drill.problems.size %> 問</div>
@@ -15,27 +15,25 @@
     <% end %>
   </div>
 
+  <hr>
+
   <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
-    <div class="form-check">
+    <div class="form-check my-3">
       <%= f.check_box :rand, {checked: true, class: "form-check-input"}, "true", nil %>
       <%= f.label :rand, "ランダムに出題する", class: "form-check-label" %>
     </div>
 
     <% if current_user && !@driill_is_mastered %>
-      <div class="form-check">
+      <div class="form-check my-3">
         <%= f.check_box :past, {checked: true, class: "form-check-input"}, "true", nil %>
         <%= f.label :past, "過去の回答に基づいて出題する", class: "form-check-label" %>
       </div>
     <% end %>
 
-    <div class="">
-      <label for="num">問題数: </label>
-      <%= f.select :num, options_for_select(problem_count_select_list(problems_count)), {}, class: "form-select form-select-lg w-75 mb-3" %>
-    </div>
+    <label for="num">問題数: </label>
+    <%= f.select :num, options_for_select(problem_count_select_list(problems_count)), {}, class: "form-select form-select-lg w-100 mb-3" %>
 
-    <div class="btn-box">
-      <%= f.submit t("text.Solve_problems"), class: 'w-100 btn btn-primary btn-lg solve-btn' %>
-    </div>
+    <%= f.submit t("text.Solve_problems"), class: 'w-100 btn btn-primary btn-lg mt-3' %>
   <% end %>
 
   <% if current_user == @drill.user %>

@@ -1,22 +1,22 @@
 
-<div class="panel form-panel">
+<div class="panel form-panel mt-5">
     <h2 class="title form-title"><%= t("word.signup") %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-panel'}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-item">
-        <%= f.label :login_name, class: "form-label" %><br>
+        <%= f.label :login_name, class: "form-label fs-4" %><br>
         <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name", class: "oneline-field form-item--input" %>
       </div>
 
       <div class="form-item">
-        <%= f.label :email %><br>
+        <%= f.label :email, class: "form-label fs-4" %><br>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "oneline-field form-item--input" %>
       </div>
 
       <div class="form-item">
-        <%= f.label :password %>
+        <%= f.label :password, class: "form-label fs-4" %>
         <% if @minimum_password_length %>
         (<%= @minimum_password_length %> 文字以上)
         <% end %><br>
@@ -24,12 +24,11 @@
       </div>
 
       <div class="form-item">
-        <%= f.label :password_confirmation %><br>
+        <%= f.label :password_confirmation, class: "form-label fs-4" %><br>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "oneline-field form-item--input" %>
       </div>
 
       <div class="actions form-action-item">
-        <%# f.submit t("button.signup"), class: "form-action-btn" %>
         <%= f.submit "登録する", class: "btn btn-primary w-75 fs-4 py-2" %>
       </div>
     <% end %>

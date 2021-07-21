@@ -37,7 +37,8 @@ class DrillsTest < ApplicationSystemTestCase
     click_on "Firsts"
 
     # drill#show
-    find(".solve-btn").click
+    # find(".solve-btn").click
+    click_button I18n.t("text.Solve_problems")
 
     # 1st problem
     assert_text "Correct"
@@ -64,7 +65,7 @@ class DrillsTest < ApplicationSystemTestCase
 
     # drill#show
     find("#past").click
-    find(".solve-btn").click
+    click_button I18n.t("text.Solve_problems")
 
     assert_text "中断して採点する"
     page.all(".problem-choice")[1].click
@@ -78,7 +79,7 @@ class DrillsTest < ApplicationSystemTestCase
 
     visit 'drills'
     click_on "Firsts"
-    find(".solve-btn").click
+    click_button I18n.t("text.Solve_problems")
 
     # 1st problem
     assert_text "Correct"

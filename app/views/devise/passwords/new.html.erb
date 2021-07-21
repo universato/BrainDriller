@@ -1,17 +1,17 @@
 
-<div class="panel form-panel">
-  <h2 class="title form-title"><%= t("word.password_reset") %></h2>
+<div class="panel form-panel px-5 mt-5">
+  <h2 class="title form-title mb-5"><%= t("word.password_reset") %></h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="form-item">
-      <%= f.label :email %><br>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-item--input" %>
+      <%= f.label :email, class: "form-label fs-4" %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control fs-4 py-3" %>
     </div>
 
-    <div class="actions form-action-item">
-      <%= f.submit "リセットのメールを送る", class: "form-action-btn" %>
+    <div class="actions form-action-item mt-5">
+      <%= f.submit "リセットのメールを送る", class: "btn btn-primary w-75 fs-4 py-2" %>
     </div>
   <% end %>
 

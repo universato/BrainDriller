@@ -1,15 +1,15 @@
 
-<div class="panel form-panel">
+<div class="panel form-panel mt-5">
   <h2 class="title form-title"><%= t("word.login") %></h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-panel' } ) do |f| %>
     <div class="form-item">
-      <%= f.label :email %><br>
+      <%= f.label :email, class: "fs-4" %><br>
       <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-item--input" %>
     </div>
 
     <div class="form-item">
-      <%= f.label :password %><br>
+      <%= f.label :password, class: "fs-4" %><br>
       <%= f.password_field :password, autocomplete: "current-password", class: "form-item--input" %>
     </div>
 
