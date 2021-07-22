@@ -7,6 +7,7 @@
     <li>
       <%= user.id %>.
       <%= link_to "#{user.login_name}", "/users/#{user.id}" %>
+      <%= link_to "(admin)", "/admin/users/#{user.id}" %>
     </li>
   <% end %>
 </ul>

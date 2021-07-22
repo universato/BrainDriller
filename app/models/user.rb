@@ -46,7 +46,12 @@ class User < ApplicationRecord
     # auth.info        # OmniAuth::AuthHash::InfoHash
     # auth.credentials # OmniAuth::AuthHash
     # auth.extra       # OmniAuth::AuthHash
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    unless auth.info.has_key?("email_verified")
+      set_flash_message(:alert, 'メールアドレスが認証されていません')
+      redirect_to new_user_registration_url
+    end
+
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.login_name = auth.info.name
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]

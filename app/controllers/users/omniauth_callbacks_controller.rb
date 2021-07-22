@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
       redirect_to root_path
     else
-      session["devise.google_data"] = request.env["omniauth.auth"].except(:info, :credentials, :extra) # Removing extra as it can overflow some session stores
+      session["devise.google_data"] = request.env["omniauth.auth"].except("extra") # Removing extra as it can overflow some session stores
       redirect_to new_user_registration_url
     end
   end
