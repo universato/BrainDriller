@@ -35,6 +35,8 @@ gem 'carrierwave'
 gem 'devise'
 gem 'impressionist'
 gem 'kaminari'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 gem 'pg'
 gem 'ransack'
 gem 'set'

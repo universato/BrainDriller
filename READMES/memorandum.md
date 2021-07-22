@@ -1708,3 +1708,18 @@ puts path = File.expand_path('../../log/', __dir__)
 
 <input autocomplete=​"current-password" class=​"form-control fs-4" type=​"password" name=​"user[current_password]​" id=​"user_current_password">
 ```
+
+
+#########
+
+
+```
+Not found. Authentication passthru.
+```
+リダイレクトURLを設定できてない。
+
+```
+D, [2021-07-22T04:48:27.345811 #41179] DEBUG -- omniauth: (google_oauth2) Request phase initiated.
+W, [2021-07-22T04:48:27.346257 #41179]  WARN -- omniauth: Attack prevented by OmniAuth::AuthenticityTokenProtection
+E, [2021-07-22T04:48:27.346419 #41179] ERROR -- omniauth: (google_oauth2) Authentication failure! authenticity_error: OmniAuth::AuthenticityError, Forbidden
+```
