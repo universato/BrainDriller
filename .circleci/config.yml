@@ -1,7 +1,7 @@
-version: 2
+version: 2.1
 jobs:
   build:
-    working_directory: ~/circleci-demo-ruby-rails
+    working_directory: ~/circleci-ruby-rails
 
     # Primary container image where all commands run
 
@@ -25,8 +25,8 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}
-            - rails-demo-
+            - rails-{{ checksum "Gemfile.lock" }}
+            - rails-
 
       # Bundle install dependencies
       - run:
@@ -39,7 +39,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          key: rails-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
