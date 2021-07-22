@@ -1716,10 +1716,19 @@ puts path = File.expand_path('../../log/', __dir__)
 ```
 Not found. Authentication passthru.
 ```
-リダイレクトURLを設定できてない。
+リダイレクトURLを設定できてない。Viewにpostをつける。
 
 ```
 D, [2021-07-22T04:48:27.345811 #41179] DEBUG -- omniauth: (google_oauth2) Request phase initiated.
 W, [2021-07-22T04:48:27.346257 #41179]  WARN -- omniauth: Attack prevented by OmniAuth::AuthenticityTokenProtection
 E, [2021-07-22T04:48:27.346419 #41179] ERROR -- omniauth: (google_oauth2) Authentication failure! authenticity_error: OmniAuth::AuthenticityError, Forbidden
+```
+
+```ruby
+user = User.where(provider: "google_oauth2",  uid: "").first_or_create do |user|
+   user.login_name = "google"
+   user.email = "google@gmail.com"
+   user.password = "asdfghjklqwertyuiop"
+   user.confirmed_at = Time.current
+ end
 ```
