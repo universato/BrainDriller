@@ -1732,3 +1732,24 @@ user = User.where(provider: "google_oauth2",  uid: "").first_or_create do |user|
    user.confirmed_at = Time.current
  end
 ```
+
+# Add Mailgun
+
+```sh
+$ curl -s --user 'api:asdfghjklqwertyuiop1234567890asd-c1234567-c1234566' \
+https://api.mailgun.net/v3/sandboxc8236017f07a4d9ab4c687b3550e0a45.mailgun.org/messages \
+-F from='BrainDrillerMail <mailgun@sandboxc1234567890asdfghjkl1234567890.mailgun.org>' \
+-F to='uni <xxx@gmail.com>' \
+-F subject='Hello MailGun Testtttttttttttttttt' \
+-F text='Testing some Mailgun awesomeness!'
+
+{
+  "id": "<20210722194502.1.E9A2557F4A7C2D23@sandboxc8236017f07a4d9ab4c687b3550e0a45.mailgun.org>",
+  "message": "Queued. Thank you."
+}
+```
+
+シングルクォートで囲む。
+api: Settings -> API key -> Private API key
+api: で書き始める。
+sandbox始まりのドメイン名がある。
