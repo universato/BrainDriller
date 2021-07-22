@@ -5,5 +5,6 @@
 <%= @user.login_name %><br>
 <%= @user.nickname || "" %><br>
 <%= (@user.encrypted_password || "")[0, 5] %><br>
+<%= @user.confirmed_at || "" %><br>
 <%= @user.provider || "" %><br>
 <%= @user.uid || "" %><br>
