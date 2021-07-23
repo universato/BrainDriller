@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -25,7 +23,10 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.mailer_sender = ENV["SMTP_MAIL_ADDRESS"]
+  mailer_sender = "noreply@brain-driller.com"
+  mailer_sender.prepend "dev-" if Rails.env.development?
+  mailer_sender.prepend "test-" if Rails.env.test?
+  config.mailer_sender = mailer_sender
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

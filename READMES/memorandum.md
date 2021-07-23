@@ -1075,10 +1075,17 @@ $ heroku addons:create mailgun:starter
 ```
 
 ```r
-$ heroku config:get MAILGUN_SMTP_PORT
-$ heroku config:get MAILGUN_SMTP_SERVER
-$ heroku config:get MAILGUN_SMTP_LOGIN
-$ heroku config:get MAILGUN_SMTP_PASSWORD 
+heroku config:get MAILGUN_SMTP_PORT
+heroku config:get MAILGUN_SMTP_SERVER
+heroku config:get MAILGUN_SMTP_LOGIN
+heroku config:get MAILGUN_SMTP_PASSWORD 
+```
+
+```r
+heroku config:set MAILGUN_SMTP_PORT=
+heroku config:set MAILGUN_SMTP_SERVER=
+heroku config:set MAILGUN_SMTP_LOGIN=
+heroku config:set MAILGUN_SMTP_PASSWORD=
 ```
 
 
@@ -1735,11 +1742,18 @@ user = User.where(provider: "google_oauth2",  uid: "").first_or_create do |user|
 
 # Add Mailgun
 
+
+```r
+heroku config:get MAILGUN_API_KEY MAILGUN_DOMAIN MAILGUN_PUBLIC_KEY MAILGUN_SMTP_LOGIN MAILGUN_SMTP_PASSWORD MAILGUN_SMTP_PORT MAILGUN_SMTP_SERVER
+```
+
+[How to start sending email — Mailgun API documentation](https://documentation.mailgun.com/en/latest/quickstart-sending.html)
+
 ```sh
 $ curl -s --user 'api:asdfghjklqwertyuiop1234567890asd-c1234567-c1234566' \
-https://api.mailgun.net/v3/sandboxc8236017f07a4d9ab4c687b3550e0a45.mailgun.org/messages \
+https://api.mailgun.net/v3/sandboxc1234567890asdfghjkl1234567890.mailgun.org/messages \
 -F from='BrainDrillerMail <mailgun@sandboxc1234567890asdfghjkl1234567890.mailgun.org>' \
--F to='uni <xxx@gmail.com>' \
+-F to='You <[送りたいメアド]@gmail.com>' \
 -F subject='Hello MailGun Testtttttttttttttttt' \
 -F text='Testing some Mailgun awesomeness!'
 
@@ -1753,3 +1767,5 @@ https://api.mailgun.net/v3/sandboxc8236017f07a4d9ab4c687b3550e0a45.mailgun.org/m
 api: Settings -> API key -> Private API key
 api: で書き始める。
 sandbox始まりのドメイン名がある。
+
+送り主の変更もお忘れなく。
