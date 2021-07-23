@@ -234,6 +234,9 @@ Style/ParallelAssignment:
 # Prefer Regexp.last_match(1) over $1
 Style/PerlBackrefs:
   Enabled: false
+# Hash#has_key?を使いたい
+Style/PreferredHashMethods:
+  Enabled: false
 # 拡張子がついてる方が作ったファイルとわかりやすい気がしたから、.rbをつけることを許したい
 Style/RedundantFileExtensionInRequire:
   Enabled: false
