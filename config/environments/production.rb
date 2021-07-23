@@ -69,7 +69,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   host = 'brain-driller.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.default_url_options = { host: host, port: 443 }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
@@ -83,8 +83,8 @@ Rails.application.configure do
   # }
   # ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-     :port => ENV['MAILGUN_SMTP_PORT'],
-     :address => ENV['MAILGUN_SMTP_SERVER'],
+     :port => ENV['MAILGUN_SMTP_PORT'] || 587,
+     :address => ENV['MAILGUN_SMTP_SERVER'] || "smtp.mailgun.org",
      :user_name => ENV['MAILGUN_SMTP_LOGIN'],
      :password => ENV['MAILGUN_SMTP_PASSWORD'],
      :domain => host,
