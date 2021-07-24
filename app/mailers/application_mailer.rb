@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@[herokuのアプリ名].herokuapp.com'
+  # [TODO]
+  default from: 'noreply@brain-driller.herokuapp.com'
   layout 'mailer'
 end
