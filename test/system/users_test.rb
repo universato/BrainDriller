@@ -19,27 +19,29 @@ class UsersTest < ApplicationSystemTestCase
     click_link "設定", match: :first, exact: true
   end
 
-  test "user change password" do
+  test "user change profile" do
     login_as(users(:uni), scope: :user)
     visit root_path
     click_link "アカウント", match: :first, exact: true
     click_link "設定", match: :first, exact: true
     within 'form[id=edit_user]' do
+      fill_in "user[login_name]", with: "universato"
       fill_in "user[password]", with: "barbar"
       fill_in "user[password_confirmation]", with: "barbar"
       fill_in "user[current_password]", with: "foobar"
     end
     click_button "更新する"
-
     assert_text "アカウント情報を変更しました"
 
     click_link "アカウント", match: :first, exact: true
     click_link "設定", match: :first, exact: true
     within 'form[id=edit_user]' do
+      fill_in "user[login_name]", with: "uni"
       fill_in "user[password]", with: "foobar"
       fill_in "user[password_confirmation]", with: "foobar"
       fill_in "user[current_password]", with: "barbar"
     end
     click_button "更新する"
+    assert_text "アカウント情報を変更しました"
   end
 end

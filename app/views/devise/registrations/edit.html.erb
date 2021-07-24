@@ -1,17 +1,19 @@
 <div class="container w-50 bg-light p-5 mt-4">
   <div class="row">
-    <h2 class="h3 pt-4">プロフィール編集 <%# resource_name.to_s.humanize %></h2>
+    <% if false %>
+      <h2 class="h3 pt-4">プロフィール編集 <%# resource_name.to_s.humanize %></h2>
+    <% end %>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "col-12" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <%= image_tag resource.icon_path, size: "160x160", alt: "icon", class: "a-user-icon" %>
-      <div class="field mb-3">
+      <div class="mb-3">
         <%= f.label :icon, class: "form-label" %><br>
         <%= f.file_field :icon, class: "form-control fs-4" %>
       </div>
 
-      <div class="row g-3">
+      <div class="row g-3 mt-4">
         <div class="col-12">
           <%= f.label :email, class: "form-label" %><br>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control fs-4" %>
@@ -21,7 +23,16 @@
           <div>現在、次のメールの確認を待っています: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div class="field">
+        <div class="col-12 mt-4">
+          <%= f.label :login_name, class: "form-label" %><br>
+          <%= f.text_field :login_name, autofocus: true, autocomplete: "login_name", class: "form-control fs-4" %>
+        </div>
+        <div>
+          ログイン名は他ユーザーと重複できません。<br>
+          英小文字と数字で構成され、英小文字で始めます。
+        </div>
+
+        <div class="mt-4">
           <%= f.label :password, t("word.new_password"), class: "form-label" %>
            <i>(パスワードを変更しないときは空欄に)</i><br>
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control fs-4" %>
@@ -30,17 +41,17 @@
           <% end %>
         </div>
 
-        <div class="field">
+        <div class="mt-4">
           <%= f.label :password_confirmation, t("word.new_password_confirmation"), class: "form-label" %><br>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control fs-4" %>
         </div>
 
-        <div class="col-12">
+        <div class="col-12  mt-4">
           <%= f.label :current_password, class: "form-label" %><br>
           <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control fs-4" %>
         </div>
 
-        <div class="actions">
+        <div class="actions mt-4">
           <%= f.submit "プロフィールを更新する", class: "w-100 btn btn-primary btn-lg fs-4" %>
         </div>
       <% end %>
