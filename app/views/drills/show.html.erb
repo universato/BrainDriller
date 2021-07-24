@@ -2,7 +2,7 @@
   <div class="title-panel">
     <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
   </div>
-  <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "説明文なし")) %></div>
+  <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "")) %></div>
 
   <div class="drill-problem-count">
     <div>このドリルの問題数: <%= problems_count = @drill.problems.size %> 問</div>
