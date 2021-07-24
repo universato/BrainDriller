@@ -23,6 +23,7 @@ import '../stylesheets/footer.scss'
 import '../stylesheets/form.scss'
 import '../stylesheets/user.scss'
 import '../stylesheets/policy.scss'
+import '../stylesheets/stamp.scss'
 import '../stylesheets/tos.scss'
 
 Rails.start()
