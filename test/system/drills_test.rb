@@ -38,6 +38,9 @@ class DrillsTest < ApplicationSystemTestCase
 
     # drill#show
     # find(".solve-btn").click
+
+    assert_text "ランダムに出題する"
+    assert_no_text "過去の回答に基づいて出題する"
     click_button I18n.t("text.Solve_problems")
 
     # 1st problem
@@ -64,7 +67,10 @@ class DrillsTest < ApplicationSystemTestCase
     click_on "解き直す", match: :first
 
     # drill#show
-    find("#past").click
+    assert_text "ランダムに出題する"
+    assert_text "過去の回答に基づいて出題する"
+    find("#past").uncheck
+    find("#past").check
     click_button I18n.t("text.Solve_problems")
 
     assert_text "中断して採点する"
@@ -80,7 +86,7 @@ class DrillsTest < ApplicationSystemTestCase
     visit 'drills'
     click_on "Firsts"
 
-    assert_no_text "ランダムに出題する"
+    assert_text "ランダムに出題する"
     assert_no_text "過去の回答に基づいて出題する"
     click_button I18n.t("text.Solve_problems")
 

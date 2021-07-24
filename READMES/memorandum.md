@@ -1769,3 +1769,10 @@ api: で書き始める。
 sandbox始まりのドメイン名がある。
 
 送り主の変更もお忘れなく。
+
+# 過去の回答に基づいて出題する。
+
+未習得問題を克服する。
+
+- app/views/show.html.erb
+- app/controllers/drills_controller.rb
