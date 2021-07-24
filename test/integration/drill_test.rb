@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersLoginTest < ActionDispatch::IntegrationTest
+class IntegrationDrillTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
   test "Other user cannot access new " do
