@@ -79,6 +79,9 @@ class DrillsTest < ApplicationSystemTestCase
 
     visit 'drills'
     click_on "Firsts"
+
+    assert_no_text "ランダムに出題する"
+    assert_no_text "過去の回答に基づいて出題する"
     click_button I18n.t("text.Solve_problems")
 
     # 1st problem
