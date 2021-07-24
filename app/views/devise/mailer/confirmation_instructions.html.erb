@@ -1,10 +1,29 @@
-<p>Welcome <%= @email %>!</p>
+<p>
+本サービスへのアカウント登録ありがとうございます。<br>
+本メールは、アカウントのメールアドレス確認のために送付しております。<br>
+</p>
 
-<p>You can confirm your account email through the link below:</p>
-<p>次のリンクをもとに認証します。</p>
+<p>
+アカウント登録を完了するために、次のURLへアクセスをお願いします。<br>
+<%= confirmation_url(@resource, confirmation_token: @token) %>
+</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>
+■本メールに心当たりのない方へ<br>
+他のユーザの方が登録の際に間違えたメールアドレスを入力している可能性があります。<br>
+上記URLにアクセスせず、メールを無視してください。<br>
+</p>
+
+---<br>
+<p>
+Brain Driller<br>
+https://brain-driller.herokuapp.com<br>
+</p>
 
 <% if Rails.env.development? %>
+   <br>
   【開発環境】
+  [TODO] アプリを変更したときに、
+  http://localhost:3000
+  <%= self.instance_variables %>
 <% end %>
