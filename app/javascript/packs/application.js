@@ -10,12 +10,10 @@ import * as ActiveStorage from "@rails/activestorage"
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/js/all'
 
-// import fs from "fs"
-// fs.readdirSync("../stylesheets").forEach(async file => {
-//   if(file.slice(-3 === "css")){
-//     await import(`.//stylesheets/${file}`)
-//   }
-// })
+import '../stylesheets/highlightjs/arta.css'
+// import '../stylesheets/highlightjs/hybrid.css'
+import '../stylesheets/highlightjs/one-dark-reasonable.css'
+import '../stylesheets/highlightjs/custom.scss'
 
 import '../stylesheets/application.scss'
 import '../stylesheets/common.scss'
@@ -24,10 +22,8 @@ import '../stylesheets/drill.scss'
 import '../stylesheets/footer.scss'
 import '../stylesheets/form.scss'
 import '../stylesheets/user.scss'
-// import '../stylesheets/highlightjs/hybrid.css'
-import '../stylesheets/highlightjs/arta.css'
-import '../stylesheets/highlightjs/one-dark-reasonable.css'
-import '../stylesheets/highlightjs/custom.scss'
+import '../stylesheets/policy.scss'
+import '../stylesheets/tos.scss'
 
 Rails.start()
 // Turbolinks.start()
