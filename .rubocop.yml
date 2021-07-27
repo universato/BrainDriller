@@ -292,6 +292,8 @@ Style/YodaCondition:
 
 require:
   - rubocop-rails
+  # - ./lib/rubocop/env_fetch.rb
+
 Rails/BulkChangeTable:
   Exclude:
     - db/migrate/2021*_add_names_to_users.rb
