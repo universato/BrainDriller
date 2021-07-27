@@ -24,7 +24,6 @@ AllCops:
   NewCops: enable
 
 
-
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
@@ -48,8 +47,7 @@ Layout/FirstHashElementIndentation:
   Enabled: false
 Layout/HeredocIndentation:
   Exclude:
-    - db/seeds/drills.rb
-    - db/seeds/ruby_drill.rb
+    - db/seeds/*.rb
 Layout/IndentationConsistency:
   Exclude:
     - Rakefile
@@ -92,6 +90,9 @@ Lint/BinaryOperatorWithIdenticalOperands:
 # Numericから継承したときに、`super`を使う方法が謎だったので、部分的に許容することにする。
 Lint/MissingSuper:
   AutoCorrect: false
+# 定数を破壊的変更ができないように、freezeさせようという話。再代入したら警告でるぐらいで十分かも。
+Style/MutableConstant:
+  Enabled: false
 # 警告がでている部分を見てみたら大丈夫そうだったので、個別に許す。
 Lint/ParenthesesAsGroupedExpression:
   AutoCorrect: false
