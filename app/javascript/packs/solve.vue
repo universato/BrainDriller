@@ -304,7 +304,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 .solve-drill {
   border: none 0 #fff;
@@ -374,11 +374,6 @@ export default {
 
 .problem-choice.selected-choice--not-sure:hover {
   background-color: hsl(220, 85%, 80%);
-}
-
-p {
-  font-size: 2em;
-  text-align: center;
 }
 
 .move-buttons {
