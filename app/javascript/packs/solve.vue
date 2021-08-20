@@ -6,22 +6,26 @@
     <div v-if="state=='solving'">
       <div class="problem">
         <div class="status-blocks">
-          <template v-for="(el, answerIndex) in answerStatus" :key="answerIndex">
-            <div v-if="el==='notSure'" class="status-block status-not_sure"></div>
-            <div v-else-if="el>=0" class="status-block status-checked"></div>
-            <div v-else class="status-block status-unchecked"></div>
-          </template>
+          <div
+            v-for="(el, problemIndex) in answerStatus"
+            :key="problemIndex"
+            :class="statusClass(el)"
+            @click="setCurrentProblemIndex(problemIndex)"
+          >
+          </div>
         </div>
-        <div v-if="currentProblem">
+        <div v-if="currentProblem" class="problem-main">
           <span class="problem-id" v-if="false"> problem-ID:{{ currentProblem.id }} </span>
-          <div class="problem-index fs-3"> {{ currentProblemIndex + 1 }}問目 </div>
           <div v-if="currentUserId && false" class="text-muted">
             <div>あなたの連続正解数: {{ currentStreak }} 回</div>
             <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
             <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
             <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
           </div>
-          <div class="problem-title"> {{ currentProblem.title }} </div>
+          <div class="problem-idnex-and-title fs-3">
+            <span class="problem-index"> {{ currentProblemIndex + 1 }}問目 </span>
+            <span class="problem-title"> {{ currentProblem.title }} </span>
+          </div>
           <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
           <div class="problem-choices">
             <div
@@ -41,12 +45,12 @@
               　わからない
             </div>
           </div>
-        </div>
-        <div class="move-buttons">
-          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev btn-std p-3 fs-4">前の問題へ</button></div>
-          <div v-if="currentProblemIndex < problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std p-3 fs-4">中断して採点する</button></div>
-          <div v-if="currentProblemIndex == problems.length - 1" class="btn-grade-frame"><button @click="grade()" class="btn-std p-3 fs-4">採点する</button></div>
-          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-next btn-std p-3 fs-4">次の問題へ</button></div>
+          <div class="move-buttons">
+            <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev-or-next p-3 fs-4">前の問題へ</button></div>
+            <div v-if="Object.keys(answerStatus).length < problems.length" class="btn-grade-frame"><button @click="grade()" class="btn-grade-in-the-middle text-center p-3 fs-4">未回答を残して採点する</button></div>
+            <div v-else class="btn-grade-frame"><button @click="grade()" class="btn-grade p-3 fs-4">採点する</button></div>
+            <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-prev-or-next p-3 fs-4">次の問題へ</button></div>
+          </div>
         </div>
       </div>
     </div>
@@ -260,7 +264,21 @@ export default {
       }else {
         return ``
       }
-    }
+    },
+    statusClass(el) {
+      console.log(this.answerStatus)
+      if(el==="notSure"){
+        return "status-block status-not_sure"
+      }else if(el>=0){
+        return "status-block status-checked"
+      }else{
+        return "status-block status-unchecked"
+      }
+    },
+    setCurrentProblemIndex(problemIndex) {
+      this.currentProblemIndex = problemIndex;
+      this.currentProblem = this.problems[problemIndex];
+    },
   },
   computed: {
     resolveDrillURL() {
@@ -334,8 +352,22 @@ export default {
   color: hsl(0, 10%, 80%);
 }
 
-.problem-title {
-  padding: 8px 0 8px;
+.problem-main {
+  margin: 20px 8% 0;
+}
+
+.problem-idnex-and-title {
+  /* width: 151px; */
+  height: 35px;
+
+  font-family: Noto Sans JP;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 35px;
+  /* identical to box height */
+
+  color: #222222;
 }
 
 .problem-statement {
@@ -383,7 +415,7 @@ export default {
 }
 
 .status-block {
-  width: 99px;
+  flex: 1;
   height: 16px;
   margin: 4px;
   box-shadow: 0px 6px 12px rgba(0, 102, 255, 0.25);

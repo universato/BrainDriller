@@ -1,3 +1,78 @@
+.btn-grade {
+  width: 152px;
+  height: 48px;
+
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+
+  background: hsl(216, 100%, 50%);
+  /* shadow-purple */
+  box-shadow: 0px 8px 12px rgba(40, 49, 255, 0.05);
+  border: 0px;
+  border-radius: 4px;
+}
+
+.btn-grade:hover {
+  background: hsl(216, 100%, 80%);
+}
+
+.btn-grade-in-the-middle {
+  height: 48px;
+
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #0066FF;
+
+  background: hsl(0, 0%, 100%);
+  border: 1px solid #0066FF;
+  box-sizing: border-box;
+  /* shadow-purple */
+
+  box-shadow: 0px 8px 12px rgba(40, 49, 255, 0.05);
+  border-radius: 4px;
+}
+
+.btn-grade-in-the-middle:hover {
+  background: hsl(0, 0%, 95%);
+}
+
+.btn-prev-or-next {
+  width: 152px;
+  height: 48px;
+
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #FFFFFF;
+
+  background: hsl(216, 100%, 50%);
+  /* shadow-purple */
+  box-shadow: 0px 8px 12px rgba(40, 49, 255, 0.05);
+  border: 0px;
+  border-radius: 4px;
+}
+
+.btn-prev-or-next:hover {
+  background: hsl(216, 100%, 80%);
+}
+
 .btn-std {
   display: block;
   color: black;
