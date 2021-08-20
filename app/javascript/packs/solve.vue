@@ -4,18 +4,18 @@
       <div class="solve-drill-title"> {{ drill.title }} </div>
     </div>
     <div v-if="state=='solving'">
-      <div class="w-100 text-center">
-        <span v-for="(el, i) in answerStatus" :key="i">
-          <span v-if="el=='notSure'"> ・ </span>
-          <span v-else-if="el >= 0" class="text-success">✓</span>
-          <span v-else> − </span>
-        </span>
-      </div>
       <div class="problem">
+        <div class="status-blocks">
+          <template v-for="(el, answerIndex) in answerStatus" :key="answerIndex">
+            <div v-if="el==='notSure'" class="status-block status-not_sure"></div>
+            <div v-else-if="el>=0" class="status-block status-checked"></div>
+            <div v-else class="status-block status-unchecked"></div>
+          </template>
+        </div>
         <div v-if="currentProblem">
           <span class="problem-id" v-if="false"> problem-ID:{{ currentProblem.id }} </span>
           <div class="problem-index fs-3"> {{ currentProblemIndex + 1 }}問目 </div>
-          <div v-if="currentUserId" class="text-muted">
+          <div v-if="currentUserId && false" class="text-muted">
             <div>あなたの連続正解数: {{ currentStreak }} 回</div>
             <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
             <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
@@ -183,6 +183,7 @@ export default {
         this.currentProblemIndex += 1;
         this.currentProblem = this.problems[this.currentProblemIndex];
       }
+      console.log(this.answerStatus)
     },
     grade() {
       this.endTime = new Date();
@@ -322,7 +323,7 @@ export default {
 }
 
 .problem {
-  margin: 8px 0 8px;
+  margin: 0 0 8px;
   padding: 8px 0 8px;
   border: none 0 #fff;
   border-radius: 4px;
@@ -374,6 +375,30 @@ export default {
 
 .problem-choice.selected-choice--not-sure:hover {
   background-color: hsl(220, 85%, 80%);
+}
+
+.status-blocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-block {
+  width: 99px;
+  height: 16px;
+  margin: 4px;
+  box-shadow: 0px 6px 12px rgba(0, 102, 255, 0.25);
+}
+
+.status-not_sure {
+  background: #f9f7a1d1;
+}
+
+.status-checked {
+  background: #0066FF;
+}
+
+.status-unchecked {
+  background: #FFFFFF;
 }
 
 .move-buttons {
