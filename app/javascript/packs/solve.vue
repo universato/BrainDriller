@@ -32,14 +32,14 @@
               v-for="(choice, choiceNo) in currentProblem.choices"
               :key="choiceNo"
               class="problem-choice"
-              :class="{'selected-choice': answerPaper[currentProblem.id] === choiceNo}"
+              :class="answerPaper[currentProblem.id] === choiceNo ? 'selected-choice' : 'unselected-choice'"
               @click="selectOption(choiceNo)"
               v-html="compiledMarkdown(choice)"
             >
             </div>
             <div
               class="problem-choice"
-              :class="{'selected-choice--not-sure': answerPaper[currentProblem.id] === 'notSure'}"
+              :class="answerPaper[currentProblem.id] === 'notSure' ? 'selected-choice--not-sure' : 'unselected-choice'"
               @click="selectOption('notSure')"
             >
               　わからない
@@ -402,7 +402,7 @@ export default {
   background-color: hsla(59, 88%, 80%, 0.82);
 }
 
-.problem-choice:hover {
+.problem-choice.unselected-choice:hover {
   background-color: #efefef;
 }
 
