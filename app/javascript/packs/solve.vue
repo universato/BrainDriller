@@ -58,22 +58,25 @@
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">解き直す</a>
       <div>
         <div class="bg-light p-5 my-4 rounded">
-          <h3>サマリー</h3>
-          <span v-for="(problem, problem_idx) in problems" :key="problem_idx">
-            <span v-if="answerPaper[problem.id] === undefined">-</span>
-            <span
-              v-else-if="problem.correct_option===answerPaper[problem.id]"
-              class="text-success"
-            >○</span>
-            <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
-            <span v-else class="text-danger">✗</span>
-          </span>
-          <div> 回答時間{{ elaspedTime }} </div>
-          <div>今回の正解数: {{ correct_count }} </div>
-          <div>今回の不正数: {{ uncorrect_count }} </div>
-          <div>今回のわからない・無回答: {{ problems.length - correct_count - uncorrect_count }} </div>
-          <div>今回の出題数: {{ problems.length }} </div>
-          <div>今回の正解率: {{ Math.floor(correct_count / problems.length * 100) }}%</div>
+          <h3 class="result-summary-title">今回の結果</h3>
+          <div>
+            <span v-for="(problem, problem_idx) in problems" :key="problem_idx" class="fs-2">
+              <span v-if="answerPaper[problem.id] === undefined">-</span>
+              <span
+                v-else-if="problem.correct_option===answerPaper[problem.id]"
+                class="text-success"
+              >○</span>
+              <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
+              <span v-else class="text-danger">✗</span>
+            </span>
+          </div>
+          <div class="result-stats">
+            <div><div class="result-label text-center">回答時間</div><div class="result-data">{{ elaspedTime }}</div></div>
+            <div><div class="result-label text-center">出題数</div><div class="result-data"> {{ problems.length }}</div> </div>
+            <div><div class="result-label text-center">正解数</div><div class="result-data"> {{ correct_count }}</div> </div>
+            <div><div class="result-label text-center">不正解数</div> <div class="result-data"> {{ problems.length - uncorrect_count }}</div> </div>
+            <div><div class="result-label text-center">正解率</div> <div class="result-data"> {{ Math.floor(correct_count / problems.length * 100) }}%</div></div>
+          </div>
         </div>
       </div>
       <div>
@@ -409,6 +412,52 @@ export default {
 
 .problem-choice.selected-choice--not-sure:hover {
   background-color: hsla(59, 88%, 90%, 0.82);
+}
+
+.result-summary-title {
+  width: 160px;
+  height: 46px;
+
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 46px;
+
+  color: #222222;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.result-label {
+  /* display: flex;
+  flex-direction: row;
+  align-items: flex-start; */
+  padding: 4px 8px;
+
+  /* width: 72px; */
+  height: 28px;
+
+  background: #EEEEEE;
+  border-radius: 4px;
+}
+
+.result-data {
+  width: 120px;
+  height: 41px;
+
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 41px;
+  /* identical to box height */
+
+  text-align: center;
+  color: #222222;
 }
 
 .status-blocks {
