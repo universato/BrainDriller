@@ -391,11 +391,12 @@ export default {
 }
 
 .problem-choice.selected-choice {
-  background-color: hsl(103, 85%, 50%);
+  /* border: 1px solid hsl(216, 100%, 50%, 0.8); */
+  background-color: hsl(216, 100%, 50%, 0.8);
 }
 
 .problem-choice.selected-choice--not-sure {
-  background-color: hsl(220, 85%, 50%);
+  background-color: hsla(59, 88%, 80%, 0.82);
 }
 
 .problem-choice:hover {
@@ -403,11 +404,11 @@ export default {
 }
 
 .problem-choice.selected-choice:hover {
-  background-color: hsl(103, 85%, 80%);
+  background-color: hsl(216, 100%, 80%, 0.8);
 }
 
 .problem-choice.selected-choice--not-sure:hover {
-  background-color: hsl(220, 85%, 80%);
+  background-color: hsla(59, 88%, 90%, 0.82);
 }
 
 .status-blocks {
