@@ -1,7 +1,7 @@
 <template>
-  <div id="app panel">
+  <div class="problem-panel">
     <div v-if="state=='solving'">
-      <div v-if="drill" class="solve-drill">
+      <div v-if="drill && false" class="solve-drill">
         <div class="solve-drill-title"> {{ drill.title }} </div>
       </div>
       <div class="problem">
@@ -9,7 +9,7 @@
           <div
             v-for="(el, problemIndex) in answerStatus"
             :key="problemIndex"
-            :class="statusClass(el)"
+            :class="statusClass(el, problemIndex)"
             @click="setCurrentProblemIndex(problemIndex)"
           >
           </div>
@@ -22,7 +22,7 @@
             <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
             <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
           </div>
-          <div class="problem-idnex-and-title fs-3">
+          <div class="problem-idnex-and-title fs-2">
             <span class="problem-index"> {{ currentProblemIndex + 1 }}問目 </span>
             <span class="problem-title"> {{ currentProblem.title }} </span>
           </div>
@@ -42,7 +42,7 @@
               :class="answerPaper[currentProblem.id] === 'notSure' ? 'selected-choice--not-sure' : 'unselected-choice'"
               @click="selectOption('notSure')"
             >
-              　わからない
+              わからない
             </div>
           </div>
           <div class="move-buttons">
@@ -63,25 +63,25 @@
               <span v-if="answerPaper[problem.id] === undefined">- </span>
               <span
                 v-else-if="problem.correct_option===answerPaper[problem.id]"
-                class="text-success"
+                class="text-correct"
               >○ </span>
               <span v-else-if="answerPaper[problem.id]==='notSure'">. </span>
               <span v-else class="text-danger">✗ </span>
             </span>
           </div>
           <div class="result-stats">
-            <div><div class="result-label text-center">回答時間</div><div class="result-data">{{ elaspedTime }}</div></div>
-            <div><div class="result-label text-center">出題数</div><div class="result-data"> {{ problems.length }}</div> </div>
-            <div><div class="result-label text-center">正解数</div><div class="result-data"> {{ correct_count }}</div> </div>
-            <div><div class="result-label text-center">不正解数</div> <div class="result-data"> {{ problems.length - correct_count }}</div> </div>
-            <div><div class="result-label text-center">正解率</div> <div class="result-data"> {{ Math.floor(correct_count / problems.length * 100) }}%</div></div>
+            <div><div class="result-label text-center">回答時間</div><div class="result-data" v-html="elaspedTime"></div></div>
+            <div><div class="result-label text-center">出題数</div><div class="result-data"> {{ problems.length }} <span class="fs-3">問</span> </div> </div>
+            <div><div class="result-label text-center">正解数</div><div class="result-data"> {{ correct_count }} <span class="fs-3">問</span></div> </div>
+            <div><div class="result-label text-center">不正解数</div> <div class="result-data"> {{ problems.length - correct_count }} <span class="fs-3">問</span></div> </div>
+            <div><div class="result-label text-center">正解率</div> <div class="result-data"> {{ Math.floor(correct_count / problems.length * 100) }}<span class="fs-3">%</span></div></div>
           </div>
         </div>
       </div>
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">すぐに解き直す</a>
       <div>
-        <div v-for="(problem, problemIdx) in problems" :key="problemIdx" class="bg-light p-5 my-4 rounded">
-          <div class="problem-idnex-and-title fs-3">
+        <div v-for="(problem, problemIdx) in problems" :key="problemIdx" class="bg-light p-5 my-4 rounded problem-panel">
+          <div class="problem-idnex-and-title fs-2">
             <span class="problem-index"> {{ problemIdx + 1 }}問目 </span>
             <span class="problem-title"> {{ problem.title }} </span>
           </div>
@@ -102,7 +102,7 @@
           </div>
           <div class="text-center fs-2 mt-5">
             <span v-if="answerPaper[problem.id] === undefined" class="uncorrect">ー 無回答</span>
-            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="text-success">○ 正解</span>
+            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="text-correct">○ 正解</span>
             <span v-else class="text-danger">✗ 不正解</span>
           </div>
           <div v-if="problem.explanation.trim().length > 0">
@@ -267,25 +267,28 @@ export default {
     markedChoice(choiceNo, correctNo, selectedNo){
       if(choiceNo === correctNo && correctNo === selectedNo){
         // 選ばれた正解
-        return `selected-correct-choice bg-success`
+        return `selected-correct-choice bg-correct`
       }else if(choiceNo === correctNo){
         // 選ばれなかった正解
-        return `correct-choice bg-success`
+        return `correct-choice bg-correct`
       }else if(choiceNo === selectedNo) {
         // 選ばれた不正解
         return `selected-uncorrect-choice bg-danger`
       }else {
-        return ``
+        return `normal-choice`
       }
     },
-    statusClass(el) {
-      console.log(this.answerStatus)
+    statusClass(el, problemIndex) {
+      let statusClass = "";
+      if(this.currentProblemIndex !== problemIndex){
+        statusClass = "pe-pointer "
+      }
       if(el==="notSure"){
-        return "status-block status-not_sure"
+        return statusClass + "status-block status-not_sure"
       }else if(el>=0){
-        return "status-block status-checked"
+        return statusClass + "status-block status-checked"
       }else{
-        return "status-block status-unchecked"
+        return statusClass + "status-block status-unchecked"
       }
     },
     setCurrentProblemIndex(problemIndex) {
@@ -327,9 +330,9 @@ export default {
       let minutes = Math.floor(seconds / 60);
       let second = seconds % 60;
       if (minutes > 0){
-        return `${minutes}分${second}秒`
+        return `${minutes}<span class="fs-3">分<span>${second}<span class="fs-3">秒<span>`
       } else {
-        return `${seconds}秒`
+        return `${seconds}<span class="fs-3">秒<span>`
       }
     },
   }
@@ -355,10 +358,16 @@ export default {
 
 .problem {
   margin: 0 0 8px;
-  padding: 8px 0 8px;
+  padding: 0px 0 8px;
   border: none 0 #fff;
   border-radius: 4px;
   background-color: #fff;
+}
+
+.problem-panel {
+  background: #FFFFFF;
+  box-shadow: 0px 8px 24px rgba(0, 102, 255, 0.25);
+  border-radius: 20px;
 }
 
 .drill-id, .problem-id {
@@ -397,10 +406,18 @@ export default {
 .problem-choice {
   border: solid 1px #eee;
   border-radius: 4px;
-  background-color: #e1e1e1;
+  /* background-color: #e1e1e1; */
   cursor: pointer;
   margin-top: 8px;
   padding: 8px;
+}
+
+.problem-choice.normal-choice {
+  background-color: #e1e1e1;
+}
+
+.problem-choice.unselected-choice {
+  background-color: #e1e1e1;
 }
 
 .problem-choice.selected-choice {
@@ -525,6 +542,26 @@ export default {
 
 .uncorrect {
   color: var(--uncorrect-color);
+}
+
+.problem-statement code  {
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: #eeeeee;
+}
+
+.problem-statement code.hljs  {
+  background-color: #364549;
+}
+
+.problem-explanation code  {
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: #eeeeee;
+}
+
+.problem-explanation code.hljs  {
+  background-color: #364549;
 }
 
 </style>
