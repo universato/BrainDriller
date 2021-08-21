@@ -55,19 +55,18 @@
       </div>
     </div>
     <div v-else-if="state=='result'">
-      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">解き直す</a>
       <div>
         <div class="bg-light p-5 my-4 rounded">
-          <h3 class="result-summary-title">今回の結果</h3>
           <div>
-            <span v-for="(problem, problem_idx) in problems" :key="problem_idx" class="fs-2">
-              <span v-if="answerPaper[problem.id] === undefined">-</span>
+            <span class="result-summary-title">今回の結果　</span>
+            <span v-for="(problem, problemIdx) in problems" :key="problemIdx" class="fs-2 ml-5">
+              <span v-if="answerPaper[problem.id] === undefined">- </span>
               <span
                 v-else-if="problem.correct_option===answerPaper[problem.id]"
                 class="text-success"
-              >○</span>
-              <span v-else-if="answerPaper[problem.id]==='notSure'">.</span>
-              <span v-else class="text-danger">✗</span>
+              >○ </span>
+              <span v-else-if="answerPaper[problem.id]==='notSure'">. </span>
+              <span v-else class="text-danger">✗ </span>
             </span>
           </div>
           <div class="result-stats">
@@ -79,11 +78,14 @@
           </div>
         </div>
       </div>
+      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">すぐに解き直す</a>
       <div>
-        <div v-for="(problem, problem_idx) in problems" :key="problem_idx" class="bg-light p-5 my-4 rounded">
-          <h3>{{ problem_idx + 1 }} 問目</h3>
+        <div v-for="(problem, problemIdx) in problems" :key="problemIdx" class="bg-light p-5 my-4 rounded">
+          <div class="problem-idnex-and-title fs-3">
+            <span class="problem-index"> {{ problemIdx + 1 }}問目 </span>
+            <span class="problem-title"> {{ problem.title }} </span>
+          </div>
           <div class="problem-id" v-if="false"> Problem ID{{ problem.id }} </div>
-          <div class="problem-title" v-if="problem.title"> {{ problem.title }} </div>
           <div class="problem-statement" v-html="compiledMarkdown(problem.statement)"> </div>
           <div
             v-for="(choice, choiceNo) in problem.choices"
@@ -317,7 +319,7 @@ export default {
       let minutes = Math.floor(seconds / 60);
       let second = seconds % 60;
       if (minutes > 0){
-        return `${minutes}分 ${second}秒 (=${seconds}秒)`
+        return `${minutes}分 ${second}秒`
       } else {
         return `${seconds}秒`
       }
