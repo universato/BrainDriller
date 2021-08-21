@@ -372,6 +372,7 @@ export default {
 
 .problem-statement {
   padding: 16px 0;
+  font-size: 18px;
 }
 
 .problem-choices {
