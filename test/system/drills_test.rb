@@ -46,20 +46,20 @@ class DrillsTest < ApplicationSystemTestCase
     # 1st problem
     assert_text "Correct"
     assert_text "わからない"
-    assert_text "中断して採点する"
+    assert_text "未回答を"
     first(".problem-choice").click
 
     # 2nd problem
     assert_text "Correct"
     assert_text "わからない"
-    assert_text "中断して採点する"
+    assert_text "未回答を残して"
     first(".problem-choice").click
 
     # 3rd problem
-    assert_no_text "中断して採点する"
+    assert_text "未回答を残して採点する"
     assert_text "採点する"
     first(".problem-choice").click
-    assert_no_text "中断して採点する"
+    assert_no_text "未回答を残して採点する"
     assert_text "採点する"
     click_button "採点する"
 
@@ -73,7 +73,7 @@ class DrillsTest < ApplicationSystemTestCase
     find("#past").check
     click_button I18n.t("text.Solve_problems")
 
-    assert_text "中断して採点する"
+    assert_text "未回答を残して採点する"
     page.all(".problem-choice")[1].click
     page.all(".problem-choice")[1].click
     assert_text "採点する"
@@ -93,20 +93,20 @@ class DrillsTest < ApplicationSystemTestCase
     # 1st problem
     assert_text "Correct"
     assert_text "わからない"
-    assert_text "中断して採点する"
+    assert_text "未回答を残して採点する"
     first(".problem-choice").click
 
     # 2nd problem
     assert_text "Correct"
     assert_text "わからない"
-    assert_text "中断して採点する"
+    assert_text "未回答を残して採点する"
     first(".problem-choice").click
 
     # 3rd problem
-    assert_no_text "中断して採点する"
+    assert_text "未回答を残して採点する"
     assert_text "採点する"
     first(".problem-choice").click
-    assert_no_text "中断して採点する"
+    assert_no_text "未回答を残して採点する"
     assert_text "採点する"
     click_button "採点する"
 
