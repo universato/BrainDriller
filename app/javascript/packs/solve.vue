@@ -1,9 +1,9 @@
 <template>
   <div id="app panel">
-    <div v-if="drill" class="solve-drill">
-      <div class="solve-drill-title"> {{ drill.title }} </div>
-    </div>
     <div v-if="state=='solving'">
+      <div v-if="drill" class="solve-drill">
+        <div class="solve-drill-title"> {{ drill.title }} </div>
+      </div>
       <div class="problem">
         <div class="status-blocks">
           <div
@@ -73,7 +73,7 @@
             <div><div class="result-label text-center">回答時間</div><div class="result-data">{{ elaspedTime }}</div></div>
             <div><div class="result-label text-center">出題数</div><div class="result-data"> {{ problems.length }}</div> </div>
             <div><div class="result-label text-center">正解数</div><div class="result-data"> {{ correct_count }}</div> </div>
-            <div><div class="result-label text-center">不正解数</div> <div class="result-data"> {{ problems.length - uncorrect_count }}</div> </div>
+            <div><div class="result-label text-center">不正解数</div> <div class="result-data"> {{ problems.length - correct_count }}</div> </div>
             <div><div class="result-label text-center">正解率</div> <div class="result-data"> {{ Math.floor(correct_count / problems.length * 100) }}%</div></div>
           </div>
         </div>
@@ -95,15 +95,23 @@
           >
             <span v-html="compiledMarkdown(choice)"></span>
           </div>
-          <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. <span v-html="compiledMarkdown(problem.choices[problem.correct_option])"></span> </div>
-          <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
-          <div class="problem-correct_option" v-else> 無回答 </div>
-          <div style="font-size: 1.2em;">
-            <span v-if="answerPaper[problem.id] === undefined" class="uncorrect">無回答でした</span>
-            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="text-success">正解です</span>
-            <span v-else class="text-danger">不正解です</span>
+          <div v-if="false">
+            <div class="problem-correct_option"> 正解: {{ problem.correct_option + 1 }}. <span v-html="compiledMarkdown(problem.choices[problem.correct_option])"></span> </div>
+            <div class="problem-correct_option" v-if="answerPaper[problem.id] >= 0"> 回答: {{ answerPaper[problem.id] + 1 }}. <span v-html="compiledMarkdown(problem.choices[answerPaper[problem.id]])"></span> </div>
+            <div class="problem-correct_option" v-else> 無回答 </div>
           </div>
-          <div class="problem-statement" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
+          <div class="text-center fs-2 mt-5">
+            <span v-if="answerPaper[problem.id] === undefined" class="uncorrect">ー 無回答</span>
+            <span v-else-if="problem.correct_option===answerPaper[problem.id]" class="text-success">○ 正解</span>
+            <span v-else class="text-danger">✗ 不正解</span>
+          </div>
+          <div v-if="problem.explanation.trim().length > 0">
+            <h4 class="fs-2">【解説】</h4>
+            <div class="problem-explanation mt-2 fs-4" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
+          </div>
+          <div v-else>
+            <h4 class="fs-2">解説なし</h4>
+          </div>
         </div>
       </div>
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 py-3 mt-1">解き直す</a>
@@ -262,7 +270,7 @@ export default {
         return `selected-correct-choice bg-success`
       }else if(choiceNo === correctNo){
         // 選ばれなかった正解
-        return `correct-choice bg-info`
+        return `correct-choice bg-success`
       }else if(choiceNo === selectedNo) {
         // 選ばれた不正解
         return `selected-uncorrect-choice bg-danger`
@@ -319,7 +327,7 @@ export default {
       let minutes = Math.floor(seconds / 60);
       let second = seconds % 60;
       if (minutes > 0){
-        return `${minutes}分 ${second}秒`
+        return `${minutes}分${second}秒`
       } else {
         return `${seconds}秒`
       }
