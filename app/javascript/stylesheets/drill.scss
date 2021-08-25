@@ -1,3 +1,8 @@
+.drills-index-broad-frame {
+  max-width: 880px;
+  margin: 0px auto;
+}
+
 .drill-panel {
   background-color: var(--white-color);
   margin: 16px;
@@ -7,7 +12,7 @@
 .drills {
   display: grid;
   background-color: var(--white-color);
-  border: 1px splid #ccc;
+  border: 1px solid #cacaca;
   border-radius: 4px;
 }
 
@@ -87,7 +92,7 @@
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 500;
-  font-size: 72px;
+  font-size: 56px;
   line-height: 104px;
 
   color: #222222;
@@ -165,4 +170,8 @@
 
 .solve-btn {
   width: 320px;
+}
+
+.resolve-button-block {
+  background-color: #f0f7ff;
 }

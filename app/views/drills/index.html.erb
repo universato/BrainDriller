@@ -1,30 +1,32 @@
-<h1 class="page-title">ドリル</h1>
+<div class="drills-index-broad-frame">
+  <h1 class="page-title">ドリル</h1>
 
-<% if current_user&.admin? %>
-  <%= link_to 'ドリルを作成する', new_drill_path, class: "btn btn-primary w-100 fs-4 mb-3" %><br>
-  <div><%= "ドリルがありません" if @drills.blank? %></div>
-<% end %>
-
-<div class="drills">
-  <% @drills.each do |drill| %>
-    <%= link_to drill, class: 'index-drill' do %>
-      <div class="index-drill-title"><%= drill.title %></div>
-      <div class="drill-guide"><%= drill.guide.truncate(100) %></div>
-
-      <div class="problem-count">問題数<%= drill.problems.size %>問</div>
-      <% if current_user&.admin? %>
-        <div class="drill-user">
-          <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
-          <div class="">
-            <%= drill.user.login_name %>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
-          <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
-        </div>
-      <% end %>
-      <%= render 'drills/stamp' if false %>
-    <% end %>
+  <% if current_user&.admin? %>
+    <%= link_to 'ドリルを作成する', new_drill_path, class: "btn btn-primary w-100 fs-4 mb-3" %><br>
+    <div><%= "ドリルがありません" if @drills.blank? %></div>
   <% end %>
+
+  <div class="drills">
+    <% @drills.each do |drill| %>
+      <%= link_to drill, class: 'index-drill' do %>
+        <div class="index-drill-title"><%= drill.title %></div>
+        <div class="drill-guide"><%= drill.guide.truncate(100) %></div>
+
+        <div class="problem-count">問題数<%= drill.problems.size %>問</div>
+        <% if current_user&.admin? %>
+          <div class="drill-user">
+            <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
+            <div class="">
+              <%= drill.user.login_name %>
+            </div>
+          </div>
+          <div class="stats">
+            <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
+            <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
+          </div>
+        <% end %>
+        <%= render 'drills/stamp' if false %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

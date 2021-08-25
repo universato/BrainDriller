@@ -1,62 +1,60 @@
 <template>
-  <div class="problem-panel">
-    <div v-if="state=='solving'">
+  <div class="solve-result">
+    <div v-if="state=='solving'" class="problem">
       <div v-if="drill && false" class="solve-drill">
         <div class="solve-drill-title"> {{ drill.title }} </div>
       </div>
-      <div class="problem">
-        <div class="status-blocks">
+      <div class="status-blocks">
+        <div
+          v-for="(el, problemIndex) in answerStatus"
+          :key="problemIndex"
+          :class="statusClass(el, problemIndex)"
+          @click="setCurrentProblemIndex(problemIndex)"
+        >
+        </div>
+      </div>
+      <div v-if="currentProblem" class="problem-main">
+        <span class="problem-id" v-if="false"> problem-ID:{{ currentProblem.id }} </span>
+        <div v-if="currentUserId && false" class="text-muted">
+          <div>あなたの連続正解数: {{ currentStreak }} 回</div>
+          <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
+          <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
+          <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
+        </div>
+        <div class="problem-idnex-and-title fs-2">
+          <span class="problem-index"> {{ currentProblemIndex + 1 }}問目 </span>
+          <span class="problem-title"> {{ currentProblem.title }} </span>
+        </div>
+        <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
+        <div class="problem-choices">
           <div
-            v-for="(el, problemIndex) in answerStatus"
-            :key="problemIndex"
-            :class="statusClass(el, problemIndex)"
-            @click="setCurrentProblemIndex(problemIndex)"
+            v-for="(choice, choiceNo) in currentProblem.choices"
+            :key="choiceNo"
+            class="problem-choice"
+            :class="answerPaper[currentProblem.id] === choiceNo ? 'selected-choice' : 'unselected-choice'"
+            @click="selectOption(choiceNo)"
+            v-html="compiledMarkdown(choice)"
           >
           </div>
+          <div
+            class="problem-choice"
+            :class="answerPaper[currentProblem.id] === 'notSure' ? 'selected-choice--not-sure' : 'unselected-choice'"
+            @click="selectOption('notSure')"
+          >
+            わからない
+          </div>
         </div>
-        <div v-if="currentProblem" class="problem-main">
-          <span class="problem-id" v-if="false"> problem-ID:{{ currentProblem.id }} </span>
-          <div v-if="currentUserId && false" class="text-muted">
-            <div>あなたの連続正解数: {{ currentStreak }} 回</div>
-            <div>あなたの回答回数: {{ numberOfSubmissions }} 回</div>
-            <div>あなたの正解回数: {{ numberOfCorrectAnswers }} 回</div>
-            <div>あなたの正解率: {{ percent(numberOfCorrectAnswers, numberOfSubmissions) }} % </div>
-          </div>
-          <div class="problem-idnex-and-title fs-2">
-            <span class="problem-index"> {{ currentProblemIndex + 1 }}問目 </span>
-            <span class="problem-title"> {{ currentProblem.title }} </span>
-          </div>
-          <div class="problem-statement" v-html="compiledMarkdown(currentProblem.statement)"></div>
-          <div class="problem-choices">
-            <div
-              v-for="(choice, choiceNo) in currentProblem.choices"
-              :key="choiceNo"
-              class="problem-choice"
-              :class="answerPaper[currentProblem.id] === choiceNo ? 'selected-choice' : 'unselected-choice'"
-              @click="selectOption(choiceNo)"
-              v-html="compiledMarkdown(choice)"
-            >
-            </div>
-            <div
-              class="problem-choice"
-              :class="answerPaper[currentProblem.id] === 'notSure' ? 'selected-choice--not-sure' : 'unselected-choice'"
-              @click="selectOption('notSure')"
-            >
-              わからない
-            </div>
-          </div>
-          <div class="move-buttons">
-            <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev-or-next p-3 fs-4">前の問題へ</button></div>
-            <div v-if="Object.keys(answerStatus).length < problems.length" class="btn-grade-frame"><button @click="grade()" class="btn-grade-in-the-middle text-center p-3 fs-4">未回答を残して採点する</button></div>
-            <div v-else class="btn-grade-frame"><button @click="grade()" class="btn-grade p-3 fs-4">採点する</button></div>
-            <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-prev-or-next p-3 fs-4">次の問題へ</button></div>
-          </div>
+        <div class="move-buttons">
+          <div v-if="0 < currentProblemIndex" class="btn-prev-frame"><button @click="prevProblem()" class="btn-prev-or-next p-3 fs-4">前の問題へ</button></div>
+          <div v-if="Object.keys(answerStatus).length < problems.length" class="btn-grade-frame"><button @click="grade()" class="btn-grade-in-the-middle text-center p-3 fs-4">未回答を残して採点する</button></div>
+          <div v-else class="btn-grade-frame"><button @click="grade()" class="btn-grade p-3 fs-4">採点する</button></div>
+          <div v-if="currentProblemIndex < problems.length - 1" class="btn-next-frame"><button @click="nextProblem()" class="btn-prev-or-next p-3 fs-4">次の問題へ</button></div>
         </div>
       </div>
     </div>
     <div v-else-if="state=='result'">
       <div>
-        <div class="bg-light p-5 my-4 rounded">
+        <div class="bg-light p-5 my-4 rounded result-summary">
           <div>
             <span class="result-summary-title">今回の結果　</span>
             <span v-for="(problem, problemIdx) in problems" :key="problemIdx" class="fs-2 ml-5">
@@ -78,7 +76,9 @@
           </div>
         </div>
       </div>
-      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">すぐに解き直す</a>
+      <div class="resolve-button-block">
+        <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">すぐに解き直す</a>
+      </div>
       <div>
         <div v-for="(problem, problemIdx) in problems" :key="problemIdx" class="bg-light p-5 my-4 rounded problem-panel">
           <div class="problem-idnex-and-title fs-2">
@@ -109,7 +109,7 @@
             <h4 class="fs-2">【解説】</h4>
             <div class="problem-explanation mt-2 fs-4" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
           </div>
-          <div v-else>
+          <div v-if="false">
             <h4 class="fs-2">解説なし</h4>
           </div>
         </div>
@@ -356,18 +356,27 @@ export default {
   background-color: #fafafa;
 }
 
-.problem {
-  margin: 0 0 8px;
-  padding: 0px 0 8px;
-  border: none 0 #fff;
-  border-radius: 4px;
-  background-color: #fff;
-}
-
 .problem-panel {
+  max-width: 880px;
+  margin: 0 auto;
+
   background: #FFFFFF;
   box-shadow: 0px 8px 24px rgba(0, 102, 255, 0.25);
   border-radius: 20px;
+}
+
+.solve-result {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.problem {
+  padding: 0px 0 40px 0px;
+  border: none 0 #fff;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0px 8px 24px rgba(0, 102, 255, 0.25);
+  border-radius: 0px 0px 20px 20px;
 }
 
 .drill-id, .problem-id {
@@ -375,7 +384,7 @@ export default {
 }
 
 .problem-main {
-  margin: 20px 8% 0;
+  margin: 40px 8% 0;
 }
 
 .problem-idnex-and-title {
@@ -398,7 +407,7 @@ export default {
 }
 
 .problem-choices {
-  border-top: 1px solid #ccc;
+  /* border-top: 1px solid #ccc; */
   margin-top: 8px;
   margin-left: 0;
 }
@@ -439,6 +448,13 @@ export default {
 
 .problem-choice.selected-choice--not-sure:hover {
   background-color: hsla(59, 88%, 90%, 0.82);
+}
+
+.result-summary {
+  background: #FFFFFF;
+  /* shadow-blue */
+  box-shadow: 0px 8px 24px rgba(0, 102, 255, 0.25);
+  border-radius: 20px;
 }
 
 .result-summary-title {
@@ -512,7 +528,7 @@ export default {
 }
 
 .move-buttons {
-  margin-top: 16px;
+  margin-top: 40px;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 4fr 5fr 4fr;
