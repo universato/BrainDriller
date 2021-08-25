@@ -1,40 +1,63 @@
-<div class="container bg-light p-5 my-4 rounded">
-  <div class="title-panel">
-    <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
-  </div>
-  <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "")) %></div>
-
-  <div class="drill-problem-count">
-    <div>このドリルの問題数: <%= problems_count = @drill.problems.size %> 問</div>
-    <% if current_user %>
-      <div>習得問題数: <%= @drill_user_result&.number_of_problem_mastered || "-" %> 問</div>
-      <div>習得問題率: <%= percent(@drill_user_result&.number_of_problem_mastered, @drill.problems.size) %></div>
-      <% if @driill_is_mastered %>
-        習得済み
-      <% end %>
-    <% end %>
-  </div>
-
-  <hr>
-
-  <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
-    <div class="form-check my-3">
-      <%= f.check_box :rand, {checked: true, class: "form-check-input"}, "true", nil %>
-      <%= f.label :rand, "ランダムに出題する", class: "form-check-label" %>
+<div class="drill-show-panel bg-light my-4 max-w768">
+  <div class="drill-show-top-panel">
+    <div class="title-panel">
+      <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
     </div>
+    <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "")) %></div>
+  </div>
+  <div class="drill-show-middle-panel">
 
-    <% if current_user && @drill_user_result && !@driill_is_mastered %>
-      <div class="form-check my-3">
-        <%= f.check_box :past, {checked: true, class: "form-check-input"}, "true", nil %>
-        <%= f.label :past, "過去の回答に基づいて出題する", class: "form-check-label" %>
+    <div class="drill-problem-counts">
+      <div class="text-ceneter">
+        <div class="drill-stat-label text-center">全問題数</div>
+        <div class="drill-stat-data text-center">
+          <%= problems_count = @drill.problems.size %><span class="unit">問</span>
+        </div>
       </div>
+      <% if current_user %>
+        <div class="text-ceneter">
+          <div class="drill-stat-label text-center">習得問題数</div>
+          <div class="drill-stat-data text-center">
+            <%= @drill_user_result&.number_of_problem_mastered || "-" %><span class="unit">問</span>
+          </div>
+        </div>
+        <div class="text-ceneter">
+          <div class="drill-stat-label text-center">習得問題率</div>
+          <div class="drill-stat-data text-center">
+            <%= percent(@drill_user_result&.number_of_problem_mastered, @drill.problems.size) %><span class="unit">%</span>
+          </div>
+        </div>
+        <% if @driill_is_mastered %>
+          習得済み
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="drill-show-bottom-panel">
+    <%= form_with url: "/solve/#{@drill.id}", method: "GET", class: "solve-drill-form" do |f| %>
+      <div class="d-flex flex-row justify-content-around">
+        <div class="form-check mt-3">
+          <%= f.check_box :rand, {checked: true, class: "form-check-input"}, "true", nil %>
+          <%= f.label :rand, "ランダムに出題する", class: "form-check-label" %>
+        </div>
+
+        <% if current_user && @drill_user_result && !@driill_is_mastered %>
+          <div class="form-check mt-3">
+            <%= f.check_box :past, {checked: true, class: "form-check-input"}, "true", nil %>
+            <%= f.label :past, "未習得の問題に絞る", class: "form-check-label" %>
+          </div>
+        <% end %>
+
+        <div class="flex-row mt-3">
+          <label for="num">(最大)出題数</label>
+          <%= f.select :num, options_for_select(problem_count_select_list(problems_count)), {}, class: "form-select-lg mb-3" %>
+        </div>
+      </div>
+
+      <%= f.submit t("text.Solve_problems"), class: 'block-center w-75 btn btn-primary btn-lg mt-3' %>
     <% end %>
-
-    <label for="num">問題数: </label>
-    <%= f.select :num, options_for_select(problem_count_select_list(problems_count)), {}, class: "form-select form-select-lg w-100 mb-3" %>
-
-    <%= f.submit t("text.Solve_problems"), class: 'w-100 btn btn-primary btn-lg mt-3' %>
-  <% end %>
+  </div>
 
   <% if current_user == @drill.user %>
     <hr>

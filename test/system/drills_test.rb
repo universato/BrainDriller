@@ -40,7 +40,7 @@ class DrillsTest < ApplicationSystemTestCase
     # find(".solve-btn").click
 
     assert_text "ランダムに出題する"
-    assert_no_text "過去の回答に基づいて出題する"
+    assert_no_text "未習得の問題に絞る"
     click_button I18n.t("text.Solve_problems")
 
     # 1st problem
@@ -68,7 +68,7 @@ class DrillsTest < ApplicationSystemTestCase
 
     # drill#show
     assert_text "ランダムに出題する"
-    assert_text "過去の回答に基づいて出題する"
+    assert_text "未習得の問題に絞る"
     find("#past").uncheck
     find("#past").check
     click_button I18n.t("text.Solve_problems")
@@ -87,7 +87,7 @@ class DrillsTest < ApplicationSystemTestCase
     click_on "Firsts"
 
     assert_text "ランダムに出題する"
-    assert_no_text "過去の回答に基づいて出題する"
+    assert_no_text "未習得の問題に絞る"
     click_button I18n.t("text.Solve_problems")
 
     # 1st problem

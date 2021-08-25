@@ -11,6 +11,10 @@
   border-radius: 4px;
 }
 
+.max-w768 {
+  max-width: 768px;
+}
+
 .index-drill {
   padding: 16px;
   display: grid;
@@ -38,6 +42,68 @@
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
+}
+
+.drill-show-panel {
+  margin: 0 auto;
+  background: #FFFFFF;
+  /* shadow-blue */
+
+  box-shadow: 0px 8px 24px rgba(0, 102, 255, 0.25);
+  border-radius: 20px;
+}
+
+.drill-show-top-panel {
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-left: 40px;
+
+  border-bottom: 3px #EEEEEE solid;
+}
+
+.drill-show-middle-panel {
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.drill-problem-counts {
+  display: flex;
+  justify-content: space-around;
+}
+
+.drill-stat-label {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  /* identical to box height */
+
+  color: #222222;
+}
+
+.drill-stat-data {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 72px;
+  line-height: 104px;
+
+  color: #222222;
+}
+
+.unit {
+  font-size: 80%;
+}
+
+.drill-show-bottom-panel {
+  border-top: 3px #EEEEEE solid;
+
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-left: 40px;
+  padding-bottom: 40px;
 }
 
 .stas {

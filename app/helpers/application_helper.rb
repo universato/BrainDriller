@@ -10,8 +10,9 @@ module ApplicationHelper
     end
   end
 
+  # 20, 100 # => 20.0
   def percent(numerator, denominator)
     r = (numerator.to_f / denominator.to_f) * 100
-    r.nan? ? "- %" : format("%5.1f", r) + "%"
+    r.nan? ? "- %" : format("%5.1f", r)
   end
 end
