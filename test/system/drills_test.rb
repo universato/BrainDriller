@@ -64,7 +64,7 @@ class DrillsTest < ApplicationSystemTestCase
     click_button "採点する"
 
     # result
-    click_on "解き直す", match: :first
+    click_on "続けて解く", match: :first
 
     # drill#show
     assert_text "ランダムに出題する"

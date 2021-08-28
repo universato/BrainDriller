@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="resolve-button-block">
-        <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">すぐに解き直す</a>
+        <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 my-3">続けて解く</a>
       </div>
       <div>
         <div v-for="(problem, problemIdx) in problems" :key="problemIdx" class="bg-light p-5 my-4 rounded problem-panel">
@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 py-3 mt-1">解き直す</a>
+      <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 py-3 mt-1">続けて解く</a>
     </div>
   </div>
 </template>
