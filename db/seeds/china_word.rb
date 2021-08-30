@@ -33,11 +33,14 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
 
   time = Time.current
 
+  statement = "<span class='chinese big-statement'>#{row['hanyu']}</span>
+  <span class='pinyin little-big-statement'>#{row["pinyin"]}</span>"
+
   problems << {
     drill_id: drill.id,
     user_id: drill.user.id,
     title: row['title'] || '',
-    statement: row['hanyu'] + "\n" + row["pinyin"].to_s, # row["pinyin"].to_s で、空白を無視する
+    statement: statement,
     format: "basic_choices",
     choices: choices,
     correct_option: correct_option,
