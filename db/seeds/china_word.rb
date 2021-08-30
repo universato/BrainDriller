@@ -18,13 +18,13 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
 
   drill = drills[row["hsk_level"].to_i]
 
-  choices = [row['correct'], row['w1'], row['w2'], row['w3']].shuffle.compact
-  correct_option = choices.find_index{ _1 == row['correct'] }
-
-  if correct_option.nil?
-    puts "correct_option is empty! Line No.#{i} skipped"
-    next
+  if row["zero_based_correct_number"].nil?
+    puts "Alert: Empty data for zero_based_correct_number column of Line No.#{i}"
   end
+
+  correct_option = row["zero_based_correct_number"].to_i
+  choices = [row['w1'], row['w2'], row['w3']]
+  choices.insert(correct_option, row["correct"])
 
   if choices.size < 2
     puts "choices.size < 2. Line No.#{i} skipped"
@@ -37,7 +37,7 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
     drill_id: drill.id,
     user_id: drill.user.id,
     title: row['title'] || '',
-    statement: row['hanyu'] + "\n" + row["pinyin"],
+    statement: row['hanyu'] + "\n" + row["pinyin"].to_s, # row["pinyin"].to_s で、空白を無視する
     format: "basic_choices",
     choices: choices,
     correct_option: correct_option,
@@ -49,7 +49,7 @@ end
 
 Problem.insert_all!(problems)
 
-puts "#{__FILE__} ended"
+puts "Done: #{__FILE__} "
 
 # 【Rails】rake seedコマンドでCSVファイルからDBに読み込ませる方法 - Qiita
 # https://qiita.com/kumasuke/items/545afaf5876d3dc52670
