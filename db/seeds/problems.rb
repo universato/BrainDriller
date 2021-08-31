@@ -1,5 +1,7 @@
 require "csv"
 
+__END__
+
 first_user = User.first
 problems = []
 CSV.foreach('./db/csv/problems.csv', headers: true).with_index(1) do |row, i|
