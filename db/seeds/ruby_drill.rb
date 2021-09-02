@@ -3,13 +3,13 @@ require "csv"
 module ProblemMaker
   def self.make_choices(correct_option, zero_based_correct_number, *wrong_options, line_no:)
     if correct_option.nil? || wrong_options.compact.size.zero? || zero_based_correct_number&.negative?
-      raise ArgumentError.new("correct_options.nill || wrong_options.zero? || correct_number is not valid.  Line No. #{line_no}")
+      raise ArgumentError, "correct_options, wrong_options or correct_number is not valid. Line No. #{line_no}"
     end
 
     nil_flag = false
     wrong_options.each do |option|
       if nil_flag && option
-        raise ArgumentError.new("途中にnilが挟まっていた. Line No. #{line_no}")
+        raise ArgumentError, "途中にnilが挟まっていた. Line No. #{line_no}"
       elsif option.nil?
         nil_flag = true
       end
@@ -17,7 +17,7 @@ module ProblemMaker
 
     wrong_options.compact!
     if wrong_options.size < zero_based_correct_number
-      raise ArgumentError.new("正解番号がでかいか  Line No. #{line_no}")
+      raise ArgumentError, "正解番号がでかいか  Line No. #{line_no}"
     end
 
     wrong_options.insert(zero_based_correct_number, correct_option)

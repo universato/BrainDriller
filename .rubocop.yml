@@ -319,3 +319,5 @@ Rails/SkipsModelValidations:
     - db/seeds/cpa_csv.rb
     - db/seeds/problems.rb
     - db/seeds/user.rb
+    - db/seeds/china_word.rb
+    - db/seeds/ruby_drill.rb

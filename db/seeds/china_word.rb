@@ -34,7 +34,7 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
   time = Time.current
 
   statement = "<span class='chinese big-statement'>#{row['hanyu']}</span>
-  <span class='pinyin little-big-statement'>#{row["pinyin"]}</span>"
+  <span class='pinyin little-big-statement'>#{row['pinyin']}</span>"
 
   problems << {
     drill_id: drill.id,
