@@ -10,14 +10,12 @@ rails s
 ```
 ## Ruby version
 
-3.0.0
+3.0.2
 
 ## Links
 
 [memo-db](READMES/memo-db.md)
 [memo-heroku](READMES/memo-heroku.md)
-[memo-question](READMES/memo-question.md)
-[memo-vuejs.md](READMES/memo-vuejs.md)
 [memoraundum](READMES/memorandum.md)
 
 # テスト方法
@@ -32,7 +30,9 @@ rails test:all
 HEADED=1 rails test:all
 ```
 
-#
+`HEADED=1`で、ブラウザで描画してテストする。
+
+# サーバーを立ち上げる
 
 ```s
 rails s
