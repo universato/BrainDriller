@@ -1,5 +1,38 @@
 require "csv"
 
+module Replace
+  def self.DoubleAngleBracketToTag(str)
+    return if str.nil?
+
+    bracket = 0
+    str.each_char do |c|
+      if c == "《"
+        bracket += 1
+        if bracket > 1
+          puts "Alert: 《《 #{str[0, 140]}"
+        end
+      elsif c == "》"
+        bracket -= 1
+        if bracket < 0
+          raise ArgumentError, "《》の不一致"
+        end
+      end
+    end
+
+    str.gsub!('《', '<span class="chinese in-statement">')
+    str.gsub!('》', '</span>')
+    str
+  end
+end
+
+module DataCheck
+  def self.any_empty?(row, *column_names)
+    if column_names.any?{ |name| row[name].nil? }
+      column_names.find{ row[_1].nil? }
+    end
+  end
+end
+
 first_user = User.find_by(login_name: "uni")
 problems = []
 
@@ -11,8 +44,8 @@ drills = drill_titles.map do |title|
 end
 
 CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
-  if row["hsk_level"].nil?
-    puts "hsk_level is empty! Line No.#{i}"
+  if column_name = DataCheck.any_empty?(row, "hsk_level", "correct", "w1")
+    puts "#{column_name} is empty! Line No.#{i}"
     next
   end
 
@@ -22,19 +55,20 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
     puts "Alert: Empty data for zero_based_correct_number column of Line No.#{i}"
   end
 
-  correct_option = row["zero_based_correct_number"].to_i
-  choices = [row['w1'], row['w2'], row['w3']]
-  choices.insert(correct_option, row["correct"])
+  correct_number = row["zero_based_correct_number"].to_i
+  choices = [row['w1'], row['w2'], row['w3']].compact
+  choices.compact!
+  choices.insert(correct_number, row["correct"])
 
   if choices.size < 2
     puts "choices.size < 2. Line No.#{i} skipped"
     next
   end
 
-  time = Time.current
-
   statement = "<span class='chinese big-statement'>#{row['hanyu']}</span>
   <span class='pinyin little-big-statement'>#{row['pinyin']}</span>"
+
+  time = Time.current
 
   problems << {
     drill_id: drill.id,
@@ -43,8 +77,8 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
     statement: statement,
     format: "basic_choices",
     choices: choices,
-    correct_option: correct_option,
-    explanation: row['explanation'] || '',
+    correct_option: correct_number,
+    explanation: Replace.DoubleAngleBracketToTag(row['explanation']) || '',
     created_at: time,
     updated_at: time,
   }
