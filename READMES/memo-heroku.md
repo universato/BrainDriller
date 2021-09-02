@@ -38,6 +38,10 @@ SELECT COUNT(*) FROM users;
 SELECT email, encrypted_password FROM users;
 ```
 
+# 
+
+https://dashboard.heroku.com/login
+
 # 作り直し
 
 例

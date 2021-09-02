@@ -81,21 +81,21 @@ Rails.application.configure do
   #   :authentication => :plain,
   #   :enable_starttls_auto => true
   # }
-  # ActionMailer::Base.delivery_method = :smtp
-  # ActionMailer::Base.smtp_settings = {
-  #    :port => ENV['MAILGUN_SMTP_PORT'] || 587,
-  #    :address => ENV['MAILGUN_SMTP_SERVER'] || "smtp.mailgun.org",
-  #    :user_name => ENV['MAILGUN_SMTP_LOGIN'],
-  #    :password => ENV['MAILGUN_SMTP_PASSWORD'],
-  #    :domain => ENV['MAILGUN_DOMAIN'],
-  #    :authentication => :plain,
-  # }
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: ENV['MAILGUN_PRIVATE_API_KEY'],
-    domain: ENV['MAILGUN_DOMAIN'],
-    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+     :port => ENV['MAILGUN_SMTP_PORT'] || 587,
+     :address => ENV['MAILGUN_SMTP_SERVER'] || "smtp.mailgun.org",
+     :user_name => ENV['MAILGUN_SMTP_LOGIN'],
+     :password => ENV['MAILGUN_SMTP_PASSWORD'],
+     :domain => ENV['MAILGUN_DOMAIN'],
+     :authentication => :plain,
   }
+  # config.action_mailer.delivery_method = :mailgun
+  # config.action_mailer.mailgun_settings = {
+  #   api_key: ENV['MAILGUN_PRIVATE_API_KEY'],
+  #   domain: ENV['MAILGUN_DOMAIN'],
+  #   # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  # }
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

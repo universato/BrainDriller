@@ -1079,13 +1079,21 @@ heroku config:get MAILGUN_SMTP_PORT
 heroku config:get MAILGUN_SMTP_SERVER
 heroku config:get MAILGUN_SMTP_LOGIN
 heroku config:get MAILGUN_SMTP_PASSWORD 
+
+heroku config:get MAILGUN_DOMAIN 
+heroku config:get MAILGUN_PRIVATE_API_KEY
 ```
+
+postmaster@your-app.herokuapp.com
 
 ```r
 heroku config:set MAILGUN_SMTP_PORT=
 heroku config:set MAILGUN_SMTP_SERVER=
 heroku config:set MAILGUN_SMTP_LOGIN=
 heroku config:set MAILGUN_SMTP_PASSWORD=
+
+heroku config:set MAILGUN_DOMAIN=
+heroku config:set MAILGUN_PRIVATE_API_KEY=
 ```
 
 
@@ -1756,8 +1764,10 @@ https://api.mailgun.net/v3/sandboxc1234567890asdfghjkl1234567890.mailgun.org/mes
 -F to='You <[送りたいメアド]@gmail.com>' \
 -F subject='Hello MailGun Testtttttttttttttttt' \
 -F text='Testing some Mailgun awesomeness!'
+```
 
-{
+```
+ {
   "id": "<20210722194502.1.E9A2557F4A7C2D23@sandboxc8236017f07a4d9ab4c687b3550e0a45.mailgun.org>",
   "message": "Queued. Thank you."
 }
@@ -1770,9 +1780,17 @@ sandbox始まりのドメイン名がある。
 
 送り主の変更もお忘れなく。
 
+optionキーを押しながらで、コマンドの改行ができる。バッククォートが必要。
+
 # 過去の回答に基づいて出題する。
 
 未習得問題を克服する。
 
 - app/views/show.html.erb
 - app/controllers/drills_controller.rb
+
+
+# Mailgun
+
+Net::SMTPAuthenticationError in Users::RegistrationsController#create
+535 Authentication failed
