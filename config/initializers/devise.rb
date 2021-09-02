@@ -23,9 +23,10 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  mailer_sender = "noreply@brain-driller.com"
-  mailer_sender.prepend "dev-" if Rails.env.development?
-  mailer_sender.prepend "test-" if Rails.env.test?
+  mail_address = "noreply@brain-driller.com"
+  mail_address.prepend "development-" if Rails.env.development?
+  mail_address.prepend "test-" if Rails.env.test?
+  mailer_sender = "BrainDriller<#{mail_address}>"
   config.mailer_sender = mailer_sender
 
   # Configure the class responsible to send e-mails.
