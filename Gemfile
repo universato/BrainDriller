@@ -34,23 +34,23 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'carrierwave'
 gem 'devise'
 gem 'impressionist'
+gem 'irb', '>= 1.3.6'
 gem 'kaminari'
+gem 'mail', '>=2.7.1'
+gem 'mailgun-ruby', '>=1.2.5'
 gem 'omniauth-google-oauth2'
-gem "omniauth-rails_csrf_protection"
+gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'ransack'
 gem 'set'
-gem 'mail', '>=2.7.1'
-gem 'mailgun-ruby', '>=1.2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # gem "factory_bot_rails"
+  # gem 'factory_bot_rails'
   gem 'dotenv-rails'
   gem 'faker'
   gem 'minitest'
-  gem 'irb', ">= 1.3.6"
   gem 'simplecov'
 end
 
