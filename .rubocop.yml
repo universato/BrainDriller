@@ -194,6 +194,7 @@ Style/GlobalVars:
 Style/GuardClause:
   Exclude:
     - app/controllers/drills_controller.rb
+    - db/seeds/china_word.rb
 # symbol: :symbolみたいな書き方が好きじゃないので。
 Style/HashSyntax:
   Exclude:
@@ -312,7 +313,7 @@ Rails/LexicallyScopedActionFilter:
     - app/controllers/users/registrations_controller.rb
 Rails/Output:
   Enabled: false
-# validationをskipするから、insert_all!やinsert_allは使うべきではないらしい。いったん外しておくか。
+# validationをskipするから、insert_all!やinsert_allは使うべきではない。DB側でつけてるし、初期化のときは大量データで速くすべきで、外しておきたい。
 Rails/SkipsModelValidations:
   Exclude:
     - app/controllers/drills_controller.rb

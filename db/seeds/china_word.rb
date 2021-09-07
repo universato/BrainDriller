@@ -1,17 +1,18 @@
 require "csv"
 
 module Replace
-  def self.DoubleAngleBracketToTag(str)
+  def self.double_angle_bracket_to_tag(str)
     return if str.nil?
 
     bracket = 0
     str.each_char do |c|
-      if c == "《"
+      case c
+      when "《"
         bracket += 1
         if bracket > 1
           puts "Alert: 《《 #{str[0, 140]}"
         end
-      elsif c == "》"
+      when "》"
         bracket -= 1
         if bracket < 0
           raise ArgumentError, "《》の不一致"
@@ -44,7 +45,7 @@ drills = drill_titles.map do |title|
 end
 
 CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
-  if column_name = DataCheck.any_empty?(row, "hsk_level", "correct", "w1")
+  if (column_name = DataCheck.any_empty?(row, "hsk_level", "correct", "w1"))
     puts "#{column_name} is empty! Line No.#{i}"
     next
   end
@@ -78,7 +79,7 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
     format: "basic_choices",
     choices: choices,
     correct_option: correct_number,
-    explanation: Replace.DoubleAngleBracketToTag(row['explanation']) || '',
+    explanation: Replace.double_angle_bracket_to_tag(row['explanation']) || '',
     created_at: time,
     updated_at: time,
   }
