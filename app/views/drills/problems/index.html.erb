@@ -1,11 +1,32 @@
 <% @problems.each do |problem| %>
-  <% problem.title %><br>
-  <%= problem.id %>
-  <% if Rails.env.development? && relation = @problem_map&.fetch(problem.id) %>
-    【開発環境のみ表示】
-    閲覧数(number_of_view): <%= relation&.number_of_views || 0 %><br>
-    提出数(number_of_submissions) <%= relation&.number_of_submissions || 0 %><br>
-    提出数(number_of_correct_answers) <%= relation&.number_of_correct_answers || 0 %><br>
-    連続正解数(current_streak) <%= relation&.current_streak || 0 %><br>
-  <% end %>
+  <div class="bg-light p-5 my-4 rounded problem-panel">
+    <%= problem.id %>
+    <div class="problem-idnex-and-title fs-2">
+      <%= problem.title %>
+    </div>
+    <div class="problem-statement">
+      <%= h(problem.statement.gsub("\n", "<br>").html_safe) %>
+    </div>
+    <div class="">
+      <div class="problem-choice correct-choice bg-correct">
+        <%= problem.correct_answer %>
+      </div>
+      <% ([] || problem.choices).each do |choice| %>
+        <div class="problem-choice normal-choice"><%= choice %></div>
+      <% end %>
+    </div>
+    <% if problem.explanation.present? %>
+      <div class="problem-explanation mt-5">
+        <h4>【解説】</h4>
+        <%= h(problem.explanation.gsub("\n", "<br>").html_safe) %>
+      </div>
+    <% end %>
+    <% if Rails.env.development? && relation = @problem_map&.[](problem.id) %>
+      <br>【開発環境のみ表示】<br>
+      閲覧数(number_of_view): <%= relation&.number_of_views || 0 %><br>
+      提出数(number_of_submissions) <%= relation&.number_of_submissions || 0 %><br>
+      正解数(number_of_correct_answers) <%= relation&.number_of_correct_answers || 0 %><br>
+      連続正解数(current_streak) <%= relation&.current_streak || 0 %><br>
+    <% end %>
+  </div>
 <% end %>

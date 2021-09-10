@@ -9,4 +9,8 @@ class Problem < ApplicationRecord
     basic_choices: 2000,
     simple_choices: 2001
   }
+
+  def correct_answer
+    self.choices[self.correct_option]
+  end
 end
