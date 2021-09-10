@@ -109,9 +109,6 @@
             <h4 class="fs-2">【解説】</h4>
             <div class="problem-explanation mt-2 fs-4" v-html="compiledMarkdown(problem.explanation)" v-if="problem.explanation.length > 0"> </div>
           </div>
-          <div v-if="false">
-            <h4 class="fs-2">解説なし</h4>
-          </div>
         </div>
       </div>
       <a :href="resolveDrillURL" class="btn btn-primary w-100 fs-4 py-3 mt-1">続けて解く</a>
