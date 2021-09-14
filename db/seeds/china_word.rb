@@ -35,9 +35,11 @@ module DataCheck
 end
 
 first_user = User.find_by(login_name: "uni")
+
+alerts = Hash.new{ |h, k| h[k] = [] }
 problems = []
 
-drill_titles = [nil, "HSK 1級 中国語単語", "HSK 2級 中国語単語", "HSK 3級 中国語単語"]
+drill_titles = [nil, "HSK 1級 中国語単語", "HSK 2級 中国語単語", "HSK 3級 中国語単語", "HSK 4級 中国語単語", "HSK 5級 中国語単語", "HSK 6級 中国語単語"]
 drills = drill_titles.map do |title|
   if title
     Drill.find_by(title: title) || Drill.create(title: title, user: first_user, state: "full_open")
@@ -46,14 +48,14 @@ end
 
 CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
   if (column_name = DataCheck.any_empty?(row, "hsk_level", "correct", "w1"))
-    puts "#{column_name} is empty! Line No.#{i}"
+    alerts["#{column_name} is empty!"] << i
     next
   end
 
   drill = drills[row["hsk_level"].to_i]
 
   if row["zero_based_correct_number"].nil?
-    puts "Alert: Empty data for zero_based_correct_number column of Line No.#{i}"
+    alerts["Empty data for zero_based_correct_number"] << i
   end
 
   correct_number = row["zero_based_correct_number"].to_i
@@ -62,7 +64,8 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
   choices.insert(correct_number, row["correct"])
 
   if choices.size < 2
-    puts "choices.size < 2. Line No.#{i} skipped"
+    alerts["choices.size < 2"] << i
+    # puts "choices.size < 2. Line No.#{i} skipped"
     next
   end
 
@@ -83,6 +86,11 @@ CSV.foreach('./db/csv/china_word.csv', headers: true).with_index(1) do |row, i|
     created_at: time,
     updated_at: time,
   }
+end
+
+alerts.each do |alert_message, problem_ids|
+  puts "Alert: #{alert_message}(the_number_of_data: #{problem_ids.size})"
+  puts problem_ids[0, 20].join(",")
 end
 
 Problem.insert_all!(problems)
