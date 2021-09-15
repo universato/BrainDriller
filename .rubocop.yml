@@ -318,6 +318,7 @@ Rails/SkipsModelValidations:
   Exclude:
     - app/controllers/drills_controller.rb
     - db/seeds/cpa_csv.rb
+    - db/seeds/cpa_aiueo_problems.rb
     - db/seeds/problems.rb
     - db/seeds/user.rb
     - db/seeds/china_word.rb
