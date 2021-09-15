@@ -47,5 +47,3 @@ yarn-debug.log*
 
 # For dotenv
 /.env
-
-cookie
