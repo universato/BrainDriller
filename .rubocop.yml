@@ -195,6 +195,7 @@ Style/GuardClause:
   Exclude:
     - app/controllers/drills_controller.rb
     - db/seeds/china_word.rb
+    - db/seeds/ruby_drill.rb
 # symbol: :symbolみたいな書き方が好きじゃないので。
 Style/HashSyntax:
   Exclude:
