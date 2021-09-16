@@ -23,11 +23,6 @@ module ProblemMaker
     wrong_options.insert(zero_based_correct_number, correct_option)
   end
 end
-# p ProblemMaker.make_choices("c", 0, "w1", "w2", "w3", line_no: 99)
-# p ProblemMaker.make_choices("c", 1, "w1", "w2", "w3", line_no: 100)
-# p ProblemMaker.make_choices("c", 2, "w1", "w2", "w3", line_no: 101)
-# p ProblemMaker.make_choices("c", 3, "w1", "w2", "w3", line_no: 102)
-# p ProblemMaker.make_choices("o", 1, "x", line_no: 103)
 
 first_user = User.first
 drills_by_title = {}
@@ -71,8 +66,3 @@ CSV.foreach('./db/csv/ruby.csv', headers: true).with_index(1) do |row, line_no|
 end
 
 Problem.insert_all!(problems)
-
-__END__
-
-# 【Rails】rake seedコマンドでCSVファイルからDBに読み込ませる方法 - Qiita
-# https://qiita.com/kumasuke/items/545afaf5876d3dc52670
