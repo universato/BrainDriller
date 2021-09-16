@@ -8,11 +8,6 @@
 - https://brain-driller.herokuapp.com (SSL)
 - http://brain-driller.com
 
-## 開発
-
-```
-rails s
-```
 ## Ruby version
 
 3.0.2
@@ -50,3 +45,26 @@ bin/webpack-dev-server
 ```
 
 `bin`ディレクトリ内に入っているRubyコードを呼んでいる。
+
+# DB
+
+PostgreSQLを使用。
+
+```s
+rails db:setup
+```
+
+db:reset
+  - db:drop
+  - db:setup
+    - db:create
+    - db:migrate
+    - db:seed
+
+# yarn
+
+npmではなく、yarnを使用。
+
+```s
+yarn install
+```
