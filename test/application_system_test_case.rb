@@ -8,8 +8,3 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     driven_by :selenium_chrome_headless
   end
 end
-
-__END__
-
-Run options: --seed 13949
-バリデーションに失敗しました: タイトル を入力してください, タイトル は1文字以上で入力してください

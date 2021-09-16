@@ -2,8 +2,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # callback for google
   def google_oauth2
     callback_for(:google)
-    puts "\n" * 4
-    puts "google_oauth2"
   end
 
   def callback_for(provider)

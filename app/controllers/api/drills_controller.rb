@@ -56,7 +56,6 @@ class API::DrillsController < API::ApplicationController
   private def grade_personal_result(user)
     drill_id = params[:drill_id].to_i
 
-    # drill_user_result = DrillUserResult.find_or_create_by(user: user, drill_id: drill_id)
     answer_paper = params[:answer_paper]
     problems = params[:problems]
     problems.each do |problem|
