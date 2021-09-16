@@ -1,6 +1,26 @@
 <div class="drill-show-panel bg-light my-4 max-w768">
+  <!-- stampベタ書き -->
+  <div class="stamp is-circle is-solved">
+    <div class="stamp__content is-icon">習</div>
+    <div class="stamp__content is-icon">得</div>
+  </div>
+
   <div class="drill-show-top-panel">
     <div class="title-panel">
+      <div class='like-button'>
+        <% if DrillLike.exists?(user: current_user, drill: @drill) %>
+          <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
+            <%= f.submit "Unlike", class: "like-button__submit" %>
+            <i class='fas fa-heart like-button__icon is-active'></i>
+          <% end %>
+        <% else %>
+          <%= form_with(model: current_user.drill_likes.build, remote: true) do |f| %>
+            <div><%= hidden_field_tag :drill_id, @drill.id %></div>
+            <%= f.submit "Like", class: "like-button__submit" %>
+            <i class='fas fa-heart like-button__icon is-inactive'></i>
+          <% end %>
+        <% end %>
+      </div><!-- .like-button -->
       <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
     </div>
     <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "")) %></div>
@@ -78,7 +98,6 @@
 <% if current_user&.admin? %>
   <%= image_tag @drill.user.icon_path, size: '56x56', alt: 'icon', class: 'a-user-icon' %>
   <div class="drill-use"><%= link_to @drill.user.login_name, @drill.user, class: "drill-user-name" %></div>
-
   <% if DrillLike.exists?(user: current_user, drill: @drill) %>
     <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
       <%= f.submit "Unlike", class: "btn btn-primary" %>
