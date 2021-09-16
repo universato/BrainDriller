@@ -25,7 +25,7 @@ class User < ApplicationRecord
     uniqueness: {case_sensitive: false},
     format: login_name_format
 
-  # validates :password, length: { minimum: 5 }
+  validates :password, length: { minimum: 5 }
 
   mount_uploader :icon, IconUploader
 
