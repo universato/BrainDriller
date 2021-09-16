@@ -30,12 +30,6 @@ class User < ApplicationRecord
   mount_uploader :icon, IconUploader
 
   def self.from_omniauth(auth)
-    # auth.class    # => OmniAuth::AuthHash
-    # auth.provider # => "google_oauth2"
-    # auth.uid      # => "123456789012345678901"
-    # auth.info        # OmniAuth::AuthHash::InfoHash
-    # auth.credentials # OmniAuth::AuthHash
-    # auth.extra       # OmniAuth::AuthHash
     unless auth.info.has_key?("email_verified")
       set_flash_message(:alert, 'メールアドレスが認証されていません')
       redirect_to new_user_registration_url
@@ -46,7 +40,6 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.confirmed_at = Time.current
-      # user.icon = auth.info.image
     end
   end
 

@@ -1,7 +1,5 @@
 class DrillsController < ApplicationController
   def index
-    # @drills = Drill.order(created_at: "DESC").page(params[:page])
-    # @drills = Drill.order(created_at: "DESC").page(params[:page]).includes(:problems, :user)
     @drills = Drill.order(created_at: "DESC").page(params[:page]).where(state: :full_open).includes(:problems, :user)
   end
 
