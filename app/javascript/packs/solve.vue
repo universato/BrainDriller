@@ -4,13 +4,14 @@
       <div v-if="drill && false" class="solve-drill">
         <div class="solve-drill-title"> {{ drill.title }} </div>
       </div>
-      <div class="status-blocks">
+      <div class="status-blocks" :class="{'has-many': problems.length > 20}">
         <div
           v-for="(el, problemIndex) in answerStatus"
           :key="problemIndex"
-          :class="statusClass(el, problemIndex)"
+          class="status-block-case"
           @click="setCurrentProblemIndex(problemIndex)"
         >
+          <div :class="statusClass(el, problemIndex)"></div>
         </div>
       </div>
       <div v-if="currentProblem" class="problem-main">
@@ -502,13 +503,23 @@ export default {
 
 .status-blocks {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+.status-block-case {
+  flex: 1 1;
+  padding: 0 1px;
+  margin-bottom: 8px;
+  min-width: 5%;
+}
+
+.has-many .status-block-case {
+  flex: 0 0 5%;
 }
 
 .status-block {
-  flex: 1;
-  height: 16px;
-  margin: 4px;
+  height: 12px;
   box-shadow: 0px 6px 12px rgba(0, 102, 255, 0.25);
 }
 
