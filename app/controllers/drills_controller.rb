@@ -86,7 +86,4 @@ class DrillsController < ApplicationController
   def solve
     render layout: 'logo_only'
   end
-
-  def mydrills
-  end
 end
