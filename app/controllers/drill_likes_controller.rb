@@ -7,12 +7,10 @@ class DrillLikesController < ApplicationController
 
   def destroy
     drill_like = DrillLike.find(params[:id])
-    unless drill_like.user == current_user
-      raise StandardError.new("different between drill_like.user and current_user")
+    if drill_like.user == current_user
+      drill = Drill.find(drill_like.drill_id)
+      drill_like.destroy
     end
-
-    drill = Drill.find(drill_like.drill_id)
-    drill_like.destroy
     redirect_to drill
   end
 end
