@@ -6,6 +6,6 @@ class Drill < ApplicationRecord
   has_many :drill_likes, dependent: :destroy
 
   validates :title, presence: true, length: { in: 1..32 }
-  validates :user_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :user_id, presence: true, numericality: { only_integer: true, greater_than: 0 }, uniqueness: { scope: :title }
   validates :state, presence: true
 end

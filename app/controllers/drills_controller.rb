@@ -33,8 +33,8 @@ class DrillsController < ApplicationController
     )
 
     begin
-      drill.save
-    rescue ActiveRecord::RecordNotUnique
+      drill.save!
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
       json = {
         status: 400,
         message: "Bad request #{controller_name.capitalize} #{action_name.capitalize}",
