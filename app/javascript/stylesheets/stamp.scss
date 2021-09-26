@@ -25,8 +25,8 @@
   height: 5.5rem;
   width: 5.5rem;
   position: absolute;
-  right: 18.75rem;
-  top: auto;
+  right: 16px;
+  top: 16px;
   transform: rotate(25deg);
   font-size: 0.625rem;
   line-height: 1;
@@ -36,6 +36,11 @@
   font-weight: 400;
   font-feature-settings: "palt";
   letter-spacing: 0;
+  &.is-sm {
+    right: 4px;
+    top: 4px;
+    transform: rotate(25deg) scale(0.8);
+  }
 }
 
 .stamp__content {

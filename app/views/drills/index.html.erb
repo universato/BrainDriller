@@ -8,25 +8,33 @@
 
   <div class="drills">
     <% @drills.each do |drill| %>
-      <%= link_to drill, class: 'index-drill' do %>
-        <div class="index-drill-title"><%= drill.title %></div>
-        <div class="drill-guide"><%= drill.guide.truncate(100) %></div>
+      <div class='index-drill'>
+        <%= link_to drill, class: 'index-drill__inner' do %>
+          <!-- stampベタ書き -->
+          <div class="stamp is-circle is-solved is-sm">
+            <div class="stamp__content is-icon">習</div>
+            <div class="stamp__content is-icon">得</div>
+          </div>
 
-        <div class="problem-count">問題数<%= drill.problems.size %>問</div>
-        <% if current_user&.admin? %>
-          <div class="drill-user">
-            <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
-            <div class="">
-              <%= drill.user.login_name %>
+          <div class="index-drill-title"><%= drill.title %></div>
+          <div class="drill-guide"><%= drill.guide.truncate(100) %></div>
+
+          <div class="problem-count">問題数<%= drill.problems.size %>問</div>
+          <% if current_user&.admin? %>
+            <div class="drill-user">
+              <%= image_tag drill.user.icon_path, size: '32x32', alt: 'icon', class: 'a-user-icon' %>
+              <div class="">
+                <%= drill.user.login_name %>
+              </div>
             </div>
-          </div>
-          <div class="stats">
-            <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
-            <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
-          </div>
+            <div class="stats">
+              <div class="stat">閲覧数: <%= drill.number_of_views %>回</div>
+              <div class="stat">インプレッション: <%= drill.impressions_count %>回</div>
+            </div>
+          <% end %>
+          <%= render 'drills/stamp' if false %>
         <% end %>
-        <%= render 'drills/stamp' if false %>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>
