@@ -25,8 +25,6 @@ class User < ApplicationRecord
     uniqueness: {case_sensitive: false},
     format: login_name_format
 
-  validates :password, length: { minimum: 5 }
-
   mount_uploader :icon, IconUploader
 
   def self.from_omniauth(auth)
