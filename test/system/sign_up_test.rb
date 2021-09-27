@@ -35,4 +35,15 @@ class SignUpTest < ApplicationSystemTestCase
     assert_text "ログアウトしました"
     assert_text "ログイン"
   end
+
+  test "edit profile" do
+    login_as(users(:uni), scope: :user)
+    visit '/users/edit'
+
+    within 'form[id=edit_user]' do
+      fill_in "user[login_name]", with: "univer"
+      fill_in "user[password]", with: "foobar"
+    end
+    click_button "プロフィールを更新する"
+  end
 end
