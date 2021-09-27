@@ -32,24 +32,21 @@ class DrillsController < ApplicationController
       state: :draft,
     )
 
-    begin
-      drill.save!
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
+    if drill.save
+      json = {
+        status: 200,
+        message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
+        redirect_edit_url: "/drills/#{drill[:id]}/edit"
+      }
+      render status: 200, json: json
+    else
       json = {
         status: 400,
         message: "Bad request #{controller_name.capitalize} #{action_name.capitalize}",
         redirect_edit_url: "/drills/new"
       }
       render status: 400, json: json
-      return
     end
-
-    json = {
-      status: 200,
-      message: "Success #{controller_name.capitalize} #{action_name.capitalize}",
-      redirect_edit_url: "/drills/#{drill[:id]}/edit"
-    }
-    render status: 200, json: json
   end
 
   def edit
