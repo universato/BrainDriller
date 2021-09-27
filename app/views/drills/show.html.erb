@@ -9,20 +9,22 @@
 
   <div class="drill-show-top-panel">
     <div class="title-panel">
-      <div class='like-button'>
-        <% if DrillLike.exists?(user: current_user, drill: @drill) %>
-          <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
-            <%= f.submit "Unlike", class: "like-button__submit" %>
-            <i class='fas fa-heart like-button__icon is-active'></i>
+      <% if current_user %>
+        <div class='like-button'>
+          <% if DrillLike.exists?(user: current_user, drill: @drill) %>
+            <%= form_with(model: current_user.drill_likes.find_by(drill_id: @drill.id), html: { method: :delete }, local: true) do |f| %>
+              <%= f.submit "Unlike", class: "like-button__submit" %>
+              <i class='fas fa-heart like-button__icon is-active'></i>
+            <% end %>
+          <% else %>
+            <%= form_with(model: current_user.drill_likes.build, remote: true) do |f| %>
+              <div><%= hidden_field_tag :drill_id, @drill.id %></div>
+              <%= f.submit "Like", class: "like-button__submit" %>
+              <i class='fas fa-heart like-button__icon is-inactive'></i>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= form_with(model: current_user.drill_likes.build, remote: true) do |f| %>
-            <div><%= hidden_field_tag :drill_id, @drill.id %></div>
-            <%= f.submit "Like", class: "like-button__submit" %>
-            <i class='fas fa-heart like-button__icon is-inactive'></i>
-          <% end %>
-        <% end %>
-      </div><!-- .like-button -->
+        </div><!-- .like-button -->
+      <% end %>
       <h1 class="drill-title"><%= @drill.title.presence || "無題" %></h1>
     </div>
     <div class="drill-guide my-4"><%= simple_format(h(@drill.guide.presence || "")) %></div>
