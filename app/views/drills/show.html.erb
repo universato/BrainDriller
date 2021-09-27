@@ -1,9 +1,10 @@
 <div class="drill-show-panel bg-light my-4 max-w768">
-  <!-- stampベタ書き -->
-  <div class="stamp is-circle is-solved">
-    <div class="stamp__content is-icon">習</div>
-    <div class="stamp__content is-icon">得</div>
-  </div>
+  <% if @driill_is_mastered %>
+    <div class="stamp is-circle is-solved">
+      <div class="stamp__content is-icon">習</div>
+      <div class="stamp__content is-icon">得</div>
+    </div>
+  <% end %>
 
   <div class="drill-show-top-panel">
     <div class="title-panel">
@@ -47,9 +48,6 @@
             <%= percent(@drill_user_result&.number_of_problem_mastered, @drill.problems.size) %><span class="unit">%</span>
           </div>
         </div>
-        <% if @driill_is_mastered %>
-          習得済み
-        <% end %>
       <% end %>
     </div>
   </div>
