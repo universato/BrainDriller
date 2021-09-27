@@ -6,7 +6,7 @@ class DrillLikesTest < ApplicationSystemTestCase
   include Warden::Test::Helpers
 
   test "solve drill" do
-    login_as(users(:admin), scope: :user)
+    login_as(users(:normal), scope: :user)
 
     visit '/drills'
     first(".index-drill").click

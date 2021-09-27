@@ -45,3 +45,9 @@ kigyo:
   nickname: kigyo
   email: kigyo@example.com
   confirmed_at: <%= Time.now %>
+normal:
+  login_name: normal
+  nickname: ノーマル
+  email: normal@example.com
+  admin: false
+  confirmed_at: <%= Time.now %>
