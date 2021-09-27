@@ -10,11 +10,14 @@
     <% @drills.each do |drill| %>
       <div class='index-drill'>
         <%= link_to drill, class: 'index-drill__inner' do %>
-          <!-- stampベタ書き -->
-          <div class="stamp is-circle is-solved is-sm">
-            <div class="stamp__content is-icon">習</div>
-            <div class="stamp__content is-icon">得</div>
-          </div>
+
+          <% if false %>
+            <!-- stampベタ書き -->
+            <div class="stamp is-circle is-solved is-sm">
+              <div class="stamp__content is-icon">習</div>
+              <div class="stamp__content is-icon">得</div>
+            </div>
+          <% end %>
 
           <div class="index-drill-title"><%= drill.title %></div>
           <div class="drill-guide"><%= drill.guide.truncate(100) %></div>
