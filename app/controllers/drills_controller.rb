@@ -81,4 +81,12 @@ class DrillsController < ApplicationController
   def solve
     render layout: 'logo_only'
   end
+
+  def destroy
+    drill = Drill.find(params[:id])
+    if current_user == drill.user && drill.problems.size.zero?
+      drill.destroy
+    end
+    redirect_to current_user
+  end
 end

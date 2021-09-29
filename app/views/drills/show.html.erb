@@ -110,4 +110,7 @@
       <%= f.submit "Like", class: "btn btn-primary" %>
     <% end %>
   <% end %>
+  <% if current_user == @drill.user && @drill.problems.size.zero? %>
+    <%= link_to 'ドリル削除', "/drills/#{@drill.id}", method: :delete %>
+  <% end %>
 <% end %>
